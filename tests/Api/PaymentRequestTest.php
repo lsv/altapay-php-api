@@ -68,7 +68,6 @@ class PaymentRequestTest extends AbstractApiTest
         $api->setShopOrderId('order id');
         $api->setTerminal('my terminal');
         $api->setLanguage('da');
-
         $api->setType('payment');
         $cctoken = $this->randomString(41);
         $api->setCcToken($cctoken);
@@ -94,18 +93,13 @@ class PaymentRequestTest extends AbstractApiTest
         foreach(PaymentRequest::REQUIRED_QUERY_PARAMS as $QUERY_PARAM){
             $this->assertArrayHasKey($QUERY_PARAM,$parts,'Create Payment Request is missing the "'.$QUERY_PARAM.'" query parameter.');
         }
-
         $this->assertEquals('da', $parts['language']);
-
         $this->assertTrue(is_numeric($parts['amount']),'Amount is not numeric');
-
         $this->assertTrue(is_numeric($parts['currency']),'Currency is not numeric');
-
         $this->assertEquals('my terminal', $parts['terminal']);
         $this->assertEquals('order id', $parts['shop_orderid']);
         $this->assertEquals(200.50, ((float)$parts['amount']));
         $this->assertEquals(957, ((int)$parts['currency']));
-
         if(strtolower($request->getMethod()) == 'post'){
             unset($parts);
             parse_str($request->getBody()->getContents(),$parts);
