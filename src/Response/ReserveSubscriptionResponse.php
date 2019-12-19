@@ -21,7 +21,7 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Response;
+namespace Valitor\Response;
 
 class ReserveSubscriptionResponse extends ChargeSubscriptionResponse
 {

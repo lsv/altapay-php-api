@@ -21,14 +21,14 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Api\Payments;
+namespace Valitor\Api\Payments;
 
-use Altapay\AbstractApi;
-use Altapay\Request\Card;
-use Altapay\Response\ReservationOfFixedAmountResponse;
-use Altapay\Serializer\ResponseSerializer;
-use Altapay\Traits;
-use Altapay\Types;
+use Valitor\AbstractApi;
+use Valitor\Request\Card;
+use Valitor\Response\ReservationOfFixedAmountResponse;
+use Valitor\Serializer\ResponseSerializer;
+use Valitor\Traits;
+use Valitor\Types;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use Symfony\Component\OptionsResolver\Options;

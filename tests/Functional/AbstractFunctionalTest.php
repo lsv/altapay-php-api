@@ -1,10 +1,10 @@
 <?php
 
-namespace Altapay\ApiTest\Functional;
+namespace Valitor\ApiTest\Functional;
 
-use Altapay\Authentication;
-use Altapay\Request\Card;
-use Altapay\ApiTest\AbstractTest;
+use Valitor\Authentication;
+use Valitor\Request\Card;
+use Valitor\ApiTest\AbstractTest;
 
 abstract class AbstractFunctionalTest extends AbstractTest
 {

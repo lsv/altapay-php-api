@@ -21,14 +21,14 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay;
+namespace Valitor;
 
-use Altapay\Exceptions\ClassDoesNotExistsException;
-use Altapay\Api\Ecommerce;
-use Altapay\Api\Others;
-use Altapay\Api\Payments;
-use Altapay\Api\Subscription;
-use Altapay\Api\Test;
+use Valitor\Exceptions\ClassDoesNotExistsException;
+use Valitor\Api\Ecommerce;
+use Valitor\Api\Others;
+use Valitor\Api\Payments;
+use Valitor\Api\Subscription;
+use Valitor\Api\Test;
 
 class Factory
 {

@@ -12,8 +12,8 @@
                 <Filename>CreatedByTest</Filename>
                 <ContractIdentifier>1234567890123456</ContractIdentifier>
                 <Shops>
-                    <Shop>AltaPay Functional Test Shop</Shop>
-                    <Shop>AltaPay Functional Test Shop Two</Shop>
+                    <Shop>Valitor Functional Test Shop</Shop>
+                    <Shop>Valitor Functional Test Shop Two</Shop>
                 </Shops>
                 <Acquirer>TestAcquirer</Acquirer>
                 <FundingDate>2010-09-26</FundingDate>
@@ -27,8 +27,8 @@
                 <Filename>CreatedByTest</Filename>
                 <ContractIdentifier>1234567890123456</ContractIdentifier>
                 <Shops>
-                    <Shop>AltaPay Functional Test Shop</Shop>
-                    <Shop>AltaPay Functional Test Shop Two</Shop>
+                    <Shop>Valitor Functional Test Shop</Shop>
+                    <Shop>Valitor Functional Test Shop Two</Shop>
                 </Shops>
                 <Acquirer>TestAcquirer</Acquirer>
                 <FundingDate>2010-09-26</FundingDate>

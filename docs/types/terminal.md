@@ -1,22 +1,22 @@
-[<](../index.md) Altapay - PHP Api - Terminal
+[<](../index.md) Valitor - PHP Api - Terminal
 =============================================
 
-# `\Altapay\Response\Embeds\Terminal` object
+# `\Valitor\Response\Embeds\Terminal` object
 
 | Method  | Description | Type |
 |---|---|---|
 | `$object->Title` | The title of the terminal | string
 | `$object->Country` | The country of the terminal | string
-| `$object->Natures` | array of `\Altapay\Response\Embeds\Nature` objects | array
-| `$object->Currencies` | array of `\Altapay\Response\Embeds\Currency` objects | array
+| `$object->Natures` | array of `\Valitor\Response\Embeds\Nature` objects | array
+| `$object->Currencies` | array of `\Valitor\Response\Embeds\Currency` objects | array
 
-### `\Altapay\Response\Embeds\Nature`
+### `\Valitor\Response\Embeds\Nature`
 
 | Method  | Description | Type |
 |---|---|---|
 | `$object->Nature` | | string
 
-### `\Altapay\Response\Embeds\Currency`
+### `\Valitor\Response\Embeds\Currency`
 
 | Method  | Description | Type |
 |---|---|---|

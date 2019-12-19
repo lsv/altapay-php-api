@@ -1,8 +1,8 @@
 <?php
 
-namespace Altapay\ApiTest\Api;
+namespace Valitor\ApiTest\Api;
 
-use Altapay\Api\Others\CustomReport;
+use Valitor\Api\Others\CustomReport;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 

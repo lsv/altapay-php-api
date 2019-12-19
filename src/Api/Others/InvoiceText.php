@@ -21,12 +21,12 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Api\Others;
+namespace Valitor\Api\Others;
 
-use Altapay\AbstractApi;
-use Altapay\Response\InvoiceTextResponse;
-use Altapay\Serializer\ResponseSerializer;
-use Altapay\Traits;
+use Valitor\AbstractApi;
+use Valitor\Response\InvoiceTextResponse;
+use Valitor\Serializer\ResponseSerializer;
+use Valitor\Traits;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;

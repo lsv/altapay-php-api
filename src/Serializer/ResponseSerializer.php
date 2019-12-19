@@ -21,9 +21,9 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Serializer;
+namespace Valitor\Serializer;
 
-use Altapay\Response\AbstractResponse;
+use Valitor\Response\AbstractResponse;
 
 /**
  * Response serializer

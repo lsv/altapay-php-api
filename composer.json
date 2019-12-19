@@ -1,8 +1,8 @@
 {
   "name": "lsv/altapay-php-api",
-  "description": "Altapay PHP API",
+  "description": "Valitor PHP API",
   "keywords": [
-    "payment", "altapay"
+    "payment", "valitor"
   ],
   "license": "MIT",
   "authors": [
@@ -19,7 +19,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Altapay\\" : "src"
+      "Valitor\\" : "src"
     }
   },
   "require-dev": {
@@ -29,7 +29,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Altapay\\ApiTest\\" : "tests"
+      "Valitor\\ApiTest\\" : "tests"
     }
   },
   "config": {

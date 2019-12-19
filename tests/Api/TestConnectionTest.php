@@ -1,8 +1,8 @@
 <?php
 
-namespace Altapay\ApiTest\Api;
+namespace Valitor\ApiTest\Api;
 
-use Altapay\Api\Test\TestConnection;
+use Valitor\Api\Test\TestConnection;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 

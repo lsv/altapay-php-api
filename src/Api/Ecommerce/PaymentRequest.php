@@ -21,14 +21,14 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Api\Ecommerce;
+namespace Valitor\Api\Ecommerce;
 
-use Altapay\AbstractApi;
-use Altapay\Request\Config;
-use Altapay\Response\PaymentRequestResponse;
-use Altapay\Serializer\ResponseSerializer;
-use Altapay\Traits;
-use Altapay\Types;
+use Valitor\AbstractApi;
+use Valitor\Request\Config;
+use Valitor\Response\PaymentRequestResponse;
+use Valitor\Serializer\ResponseSerializer;
+use Valitor\Traits;
+use Valitor\Types;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use Symfony\Component\OptionsResolver\Options;
@@ -331,9 +331,9 @@ class PaymentRequest extends AbstractApi
     }
 
     /**
-     * @return \Altapay\Response\AbstractResponse|PaymentRequestResponse|bool|void
-     * @throws \Altapay\Exceptions\ResponseHeaderException
-     * @throws \Altapay\Exceptions\ResponseMessageException
+     * @return \Valitor\Response\AbstractResponse|PaymentRequestResponse|bool|void
+     * @throws \Valitor\Exceptions\ResponseHeaderException
+     * @throws \Valitor\Exceptions\ResponseMessageException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     protected function doResponse()

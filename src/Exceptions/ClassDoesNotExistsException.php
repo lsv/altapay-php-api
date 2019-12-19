@@ -21,7 +21,7 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Exceptions;
+namespace Valitor\Exceptions;
 
 class ClassDoesNotExistsException extends Exception
 {

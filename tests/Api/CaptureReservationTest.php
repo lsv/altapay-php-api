@@ -1,11 +1,11 @@
 <?php
 
-namespace Altapay\ApiTest\Api;
+namespace Valitor\ApiTest\Api;
 
-use Altapay\Api\Payments\CaptureReservation;
-use Altapay\Response\CaptureReservationResponse;
-use Altapay\Request\OrderLine;
-use Altapay\Response\Embeds\Transaction;
+use Valitor\Api\Payments\CaptureReservation;
+use Valitor\Response\CaptureReservationResponse;
+use Valitor\Request\OrderLine;
+use Valitor\Response\Embeds\Transaction;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;

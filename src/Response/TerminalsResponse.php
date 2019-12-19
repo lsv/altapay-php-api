@@ -21,9 +21,9 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Response;
+namespace Valitor\Response;
 
-use Altapay\Response\Embeds\Terminal;
+use Valitor\Response\Embeds\Terminal;
 
 class TerminalsResponse extends AbstractResponse
 {

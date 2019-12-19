@@ -21,10 +21,10 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Response;
+namespace Valitor\Response;
 
-use Altapay\Response\Embeds\Header;
-use Altapay\Serializer\ResponseSerializer;
+use Valitor\Response\Embeds\Header;
+use Valitor\Serializer\ResponseSerializer;
 
 /**
  * Class AbstractResponse

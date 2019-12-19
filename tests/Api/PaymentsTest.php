@@ -1,15 +1,15 @@
 <?php
 
-namespace Altapay\ApiTest\Api;
+namespace Valitor\ApiTest\Api;
 
-use Altapay\Api\Others\Payments;
-use Altapay\Response\Embeds\Address;
-use Altapay\Response\Embeds\Country;
-use Altapay\Response\Embeds\CustomerInfo;
-use Altapay\Response\Embeds\PaymentInfo;
-use Altapay\Response\Embeds\PaymentNatureService;
-use Altapay\Response\Embeds\ReconciliationIdentifier;
-use Altapay\Response\Embeds\Transaction;
+use Valitor\Api\Others\Payments;
+use Valitor\Response\Embeds\Address;
+use Valitor\Response\Embeds\Country;
+use Valitor\Response\Embeds\CustomerInfo;
+use Valitor\Response\Embeds\PaymentInfo;
+use Valitor\Response\Embeds\PaymentNatureService;
+use Valitor\Response\Embeds\ReconciliationIdentifier;
+use Valitor\Response\Embeds\Transaction;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Request;
@@ -133,8 +133,8 @@ class PaymentsTest extends AbstractApiTest
         $this->assertEquals('Merchant', $data->LiableForChargeback);
         $this->assertEquals('4f244dec4907eba0f6432e53b17a60ebcf51365e', $data->BlacklistToken);
         $this->assertEquals('myorderid', $data->ShopOrderId);
-        $this->assertEquals('AltaPay Shop', $data->Shop);
-        $this->assertEquals('AltaPay Test Terminal', $data->Terminal);
+        $this->assertEquals('Valitor Shop', $data->Shop);
+        $this->assertEquals('Valitor Test Terminal', $data->Terminal);
         $this->assertEquals('captured', $data->TransactionStatus);
         $this->assertEquals('NONE', $data->ReasonCode);
         $this->assertEquals('978', $data->MerchantCurrency);
@@ -189,7 +189,7 @@ class PaymentsTest extends AbstractApiTest
                     0, 'Form_Created_At', '2010-09-28 12:34:56'
                 ],
                 [
-                    1, 'Form_Provider', 'AltaPay Test Form'
+                    1, 'Form_Provider', 'Valitor Test Form'
                 ],
                 [
                     2, 'Merchant_Provided_Info', 'Some info by merchant'

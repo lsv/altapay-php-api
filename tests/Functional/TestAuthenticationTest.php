@@ -1,9 +1,9 @@
 <?php
 
-namespace Altapay\ApiTest\Functional;
+namespace Valitor\ApiTest\Functional;
 
-use Altapay\Authentication;
-use Altapay\Api\Test\TestAuthentication;
+use Valitor\Authentication;
+use Valitor\Api\Test\TestAuthentication;
 
 class TestAuthenticationTest extends AbstractFunctionalTest
 {

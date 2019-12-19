@@ -1,4 +1,4 @@
-[<](../index.md) Altapay - PHP Api - Customer Info
+[<](../index.md) Valitor - PHP Api - Customer Info
 ==================================================
 
 A order line object requries
@@ -13,7 +13,7 @@ $itemid = 'brown_sugar';
 $quantity = 2;
 $price = 17.55;
 
-$orderline = new \Altapay\Request\OrderLine(
+$orderline = new \Valitor\Request\OrderLine(
     $description,
     $itemid,
     $quantity,

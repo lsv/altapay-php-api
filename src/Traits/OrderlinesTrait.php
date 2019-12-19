@@ -21,9 +21,9 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Traits;
+namespace Valitor\Traits;
 
-use Altapay\Request\OrderLine;
+use Valitor\Request\OrderLine;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

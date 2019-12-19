@@ -1,4 +1,4 @@
-[<](../index.md) Altapay - PHP Api - Calculate surcharge
+[<](../index.md) Valitor - PHP Api - Calculate surcharge
 =====================================================
 
 This method is used to calculate the surcharge beforehand, based on a previously completed payment or a terminal, creditcard token, currency combo.
@@ -12,7 +12,7 @@ This method is used to calculate the surcharge beforehand, based on a previously
 # Request
 
 ```php
-$request = new \Altapay\Api\Others\CalculateSurcharge($auth);
+$request = new \Valitor\Api\Others\CalculateSurcharge($auth);
 // Set the options - see Required and Optional below
 $request->setAmount(200.50);
 // etc
@@ -20,12 +20,12 @@ $request->setAmount(200.50);
 try {
     $response = $request->call();
     // Response will be a object - See Response below
-} catch (\Altapay\Exceptions\ClientException $e) {
+} catch (\Valitor\Exceptions\ClientException $e) {
     // Could not connect
-} catch (\Altapay\Exceptions\ResponseHeaderException $e) {
+} catch (\Valitor\Exceptions\ResponseHeaderException $e) {
     // Response error in header
-    $e->getHeader()->ErrorMessage
-} catch (\Altapay\Exceptions\ResponseMessageException $e) {
+    $e->getHeader()->ErrorMessage;
+} catch (\Valitor\Exceptions\ResponseMessageException $e) {
     // Error message
     $e->getMessage();
 }
@@ -44,7 +44,7 @@ try {
 ###### Example
 
 ```php
-$request = new \Altapay\Api\Others\CalculateSurcharge($auth);
+$request = new \Valitor\Api\Others\CalculateSurcharge($auth);
 $request->setTerminal('my terminal');
 $request->setAmount(125.50);
 $request->setCurrency('SEK');
@@ -54,14 +54,14 @@ $request->setCreditCardToken('abcdef1234567890abcdef1234567890');
 or if you have a payment ID
 
 ```php
-$request = new \Altapay\Api\Others\CalculateSurcharge($auth);
+$request = new \Valitor\Api\Others\CalculateSurcharge($auth);
 $request->setPaymentId('payment id');
 $request->setAmount(125.50);
 ```
 
 # Response
 
-Object of `\Altapay\Response\SurchargeResponse`
+Object of `\Valitor\Response\SurchargeResponse`
 
 | Method  | Description | Type |
 |---|---|---|
@@ -77,7 +77,7 @@ Object of `\Altapay\Response\SurchargeResponse`
 
 `CardType_Not_Supported`: The card is not part of a 3d secure scheme
 
-`Not_Attempted`: AltaPay does not support 3d secure with this acquirer/card type combination
+`Not_Attempted`: Valitor does not support 3d secure with this acquirer/card type combination
 
 `Not_Enrolled`: The card is not enrolled in the applicable 3d secure scheme, so the transaction was completed without 3d secure
 

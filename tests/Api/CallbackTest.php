@@ -1,9 +1,9 @@
 <?php
 
-namespace Altapay\ApiTest\Api;
+namespace Valitor\ApiTest\Api;
 
-use Altapay\Api\Ecommerce\Callback;
-use Altapay\Response\CallbackResponse;
+use Valitor\Api\Ecommerce\Callback;
+use Valitor\Response\CallbackResponse;
 
 class CallbackTest extends \PHPUnit_Framework_TestCase
 {

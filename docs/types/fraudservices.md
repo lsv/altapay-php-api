@@ -1,4 +1,4 @@
-[<](../index.md) Altapay - PHP Api - Fraud services
+[<](../index.md) Valitor - PHP Api - Fraud services
 ==============================================
 
 Following services are accepted

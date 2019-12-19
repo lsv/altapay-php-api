@@ -19,8 +19,8 @@
                 <LiableForChargeback>Merchant</LiableForChargeback>
                 <BlacklistToken/>
                 <ShopOrderId>asdf23</ShopOrderId>
-                <Shop>AltaPay Test Shop</Shop>
-                <Terminal>AltaPay Test Terminal</Terminal>
+                <Shop>Valitor Test Shop</Shop>
+                <Terminal>Valitor Test Terminal</Terminal>
                 <TransactionStatus>invoice_initialized</TransactionStatus>
                 <ReasonCode>NONE</ReasonCode>
                 <MerchantCurrency>978</MerchantCurrency>

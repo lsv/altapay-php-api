@@ -21,11 +21,11 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Api\Test;
+namespace Valitor\Api\Test;
 
-use Altapay\AbstractApi;
-use Altapay\Authentication;
-use Altapay\Exceptions\ClientException;
+use Valitor\AbstractApi;
+use Valitor\Authentication;
+use Valitor\Exceptions\ClientException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;

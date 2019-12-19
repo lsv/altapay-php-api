@@ -1,4 +1,4 @@
-[<](../index.md) Altapay - PHP Api - Shipping methods
+[<](../index.md) Valitor - PHP Api - Shipping methods
 ===============================================
 
 Following shipping methods are accepted

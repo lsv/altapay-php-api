@@ -21,7 +21,7 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Request;
+namespace Valitor\Request;
 
 /**
  * Credit card class

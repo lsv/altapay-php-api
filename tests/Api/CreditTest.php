@@ -1,12 +1,12 @@
 <?php
 
-namespace Altapay\ApiTest\Api;
+namespace Valitor\ApiTest\Api;
 
-use Altapay\Api\Payments\Credit;
-use Altapay\Request\Card;
-use Altapay\Exceptions\CreditCardTokenAndCardUsedException;
-use Altapay\Response\CreditResponse as CreditResponse;
-use Altapay\Types\PaymentSources;
+use Valitor\Api\Payments\Credit;
+use Valitor\Request\Card;
+use Valitor\Exceptions\CreditCardTokenAndCardUsedException;
+use Valitor\Response\CreditResponse as CreditResponse;
+use Valitor\Types\PaymentSources;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;

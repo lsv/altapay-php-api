@@ -1,8 +1,8 @@
 <?php
 
-namespace Altapay\ApiTest;
+namespace Valitor\ApiTest;
 
-use Altapay\Authentication;
+use Valitor\Authentication;
 use Faker\Factory;
 
 abstract class AbstractTest extends \PHPUnit_Framework_TestCase

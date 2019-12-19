@@ -21,13 +21,13 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Api\Others;
+namespace Valitor\Api\Others;
 
-use Altapay\AbstractApi;
-use Altapay\Request\Giftcard;
-use Altapay\Response\GiftcardResponse;
-use Altapay\Serializer\ResponseSerializer;
-use Altapay\Traits\TerminalTrait;
+use Valitor\AbstractApi;
+use Valitor\Request\Giftcard;
+use Valitor\Response\GiftcardResponse;
+use Valitor\Serializer\ResponseSerializer;
+use Valitor\Traits\TerminalTrait;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;

@@ -21,12 +21,12 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Api\Subscription;
+namespace Valitor\Api\Subscription;
 
-use Altapay\AbstractApi;
-use Altapay\Response\ChargeSubscriptionResponse;
-use Altapay\Serializer\ResponseSerializer;
-use Altapay\Traits;
+use Valitor\AbstractApi;
+use Valitor\Response\ChargeSubscriptionResponse;
+use Valitor\Serializer\ResponseSerializer;
+use Valitor\Traits;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;

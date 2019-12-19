@@ -21,10 +21,10 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Api\Ecommerce;
+namespace Valitor\Api\Ecommerce;
 
-use Altapay\Response\CallbackResponse;
-use Altapay\Serializer\ResponseSerializer;
+use Valitor\Response\CallbackResponse;
+use Valitor\Serializer\ResponseSerializer;
 
 class Callback
 {

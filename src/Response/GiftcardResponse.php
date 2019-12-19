@@ -21,9 +21,9 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Response;
+namespace Valitor\Response;
 
-use Altapay\Response\Embeds\GiftCardAccount;
+use Valitor\Response\Embeds\GiftCardAccount;
 
 class GiftcardResponse extends AbstractResponse
 {

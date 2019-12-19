@@ -21,9 +21,9 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Response\Embeds;
+namespace Valitor\Response\Embeds;
 
-use Altapay\Response\AbstractResponse;
+use Valitor\Response\AbstractResponse;
 
 class PaymentInfo extends AbstractResponse
 {

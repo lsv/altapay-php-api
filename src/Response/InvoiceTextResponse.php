@@ -21,10 +21,10 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Response;
+namespace Valitor\Response;
 
-use Altapay\Response\Embeds\Address;
-use Altapay\Response\Embeds\TextInfo;
+use Valitor\Response\Embeds\Address;
+use Valitor\Response\Embeds\TextInfo;
 
 class InvoiceTextResponse extends AbstractResponse
 {

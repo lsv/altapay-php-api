@@ -1,11 +1,11 @@
 <?php
 
-namespace Altapay\ApiTest\Request;
+namespace Valitor\ApiTest\Request;
 
-use Altapay\ApiTest\AbstractTest;
-use Altapay\Exceptions\Exception;
-use Altapay\Request\Address;
-use Altapay\Request\Customer;
+use Valitor\ApiTest\AbstractTest;
+use Valitor\Exceptions\Exception;
+use Valitor\Request\Address;
+use Valitor\Request\Customer;
 
 class CustomerTest extends AbstractTest
 {

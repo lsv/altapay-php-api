@@ -1,8 +1,8 @@
 <?php
 
-namespace Altapay\ApiTest\Functional;
+namespace Valitor\ApiTest\Functional;
 
-use Altapay\Api\Test\TestConnection;
+use Valitor\Api\Test\TestConnection;
 
 class TestConnectionTest extends AbstractFunctionalTest
 {

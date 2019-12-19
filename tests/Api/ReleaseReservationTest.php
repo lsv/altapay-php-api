@@ -1,10 +1,10 @@
 <?php
 
-namespace Altapay\ApiTest\Api;
+namespace Valitor\ApiTest\Api;
 
-use Altapay\Api\Payments\ReleaseReservation;
-use Altapay\Response\Embeds\Transaction;
-use Altapay\Response\ReleaseReservationResponse as ReleaseReservationDocument;
+use Valitor\Api\Payments\ReleaseReservation;
+use Valitor\Response\Embeds\Transaction;
+use Valitor\Response\ReleaseReservationResponse as ReleaseReservationDocument;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;

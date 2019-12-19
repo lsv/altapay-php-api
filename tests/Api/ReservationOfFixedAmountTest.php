@@ -1,19 +1,19 @@
 <?php
 
-namespace Altapay\ApiTest\Api\Api;
+namespace Valitor\ApiTest\Api\Api;
 
-use Altapay\Api\Payments\ReservationOfFixedAmount;
-use Altapay\Request\Address;
-use Altapay\Request\Card;
-use Altapay\Request\Customer;
-use Altapay\Response\Embeds\Terminal;
-use Altapay\Response\ReservationOfFixedAmountResponse;
-use Altapay\Types\FraudServices;
-use Altapay\Types\PaymentSources;
-use Altapay\Types\PaymentTypes;
-use Altapay\Types\ShippingMethods;
-use Altapay\Types\TypeInterface;
-use Altapay\ApiTest\Api\AbstractApiTest;
+use Valitor\Api\Payments\ReservationOfFixedAmount;
+use Valitor\Request\Address;
+use Valitor\Request\Card;
+use Valitor\Request\Customer;
+use Valitor\Response\Embeds\Terminal;
+use Valitor\Response\ReservationOfFixedAmountResponse;
+use Valitor\Types\FraudServices;
+use Valitor\Types\PaymentSources;
+use Valitor\Types\PaymentTypes;
+use Valitor\Types\ShippingMethods;
+use Valitor\Types\TypeInterface;
+use Valitor\ApiTest\Api\AbstractApiTest;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;

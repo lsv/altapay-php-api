@@ -1,11 +1,11 @@
 <?php
 
-namespace Altapay\ApiTest\Api;
+namespace Valitor\ApiTest\Api;
 
-use Altapay\Api\Others\Terminals;
-use Altapay\Response\Embeds\Terminal;
-use Altapay\Response\TerminalsResponse as TerminalsDocument;
-use Altapay\Response\TerminalsResponse;
+use Valitor\Api\Others\Terminals;
+use Valitor\Response\Embeds\Terminal;
+use Valitor\Response\TerminalsResponse as TerminalsDocument;
+use Valitor\Response\TerminalsResponse;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 
@@ -67,7 +67,7 @@ class TerminalsTest extends AbstractApiTest
         $this->assertCount(2, $response->Terminals);
 
         $terminal = $response->Terminals[0];
-        $this->assertEquals('AltaPay Multi-Nature Terminal', $terminal->Title);
+        $this->assertEquals('Valitor Multi-Nature Terminal', $terminal->Title);
         $this->assertEquals('DK', $terminal->Country);
         $this->assertCount(4, $terminal->Natures);
     }
@@ -76,7 +76,7 @@ class TerminalsTest extends AbstractApiTest
     {
         $this->setExpectedException(
             \InvalidArgumentException::class,
-            'The attribute "iddonotexists" on element "Title" does not have a setter or a property in class "Altapay\Response\Embeds\Terminal"'
+            'The attribute "iddonotexists" on element "Title" does not have a setter or a property in class "Valitor\Response\Embeds\Terminal"'
         );
 
         (new Terminals($this->getAuth()))

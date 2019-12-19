@@ -1,2 +1,2 @@
 "Order ID";"Payment ID";"Terminal title";"Transaction Date";Amount;Currency;Acquirer
-orderid;7;"AltaPay Soap Test Terminal";"2014-08-11 15:37:36";12.00;EUR;SoapTestAcquirer
+orderid;7;"Valitor Soap Test Terminal";"2014-08-11 15:37:36";12.00;EUR;SoapTestAcquirer

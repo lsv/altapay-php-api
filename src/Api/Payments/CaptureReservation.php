@@ -21,14 +21,14 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Api\Payments;
+namespace Valitor\Api\Payments;
 
-use Altapay\AbstractApi;
-use Altapay\Response\CaptureReservationResponse;
-use Altapay\Serializer\ResponseSerializer;
-use Altapay\Traits\AmountTrait;
-use Altapay\Traits\OrderlinesTrait;
-use Altapay\Traits\TransactionsTrait;
+use Valitor\AbstractApi;
+use Valitor\Response\CaptureReservationResponse;
+use Valitor\Serializer\ResponseSerializer;
+use Valitor\Traits\AmountTrait;
+use Valitor\Traits\OrderlinesTrait;
+use Valitor\Traits\TransactionsTrait;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -41,7 +41,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * which means if the capture fails the system will automatically try to reauth the payment and then capture again.
  * Reauthed payments, however, do not have cvv or 3d-secure protection, which means the
  * protection against chargebacks is not as good.
- * If you wish to disable auto reauth for one or more of your terminals please contact AltaPay.
+ * If you wish to disable auto reauth for one or more of your terminals please contact Valitor.
  */
 class CaptureReservation extends AbstractApi
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Altapay\ApiTest\Functional;
+namespace Valitor\ApiTest\Functional;
 
-use Altapay\Api\Others\Terminals;
-use Altapay\Response\TerminalsResponse;
+use Valitor\Api\Others\Terminals;
+use Valitor\Response\TerminalsResponse;
 
 class TerminalsTest extends AbstractFunctionalTest
 {

@@ -1,7 +1,7 @@
-[<](../index.md) Altapay - PHP Api - Custom report
+[<](../index.md) Valitor - PHP Api - Custom report
 ===============================================
 
-Used to get a comma separated value file containing the custom report. Find the id and see the optional parameters that can be passed to each custom report on the custom report details page in the merchant interface (this is only visible if you have api credentials). Custom reports can be enabled by AltaPay support.
+Used to get a comma separated value file containing the custom report. Find the id and see the optional parameters that can be passed to each custom report on the custom report details page in the merchant interface (this is only visible if you have api credentials). Custom reports can be enabled by Valitor support.
 
 - [Request](#request)
     + [Required](#required)
@@ -11,18 +11,18 @@ Used to get a comma separated value file containing the custom report. Find the 
 # Request
 
 ```php
-$request = new \Altapay\Api\Others\CustomReport($auth);
+$request = new \Valitor\Api\Others\CustomReport($auth);
 $request->setId('my terminal');
 // Do the call
 try {
     $response = $request->call();
     // See Response below
-} catch (\Altapay\Exceptions\ClientException $e) {
+} catch (\Valitor\Exceptions\ClientException $e) {
     // Could not connect
-} catch (\Altapay\Exceptions\ResponseHeaderException $e) {
+} catch (\Valitor\Exceptions\ResponseHeaderException $e) {
     // Response error in header
-    $e->getHeader()->ErrorMessage
-} catch (\Altapay\Exceptions\ResponseMessageException $e) {
+    $e->getHeader()->ErrorMessage;
+} catch (\Valitor\Exceptions\ResponseMessageException $e) {
     // Error message
     $e->getMessage();
 }
@@ -37,7 +37,7 @@ try {
 ##### Example
 
 ```php
-$request = new \Altapay\Api\Others\CustomReport($auth);
+$request = new \Valitor\Api\Others\CustomReport($auth);
 $request->setId('my custom report');
 ```
 
@@ -51,7 +51,7 @@ $response = $request->call();
 
 ```
 "Order ID";"Payment ID";"Terminal title";"Transaction Date";Amount;Currency;Acquirer
-orderid;7;"AltaPay Soap Test Terminal";"2014-08-11 15:37:36";12.00;EUR;SoapTestAcquirer
+orderid;7;"Valitor Soap Test Terminal";"2014-08-11 15:37:36";12.00;EUR;SoapTestAcquirer
 ```
 
 **Note** that the columns in the output are defined by each individual report.
@@ -72,5 +72,5 @@ $array[0][1] = 'Payment ID';
 $array[0][2] = 'Terminal title';
 $array[1][0] = 'orderid';
 $array[1][1] = '7';
-$array[1][2] = 'AltaPay Soap Test Terminal';
+$array[1][2] = 'Valitor Soap Test Terminal';
 ```

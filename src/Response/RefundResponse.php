@@ -21,9 +21,9 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Response;
+namespace Valitor\Response;
 
-use Altapay\Response\Embeds\Transaction;
+use Valitor\Response\Embeds\Transaction;
 
 /**
  * Class Refund

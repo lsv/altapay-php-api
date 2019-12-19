@@ -1,7 +1,7 @@
-[<](../index.md) Altapay - PHP Api - Payment request
+[<](../index.md) Valitor - PHP Api - Payment request
 =================================================
 
-This is the preferred way of redirecting a customer to the AltaPay payment page. By invoking this method you send all the relavant payment information to the gateway and in return you get a URL which you can redirect the customer to.
+This is the preferred way of redirecting a customer to the Valitor payment page. By invoking this method you send all the relavant payment information to the gateway and in return you get a URL which you can redirect the customer to.
 
 Because this call does not happen in the browser, you do not need to worry about the user tampering with or even seeing the data posted to the gateway, and thus don't need to pass a checksum for the customer information.
 
@@ -21,7 +21,7 @@ Because this call does not happen in the browser, you do not need to worry about
 # Request
 
 ```php
-$request = new \Altapay\Api\Ecommerce\PaymentRequest($auth);
+$request = new \Valitor\Api\Ecommerce\PaymentRequest($auth);
 // Set the options - see Required and Optional below
 $request->setTerminal('my terminal');
 // etc
@@ -29,12 +29,12 @@ $request->setTerminal('my terminal');
 try {
     $response = $request->call();
     // Response will be a object - See Response below
-} catch (\Altapay\Exceptions\ClientException $e) {
+} catch (\Valitor\Exceptions\ClientException $e) {
     // Could not connect
-} catch (\Altapay\Exceptions\ResponseHeaderException $e) {
+} catch (\Valitor\Exceptions\ResponseHeaderException $e) {
     // Response error in header
-    $e->getHeader()->ErrorMessage
-} catch (\Altapay\Exceptions\ResponseMessageException $e) {
+    $e->getHeader()->ErrorMessage;
+} catch (\Valitor\Exceptions\ResponseMessageException $e) {
     // Error message
     $e->getMessage();
 }
@@ -52,7 +52,7 @@ try {
 ##### Example
 
 ```php
-$request = new \Altapay\Api\Ecommerce\PaymentRequest($auth);
+$request = new \Valitor\Api\Ecommerce\PaymentRequest($auth);
 $request->setTerminal('my terminal');
 $request->setShopOrderId('123456');
 $request->setAmount(200.45);
@@ -147,7 +147,7 @@ To enable fraud detection
 
 # Response
 
-Object of `\Altapay\Response\PaymentRequestResponse`
+Object of `\Valitor\Response\PaymentRequestResponse`
 
 | Method  | Description | Type |
 |---|---|---|

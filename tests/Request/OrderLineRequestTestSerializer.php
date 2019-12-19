@@ -1,8 +1,8 @@
 <?php
 
-namespace Altapay\ApiTest\Request;
+namespace Valitor\ApiTest\Request;
 
-use Altapay\Request\OrderLine;
+use Valitor\Request\OrderLine;
 
 class OrderLineRequestTestSerializer extends OrderLine
 {

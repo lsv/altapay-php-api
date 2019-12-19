@@ -21,9 +21,9 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Exceptions;
+namespace Valitor\Exceptions;
 
-use Altapay\Response\Embeds\Header;
+use Valitor\Response\Embeds\Header;
 
 class ResponseHeaderException extends Exception
 {

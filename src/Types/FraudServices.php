@@ -21,7 +21,7 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Types;
+namespace Valitor\Types;
 
 /**
  * Allowed fraud services
