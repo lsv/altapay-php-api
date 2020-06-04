@@ -21,7 +21,7 @@ try {
     // Could not connect
 } catch (\Valitor\Exceptions\ResponseHeaderException $e) {
     // Response error in header
-    $e->getHeader()->ErrorMessage;
+    $e->getHeader()->ErrorMessage
 } catch (\Valitor\Exceptions\ResponseMessageException $e) {
     // Error message
     $e->getMessage();

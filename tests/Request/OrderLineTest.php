@@ -13,9 +13,11 @@ class OrderLineTest extends AbstractTest
         $line = new OrderLine('description', 12, 2, 12.50);
         $line->setGoodsType('item');
         $line->taxAmount = 4.75;
+        $line->taxPercent = 38;
         $line->unitCode = 'code';
         $line->discount = 1;
         $line->imageUrl = 'https://image.com';
+        $line->productUrl = 'https://image.com';
 
         $serialized = $line->serialize();
 
@@ -24,20 +26,24 @@ class OrderLineTest extends AbstractTest
         $this->assertArrayHasKey('quantity', $serialized);
         $this->assertArrayHasKey('unitPrice', $serialized);
         $this->assertArrayHasKey('taxAmount', $serialized);
+        $this->assertArrayHasKey('taxPercent', $serialized);
         $this->assertArrayHasKey('unitCode', $serialized);
         $this->assertArrayHasKey('discount', $serialized);
         $this->assertArrayHasKey('goodsType', $serialized);
         $this->assertArrayHasKey('imageUrl', $serialized);
+        $this->assertArrayHasKey('productUrl', $serialized);
 
         $this->assertEquals('description', $serialized['description']);
         $this->assertEquals(12, $serialized['itemId']);
         $this->assertEquals(2, $serialized['quantity']);
         $this->assertEquals(12.50, $serialized['unitPrice']);
         $this->assertEquals(4.75, $serialized['taxAmount']);
+        $this->assertEquals(38, $serialized['taxPercent']);
         $this->assertEquals('code', $serialized['unitCode']);
         $this->assertEquals(1, $serialized['discount']);
         $this->assertEquals('item', $serialized['goodsType']);
         $this->assertEquals('https://image.com', $serialized['imageUrl']);
+        $this->assertEquals('https://image.com', $serialized['productUrl']);
 
     }
 
@@ -70,19 +76,6 @@ class OrderLineTest extends AbstractTest
         $s = $line->serialize();
 
         $this->assertEquals($type, $s['goodsType']);
-    }
-
-    public function test_can_not_set_both_tax_types()
-    {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
-            'Only one of "taxPercent" and "taxAmount" should be used'
-        );
-
-        $line = new OrderLine('description', 12, 2, 12.50);
-        $line->taxAmount = 4.75;
-        $line->taxPercent = 25;
-        $line->serialize();
     }
 
     public function test_serializer()

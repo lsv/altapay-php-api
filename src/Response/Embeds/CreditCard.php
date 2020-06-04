@@ -23,6 +23,17 @@
 
 namespace Valitor\Response\Embeds;
 
-class CreditCard
+use Valitor\Response\AbstractResponse;
+
+class CreditCard extends AbstractResponse
 {
+    /**
+     * @var Year
+     */
+    public $Year;
+
+    /**
+     * @var Month
+     */
+    public $Month;
 }
