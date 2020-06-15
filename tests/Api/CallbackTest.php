@@ -1,9 +1,9 @@
 <?php
 
-namespace Valitor\ApiTest\Api;
+namespace Altapay\ApiTest\Api;
 
-use Valitor\Api\Ecommerce\Callback;
-use Valitor\Response\CallbackResponse;
+use Altapay\Api\Ecommerce\Callback;
+use Altapay\Response\CallbackResponse;
 
 class CallbackTest extends \PHPUnit_Framework_TestCase
 {
@@ -77,7 +77,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
                 <PaymentNature>CreditCard</PaymentNature>
                 <PaymentSource>eCommerce</PaymentSource>
                 <PaymentSchemeName>Visa</PaymentSchemeName>
-                <PaymentNatureService name="ValitorAcquirer">
+                <PaymentNatureService name="AltapayAcquirer">
                     <SupportsRefunds>true</SupportsRefunds>
                     <SupportsRelease>true</SupportsRelease>
                     <SupportsMultipleCaptures>true</SupportsMultipleCaptures>

@@ -21,9 +21,9 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Traits;
+namespace Altapay\Traits;
 
-use Valitor\Response\Embeds\Terminal;
+use Altapay\Response\Embeds\Terminal;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 trait TerminalTrait

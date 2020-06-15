@@ -1,9 +1,9 @@
 <?php
 
-namespace Valitor\ApiTest\Request;
+namespace Altapay\ApiTest\Request;
 
-use Valitor\ApiTest\AbstractTest;
-use Valitor\Request\OrderLine;
+use Altapay\ApiTest\AbstractTest;
+use Altapay\Request\OrderLine;
 
 class OrderLineTest extends AbstractTest
 {

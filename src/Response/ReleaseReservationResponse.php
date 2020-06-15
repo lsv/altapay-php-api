@@ -21,9 +21,9 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Response;
+namespace Altapay\Response;
 
-use Valitor\Response\Embeds\Transaction;
+use Altapay\Response\Embeds\Transaction;
 
 /**
  * Class ReleaseReservation

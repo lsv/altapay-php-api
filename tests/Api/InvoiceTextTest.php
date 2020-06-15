@@ -1,11 +1,11 @@
 <?php
 
-namespace Valitor\ApiTest\Api;
+namespace Altapay\ApiTest\Api;
 
-use Valitor\Api\Others\InvoiceText;
-use Valitor\Response\Embeds\Address;
-use Valitor\Response\Embeds\Transaction;
-use Valitor\Response\InvoiceTextResponse as InvoiceTextDocument;
+use Altapay\Api\Others\InvoiceText;
+use Altapay\Response\Embeds\Address;
+use Altapay\Response\Embeds\Transaction;
+use Altapay\Response\InvoiceTextResponse as InvoiceTextDocument;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 

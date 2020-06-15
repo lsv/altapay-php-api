@@ -1,11 +1,11 @@
 <?php
 
-namespace Valitor\ApiTest\Api;
+namespace Altapay\ApiTest\Api;
 
-use Valitor\Response\Embeds\Transaction;
-use Valitor\Response\ReserveSubscriptionResponse;
-use Valitor\Exceptions\ClientException;
-use Valitor\Api\Subscription\ReserveSubscriptionCharge;
+use Altapay\Response\Embeds\Transaction;
+use Altapay\Response\ReserveSubscriptionResponse;
+use Altapay\Exceptions\ClientException;
+use Altapay\Api\Subscription\ReserveSubscriptionCharge;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 

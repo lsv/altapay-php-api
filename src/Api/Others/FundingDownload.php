@@ -21,11 +21,11 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Api\Others;
+namespace Altapay\Api\Others;
 
-use Valitor\AbstractApi;
-use Valitor\Response\Embeds\Funding;
-use Valitor\Traits\CsvToArrayTrait;
+use Altapay\AbstractApi;
+use Altapay\Response\Embeds\Funding;
+use Altapay\Traits\CsvToArrayTrait;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use Symfony\Component\OptionsResolver\Options;

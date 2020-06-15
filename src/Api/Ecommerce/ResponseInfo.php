@@ -1,8 +1,8 @@
 <?php
 
-namespace Valitor\Api\Ecommerce;
+namespace Altapay\Api\Ecommerce;
 
-use Valitor\Api\Ecommerce\Callback;
+use Altapay\Api\Ecommerce\Callback;
 
 class ResponseInfo extends Callback
 {

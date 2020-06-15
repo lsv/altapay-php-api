@@ -21,10 +21,10 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Api\Others;
+namespace Altapay\Api\Others;
 
-use Valitor\AbstractApi;
-use Valitor\Traits\CsvToArrayTrait;
+use Altapay\AbstractApi;
+use Altapay\Traits\CsvToArrayTrait;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -34,7 +34,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * Find the id and see the optional parameters that can be passed to each custom report on the
  * custom report details page in the merchant interface (this is only visible if you have api credentials).
  *
- * Custom reports can be enabled by Valitor support.
+ * Custom reports can be enabled by Altapay support.
  */
 class CustomReport extends AbstractApi
 {

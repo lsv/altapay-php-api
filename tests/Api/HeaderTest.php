@@ -1,10 +1,10 @@
 <?php
 
-namespace Valitor\ApiTest\Api;
+namespace Altapay\ApiTest\Api;
 
-use Valitor\Api\Others\FundingList;
-use Valitor\Exceptions\ResponseHeaderException;
-use Valitor\Response\Embeds\Header;
+use Altapay\Api\Others\FundingList;
+use Altapay\Exceptions\ResponseHeaderException;
+use Altapay\Response\Embeds\Header;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 

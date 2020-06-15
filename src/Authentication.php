@@ -21,7 +21,7 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor;
+namespace Altapay;
 
 /**
  * Authenticator

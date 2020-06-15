@@ -21,12 +21,12 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Api\Payments;
+namespace Altapay\Api\Payments;
 
-use Valitor\AbstractApi;
-use Valitor\Response\ReleaseReservationResponse;
-use Valitor\Serializer\ResponseSerializer;
-use Valitor\Traits\TransactionsTrait;
+use Altapay\AbstractApi;
+use Altapay\Response\ReleaseReservationResponse;
+use Altapay\Serializer\ResponseSerializer;
+use Altapay\Traits\TransactionsTrait;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -111,9 +111,9 @@ class ReleaseReservation extends AbstractApi
     }
 
     /**
-     * @return \Valitor\Response\AbstractResponse|PaymentRequestResponse|bool|void
-     * @throws \Valitor\Exceptions\ResponseHeaderException
-     * @throws \Valitor\Exceptions\ResponseMessageException
+     * @return \Altapay\Response\AbstractResponse|PaymentRequestResponse|bool|void
+     * @throws \Altapay\Exceptions\ResponseHeaderException
+     * @throws \Altapay\Exceptions\ResponseMessageException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     protected function doResponse()

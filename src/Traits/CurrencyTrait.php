@@ -21,9 +21,9 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Traits;
+namespace Altapay\Traits;
 
-use Valitor\Types\CurrencyTypes;
+use Altapay\Types\CurrencyTypes;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 trait CurrencyTrait

@@ -1,11 +1,11 @@
 <?php
 
-namespace Valitor\ApiTest\Api;
+namespace Altapay\ApiTest\Api;
 
-use Valitor\Request\Address;
-use Valitor\Request\Customer;
-use Valitor\Request\OrderLine;
-use Valitor\ApiTest\AbstractTest;
+use Altapay\Request\Address;
+use Altapay\Request\Customer;
+use Altapay\Request\OrderLine;
+use Altapay\ApiTest\AbstractTest;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;

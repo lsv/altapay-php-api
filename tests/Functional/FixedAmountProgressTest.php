@@ -1,16 +1,16 @@
 <?php
 
-namespace Valitor\ApiTest\Functional;
+namespace Altapay\ApiTest\Functional;
 
-use Valitor\Exceptions\ResponseHeaderException;
-use Valitor\Exceptions\ResponseMessageException;
-use Valitor\Api\Payments\CaptureReservation;
-use Valitor\Api\Payments\RefundCapturedReservation;
-use Valitor\Api\Payments\ReservationOfFixedAmount;
-use Valitor\Response\CaptureReservationResponse;
-use Valitor\Response\Embeds\Header;
-use Valitor\Response\RefundResponse;
-use Valitor\Response\ReservationOfFixedAmountResponse;
+use Altapay\Exceptions\ResponseHeaderException;
+use Altapay\Exceptions\ResponseMessageException;
+use Altapay\Api\Payments\CaptureReservation;
+use Altapay\Api\Payments\RefundCapturedReservation;
+use Altapay\Api\Payments\ReservationOfFixedAmount;
+use Altapay\Response\CaptureReservationResponse;
+use Altapay\Response\Embeds\Header;
+use Altapay\Response\RefundResponse;
+use Altapay\Response\ReservationOfFixedAmountResponse;
 
 class FixedAmountProgressTest extends AbstractFunctionalTest
 {

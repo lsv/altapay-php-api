@@ -21,10 +21,10 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor;
+namespace Altapay;
 
-use Valitor\Exceptions;
-use Valitor\Response\AbstractResponse;
+use Altapay\Exceptions;
+use Altapay\Response\AbstractResponse;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;

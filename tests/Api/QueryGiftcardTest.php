@@ -1,10 +1,10 @@
 <?php
 
-namespace Valitor\ApiTest\Api;
+namespace Altapay\ApiTest\Api;
 
-use Valitor\Api\Others\QueryGiftcard;
-use Valitor\Request\Giftcard;
-use Valitor\Response\GiftcardResponse as GiftcardResponse;
+use Altapay\Api\Others\QueryGiftcard;
+use Altapay\Request\Giftcard;
+use Altapay\Response\GiftcardResponse as GiftcardResponse;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 

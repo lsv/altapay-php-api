@@ -1,2 +1,2 @@
-[<](../index.md) Valitor - PHP Api - Capture reservation
+[<](../index.md) Altapay - PHP Api - Capture reservation
 =====================================================

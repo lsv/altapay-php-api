@@ -1,9 +1,9 @@
 <?php
 
-namespace Valitor\ApiTest\Api;
+namespace Altapay\ApiTest\Api;
 
-use Valitor\Api\Others\CalculateSurcharge;
-use Valitor\Response\SurchargeResponse;
+use Altapay\Api\Others\CalculateSurcharge;
+use Altapay\Response\SurchargeResponse;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 

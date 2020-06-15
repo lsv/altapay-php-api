@@ -1,9 +1,9 @@
 <?php
 
-namespace Valitor\ApiTest;
+namespace Altapay\ApiTest;
 
-use Valitor\Exceptions\ClassDoesNotExistsException;
-use Valitor\Factory;
+use Altapay\Exceptions\ClassDoesNotExistsException;
+use Altapay\Factory;
 
 class FactoryTest extends AbstractTest
 {

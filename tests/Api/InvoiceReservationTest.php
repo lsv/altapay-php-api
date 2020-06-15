@@ -1,8 +1,8 @@
 <?php
 
-namespace Valitor\ApiTest\Api;
+namespace Altapay\ApiTest\Api;
 
-use Valitor\Api\Payments\InvoiceReservation;
+use Altapay\Api\Payments\InvoiceReservation;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;

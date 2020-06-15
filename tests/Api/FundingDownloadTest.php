@@ -1,9 +1,9 @@
 <?php
 
-namespace Valitor\ApiTest\Api;
+namespace Altapay\ApiTest\Api;
 
-use Valitor\Api\Others\FundingDownload;
-use Valitor\Response\Embeds\Funding;
+use Altapay\Api\Others\FundingDownload;
+use Altapay\Response\Embeds\Funding;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 

@@ -1,4 +1,4 @@
-[<](../index.md) Valitor - PHP Api - Languages
+[<](../index.md) Altapay - PHP Api - Languages
 ==============================================
 
 Following languages are accepted

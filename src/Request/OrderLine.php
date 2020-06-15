@@ -21,7 +21,7 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Request;
+namespace Altapay\Request;
 
 class OrderLine extends AbstractSerializer
 {

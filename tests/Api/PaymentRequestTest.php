@@ -1,12 +1,12 @@
 <?php
 
-namespace Valitor\ApiTest\Api;
+namespace Altapay\ApiTest\Api;
 
-use Valitor\Api\Ecommerce\PaymentRequest;
-use Valitor\Request\Config;
-use Valitor\Response\PaymentRequestResponse;
-use Valitor\Types\LanguageTypes;
-use Valitor\Types\TypeInterface;
+use Altapay\Api\Ecommerce\PaymentRequest;
+use Altapay\Request\Config;
+use Altapay\Response\PaymentRequestResponse;
+use Altapay\Types\LanguageTypes;
+use Altapay\Types\TypeInterface;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;

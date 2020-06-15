@@ -21,9 +21,9 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Request;
+namespace Altapay\Request;
 
-use Valitor\Exceptions\Exception;
+use Altapay\Exceptions\Exception;
 
 class Customer extends AbstractSerializer
 {

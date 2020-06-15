@@ -1,11 +1,11 @@
 <?php
 
-namespace Valitor\ApiTest\Api;
+namespace Altapay\ApiTest\Api;
 
-use Valitor\Api\Others\FundingList;
-use Valitor\Response\Embeds\Funding;
-use Valitor\Response\Embeds\Shop;
-use Valitor\Response\FundingsResponse;
+use Altapay\Api\Others\FundingList;
+use Altapay\Response\Embeds\Funding;
+use Altapay\Response\Embeds\Shop;
+use Altapay\Response\FundingsResponse;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 

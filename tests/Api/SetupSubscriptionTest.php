@@ -1,10 +1,10 @@
 <?php
 
-namespace Valitor\ApiTest\Api;
+namespace Altapay\ApiTest\Api;
 
-use Valitor\Exceptions\ResponseMessageException;
-use Valitor\Response\SetupSubscriptionResponse as SetupSubscriptionResponse;
-use Valitor\Api\Subscription\SetupSubscription;
+use Altapay\Exceptions\ResponseMessageException;
+use Altapay\Response\SetupSubscriptionResponse as SetupSubscriptionResponse;
+use Altapay\Api\Subscription\SetupSubscription;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 
