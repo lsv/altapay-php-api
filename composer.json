@@ -1,16 +1,10 @@
 {
-  "name": "lsv/altapay-php-api",
+  "name": "altapay/php-api",
   "description": "Valitor PHP API",
   "keywords": [
     "payment", "valitor"
   ],
   "license": "MIT",
-  "authors": [
-    {
-      "name": "Martin Aarhof",
-      "email": "maa@scandesigns.dk"
-    }
-  ],
   "require": {
     "php": "^5.6|^7.0",
     "guzzlehttp/guzzle": "^6.0",

@@ -6,3 +6,8 @@
 /_.env.php
 composer.lock
 /.php_cs.cache
+.idea/lsv-php-api.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/.gitignore
