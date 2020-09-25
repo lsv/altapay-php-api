@@ -1,21 +1,13 @@
-Altapay - PHP API &ndash; [![Build Status](https://travis-ci.org/lsv/altapay-php-api.svg?branch=master)](https://travis-ci.org/lsv/altapay-php-api) [![codecov](https://codecov.io/gh/lsv/altapay-php-api/branch/master/graph/badge.svg)](https://codecov.io/gh/lsv/altapay-php-api) [![SensioLabsInsight](https://insight.sensiolabs.com/projects/ec01dcf9-d9dd-4227-b116-8c72617b79bc/mini.png)](https://insight.sensiolabs.com/projects/ec01dcf9-d9dd-4227-b116-8c72617b79bc)
+Altapay - API PHP
 =================
 
 For accessing Altapay payment gateway through the API
 
-### Install
+## Install
 
-`composer require lsv/altapay-php-api`
+`composer require altapay/api-php`
 
-or add it to your `composer.json` file
-
-```json
-"require": {
-    "lsv/altapay-php-api": "^1.0"
-}
-```
-
-### Usage
+## Usage
 
 For doing a [`capture`](docs/capture.md) the following can be used
 
@@ -35,14 +27,22 @@ try {
 
 More details in the [documentation](docs/index.md)
 
-### License
+## Requirements
 
-The MIT License (MIT)
+The AltaPay API PHP requires PHP 5.6.0 or grater with the following extensions installed:
 
-Copyright (c) 2016 Martin Aarhof martin.aarhof@gmail.com
+- date
+- filter
+- pcre
+- Reflection
+- SimpleXML
+- spl
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+## Changelog
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+See [CHANGELOG.md](CHANGELOG.md)
+
+## License
+
+See [LICENSE](LICENSE)
