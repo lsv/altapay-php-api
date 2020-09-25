@@ -24,9 +24,11 @@
 namespace Altapay\Api\Payments;
 
 use Altapay\AbstractApi;
+use Altapay\Exceptions;
 use Altapay\Response\RefundResponse;
 use Altapay\Serializer\ResponseSerializer;
 use Altapay\Traits;
+use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
