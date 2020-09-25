@@ -1,32 +1,37 @@
 {
-  "name": "altapay/php-api",
-  "description": "Altapay PHP API",
-  "keywords": [
-    "payment", "altapay"
-  ],
-  "license": "MIT",
-  "require": {
-    "php": "^5.6|^7.0",
-    "guzzlehttp/guzzle": "^6.0",
-    "symfony/options-resolver": "^2.6|^3.0|^4.0",
-    "symfony/event-dispatcher": "^2.1|^3.0|^4.0"
-  },
-  "autoload": {
-    "psr-4": {
-      "Altapay\\" : "src"
+    "name": "altapay/php-api",
+    "license": "MIT",
+    "description": "AltaPay: Payments less complicated",
+    "keywords": [
+        "payment",
+        "altapay"
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "bin-dir": "bin"
+    },
+    "require": {
+        "php": "^5.6 || ^7.0",
+        "guzzlehttp/guzzle": "^6.0",
+        "symfony/event-dispatcher": "^2.1 || ^3.0 || ^4.0",
+        "symfony/options-resolver": "^2.6 || ^3.0 || ^4.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8 || ^5.3",
+        "friendsofphp/php-cs-fixer": "^2.0",
+        "fzaninotto/faker": "^1.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Altapay\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Altapay\\ApiTest\\": "tests"
+        }
     }
-  },
-  "require-dev": {
-    "phpunit/phpunit": "^4.8|^5.3",
-    "friendsofphp/php-cs-fixer": "^2.0",
-    "fzaninotto/faker": "^1.6"
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Altapay\\ApiTest\\" : "tests"
-    }
-  },
-  "config": {
-    "bin-dir": "bin"
-  }
 }
