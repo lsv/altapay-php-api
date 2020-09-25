@@ -101,7 +101,7 @@ abstract class AbstractResponse
         if ($element) {
             /** @var \SimpleXMLElement $attribute */
             foreach ($element->attributes() as $attribute) {
-                if (isset($attribute) && $attribute) {
+                if ($attribute) {
                     if (!$this->set($object, (string)$attribute, $attribute)) {
                         throw new \InvalidArgumentException(
                             sprintf(
