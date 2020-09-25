@@ -33,9 +33,9 @@ class LanguageTypes implements TypeInterface
      * @var array
      */
     private static $languages = [
-	    'cs', 'da', 'de', 'en', 'es', 'fi', 'fr', 'ja',
-	    'lt', 'nb', 'nl', 'nn', 'no', 'pl', 'sv','th', 'tr', 'zh',
-	    'et', 'ee', 'it', 'pt', 'eu'
+        'cs', 'da', 'de', 'en', 'es', 'fi', 'fr', 'ja',
+        'lt', 'nl', 'no', 'nb', 'nn', 'pl', 'sv','th', 'tr', 'zh',
+        'et', 'ee', 'it', 'pt', 'eu'
     ];
 
     /**

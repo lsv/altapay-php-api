@@ -378,9 +378,7 @@ class PaymentRequest extends AbstractApi
 
             return $output;
         } catch (GuzzleHttpClientException $e) {
-            $exception = new Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse());
-
-            return $this->handleExceptionResponse($exception);
+            throw new Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse());
         }
     }
 

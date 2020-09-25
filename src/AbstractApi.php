@@ -211,19 +211,6 @@ abstract class AbstractApi
     }
 
     /**
-     * Handle exception response
-     *
-     * @param Exceptions\ClientException $exception
-     *
-     * @return bool|void
-     * @throws Exceptions\ClientException
-     */
-    protected function handleExceptionResponse(Exceptions\ClientException $exception)
-    {
-        throw $exception;
-    }
-
-    /**
      * Resolve options
      */
     protected function doConfigureOptions()
@@ -293,9 +280,7 @@ abstract class AbstractApi
 
             return $output;
         } catch (GuzzleHttpClientException $e) {
-            $exception = new Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse());
-
-            return $this->handleExceptionResponse($exception);
+            throw new Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse());
         }
     }
 

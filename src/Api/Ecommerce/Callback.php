@@ -26,10 +26,20 @@ namespace Altapay\Api\Ecommerce;
 use Altapay\Response\CallbackResponse;
 use Altapay\Serializer\ResponseSerializer;
 
+/**
+ * Class Callback
+ * Handle callback functionality.
+ * Store the data to the response.
+ */
 class Callback
 {
     private $postedData;
 
+    /**
+     * Callback constructor.
+     *
+     * @param $postedData
+     */
     public function __construct($postedData)
     {
         $this->postedData = $postedData;

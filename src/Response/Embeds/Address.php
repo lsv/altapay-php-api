@@ -93,4 +93,16 @@ class Address extends AbstractResponse
 
         return $this;
     }
+
+    /**
+     * @param string $LastName
+     *
+     * @return Address
+     */
+    public function setLastName($LastName)
+    {
+        $this->Lastname = $LastName;
+
+        return $this;
+    }
 }

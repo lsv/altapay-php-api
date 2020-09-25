@@ -147,9 +147,7 @@ class CaptureReservation extends AbstractApi
         }
 
         try {
-            $data = ResponseSerializer::serialize(CaptureReservationResponse::class, $xml->Body, false, $xml->Header);
-
-            return $data;
+            return ResponseSerializer::serialize(CaptureReservationResponse::class, $xml->Body, false, $xml->Header);
         } catch (\Exception $e) {
             throw $e;
         }
@@ -216,9 +214,7 @@ class CaptureReservation extends AbstractApi
 
             return $output;
         } catch (GuzzleHttpClientException $e) {
-            $exception = new Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse());
-
-            return $this->handleExceptionResponse($exception);
+            throw new Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse());
         }
     }
 

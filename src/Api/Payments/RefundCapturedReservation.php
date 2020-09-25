@@ -169,7 +169,6 @@ class RefundCapturedReservation extends AbstractApi
         return $url;
     }
 
-
     /**
      * @return string
      */
@@ -177,7 +176,6 @@ class RefundCapturedReservation extends AbstractApi
     {
         return 'POST';
     }
-
 
     /**
      * Generate the response
@@ -203,9 +201,7 @@ class RefundCapturedReservation extends AbstractApi
 
             return $output;
         } catch (GuzzleHttpClientException $e) {
-            $exception = new Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse());
-
-            return $this->handleExceptionResponse($exception);
+            throw new Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse());
         }
     }
 
