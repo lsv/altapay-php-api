@@ -249,7 +249,7 @@ abstract class AbstractApi
                 }
             }
 
-            if (property_exists($response, 'CardHolderMessageMustBeShown')) {
+            if (property_exists($response, 'CardHolderErrorMessage') && property_exists($response, 'CardHolderMessageMustBeShown')) {
                 if ($response->CardHolderMessageMustBeShown) {
                     throw new Exceptions\ResponseMessageException($response->CardHolderErrorMessage);
                 }
