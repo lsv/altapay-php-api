@@ -53,7 +53,7 @@ class Card
     /**
      * Card security code
      *
-     * @var int
+     * @var int|null
      */
     private $cvc;
 

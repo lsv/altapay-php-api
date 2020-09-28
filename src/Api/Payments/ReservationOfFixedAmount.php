@@ -247,7 +247,7 @@ class ReservationOfFixedAmount extends AbstractApi
     /**
      * Url to api call
      *
-     * @param array $options Resolved options
+     * @param array<string, string> $options Resolved options
      *
      * @return string
      */

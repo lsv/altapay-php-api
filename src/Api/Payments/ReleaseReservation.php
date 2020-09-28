@@ -26,6 +26,7 @@ namespace Altapay\Api\Payments;
 use Altapay\AbstractApi;
 use Altapay\Exceptions;
 use Altapay\Response\ReleaseReservationResponse;
+use Altapay\Response\PaymentRequestResponse;
 use Altapay\Serializer\ResponseSerializer;
 use Altapay\Traits\TransactionsTrait;
 use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
@@ -113,7 +114,7 @@ class ReleaseReservation extends AbstractApi
     }
 
     /**
-     * @return \Altapay\Response\AbstractResponse|PaymentRequestResponse|bool|void
+     * @return \Altapay\Response\AbstractResponse|PaymentRequestResponse|bool
      * @throws \Altapay\Exceptions\ResponseHeaderException
      * @throws \Altapay\Exceptions\ResponseMessageException
      * @throws \GuzzleHttp\Exception\GuzzleException

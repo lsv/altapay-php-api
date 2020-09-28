@@ -35,7 +35,7 @@ abstract class AbstractResponse
     /**
      * Header of the result
      *
-     * @var Header;
+     * @var Header
      */
     public $Header;
 
@@ -46,6 +46,9 @@ abstract class AbstractResponse
      */
     protected $childs = [];
 
+    /**
+     * @return void
+     */
     public function headerSetter(\SimpleXMLElement $xml = null)
     {
         if ($xml) {
@@ -95,6 +98,7 @@ abstract class AbstractResponse
      *
      * @param object            $object
      * @param \SimpleXMLElement $element
+     * @return void
      */
     private function attributeSetter($object, \SimpleXMLElement $element)
     {
@@ -123,6 +127,7 @@ abstract class AbstractResponse
      * @param object            $object
      * @param mixed             $data
      * @param \SimpleXMLElement $element
+     * @return void
      */
     private function elementSetter($object, $data, \SimpleXMLElement $element)
     {

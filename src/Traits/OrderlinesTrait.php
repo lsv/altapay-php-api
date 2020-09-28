@@ -61,6 +61,9 @@ trait OrderlinesTrait
         return $this;
     }
 
+    /**
+     * @return void
+     */
     protected function setOrderLinesResolver(OptionsResolver $resolver)
     {
         $resolver->addAllowedTypes('orderLines', 'array');

@@ -98,7 +98,7 @@ class CaptureReservation extends AbstractApi
      * The shipping tracking info is used if you want to send the shipping tracking info
      * with invoice.
      *
-     * @param $shippingTrackingInfo
+     * @param string $shippingTrackingInfo
      *
      * @return $this
      */

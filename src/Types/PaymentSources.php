@@ -32,7 +32,7 @@ class PaymentSources implements TypeInterface
     /**
      * Allowed payment sources
      *
-     * @var array
+     * @var array<int, string>
      */
     private static $sources = [
         'eCommerce',
@@ -45,7 +45,7 @@ class PaymentSources implements TypeInterface
     /**
      * Get allowed values
      *
-     * @return array
+     * @return array<int, string>
      */
     public static function getAllowed()
     {

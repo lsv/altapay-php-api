@@ -49,6 +49,7 @@ trait CustomerInfoTrait
      * Resolve amount option
      *
      * @param OptionsResolver $resolver
+     * @return void
      */
     protected function setCustomerInfoResolver(OptionsResolver $resolver)
     {

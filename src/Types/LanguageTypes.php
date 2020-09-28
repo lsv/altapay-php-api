@@ -30,7 +30,7 @@ class LanguageTypes implements TypeInterface
      * Allowed languages
      * nb, nn will be converted to no.
      * ee will be converted to et
-     * @var array
+     * @var array<int, string>
      */
     private static $languages = [
         'cs', 'da', 'de', 'en', 'es', 'fi', 'fr', 'ja',
@@ -41,7 +41,7 @@ class LanguageTypes implements TypeInterface
     /**
      * Get allowed values
      *
-     * @return array
+     * @return array<int, string>
      */
     public static function getAllowed()
     {

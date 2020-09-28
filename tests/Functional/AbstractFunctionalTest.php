@@ -11,6 +11,9 @@ abstract class AbstractFunctionalTest extends AbstractTest
 
     const VALID_VISA_CARD_NUMBER = '4140000000001466';
 
+    /**
+     * @return void
+     */
     protected function setUp()
     {
         if (! file_exists(__DIR__ . '/../../.env.php')) {

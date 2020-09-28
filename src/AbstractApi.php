@@ -302,7 +302,7 @@ abstract class AbstractApi
     /**
      * Build url
      *
-     * @param array $options
+     * @param array<string, string> $options
      *
      * @return bool|string
      */
@@ -328,7 +328,7 @@ abstract class AbstractApi
     /**
      * Set the headers to the API call
      *
-     * @return array
+     * @return array<string, string>
      */
     protected function getBasicHeaders()
     {
@@ -358,6 +358,7 @@ abstract class AbstractApi
      * Resolve transaction
      *
      * @param OptionsResolver $resolver
+     * @return void
      */
     protected function setTransactionResolver(OptionsResolver $resolver)
     {
@@ -367,6 +368,7 @@ abstract class AbstractApi
      * Resolve orderlines
      *
      * @param OptionsResolver $resolver
+     * @return void
      */
     protected function setOrderLinesResolver(OptionsResolver $resolver)
     {
@@ -376,6 +378,7 @@ abstract class AbstractApi
      * Resolve amount option
      *
      * @param OptionsResolver $resolver
+     * @return void
      */
     protected function setAmountResolver(OptionsResolver $resolver)
     {
@@ -385,6 +388,7 @@ abstract class AbstractApi
      * Resolve terminal option
      *
      * @param OptionsResolver $resolver
+     * @return void
      */
     protected function setTerminalResolver(OptionsResolver $resolver)
     {
@@ -394,6 +398,7 @@ abstract class AbstractApi
      * Resolve currency option
      *
      * @param OptionsResolver $resolver
+     * @return void
      */
     protected function setCurrencyResolver(OptionsResolver $resolver)
     {
@@ -403,6 +408,7 @@ abstract class AbstractApi
      * Resolve shop order id
      *
      * @param OptionsResolver $resolver
+     * @return void
      */
     protected function setShopOrderIdResolver(OptionsResolver $resolver)
     {
@@ -412,6 +418,7 @@ abstract class AbstractApi
      * Resolve transaction info option
      *
      * @param OptionsResolver $resolver
+     * @return void
      */
     protected function setTransactionInfoResolver(OptionsResolver $resolver)
     {
@@ -421,6 +428,7 @@ abstract class AbstractApi
      * Resolve amount option
      *
      * @param OptionsResolver $resolver
+     * @return void
      */
     protected function setCustomerInfoResolver(OptionsResolver $resolver)
     {
