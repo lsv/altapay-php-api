@@ -26,8 +26,8 @@ class CalculateSurchargeTest extends AbstractApiTest
 
     public function test_options_fields_not_allowed_when_payment_id_is_set()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage(
             'The fields "currency, terminal, credit_card_token" is not allowed when "payment_id" is set'
         );
 
@@ -42,8 +42,8 @@ class CalculateSurchargeTest extends AbstractApiTest
 
     public function test_options_fields_required_when_payment_not_set()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage(
             'The fields "terminal, credit_card_token, currency" is required'
         );
 
@@ -106,6 +106,9 @@ class CalculateSurchargeTest extends AbstractApiTest
         $this->assertEquals('my terminal', $parts['terminal']);
     }
 
+    /**
+     * @return void
+     */
     public function test_object()
     {
         $api = $this->getapi();

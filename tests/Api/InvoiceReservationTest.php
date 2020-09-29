@@ -26,8 +26,8 @@ class InvoiceReservationTest extends AbstractApiTest
 
     public function test_missing_all_options()
     {
-        $this->setExpectedException(
-            MissingOptionsException::class,
+        $this->expectException(MissingOptionsException::class);
+        $this->expectExceptionMessage(
             'The required options "amount", "currency", "shop_orderid", "terminal" are missing.'
         );
         $this->getapi()->call();

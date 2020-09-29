@@ -77,7 +77,7 @@ class ReleaseReservationTest extends AbstractApiTest
 
     public function test_capture_reservation_transaction_handleexception()
     {
-        $this->setExpectedException(ClientException::class);
+        $this->expectException(ClientException::class);
 
         $transaction = new Transaction();
         $transaction->TransactionId = 456;

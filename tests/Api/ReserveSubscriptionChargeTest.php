@@ -79,7 +79,7 @@ class ReserveSubscriptionChargeTest extends AbstractApiTest
 
     public function test_reserve_subscription_charge_querypath_handleexception()
     {
-        $this->setExpectedException(ClientException::class);
+        $this->expectException(ClientException::class);
 
         $transaction = new Transaction();
         $transaction->TransactionId = 456;

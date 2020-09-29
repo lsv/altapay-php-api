@@ -161,7 +161,8 @@ class RefundCapturedReservationTest extends AbstractApiTest
      */
     public function test_capture_refund_transaction_orderlines_randomarray()
     {
-        $this->setExpectedException(\InvalidArgumentException::class, sprintf(
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage(sprintf(
             'orderLines should all be a instance of "%s"',
             OrderLine::class
         ));
@@ -177,7 +178,7 @@ class RefundCapturedReservationTest extends AbstractApiTest
 
     public function test_capture_refund_transaction_handleexception()
     {
-        $this->setExpectedException(ClientException::class);
+        $this->expectException(ClientException::class);
 
         $transaction = new Transaction();
         $transaction->TransactionId = 456;

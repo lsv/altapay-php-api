@@ -30,7 +30,7 @@ class FactoryTest extends AbstractTest
 
     public function test_does_not_exists()
     {
-        $this->setExpectedException(ClassDoesNotExistsException::class);
+        $this->expectException(ClassDoesNotExistsException::class);
         Factory::create('Foo\Bar', $this->getAuth());
     }
 

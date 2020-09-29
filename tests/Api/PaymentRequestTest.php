@@ -33,8 +33,8 @@ class PaymentRequestTest extends AbstractApiTest
 
     public function test_required_options()
     {
-        $this->setExpectedException(
-            MissingOptionsException::class,
+        $this->expectException(MissingOptionsException::class);
+        $this->expectExceptionMessage(
             'The required options "amount", "currency", "shop_orderid", "terminal" are missing.'
         );
 
@@ -94,8 +94,8 @@ class PaymentRequestTest extends AbstractApiTest
             $this->assertArrayHasKey($QUERY_PARAM,$parts,'Create Payment Request is missing the "'.$QUERY_PARAM.'" query parameter.');
         }
         $this->assertEquals('da', $parts['language']);
-        $this->assertTrue(is_numeric($parts['amount']),'Amount is not numeric');
-        $this->assertTrue(is_numeric($parts['currency']),'Currency is not numeric');
+        $this->assertIsNumeric($parts['amount'],'Amount is not numeric');
+        $this->assertIsNumeric($parts['currency'],'Currency is not numeric');
         $this->assertEquals('my terminal', $parts['terminal']);
         $this->assertEquals('order id', $parts['shop_orderid']);
         $this->assertEquals(200.50, ((float)$parts['amount']));
@@ -128,7 +128,7 @@ class PaymentRequestTest extends AbstractApiTest
         $this->assertEquals('kg', $line['unitCode']);
 
         // Config
-        $this->assertTrue(is_array($parts['config']));
+        $this->assertIsArray($parts['config']);
         $config = $parts['config'];
         $this->assertEquals(sprintf('%s/%s', self::CONFIG_URL, 'form'), $config['callback_form']);
         $this->assertEquals(sprintf('%s/%s', self::CONFIG_URL, 'ok'), $config['callback_ok']);
@@ -228,8 +228,8 @@ class PaymentRequestTest extends AbstractApiTest
      */
     private function disallowedTypes($class, $key, $method)
     {
-        $this->setExpectedException(
-            InvalidOptionsException::class,
+        $this->expectException(InvalidOptionsException::class);
+        $this->expectExceptionMessage(
             sprintf(
                 'The option "%s" with value "not allowed type" is invalid. Accepted values are: "%s".',
                 $key,

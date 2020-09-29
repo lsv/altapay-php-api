@@ -105,7 +105,8 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
 
     public function test_preauth_declined_by_bank()
     {
-        $this->setExpectedException(ResponseMessageException::class, 'TestAcquirer[pan=0566 or amount=5660]');
+        $this->expectException(ResponseMessageException::class);
+        $this->expectExceptionMessage('TestAcquirer[pan=0566 or amount=5660]');
 
         $api = new ReservationOfFixedAmount($this->getAuth());
         $api
@@ -120,7 +121,8 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
 
     public function test_preauth_bank_error()
     {
-        $this->setExpectedException(ResponseMessageException::class, 'TestAcquirer[pan=0567 or amount=5670][54321]');
+        $this->expectException(ResponseMessageException::class);
+        $this->expectExceptionMessage('TestAcquirer[pan=0567 or amount=5670][54321]');
 
         $api = new ReservationOfFixedAmount($this->getAuth());
         $api
@@ -137,7 +139,8 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
 //    {
 //        $this->markTestSkipped('Not working with API');
 //
-//        $this->setExpectedException(ResponseMessageException::class, 'TestAcquirer[pan=0572 or amount=5720]');
+//        $this->setExpectedException(ResponseMessageException::class);
+//        $this->expectExceptionMessage('TestAcquirer[pan=0572 or amount=5720]');
 //
 //        $api = new ReservationOfFixedAmount($this->getAuth());
 //        $api

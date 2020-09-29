@@ -27,8 +27,8 @@ class SetupSubscriptionTest extends AbstractApiTest
 
     public function test_charge_subscription_error()
     {
-        $this->setExpectedException(
-            ResponseMessageException::class,
+        $this->expectException(ResponseMessageException::class);
+        $this->expectExceptionMessage(
             'TestAcquirer[pan=1466 or amount=14660]'
         );
 

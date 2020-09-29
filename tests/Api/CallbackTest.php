@@ -5,7 +5,7 @@ namespace Altapay\ApiTest\Api;
 use Altapay\Api\Ecommerce\Callback;
 use Altapay\Response\CallbackResponse;
 
-class CallbackTest extends \PHPUnit_Framework_TestCase
+class CallbackTest extends \PHPUnit\Framework\TestCase
 {
     private $data;
 

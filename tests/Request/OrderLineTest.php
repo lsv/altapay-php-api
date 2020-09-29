@@ -65,8 +65,8 @@ class OrderLineTest extends AbstractTest
     public function test_can_not_set_goodstypes($type, $exception = false)
     {
         if ($exception) {
-            $this->setExpectedException(
-                \InvalidArgumentException::class,
+            $this->expectException(\InvalidArgumentException::class);
+            $this->expectExceptionMessage(
                 'goodsType should be one of "shipment|handling|item" you have selected "' . $type . '"'
             );
         }

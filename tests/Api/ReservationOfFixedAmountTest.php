@@ -38,8 +38,8 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
 
     public function test_missing_all_options()
     {
-        $this->setExpectedException(
-            MissingOptionsException::class,
+        $this->expectException(MissingOptionsException::class);
+        $this->expectExceptionMessage(
             'The required options "amount", "currency", "shop_orderid", "terminal" are missing.'
         );
         $this->getapi()->call();
@@ -47,8 +47,8 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
 
     public function test_missing_terminal_options()
     {
-        $this->setExpectedException(
-            MissingOptionsException::class,
+        $this->expectException(MissingOptionsException::class);
+        $this->expectExceptionMessage(
             'The required option "terminal" is missing.'
         );
 
@@ -100,8 +100,8 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
 
     public function test_wrong_currency()
     {
-        $this->setExpectedException(
-            InvalidOptionsException::class,
+        $this->expectException(InvalidOptionsException::class);
+        $this->expectExceptionMessage(
             'The option "currency" with value "danske kroner" is invalid.'
         );
 
@@ -116,8 +116,8 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
 
     public function test_creditcard_and_token()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage(
             'You can not set both a credit card and a credit card token'
         );
 
@@ -134,8 +134,8 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
 
     public function test_token_and_creditcard()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage(
             'You can not set both a credit card token and a credit card'
         );
 
@@ -385,8 +385,8 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
      */
     private function disallowedTypes($class, $key, $method)
     {
-        $this->setExpectedException(
-            InvalidOptionsException::class,
+        $this->expectException(InvalidOptionsException::class);
+        $this->expectExceptionMessage(
             sprintf(
                 'The option "%s" with value "not allowed type" is invalid. Accepted values are: "%s".',
                 $key,

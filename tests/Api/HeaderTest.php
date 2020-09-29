@@ -27,7 +27,7 @@ class HeaderTest extends AbstractApiTest
 
     public function test_get_header_error()
     {
-        $this->setExpectedException(ResponseHeaderException::class);
+        $this->expectException(ResponseHeaderException::class);
         $api = $this->getapi();
         $api->call();
     }
