@@ -133,8 +133,8 @@ class PaymentsTest extends AbstractApiTest
         $this->assertEquals('Merchant', $data->LiableForChargeback);
         $this->assertEquals('4f244dec4907eba0f6432e53b17a60ebcf51365e', $data->BlacklistToken);
         $this->assertEquals('myorderid', $data->ShopOrderId);
-        $this->assertEquals('Altapay Shop', $data->Shop);
-        $this->assertEquals('Altapay Test Terminal', $data->Terminal);
+        $this->assertEquals('AltaPay Shop', $data->Shop);
+        $this->assertEquals('AltaPay Test Terminal', $data->Terminal);
         $this->assertEquals('captured', $data->TransactionStatus);
         $this->assertEquals('NONE', $data->ReasonCode);
         $this->assertEquals('978', $data->MerchantCurrency);
@@ -189,7 +189,7 @@ class PaymentsTest extends AbstractApiTest
                     0, 'Form_Created_At', '2010-09-28 12:34:56'
                 ],
                 [
-                    1, 'Form_Provider', 'Altapay Test Form'
+                    1, 'Form_Provider', 'AltaPay Test Form'
                 ],
                 [
                     2, 'Merchant_Provided_Info', 'Some info by merchant'

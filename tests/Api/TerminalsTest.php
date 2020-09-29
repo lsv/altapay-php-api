@@ -67,7 +67,7 @@ class TerminalsTest extends AbstractApiTest
         $this->assertCount(2, $response->Terminals);
 
         $terminal = $response->Terminals[0];
-        $this->assertEquals('Altapay Multi-Nature Terminal', $terminal->Title);
+        $this->assertEquals('AltaPay Multi-Nature Terminal', $terminal->Title);
         $this->assertEquals('DK', $terminal->Country);
         $this->assertCount(4, $terminal->Natures);
     }
