@@ -22,7 +22,7 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
         $api = new ReservationOfFixedAmount($this->getAuth());
         $api
             ->setTerminal($this->getTerminal())
-            ->setShopOrderId(time())
+            ->setShopOrderId((string)time())
             ->setAmount($this->getFaker()->randomFloat(2, 1, 50))
             ->setCurrency('DKK')
         ;
@@ -35,7 +35,7 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
             $api = new ReservationOfFixedAmount($this->getAuth());
             $api
                 ->setTerminal($this->getTerminal())
-                ->setShopOrderId(time())
+                ->setShopOrderId((string)time())
                 ->setAmount($this->getFaker()->randomFloat(2, 1, 50))
                 ->setCurrency('DKK');
             $api->call();
@@ -50,7 +50,7 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
         $api = new ReservationOfFixedAmount($this->getAuth());
         $api
             ->setTerminal($this->getTerminal())
-            ->setShopOrderId(time())
+            ->setShopOrderId((string)time())
             ->setAmount($this->getFaker()->randomFloat(2, 1, 50))
             ->setCurrency('DKK')
             ->setCard($this->getValidCard())
@@ -82,10 +82,10 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
 //        $api = new ReservationOfFixedAmount($this->getAuth());
 //        $api
 //            ->setTerminal($this->getTerminal())
-//            ->setShopOrderId(time())
+//            ->setShopOrderId((string)time())
 //            ->setAmount(4.66)
 //            ->setCurrency('DKK')
-//            ->setCard($this->generateCard(4140000000000466))
+//            ->setCard($this->generateCard('4140000000000466'))
 //        ;
 //        $api->call();
 //    }
@@ -95,10 +95,10 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
 //        $api = new ReservationOfFixedAmount($this->getAuth());
 //        $api
 //            ->setTerminal($this->getTerminal())
-//            ->setShopOrderId(time())
+//            ->setShopOrderId((string)time())
 //            ->setAmount(4.67)
 //            ->setCurrency('DKK')
-//            ->setCard($this->generateCard(4180000000000467))
+//            ->setCard($this->generateCard('4180000000000467'))
 //        ;
 //        $api->call();
 //    }
@@ -111,10 +111,10 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
         $api = new ReservationOfFixedAmount($this->getAuth());
         $api
             ->setTerminal($this->getTerminal())
-            ->setShopOrderId(time())
+            ->setShopOrderId((string)time())
             ->setAmount(5.66)
             ->setCurrency('DKK')
-            ->setCard($this->generateCard(4180000000000566))
+            ->setCard($this->generateCard('4180000000000566'))
         ;
         $api->call();
     }
@@ -127,10 +127,10 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
         $api = new ReservationOfFixedAmount($this->getAuth());
         $api
             ->setTerminal($this->getTerminal())
-            ->setShopOrderId(time())
+            ->setShopOrderId((string)time())
             ->setAmount(5.67)
             ->setCurrency('DKK')
-            ->setCard($this->generateCard(4130000000000567))
+            ->setCard($this->generateCard('4130000000000567'))
         ;
         $api->call();
     }
@@ -145,10 +145,10 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
 //        $api = new ReservationOfFixedAmount($this->getAuth());
 //        $api
 //            ->setTerminal($this->getTerminal())
-//            ->setShopOrderId(time())
+//            ->setShopOrderId((string)time())
 //            ->setAmount(5.72)
 //            ->setCurrency('DKK')
-//            ->setCard($this->generateCard(4190000000000572))
+//            ->setCard($this->generateCard('4190000000000572'))
 //        ;
 //        $api->call();
 //    }
@@ -160,10 +160,10 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
 //        $api = new ReservationOfFixedAmount($this->getAuth());
 //        $api
 //            ->setTerminal($this->getTerminal())
-//            ->setShopOrderId(time())
+//            ->setShopOrderId((string)time())
 //            ->setAmount(16.66)
 //            ->setCurrency('DKK')
-//            ->setCard($this->generateCard(4120000000001666))
+//            ->setCard($this->generateCard('4120000000001666'))
 //        ;
 //        $api->call();
 //    }
@@ -175,10 +175,10 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
 //        $api = new ReservationOfFixedAmount($this->getAuth());
 //        $api
 //            ->setTerminal($this->getTerminal())
-//            ->setShopOrderId(time())
+//            ->setShopOrderId((string)time())
 //            ->setAmount(16.67)
 //            ->setCurrency('DKK')
-//            ->setCard($this->generateCard(4160000000001667))
+//            ->setCard($this->generateCard('4160000000001667'))
 //        ;
 //        $api->call();
 //    }
@@ -188,10 +188,10 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
         $api = new ReservationOfFixedAmount($this->getAuth());
         $api
             ->setTerminal($this->getTerminal())
-            ->setShopOrderId(time())
+            ->setShopOrderId((string)time())
             ->setAmount(102)
             ->setCurrency('DKK')
-            ->setCard($this->generateCard(4170000000000121))
+            ->setCard($this->generateCard('4170000000000121'))
             ->setFraudService('maxmind')
         ;
         $response = $api->call();
@@ -204,10 +204,10 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
         $api = new ReservationOfFixedAmount($this->getAuth());
         $api
             ->setTerminal($this->getTerminal())
-            ->setShopOrderId(time())
+            ->setShopOrderId((string)time())
             ->setAmount(110)
             ->setCurrency('DKK')
-            ->setCard($this->generateCard(4170000000000105))
+            ->setCard($this->generateCard('4170000000000105'))
             ->setFraudService('maxmind')
         ;
         $response = $api->call();

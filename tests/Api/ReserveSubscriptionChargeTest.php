@@ -27,7 +27,7 @@ class ReserveSubscriptionChargeTest extends AbstractApiTest
     public function test_reserve_subscription_charge(): void
     {
         $api = $this->getReserveSubscriptionCharge();
-        $api->setTransaction(123);
+        $api->setTransaction('123');
         $this->assertInstanceOf(ReserveSubscriptionResponse::class, $api->call());
     }
 
@@ -37,7 +37,7 @@ class ReserveSubscriptionChargeTest extends AbstractApiTest
     public function test_reserve_subscription_charge_data(): void
     {
         $api = $this->getReserveSubscriptionCharge();
-        $api->setTransaction(123);
+        $api->setTransaction('123');
         $response = $api->call();
         $this->assertInstanceOf(ReserveSubscriptionResponse::class, $response);
         $this->assertEquals('Success', $response->Result);
@@ -88,7 +88,7 @@ class ReserveSubscriptionChargeTest extends AbstractApiTest
 
         $api = (new ReserveSubscriptionCharge($this->getAuth()))
             ->setClient($client)
-            ->setTransaction(123)
+            ->setTransaction('123')
         ;
         $api->call();
     }

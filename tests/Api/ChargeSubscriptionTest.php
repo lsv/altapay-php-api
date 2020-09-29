@@ -27,7 +27,7 @@ class ChargeSubscriptionTest extends AbstractApiTest
     public function test_charge_subscription(): void
     {
         $api = $this->getChargeSubscription();
-        $api->setTransaction(123);
+        $api->setTransaction('123');
         $this->assertInstanceOf(ChargeSubscriptionDocument::class, $api->call());
     }
 
@@ -37,7 +37,7 @@ class ChargeSubscriptionTest extends AbstractApiTest
     public function test_charge_subscription_data(): void
     {
         $api = $this->getChargeSubscription();
-        $api->setTransaction(123);
+        $api->setTransaction('123');
         $response = $api->call();
         $this->assertInstanceOf(ChargeSubscriptionDocument::class, $response);
         $this->assertEquals('Success', $response->Result);
@@ -90,7 +90,7 @@ class ChargeSubscriptionTest extends AbstractApiTest
 
         $api = (new ChargeSubscription($this->getAuth()))
             ->setClient($client)
-            ->setTransaction(123)
+            ->setTransaction('123')
         ;
         $api->call();
     }

@@ -10,7 +10,7 @@ class OrderLineTest extends AbstractTest
 
     public function test_orderline(): void
     {
-        $line = new OrderLine('description', 12, 2, 12.50);
+        $line = new OrderLine('description', '12', 2, 12.50);
         $line->setGoodsType('item');
         $line->taxAmount = 4.75;
         $line->taxPercent = 38;
@@ -74,7 +74,7 @@ class OrderLineTest extends AbstractTest
             );
         }
 
-        $line = new OrderLine('description', 12, 2, 12.50);
+        $line = new OrderLine('description', '12', 2, 12.50);
         $line->setGoodsType($type);
         $s = $line->serialize();
 

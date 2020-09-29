@@ -27,7 +27,7 @@ class ReleaseReservationTest extends AbstractApiTest
     public function test_release_reservation(): void
     {
         $api = $this->getReleaseReservation();
-        $api->setTransaction(123);
+        $api->setTransaction('123');
         $this->assertInstanceOf(ReleaseReservationDocument::class, $api->call());
     }
 
@@ -37,7 +37,7 @@ class ReleaseReservationTest extends AbstractApiTest
     public function test_release_data(): void
     {
         $api = $this->getReleaseReservation();
-        $api->setTransaction(123);
+        $api->setTransaction('123');
         $response = $api->call();
         $this->assertInstanceOf(ReleaseReservationDocument::class, $response);
         $this->assertEquals('Success', $response->Result);
@@ -86,7 +86,7 @@ class ReleaseReservationTest extends AbstractApiTest
 
         $api = (new ReleaseReservation($this->getAuth()))
             ->setClient($client)
-            ->setTransaction(123)
+            ->setTransaction('123')
         ;
         $api->call();
     }

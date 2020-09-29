@@ -27,7 +27,7 @@ class InvoiceTextTest extends AbstractApiTest
     public function test_url(): void
     {
         $trans = new Transaction();
-        $trans->TransactionId = 'my transaction number';
+        $trans->TransactionId = 123;
 
         $api = $this->getinvoicetext();
         $api->setTransaction($trans);
@@ -37,14 +37,14 @@ class InvoiceTextTest extends AbstractApiTest
 
         $this->assertEquals($this->getExceptedUri('getInvoiceText/'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
-        $this->assertEquals('my transaction number', $parts['transaction_id']);
+        $this->assertEquals(123, $parts['transaction_id']);
         $this->assertEquals(35.33, $parts['amount']);
     }
 
     public function test_object(): void
     {
         $trans = new Transaction();
-        $trans->TransactionId = 'my transaction number';
+        $trans->TransactionId = 123;
 
         $api = $this->getinvoicetext();
         $api->setTransaction($trans);

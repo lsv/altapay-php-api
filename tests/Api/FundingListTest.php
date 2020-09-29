@@ -77,18 +77,20 @@ class FundingListTest extends AbstractApiTest
     public function test_funding_object(): void
     {
         $api = $this->getMultipleFundingsList();
-        $response = $api->call()->Fundings[0];
-        $this->assertInstanceOf(Funding::class, $response);
+        $response = $api->call();
+        $this->assertInstanceOf(FundingsResponse::class, $response);
+        $funding = $response->Fundings[0];
+        $this->assertInstanceOf(Funding::class, $funding);
 
-        $this->assertEquals('CreatedByTest', $response->Filename);
-        $this->assertEquals('1234567890123456', $response->ContractIdentifier);
-        $this->assertCount(2, $response->Shops);
-        $this->assertEquals('TestAcquirer', $response->Acquirer);
-        $this->assertInstanceOf(\DateTime::class, $response->FundingDate);
-        $this->assertEquals('26-09-2010', $response->FundingDate->format('d-m-Y'));
-        $this->assertEquals('50.00 EUR', $response->Amount);
-        $this->assertInstanceOf(\DateTime::class, $response->CreatedDate);
-        $this->assertEquals('27-09-2010', $response->CreatedDate->format('d-m-Y'));
-        $this->assertEquals('http://localhost/merchant.php/API/fundingDownload?id=1', $response->DownloadLink);
+        $this->assertEquals('CreatedByTest', $funding->Filename);
+        $this->assertEquals('1234567890123456', $funding->ContractIdentifier);
+        $this->assertCount(2, $funding->Shops);
+        $this->assertEquals('TestAcquirer', $funding->Acquirer);
+        $this->assertInstanceOf(\DateTime::class, $funding->FundingDate);
+        $this->assertEquals('26-09-2010', $funding->FundingDate->format('d-m-Y'));
+        $this->assertEquals('50.00 EUR', $funding->Amount);
+        $this->assertInstanceOf(\DateTime::class, $funding->CreatedDate);
+        $this->assertEquals('27-09-2010', $funding->CreatedDate->format('d-m-Y'));
+        $this->assertEquals('http://localhost/merchant.php/API/fundingDownload?id=1', $funding->DownloadLink);
     }
 }

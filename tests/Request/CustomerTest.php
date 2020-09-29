@@ -17,7 +17,7 @@ class CustomerTest extends AbstractTest
 
         $customer = new Customer($billingAddress);
         $customer->setShipping($shippingAddress);
-        $customer->setOrganisationNumber(123);
+        $customer->setOrganisationNumber('123');
         $customer->setPersonalIdentifyNumber('20304050');
         $customer->setGender('f');
         $serialized = $customer->serialize();

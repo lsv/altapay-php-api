@@ -37,6 +37,7 @@ class CustomReportTest extends AbstractApiTest
         $api = $this->getCustomReport();
         $api->setCustomReportId('0c55e643-49c2-492c-ab61-1014426dce5d');
         $response = $api->call();
+        $this->assertInternalType('string', $response);
         $this->assertStringStartsWith('"Order ID";', $response);
 
         $csv = $api->__toArray(true);

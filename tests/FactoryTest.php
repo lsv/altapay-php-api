@@ -2,6 +2,7 @@
 
 namespace Altapay\ApiTest;
 
+use Altapay\Api\Test\TestAuthentication;
 use Altapay\Exceptions\ClassDoesNotExistsException;
 use Altapay\Factory;
 
@@ -33,13 +34,20 @@ class FactoryTest extends AbstractTest
     public function test_does_not_exists(): void
     {
         $this->expectException(ClassDoesNotExistsException::class);
-        Factory::create('Foo\Bar', $this->getAuth());
+
+        /** @var class-string */
+        $invalidClassName ='Foo\Bar';
+
+        Factory::create($invalidClassName, $this->getAuth());
     }
 
     public function test_does_not_exists_exception_catch(): void
     {
+        /** @var class-string */
+        $invalidClassName ='Foo\Bar';
+
         try {
-            Factory::create('Foo\Bar', $this->getAuth());
+            Factory::create($invalidClassName, $this->getAuth());
         } catch (ClassDoesNotExistsException $e) {
             $this->assertEquals('Foo\Bar', $e->getClass());
         }

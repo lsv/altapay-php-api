@@ -65,7 +65,7 @@ abstract class AbstractFunctionalTest extends AbstractTest
             $number,
             (new \DateTime())->format('m'),
             (new \DateTime())->add(new \DateInterval('P1Y'))->format('Y'),
-            123
+            '123'
         );
     }
 

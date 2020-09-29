@@ -27,7 +27,9 @@ class PaymentsTest extends AbstractApiTest
         $api = (new Payments($this->getAuth()))
             ->setClient($client)
         ;
-        return $api->call();
+        $result = $api->call();
+        $this->assertInternalType('array', $result);
+        return $result;
     }
 
     /**
@@ -40,7 +42,9 @@ class PaymentsTest extends AbstractApiTest
         $api = (new Payments($this->getAuth()))
             ->setClient($client)
         ;
-        return $api->call();
+        $result = $api->call();
+        $this->assertInternalType('array', $result);
+        return $result;
     }
 
     public function test_payments_exception(): void
@@ -89,7 +93,7 @@ class PaymentsTest extends AbstractApiTest
         $client = $this->getXmlClient(__DIR__ . '/Results/payments.xml');
 
         $trans = new Transaction();
-        $trans->TransactionId = 'my trans number';
+        $trans->TransactionId = 123;
 
         $api = (new Payments($this->getAuth()))
             ->setClient($client)
@@ -100,7 +104,7 @@ class PaymentsTest extends AbstractApiTest
         $this->assertEquals($this->getExceptedUri('payments/'), $api->getRawRequest()->getUri()->getPath());
         parse_str($api->getRawRequest()->getUri()->getQuery(), $parts);
 
-        $this->assertEquals('my trans number', $parts['transaction_id']);
+        $this->assertEquals(123, $parts['transaction_id']);
     }
 
     public function test_single_payment_transaction_count(): void

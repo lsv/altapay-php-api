@@ -30,10 +30,10 @@ class CreditTest extends AbstractApiTest
     {
         $this->expectException(CreditCardTokenAndCardUsedException::class);
 
-        $card = new Card(1234, 12, 12, 122);
+        $card = new Card('1234', '12', '12', '122');
         $api = $this->getCredit();
         $api->setTerminal('123');
-        $api->setShopOrderId(123);
+        $api->setShopOrderId('123');
         $api->setAmount(20.44);
         $api->setCurrency(967);
         $api->setCard($card);
@@ -43,10 +43,10 @@ class CreditTest extends AbstractApiTest
 
     public function test_creditcard_options(): void
     {
-        $card = new Card(1234567890, 5, 19, 122);
+        $card = new Card('1234567890', '05', '19', '122');
         $api = $this->getCredit();
         $api->setTerminal('terminal');
-        $api->setShopOrderId(123);
+        $api->setShopOrderId('123');
         $api->setAmount(20.44);
         $api->setCurrency(967);
         $api->setCard($card);
@@ -69,7 +69,7 @@ class CreditTest extends AbstractApiTest
     {
         $api = $this->getCredit();
         $api->setTerminal('terminal');
-        $api->setShopOrderId(123);
+        $api->setShopOrderId('123');
         $api->setAmount(20.44);
         $api->setCurrency(967);
         $api->setCreditCardToken('token');
@@ -103,7 +103,7 @@ class CreditTest extends AbstractApiTest
     {
         $api = $this->getCredit();
         $api->setTerminal('terminal');
-        $api->setShopOrderId(123);
+        $api->setShopOrderId('123');
         $api->setAmount(20.44);
         $api->setCurrency(967);
         $api->setCreditCardToken('token');
@@ -117,7 +117,7 @@ class CreditTest extends AbstractApiTest
 
         $api = $this->getCredit();
         $api->setTerminal('terminal');
-        $api->setShopOrderId(123);
+        $api->setShopOrderId('123');
         $api->setAmount(20.44);
         $api->setCurrency(967);
         $api->setCreditCardToken('token');
@@ -127,10 +127,10 @@ class CreditTest extends AbstractApiTest
 
     public function test_response(): void
     {
-        $card = new Card(1234567890, 5, 19, 122);
+        $card = new Card('1234567890', '05', '19', '122');
         $api = $this->getCredit();
         $api->setTerminal('terminal');
-        $api->setShopOrderId(123);
+        $api->setShopOrderId('123');
         $api->setAmount(20.44);
         $api->setCurrency(967);
         $api->setCard($card);

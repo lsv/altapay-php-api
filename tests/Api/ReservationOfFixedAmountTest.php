@@ -125,7 +125,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setCurrency(957);
         $api->setShopOrderId('order id');
 
-        $api->setCard(new Card(1234, 10, 12, 100));
+        $api->setCard(new Card('1234', '10', '12', '100'));
         $api->setCreditCardToken('token');
         $api->call();
     }
@@ -144,7 +144,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setShopOrderId('order id');
 
         $api->setCreditCardToken('token');
-        $api->setCard(new Card(1234, 10, 12, 100));
+        $api->setCard(new Card('1234', '10', '12', '100'));
         $api->call();
     }
 
@@ -156,7 +156,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setCurrency(957);
         $api->setShopOrderId('order id');
 
-        $api->setCard(new Card(1234, 10, 12, 100));
+        $api->setCard(new Card('1234', '10', '12', '100'));
         $api->call();
         $request = $api->getRawRequest();
         parse_str($request->getUri()->getQuery(), $parts);
@@ -174,7 +174,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setCurrency(957);
         $api->setShopOrderId('order id');
 
-        $api->setCreditCardToken('credit card token', 200);
+        $api->setCreditCardToken('credit card token', '200');
         $api->call();
         $request = $api->getRawRequest();
         parse_str($request->getUri()->getQuery(), $parts);
