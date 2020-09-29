@@ -4,7 +4,6 @@ namespace Altapay\ApiTest\Api;
 
 use Altapay\Api\Others\Terminals;
 use Altapay\Response\Embeds\Terminal;
-use Altapay\Response\TerminalsResponse as TerminalsDocument;
 use Altapay\Response\TerminalsResponse;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
@@ -36,7 +35,7 @@ class TerminalsTest extends AbstractApiTest
     public function test_header()
     {
         $api = $this->getTerminals();
-        /** @var TerminalsDocument $response */
+        /** @var TerminalsResponse $response */
         $response = $api->call();
         $this->assertInstanceOf(\DateTime::class, $response->Header->Date);
         $this->assertEquals('07-01-2016', $response->Header->Date->format('d-m-Y'));
@@ -48,7 +47,7 @@ class TerminalsTest extends AbstractApiTest
     public function test_response()
     {
         $api = $this->getTerminals();
-        /** @var TerminalsDocument $response */
+        /** @var TerminalsResponse $response */
         $response = $api->call();
 
         $this->assertCount(2, $response->Terminals);

@@ -2,7 +2,6 @@
 
 namespace Altapay\Api\Ecommerce;
 
-use Altapay\Api\Ecommerce\Callback;
 
 class ResponseInfo extends Callback
 {

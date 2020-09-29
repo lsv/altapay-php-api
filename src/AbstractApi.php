@@ -23,7 +23,6 @@
 
 namespace Altapay;
 
-use Altapay\Exceptions;
 use Altapay\Response\AbstractResponse;
 use Altapay\Response\Embeds\Transaction;
 use GuzzleHttp\Client;
@@ -64,13 +63,6 @@ abstract class AbstractApi
      * @var array
      */
     public $unresolvedOptions;
-
-    /**
-     * Filters to go into the url
-     *
-     * @var array
-     */
-    protected $definedFilters = [];
 
     /**
      * Resolved options
