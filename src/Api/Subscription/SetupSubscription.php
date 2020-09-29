@@ -68,7 +68,7 @@ class SetupSubscription extends ReservationOfFixedAmount
     {
         $body = (string) $response->getBody();
         $xml = simplexml_load_string($body);
-        return ResponseSerializer::serialize(SetupSubscriptionResponse::class, $xml->Body, false, $xml->Header);
+        return ResponseSerializer::serialize(SetupSubscriptionResponse::class, $xml->Body, $xml->Header);
     }
 
     /**

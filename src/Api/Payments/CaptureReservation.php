@@ -150,7 +150,7 @@ class CaptureReservation extends AbstractApi
         }
 
         try {
-            return ResponseSerializer::serialize(CaptureReservationResponse::class, $xml->Body, false, $xml->Header);
+            return ResponseSerializer::serialize(CaptureReservationResponse::class, $xml->Body, $xml->Header);
         } catch (\Exception $e) {
             throw $e;
         }

@@ -67,7 +67,7 @@ class InvoiceText extends AbstractApi
     {
         $body = (string) $response->getBody();
         $xml = simplexml_load_string($body);
-        return ResponseSerializer::serialize(InvoiceTextResponse::class, $xml->Body->InvoiceText, false, $xml->Header);
+        return ResponseSerializer::serialize(InvoiceTextResponse::class, $xml->Body->InvoiceText, $xml->Header);
     }
 
     /**

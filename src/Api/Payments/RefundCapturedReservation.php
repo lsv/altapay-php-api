@@ -134,7 +134,7 @@ class RefundCapturedReservation extends AbstractApi
             throw new \Exception($xml->Body->MerchantErrorMessage);
         }
         try {
-            $data = ResponseSerializer::serialize(RefundResponse::class, $xml->Body, false, $xml->Header);
+            $data = ResponseSerializer::serialize(RefundResponse::class, $xml->Body, $xml->Header);
 
             return $data;
         } catch (\Exception $e) {

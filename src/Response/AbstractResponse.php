@@ -52,7 +52,7 @@ abstract class AbstractResponse
     public function headerSetter(\SimpleXMLElement $xml = null)
     {
         if ($xml) {
-            $this->Header = ResponseSerializer::serialize(Header::class, $xml, false);
+            $this->Header = ResponseSerializer::serialize(Header::class, $xml);
         }
     }
 
@@ -80,7 +80,15 @@ abstract class AbstractResponse
             foreach ($xml->children() as $child) {
                 if (isset($this->childs[$child->getName()])) {
                     $builder = $this->childs[$child->getName()];
-                    $data    = ResponseSerializer::serialize($builder['class'], $child, $builder['array']);
+                    /** @var class-string<AbstractResponse> */
+                    $className = $builder['class'];
+                    /** @var string|false */
+                    $childKey = $builder['array'];
+                    if ($childKey === false) {
+                        $data = ResponseSerializer::serialize($className, $child);
+                    } else {
+                        $data = ResponseSerializer::serializeChildren($className, $child, $builder['array']);
+                    }
                 } else {
                     $data = trim((string)$child);
                     $this->attributeSetter($object, $child);

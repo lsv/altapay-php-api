@@ -30,6 +30,27 @@ use Altapay\Response\AbstractResponse;
  */
 class ResponseSerializer
 {
+    /**
+     * Serialize a response
+     *
+     * @template T of AbstractResponse
+     *
+     * @param class-string<T>   $objectName
+     * @param \SimpleXMLElement $data
+     * @param \SimpleXMLElement $header
+     *
+     * @return T
+     */
+    public static function serialize(
+        $objectName,
+        \SimpleXMLElement $data,
+        \SimpleXMLElement $header = null
+    ) {
+        $object = new $objectName;
+        $object->headerSetter($header);
+
+        return $object->deserialize($data);
+    }
 
     /**
      * Serialize a response
@@ -38,30 +59,21 @@ class ResponseSerializer
      *
      * @param class-string<T>   $objectName
      * @param \SimpleXMLElement $data
-     * @param bool              $childKey
-     * @param \SimpleXMLElement $header
+     * @param string            $childKey
      *
-     * @return T|array<int, T>
+     * @return array<int, T>
      */
-    public static function serialize(
+    public static function serializeChildren(
         $objectName,
         \SimpleXMLElement $data,
-        $childKey = false,
-        \SimpleXMLElement $header = null
+        $childKey
     ) {
-        if ($childKey !== false) {
-            $documents = [];
-            foreach ($data->{$childKey} as $d) {
-                $object      = new $objectName;
-                $documents[] = $object->deserialize($d);
-            }
-
-            return $documents;
+        $documents = [];
+        foreach ($data->{$childKey} as $d) {
+            $object      = new $objectName;
+            $documents[] = $object->deserialize($d);
         }
 
-        $object = new $objectName;
-        $object->headerSetter($header);
-
-        return $object->deserialize($data);
+        return $documents;
     }
 }

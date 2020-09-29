@@ -103,7 +103,7 @@ class Payments extends AbstractApi
     {
         $body = (string) $response->getBody();
         $xml = simplexml_load_string($body);
-        return ResponseSerializer::serialize(Transaction::class, $xml->Body->Transactions, 'Transaction', $xml->Header);
+        return ResponseSerializer::serializeChildren(Transaction::class, $xml->Body->Transactions, 'Transaction');
     }
 
     /**

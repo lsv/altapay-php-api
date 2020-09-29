@@ -67,7 +67,7 @@ class ReserveSubscriptionCharge extends AbstractApi
     {
         $body = (string) $response->getBody();
         $xml = simplexml_load_string($body);
-        return ResponseSerializer::serialize(ReserveSubscriptionResponse::class, $xml->Body, false, $xml->Header);
+        return ResponseSerializer::serialize(ReserveSubscriptionResponse::class, $xml->Body, $xml->Header);
     }
 
     /**
