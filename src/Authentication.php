@@ -46,7 +46,7 @@ class Authentication
     /**
      * Baseurl for the gateway
      *
-     * @var string
+     * @var string|null
      */
     private $baseurl;
 
@@ -87,7 +87,7 @@ class Authentication
     /**
      * Get baseurl to gateway
      *
-     * @return string
+     * @return string|null
      */
     public function getBaseurl()
     {

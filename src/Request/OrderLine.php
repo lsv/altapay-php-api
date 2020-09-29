@@ -31,28 +31,28 @@ class OrderLine extends AbstractSerializer
     /**
      * Description of item
      *
-     * @var string
+     * @var string|null
      */
     public $description;
 
     /**
      * Item number
      *
-     * @var string
+     * @var string|null
      */
     public $itemId;
 
     /**
      * Quantity
      *
-     * @var float
+     * @var float|null
      */
     public $quantity;
 
     /**
      * Unit price excluding sales tax
      *
-     * @var float
+     * @var float|null
      */
     public $unitPrice;
 
@@ -87,7 +87,7 @@ class OrderLine extends AbstractSerializer
     /**
      * The type of order line it is
      *
-     * @var string
+     * @var string|null
      */
     private $goodsType;
 
@@ -108,10 +108,10 @@ class OrderLine extends AbstractSerializer
     /**
      * OrderLine constructor.
      *
-     * @param string $description
-     * @param string $itemId
-     * @param float  $quantity
-     * @param float  $unitPrice
+     * @param string|null $description
+     * @param string|null $itemId
+     * @param float|null  $quantity
+     * @param float|null  $unitPrice
      */
     public function __construct($description = null, $itemId = null, $quantity = null, $unitPrice = null)
     {
@@ -148,7 +148,7 @@ class OrderLine extends AbstractSerializer
     /**
      * Get goods type
      *
-     * @return string
+     * @return string|null
      */
     public function getGoodsType()
     {

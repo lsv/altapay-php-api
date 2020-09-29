@@ -106,7 +106,7 @@ class Card
     /**
      * Get cvc
      *
-     * @return string
+     * @return string|null
      */
     public function getCvc()
     {

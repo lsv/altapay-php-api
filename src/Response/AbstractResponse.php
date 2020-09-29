@@ -112,7 +112,7 @@ abstract class AbstractResponse
     private function attributeSetter($object, \SimpleXMLElement $element)
     {
         if ($element->getName()) {
-            foreach ($element->attributes() as $attribute) {
+            foreach ($element->attributes() ?: [] as $attribute) {
                 if (!$this->set($object, (string)$attribute, $attribute)) {
                     throw new \InvalidArgumentException(
                         sprintf(

@@ -40,8 +40,9 @@ trait CustomerInfoTrait
     public function setCustomerInfo(Customer $customer)
     {
         $this->unresolvedOptions['customer_info'] = $customer;
-        if ($customer->getCreatedDate()) {
-            $this->unresolvedOptions['customer_created_date'] = $customer->getCreatedDate()->format('Y-m-d');
+        $createdDate = $customer->getCreatedDate();
+        if ($createdDate) {
+            $this->unresolvedOptions['customer_created_date'] = $createdDate->format('Y-m-d');
         }
         return $this;
     }

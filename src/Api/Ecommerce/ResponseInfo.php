@@ -2,6 +2,7 @@
 
 namespace Altapay\Api\Ecommerce;
 
+use Altapay\Response\Embeds\Address;
 
 class ResponseInfo extends Callback
 {

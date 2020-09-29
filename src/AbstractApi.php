@@ -88,7 +88,7 @@ abstract class AbstractApi
     /**
      * Base url
      *
-     * @var string
+     * @var string|null
      */
     protected $baseUrl;
 
