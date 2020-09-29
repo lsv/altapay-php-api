@@ -87,6 +87,9 @@ class CreditTest extends AbstractApiTest
         $this->assertEquals('token', $parts['credit_card_token']);
     }
 
+    /**
+     * @return array<int, array<int, string>>
+     */
     public function paymentSourceDataProvider()
     {
         return [

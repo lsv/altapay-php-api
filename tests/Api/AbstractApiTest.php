@@ -13,12 +13,19 @@ use GuzzleHttp\HandlerStack;
 abstract class AbstractApiTest extends AbstractTest
 {
 
+    /**
+     * @return Client
+     */
     protected function getClient(MockHandler $mock)
     {
         $handler = HandlerStack::create($mock);
         return new Client(['handler' => $handler]);
     }
 
+    /**
+     * @param string $uri
+     * @return string
+     */
     protected function getExceptedUri($uri)
     {
         return '/merchant/API/' . $uri;

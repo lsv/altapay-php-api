@@ -47,6 +47,9 @@ class OrderLineTest extends AbstractTest
 
     }
 
+    /**
+     * @return array<int, array<int, mixed>>
+     */
     public function dataProvider()
     {
         return [

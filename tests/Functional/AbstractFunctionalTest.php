@@ -55,6 +55,10 @@ abstract class AbstractFunctionalTest extends AbstractTest
         return $this->generateCard(self::VALID_VISA_CARD_NUMBER);
     }
 
+    /**
+     * @param string $number
+     * @return Card
+     */
     protected function generateCard($number)
     {
         return new Card(

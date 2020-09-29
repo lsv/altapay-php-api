@@ -17,6 +17,9 @@ use GuzzleHttp\Psr7\Response;
 
 class PaymentsTest extends AbstractApiTest
 {
+    /**
+     * @return Transaction[]
+     */
     protected function getMultiplePaymentTransaction()
     {
         $client = $this->getClient($mock = new MockHandler([
@@ -29,6 +32,9 @@ class PaymentsTest extends AbstractApiTest
         return $api->call();
     }
 
+    /**
+     * @return Transaction[]
+     */
     protected function getSinglePaymentTransaction()
     {
         $client = $this->getClient(new MockHandler([
@@ -182,6 +188,9 @@ class PaymentsTest extends AbstractApiTest
         $this->assertFalse($data->SupportsMultipleRefunds);
     }
 
+    /**
+     * @return array<int, array<int, mixed>>
+     */
     public function paymentinfosDataprovider()
     {
         return [

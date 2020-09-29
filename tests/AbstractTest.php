@@ -16,6 +16,12 @@ abstract class AbstractTest extends \PHPUnit\Framework\TestCase
         return Factory::create('da_DK');
     }
 
+    /**
+     * @param int    $length
+     * @param string $characters
+     *
+     * @return string
+     */
     public function randomString($length, $characters = '0123456789abcdef')
     {
         $randstring = '';
@@ -25,6 +31,9 @@ abstract class AbstractTest extends \PHPUnit\Framework\TestCase
         return $randstring;
     }
 
+    /**
+     * @return Authentication
+     */
     protected function getAuth()
     {
         return new Authentication('test_username', 'test_password');

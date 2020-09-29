@@ -7,6 +7,7 @@ use Altapay\Response\CallbackResponse;
 
 class CallbackTest extends \PHPUnit\Framework\TestCase
 {
+    /** @var array<string, string> */
     private $data;
 
     public function setUp()

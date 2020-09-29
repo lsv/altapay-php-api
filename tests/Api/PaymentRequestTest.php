@@ -181,6 +181,9 @@ class PaymentRequestTest extends AbstractApiTest
         );
     }
 
+    /**
+     * @return Config
+     */
     protected function getConfig()
     {
         $config = new Config();

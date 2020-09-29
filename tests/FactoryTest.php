@@ -7,7 +7,9 @@ use Altapay\Factory;
 
 class FactoryTest extends AbstractTest
 {
-
+    /**
+     * @return array<int, array<int, class-string>>
+     */
     public function dataProvider()
     {
         $refClass = new \ReflectionClass(Factory::class);
@@ -21,7 +23,7 @@ class FactoryTest extends AbstractTest
 
     /**
      * @dataProvider dataProvider
-     * @param string $class
+     * @param class-string $class
      */
     public function test_can_create($class)
     {
