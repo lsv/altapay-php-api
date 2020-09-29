@@ -62,11 +62,11 @@ class TestAuthentication extends AbstractApi
      *
      * @param Request $request
      * @param Response $response
-     * @return true
+     * @return string
      */
     protected function handleResponse(Request $request, Response $response)
     {
-        return true;
+        return 'ok';
     }
 
     /**

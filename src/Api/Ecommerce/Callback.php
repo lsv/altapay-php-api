@@ -59,7 +59,7 @@ class Callback
         }
 
         if (isset($this->postedData['currency'])) {
-            $response->currency = $this->postedData['currency'];
+            $response->currency = (int)$this->postedData['currency'];
         }
 
         if (isset($this->postedData['type'])) {
@@ -91,7 +91,7 @@ class Callback
         }
 
         if (isset($this->postedData['require_capture'])) {
-            $response->requireCapture = $this->postedData['require_capture'];
+            $response->requireCapture = (bool)$this->postedData['require_capture'];
         }
 
         if (isset($this->postedData['payment_status'])) {

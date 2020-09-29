@@ -61,7 +61,7 @@ abstract class AbstractResponse
      *
      * @param \SimpleXMLElement $xml
      *
-     * @return AbstractResponse
+     * @return static
      */
     public function deserialize(\SimpleXMLElement $xml = null)
     {

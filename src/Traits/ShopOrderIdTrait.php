@@ -51,7 +51,7 @@ trait ShopOrderIdTrait
     {
         $resolver->setAllowedTypes('shop_orderid', ['string', 'int']);
         $resolver->setAllowedValues('shop_orderid', function ($value) {
-            return preg_match('/^[a-zA-Z0-9 ]{1,100}$/', $value);
+            return preg_match('/^[a-zA-Z0-9 ]{1,100}$/', $value) === 1;
         });
     }
 }

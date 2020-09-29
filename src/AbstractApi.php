@@ -25,11 +25,13 @@ namespace Altapay;
 
 use Altapay\Exceptions;
 use Altapay\Response\AbstractResponse;
+use Altapay\Response\Embeds\Transaction;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -87,7 +89,7 @@ abstract class AbstractApi
     /**
      * Response of the call
      *
-     * @var Response
+     * @var ResponseInterface
      */
     protected $response;
 
@@ -127,7 +129,7 @@ abstract class AbstractApi
      * @param Request  $request
      * @param Response $response
      *
-     * @return AbstractResponse
+     * @return AbstractResponse|string|array<Transaction>
      */
     abstract protected function handleResponse(Request $request, Response $response);
 
@@ -193,7 +195,7 @@ abstract class AbstractApi
      * Get the raw response
      * It is made after call() method has been called
      *
-     * @return Response
+     * @return ResponseInterface
      */
     public function getRawResponse()
     {
@@ -347,7 +349,7 @@ abstract class AbstractApi
     /**
      * Get the HTTP client
      *
-     * @return Client
+     * @return ClientInterface
      */
     protected function getClient()
     {

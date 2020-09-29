@@ -34,12 +34,14 @@ class ResponseSerializer
     /**
      * Serialize a response
      *
-     * @param string            $objectName
+     * @template T of AbstractResponse
+     *
+     * @param class-string<T>   $objectName
      * @param \SimpleXMLElement $data
      * @param bool              $childKey
      * @param \SimpleXMLElement $header
      *
-     * @return AbstractResponse|array<int, AbstractResponse>
+     * @return T|array<int, T>
      */
     public static function serialize(
         $objectName,
@@ -50,7 +52,6 @@ class ResponseSerializer
         if ($childKey !== false) {
             $documents = [];
             foreach ($data->{$childKey} as $d) {
-                /** @var AbstractResponse $object */
                 $object      = new $objectName;
                 $documents[] = $object->deserialize($d);
             }
@@ -58,7 +59,6 @@ class ResponseSerializer
             return $documents;
         }
 
-        /** @var AbstractResponse $object */
         $object = new $objectName;
         $object->headerSetter($header);
 
