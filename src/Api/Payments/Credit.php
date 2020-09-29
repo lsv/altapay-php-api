@@ -130,7 +130,8 @@ class Credit extends AbstractApi
     protected function handleResponse(Request $request, ResponseInterface $response)
     {
         $body = (string) $response->getBody();
-        $xml = simplexml_load_string($body);
+        $xml = new \SimpleXMLElement($body);
+
         return ResponseSerializer::serialize(CreditResponse::class, $xml->Body, $xml->Header);
     }
 

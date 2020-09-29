@@ -66,7 +66,8 @@ class InvoiceText extends AbstractApi
     protected function handleResponse(Request $request, ResponseInterface $response)
     {
         $body = (string) $response->getBody();
-        $xml = simplexml_load_string($body);
+        $xml = new \SimpleXMLElement($body);
+
         return ResponseSerializer::serialize(InvoiceTextResponse::class, $xml->Body->InvoiceText, $xml->Header);
     }
 

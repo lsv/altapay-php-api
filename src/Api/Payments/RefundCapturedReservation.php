@@ -129,7 +129,7 @@ class RefundCapturedReservation extends AbstractApi
     protected function handleResponse(Request $request, ResponseInterface $response)
     {
         $body = (string)$response->getBody();
-        $xml  = simplexml_load_string($body);
+        $xml  = new \SimpleXMLElement($body);
         if ($xml->Body->Result == 'Error' || $xml->Body->Result == 'Failed') {
             throw new \Exception($xml->Body->MerchantErrorMessage);
         }

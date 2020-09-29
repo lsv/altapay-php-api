@@ -60,7 +60,8 @@ class Terminals extends AbstractApi
     protected function handleResponse(Request $request, ResponseInterface $response)
     {
         $body = (string) $response->getBody();
-        $xml = simplexml_load_string($body);
+        $xml = new \SimpleXMLElement($body);
+
         return ResponseSerializer::serialize(TerminalsResponse::class, $xml->Body, $xml->Header);
     }
 

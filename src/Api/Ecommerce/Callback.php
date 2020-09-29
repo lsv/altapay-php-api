@@ -51,7 +51,8 @@ class Callback
      */
     public function call()
     {
-        $xml = simplexml_load_string($this->postedData['xml']);
+        $xml = new \SimpleXMLElement($this->postedData['xml']);
+
         $response = ResponseSerializer::serialize(CallbackResponse::class, $xml->Body, $xml->Header);
         if (isset($this->postedData['shop_orderid'])) {
             $response->shopOrderId = $this->postedData['shop_orderid'];

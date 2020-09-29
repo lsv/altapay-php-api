@@ -67,7 +67,8 @@ class SetupSubscription extends ReservationOfFixedAmount
     protected function handleResponse(Request $request, ResponseInterface $response)
     {
         $body = (string) $response->getBody();
-        $xml = simplexml_load_string($body);
+        $xml = new \SimpleXMLElement($body);
+
         return ResponseSerializer::serialize(SetupSubscriptionResponse::class, $xml->Body, $xml->Header);
     }
 
