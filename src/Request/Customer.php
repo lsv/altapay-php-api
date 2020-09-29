@@ -139,14 +139,14 @@ class Customer extends AbstractSerializer
     /**
      * The birth date of the customer
      *
-     * @var \DateTime
+     * @var \DateTime|null
      */
     private $birthdate;
 
     /**
      * The creation date of the customer in your system
      *
-     * @var \DateTime
+     * @var \DateTime|null
      */
     private $createdDate;
 
@@ -411,7 +411,7 @@ class Customer extends AbstractSerializer
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getCreatedDate()
     {

@@ -102,20 +102,17 @@ abstract class AbstractResponse
      */
     private function attributeSetter($object, \SimpleXMLElement $element)
     {
-        if ($element) {
-            /** @var \SimpleXMLElement $attribute */
+        if ($element->getName()) {
             foreach ($element->attributes() as $attribute) {
-                if ($attribute) {
-                    if (!$this->set($object, (string)$attribute, $attribute)) {
-                        throw new \InvalidArgumentException(
-                            sprintf(
-                                'The attribute "%s" on element "%s" does not have a setter or a property in class "%s"',
-                                $attribute->getName(),
-                                $element->getName(),
-                                get_called_class()
-                            )
-                        );
-                    }
+                if (!$this->set($object, (string)$attribute, $attribute)) {
+                    throw new \InvalidArgumentException(
+                        sprintf(
+                            'The attribute "%s" on element "%s" does not have a setter or a property in class "%s"',
+                            $attribute->getName(),
+                            $element->getName(),
+                            get_called_class()
+                        )
+                    );
                 }
             }
         }
