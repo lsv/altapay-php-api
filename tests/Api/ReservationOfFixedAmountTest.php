@@ -240,7 +240,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $shipping->Region = '0';
         $shipping->Country = 'DK';
 
-        $customer = new Customer($billing, $shipping);
+        $customer = new Customer($billing);
         $customer->setShipping($shipping);
         $customer->setBirthdate(new \DateTime('2001-11-28'));
         $customer->setEmail('my@mail.com');
