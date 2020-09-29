@@ -108,7 +108,9 @@ class CreditTest extends AbstractApiTest
         $api->setCurrency(967);
         $api->setCreditCardToken('token');
         $api->setPaymentSource($type);
-        $api->call();
+        $response = $api->call();
+
+        $this->assertInstanceOf(CreditResponse::class, $response);
     }
 
     public function test_paymentsource_invalid_options(): void

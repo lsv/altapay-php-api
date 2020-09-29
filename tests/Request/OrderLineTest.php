@@ -83,8 +83,11 @@ class OrderLineTest extends AbstractTest
 
     public function test_serializer(): void
     {
-        $line = new OrderLineRequestTestSerializer('description', 12, 2, 12.50);
-        $this->assertFalse($line->serialize());
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('Got false');
+
+        $line = new OrderLineRequestTestSerializer('description', '12', 2, 12.50);
+        $line->serialize();
     }
 
 }

@@ -75,14 +75,14 @@ class CalculateSurchargeTest extends AbstractApiTest
     public function test_payment_id_route(): void
     {
         $api = $this->getapi();
-        $api->setAmount(200.50);
+        $api->setAmount(200.5);
         $api->setPaymentId('123');
         $api->call();
         $request = $api->getRawRequest();
 
         $this->assertEquals($this->getExceptedUri('calculateSurcharge/'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
-        $this->assertEquals('200.50', $parts['amount']);
+        $this->assertEquals(200.5, $parts['amount']);
         $this->assertEquals('123', $parts['payment_id']);
     }
 

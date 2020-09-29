@@ -5,6 +5,7 @@ namespace Altapay\ApiTest\Api;
 use Altapay\Api\Test\TestAuthentication;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
+use Altapay\Exceptions\ClientException;
 
 class TestAuthenticationTest extends AbstractApiTest
 {
@@ -18,12 +19,14 @@ class TestAuthenticationTest extends AbstractApiTest
             ->setClient($client)
         ;
 
-        $this->assertTrue($api->call());
+        $this->assertSame('ok', $api->call());
         $this->assertEquals($this->getExceptedUri('login'), $api->getRawRequest()->getUri()->getPath());
     }
 
     public function test_auth_fail(): void
     {
+        $this->expectException(ClientException::class);
+
         $client = $this->getClient($mock = new MockHandler([
             new Response(400)
         ]));
@@ -32,7 +35,11 @@ class TestAuthenticationTest extends AbstractApiTest
             ->setClient($client)
         ;
 
-        $this->assertFalse($api->call());
-        $this->assertEquals($this->getExceptedUri('login'), $api->getRawRequest()->getUri()->getPath());
+        try {
+            $api->call();
+        } catch (ClientException $e) {
+            $this->assertEquals($this->getExceptedUri('login'), $api->getRawRequest()->getUri()->getPath());
+            throw $e;
+        }
     }
 }

@@ -88,9 +88,6 @@ class PaymentRequestTest extends AbstractApiTest
         $this->assertEquals($this->getExceptedUri('createPaymentRequest/'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
 
-        foreach(PaymentRequest::REQUIRED_QUERY_PARAMS as $QUERY_PARAM){
-            $this->assertArrayHasKey($QUERY_PARAM,$parts,'Create Payment Request is missing the "'.$QUERY_PARAM.'" query parameter.');
-        }
         $this->assertEquals('da', $parts['language']);
         $this->assertIsNumeric($parts['amount'],'Amount is not numeric');
         $this->assertIsNumeric($parts['currency'],'Currency is not numeric');
