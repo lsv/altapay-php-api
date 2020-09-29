@@ -16,9 +16,7 @@ class SetupSubscriptionTest extends AbstractApiTest
      */
     protected function getapi()
     {
-        $client = $this->getClient($mock = new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/reservationoffixedamount.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/reservationoffixedamount.xml');
 
         return (new SetupSubscription($this->getAuth()))
             ->setClient($client)
@@ -32,9 +30,7 @@ class SetupSubscriptionTest extends AbstractApiTest
             'TestAcquirer[pan=1466 or amount=14660]'
         );
 
-        $client = $this->getClient($mock = new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/setupsubscription_fail.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/setupsubscription_fail.xml');
 
         $api = (new SetupSubscription($this->getAuth()))
             ->setClient($client)

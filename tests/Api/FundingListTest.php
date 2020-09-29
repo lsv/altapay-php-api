@@ -17,9 +17,7 @@ class FundingListTest extends AbstractApiTest
      */
     protected function getMultipleFundingsList()
     {
-        $client = $this->getClient($mock = new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/multiplefundinglist.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/multiplefundinglist.xml');
 
         return (new FundingList($this->getAuth()))
             ->setClient($client)
@@ -31,9 +29,7 @@ class FundingListTest extends AbstractApiTest
      */
     protected function getSingleFundingsList()
     {
-        $client = $this->getClient(new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/singlefundinglist.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/singlefundinglist.xml');
 
         return (new FundingList($this->getAuth()))
             ->setClient($client)

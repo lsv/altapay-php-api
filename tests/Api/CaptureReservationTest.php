@@ -18,9 +18,7 @@ class CaptureReservationTest extends AbstractApiTest
      */
     protected function getCaptureReservation()
     {
-        $client = $this->getClient($mock = new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/capture.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/capture.xml');
 
         return (new CaptureReservation($this->getAuth()))
             ->setClient($client)

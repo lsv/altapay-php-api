@@ -17,9 +17,7 @@ class ReserveSubscriptionChargeTest extends AbstractApiTest
      */
     protected function getReserveSubscriptionCharge()
     {
-        $client = $this->getClient($mock = new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/reservesubscription.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/reservesubscription.xml');
 
         return (new ReserveSubscriptionCharge($this->getAuth()))
             ->setClient($client)

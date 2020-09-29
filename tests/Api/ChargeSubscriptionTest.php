@@ -17,9 +17,7 @@ class ChargeSubscriptionTest extends AbstractApiTest
      */
     protected function getChargeSubscription()
     {
-        $client = $this->getClient($mock = new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/setupsubscription.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/setupsubscription.xml');
 
         return (new ChargeSubscription($this->getAuth()))
             ->setClient($client)

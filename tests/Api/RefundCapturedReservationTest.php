@@ -18,9 +18,7 @@ class RefundCapturedReservationTest extends AbstractApiTest
      */
     protected function getRefundCaptureReservation()
     {
-        $client = $this->getClient($mock = new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/refundcapture.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/refundcapture.xml');
 
         return (new RefundCapturedReservation($this->getAuth()))
             ->setClient($client)

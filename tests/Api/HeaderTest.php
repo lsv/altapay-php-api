@@ -16,9 +16,7 @@ class HeaderTest extends AbstractApiTest
      */
     protected function getapi()
     {
-        $client = $this->getClient(new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/header_error.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/header_error.xml');
 
         return (new FundingList($this->getAuth()))
             ->setClient($client)

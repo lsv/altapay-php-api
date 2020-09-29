@@ -14,9 +14,7 @@ class CustomReportTest extends AbstractApiTest
      */
     protected function getCustomReport()
     {
-        $client = $this->getClient($mock = new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/customreport.txt'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/customreport.txt');
 
         return (new CustomReport($this->getAuth()))
             ->setClient($client)

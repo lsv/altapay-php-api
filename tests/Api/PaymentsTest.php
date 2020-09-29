@@ -22,9 +22,7 @@ class PaymentsTest extends AbstractApiTest
      */
     protected function getMultiplePaymentTransaction()
     {
-        $client = $this->getClient($mock = new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/payments.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/payments.xml');
 
         $api = (new Payments($this->getAuth()))
             ->setClient($client)
@@ -37,9 +35,7 @@ class PaymentsTest extends AbstractApiTest
      */
     protected function getSinglePaymentTransaction()
     {
-        $client = $this->getClient(new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/payment.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/payment.xml');
 
         $api = (new Payments($this->getAuth()))
             ->setClient($client)
@@ -63,9 +59,7 @@ class PaymentsTest extends AbstractApiTest
 
     public function test_payments_routing(): void
     {
-        $client = $this->getClient($mock = new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/payments.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/payments.xml');
 
         $api = (new Payments($this->getAuth()))
             ->setClient($client)
@@ -92,9 +86,7 @@ class PaymentsTest extends AbstractApiTest
 
     public function test_payments_transaction_object(): void
     {
-        $client = $this->getClient($mock = new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/payments.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/payments.xml');
 
         $trans = new Transaction();
         $trans->TransactionId = 'my trans number';

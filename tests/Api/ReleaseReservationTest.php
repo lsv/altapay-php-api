@@ -17,9 +17,7 @@ class ReleaseReservationTest extends AbstractApiTest
      */
     protected function getReleaseReservation()
     {
-        $client = $this->getClient($mock = new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/release.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/release.xml');
 
         return (new ReleaseReservation($this->getAuth()))
             ->setClient($client)

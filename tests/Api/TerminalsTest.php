@@ -16,9 +16,7 @@ class TerminalsTest extends AbstractApiTest
      */
     protected function getTerminals()
     {
-        $client = $this->getClient($mock = new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/terminals.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/terminals.xml');
 
         return (new Terminals($this->getAuth()))
             ->setClient($client)
@@ -78,10 +76,10 @@ class TerminalsTest extends AbstractApiTest
             'The attribute "iddonotexists" on element "Title" does not have a setter or a property in class "Altapay\Response\Embeds\Terminal"'
         );
 
+        $client = $this->getXmlClient(__DIR__ . '/Results/terminals-fails.xml');
+
         (new Terminals($this->getAuth()))
-            ->setClient($this->getClient($mock = new MockHandler([
-                new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/terminals-fails.xml'))
-            ])))
+            ->setClient($client)
             ->call()
         ;
     }
