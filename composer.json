@@ -37,6 +37,7 @@
         "friendsofphp/php-cs-fixer": "^2.0",
         "fzaninotto/faker": "^1.6",
         "phpstan/phpstan": "^0.12.44",
+        "phpstan/phpstan-phpunit": "*",
         "phpunit/phpunit": "^7.0"
     },
     "autoload": {

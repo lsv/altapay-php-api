@@ -1,4 +1,8 @@
+includes:
+	- vendor/phpstan/phpstan-phpunit/extension.neon
 parameters:
 	paths:
-		- ./src
-	level: 2
+		- ./
+	excludes_analyse:
+		- vendor
+	level: max
