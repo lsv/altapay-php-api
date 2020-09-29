@@ -92,10 +92,13 @@ class QueryGiftcard extends AbstractApi
     {
         /** @var Giftcard $card */
         $card = $options['giftcard'];
-        unset($options['giftcard']);
-        $options['giftcard']['account_identifier'] = $card->getAccount();
-        $options['giftcard']['provider'] = $card->getProvider();
-        $options['giftcard']['token'] = $card->getToken();
+
+        $options['giftcard'] = [
+            'account_identifier' => $card->getAccount(),
+            'provider'           => $card->getProvider(),
+            'token'              => $card->getToken(),
+        ];
+
         $query = $this->buildUrl($options);
         return sprintf('queryGiftCard/?%s', $query);
     }
