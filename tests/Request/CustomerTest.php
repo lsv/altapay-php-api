@@ -10,7 +10,7 @@ use Altapay\Request\Customer;
 class CustomerTest extends AbstractTest
 {
 
-    public function test_customer()
+    public function test_customer(): void
     {
         $billingAddress = new Address();
         $shippingAddress = new Address();
@@ -44,7 +44,7 @@ class CustomerTest extends AbstractTest
 
     }
 
-    public function test_gender_exception()
+    public function test_gender_exception(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('setGender() only allows the value (m, male, f or female)');

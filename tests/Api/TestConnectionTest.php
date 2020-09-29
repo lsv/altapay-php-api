@@ -8,7 +8,7 @@ use GuzzleHttp\Psr7\Response;
 
 class TestConnectionTest extends AbstractApiTest
 {
-    public function test_connection_on()
+    public function test_connection_on(): void
     {
         $client = $this->getClient($mock = new MockHandler([
             new Response(200)
@@ -22,7 +22,7 @@ class TestConnectionTest extends AbstractApiTest
         $this->assertEquals($this->getExceptedUri('testConnection'), $api->getRawRequest()->getUri()->getPath());
     }
 
-    public function test_connection_off()
+    public function test_connection_off(): void
     {
         $client = $this->getClient($mock = new MockHandler([
             new Response(400)
@@ -36,7 +36,7 @@ class TestConnectionTest extends AbstractApiTest
         $this->assertEquals($this->getExceptedUri('testConnection'), $api->getRawRequest()->getUri()->getPath());
     }
 
-    public function test_connection_302()
+    public function test_connection_302(): void
     {
         $client = $this->getClient($mock = new MockHandler([
             new Response(302)

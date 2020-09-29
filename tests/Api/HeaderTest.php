@@ -25,14 +25,14 @@ class HeaderTest extends AbstractApiTest
         ;
     }
 
-    public function test_get_header_error()
+    public function test_get_header_error(): void
     {
         $this->expectException(ResponseHeaderException::class);
         $api = $this->getapi();
         $api->call();
     }
 
-    public function test_get_header_error_data()
+    public function test_get_header_error_data(): void
     {
         try {
             $api = $this->getapi();

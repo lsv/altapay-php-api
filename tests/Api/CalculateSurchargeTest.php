@@ -24,7 +24,7 @@ class CalculateSurchargeTest extends AbstractApiTest
         ;
     }
 
-    public function test_options_fields_not_allowed_when_payment_id_is_set()
+    public function test_options_fields_not_allowed_when_payment_id_is_set(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage(
@@ -40,7 +40,7 @@ class CalculateSurchargeTest extends AbstractApiTest
         $api->call();
     }
 
-    public function test_options_fields_required_when_payment_not_set()
+    public function test_options_fields_required_when_payment_not_set(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage(
@@ -54,7 +54,7 @@ class CalculateSurchargeTest extends AbstractApiTest
         $api->call();
     }
 
-    public function test_options_payment_and_amount_is_ok()
+    public function test_options_payment_and_amount_is_ok(): void
     {
         $api = $this->getapi();
         $api->setAmount(200.50);
@@ -63,7 +63,7 @@ class CalculateSurchargeTest extends AbstractApiTest
         $this->assertInstanceOf(SurchargeResponse::class, $response);
     }
 
-    public function test_options_fields_and_amount_is_ok()
+    public function test_options_fields_and_amount_is_ok(): void
     {
         $api = $this->getapi();
         $api->setAmount(200.50);
@@ -74,7 +74,7 @@ class CalculateSurchargeTest extends AbstractApiTest
         $this->assertInstanceOf(SurchargeResponse::class, $response);
     }
 
-    public function test_payment_id_route()
+    public function test_payment_id_route(): void
     {
         $api = $this->getapi();
         $api->setAmount(200.50);
@@ -88,7 +88,7 @@ class CalculateSurchargeTest extends AbstractApiTest
         $this->assertEquals('123', $parts['payment_id']);
     }
 
-    public function test_fields_route()
+    public function test_fields_route(): void
     {
         $api = $this->getapi();
         $api->setAmount(200);
@@ -109,7 +109,7 @@ class CalculateSurchargeTest extends AbstractApiTest
     /**
      * @return void
      */
-    public function test_object()
+    public function test_object(): void
     {
         $api = $this->getapi();
         $api->setAmount(200);

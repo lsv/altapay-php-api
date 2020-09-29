@@ -26,7 +26,7 @@ class ReleaseReservationTest extends AbstractApiTest
         ;
     }
 
-    public function test_release_reservation()
+    public function test_release_reservation(): void
     {
         $api = $this->getReleaseReservation();
         $api->setTransaction(123);
@@ -36,7 +36,7 @@ class ReleaseReservationTest extends AbstractApiTest
     /**
      * @depends test_release_reservation
      */
-    public function test_release_data()
+    public function test_release_data(): void
     {
         $api = $this->getReleaseReservation();
         $api->setTransaction(123);
@@ -46,7 +46,7 @@ class ReleaseReservationTest extends AbstractApiTest
         $this->assertCount(1, $response->Transactions);
     }
 
-    public function test_release_reservation_querypath()
+    public function test_release_reservation_querypath(): void
     {
         $transaction = new Transaction();
         $transaction->TransactionId = 456;
@@ -75,7 +75,7 @@ class ReleaseReservationTest extends AbstractApiTest
         $this->assertEquals('my trans id has spaces', $parts['transaction_id']);
     }
 
-    public function test_capture_reservation_transaction_handleexception()
+    public function test_capture_reservation_transaction_handleexception(): void
     {
         $this->expectException(ClientException::class);
 

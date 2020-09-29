@@ -25,7 +25,7 @@ class QueryGiftcardTest extends AbstractApiTest
         ;
     }
 
-    public function test_route()
+    public function test_route(): void
     {
         $card = new Giftcard('account', 'provider', '1234-1234');
         $api = $this->getapi();
@@ -42,7 +42,7 @@ class QueryGiftcardTest extends AbstractApiTest
         $this->assertEquals('1234-1234', $parts['giftcard']['token']);
     }
 
-    public function test_response()
+    public function test_response(): void
     {
         $card = new Giftcard('account', 'provider', '1234-1234');
         $api = $this->getapi();

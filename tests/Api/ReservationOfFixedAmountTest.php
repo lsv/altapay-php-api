@@ -36,7 +36,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         ;
     }
 
-    public function test_missing_all_options()
+    public function test_missing_all_options(): void
     {
         $this->expectException(MissingOptionsException::class);
         $this->expectExceptionMessage(
@@ -45,7 +45,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $this->getapi()->call();
     }
 
-    public function test_missing_terminal_options()
+    public function test_missing_terminal_options(): void
     {
         $this->expectException(MissingOptionsException::class);
         $this->expectExceptionMessage(
@@ -59,7 +59,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->call();
     }
 
-    public function test_url()
+    public function test_url(): void
     {
         $api = $this->getapi();
         $api->setTerminal('my terminal');
@@ -79,7 +79,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $this->assertEquals(155.23, $parts['surcharge']);
     }
 
-    public function test_terminal()
+    public function test_terminal(): void
     {
         $terminal = new Terminal();
         $terminal->Title = 'terminal object';
@@ -98,7 +98,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $this->assertEquals('terminal object', $parts['terminal']);
     }
 
-    public function test_wrong_currency()
+    public function test_wrong_currency(): void
     {
         $this->expectException(InvalidOptionsException::class);
         $this->expectExceptionMessage(
@@ -114,7 +114,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->call();
     }
 
-    public function test_creditcard_and_token()
+    public function test_creditcard_and_token(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage(
@@ -132,7 +132,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->call();
     }
 
-    public function test_token_and_creditcard()
+    public function test_token_and_creditcard(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage(
@@ -150,7 +150,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->call();
     }
 
-    public function test_creditcard_query()
+    public function test_creditcard_query(): void
     {
         $api = $this->getapi();
         $api->setTerminal('my terminal');
@@ -168,7 +168,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $this->assertEquals(100, $parts['cvc']);
     }
 
-    public function test_creditcardtoken_query()
+    public function test_creditcardtoken_query(): void
     {
         $api = $this->getapi();
         $api->setTerminal('my terminal');
@@ -184,7 +184,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $this->assertEquals(200, $parts['cvc']);
     }
 
-    public function test_customer_query()
+    public function test_customer_query(): void
     {
         $api = $this->getapi();
         $api->setTerminal('my terminal');
@@ -216,7 +216,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $this->assertEquals('2016-11-25', $parts['customer_created_date']);
     }
 
-    public function test_customer_fullquery()
+    public function test_customer_fullquery(): void
     {
         $api = $this->getapi();
         $api->setTerminal('my terminal');
@@ -264,7 +264,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $this->assertEquals('20304050', $parts['customer_info']['bank_phone']);
     }
 
-    public function test_type()
+    public function test_type(): void
     {
         $this->allowedTypes(
             PaymentTypes::class,
@@ -273,7 +273,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         );
     }
 
-    public function test_payment_source()
+    public function test_payment_source(): void
     {
         $this->allowedTypes(
             PaymentSources::class,
@@ -282,7 +282,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         );
     }
 
-    public function test_fraud_service()
+    public function test_fraud_service(): void
     {
         $this->allowedTypes(
             FraudServices::class,
@@ -291,7 +291,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         );
     }
 
-    public function test_shipping_method()
+    public function test_shipping_method(): void
     {
         $this->allowedTypes(
             ShippingMethods::class,
@@ -300,7 +300,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         );
     }
 
-    public function test_transaction_info()
+    public function test_transaction_info(): void
     {
         $api = $this->getapi();
         $api->setTerminal('my terminal');
@@ -319,7 +319,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $this->assertEquals('Trans 2', $parts['transaction_info'][1]);
     }
 
-    public function test_result()
+    public function test_result(): void
     {
         $api = $this->getapi();
         $api->setTerminal('my terminal');
@@ -334,7 +334,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $this->assertCount(1, $response->Transactions);
     }
 
-    public function test_real_api_call_response()
+    public function test_real_api_call_response(): void
     {
         $client = $this->getClient($mock = new MockHandler([
             new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/reservationoffixedamount_2.xml'))
@@ -358,7 +358,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
      * @param string $key
      * @param string $setter
      */
-    private function allowedTypes($class, $key, $setter)
+    private function allowedTypes($class, $key, $setter): void
     {
         foreach ($class::getAllowed() as $type) {
             $api = $this->getapi();
@@ -383,7 +383,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
      * @param string $key
      * @param string $method
      */
-    private function disallowedTypes($class, $key, $method)
+    private function disallowedTypes($class, $key, $method): void
     {
         $this->expectException(InvalidOptionsException::class);
         $this->expectExceptionMessage(

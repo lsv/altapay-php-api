@@ -8,7 +8,7 @@ use Altapay\Request\OrderLine;
 class OrderLineTest extends AbstractTest
 {
 
-    public function test_orderline()
+    public function test_orderline(): void
     {
         $line = new OrderLine('description', 12, 2, 12.50);
         $line->setGoodsType('item');
@@ -65,7 +65,7 @@ class OrderLineTest extends AbstractTest
      * @param string $type
      * @param bool $exception
      */
-    public function test_can_not_set_goodstypes($type, $exception = false)
+    public function test_can_not_set_goodstypes($type, $exception = false): void
     {
         if ($exception) {
             $this->expectException(\InvalidArgumentException::class);
@@ -81,7 +81,7 @@ class OrderLineTest extends AbstractTest
         $this->assertEquals($type, $s['goodsType']);
     }
 
-    public function test_serializer()
+    public function test_serializer(): void
     {
         $line = new OrderLineRequestTestSerializer('description', 12, 2, 12.50);
         $this->assertFalse($line->serialize());

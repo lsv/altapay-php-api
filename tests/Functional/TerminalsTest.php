@@ -8,7 +8,7 @@ use Altapay\Response\TerminalsResponse;
 class TerminalsTest extends AbstractFunctionalTest
 {
 
-    public function test_terminals()
+    public function test_terminals(): void
     {
         $response = (new Terminals($this->getAuth()))->call();
         $this->assertInstanceOf(TerminalsResponse::class, $response);

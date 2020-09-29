@@ -40,7 +40,7 @@ class FundingListTest extends AbstractApiTest
         ;
     }
 
-    public function test_fundlinglist_routing()
+    public function test_fundlinglist_routing(): void
     {
         $api = $this->getMultipleFundingsList();
         $api->call();
@@ -59,7 +59,7 @@ class FundingListTest extends AbstractApiTest
         $this->assertEquals(9, $parts['page']);
     }
 
-    public function test_fundlinglist_single()
+    public function test_fundlinglist_single(): void
     {
         $api = $this->getSingleFundingsList();
         $response = $api->call();
@@ -67,7 +67,7 @@ class FundingListTest extends AbstractApiTest
         $this->assertCount(1, $response->Fundings, 'num fundings');
     }
 
-    public function test_fundlinglist_multiple()
+    public function test_fundlinglist_multiple(): void
     {
         $api = $this->getMultipleFundingsList();
         $response = $api->call();
@@ -78,7 +78,7 @@ class FundingListTest extends AbstractApiTest
     /**
      * @depends test_fundlinglist_multiple
      */
-    public function test_funding_object()
+    public function test_funding_object(): void
     {
         $api = $this->getMultipleFundingsList();
         $response = $api->call()->Fundings[0];

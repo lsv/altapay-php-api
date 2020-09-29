@@ -15,7 +15,7 @@ use Altapay\Response\ReservationOfFixedAmountResponse;
 class FixedAmountProgressTest extends AbstractFunctionalTest
 {
 
-    public function test_create_fixed_amount_fails()
+    public function test_create_fixed_amount_fails(): void
     {
         $this->expectException(ResponseHeaderException::class);
 
@@ -29,7 +29,7 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
         $api->call();
     }
 
-    public function test_create_fixed_amount_fails_exception()
+    public function test_create_fixed_amount_fails_exception(): void
     {
         try {
             $api = new ReservationOfFixedAmount($this->getAuth());
@@ -44,7 +44,7 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
         }
     }
 
-    public function test_can_reserve_capture_refund()
+    public function test_can_reserve_capture_refund(): void
     {
         // Reserve
         $api = new ReservationOfFixedAmount($this->getAuth());
@@ -103,7 +103,7 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
 //        $api->call();
 //    }
 
-    public function test_preauth_declined_by_bank()
+    public function test_preauth_declined_by_bank(): void
     {
         $this->expectException(ResponseMessageException::class);
         $this->expectExceptionMessage('TestAcquirer[pan=0566 or amount=5660]');
@@ -119,7 +119,7 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
         $api->call();
     }
 
-    public function test_preauth_bank_error()
+    public function test_preauth_bank_error(): void
     {
         $this->expectException(ResponseMessageException::class);
         $this->expectExceptionMessage('TestAcquirer[pan=0567 or amount=5670][54321]');
@@ -183,7 +183,7 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
 //        $api->call();
 //    }
 
-    public function test_fraud_check_challenge()
+    public function test_fraud_check_challenge(): void
     {
         $api = new ReservationOfFixedAmount($this->getAuth());
         $api
@@ -199,7 +199,7 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
         $this->assertEquals('Deny', $response->Transactions[0]->FraudRecommendation);
     }
 
-    public function test_fraud_check_deny()
+    public function test_fraud_check_deny(): void
     {
         $api = new ReservationOfFixedAmount($this->getAuth());
         $api

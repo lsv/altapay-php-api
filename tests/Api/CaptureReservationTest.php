@@ -27,7 +27,7 @@ class CaptureReservationTest extends AbstractApiTest
         ;
     }
 
-    public function test_capture_reservation()
+    public function test_capture_reservation(): void
     {
         $api = $this->getCaptureReservation();
         $api->setTransaction(123);
@@ -37,7 +37,7 @@ class CaptureReservationTest extends AbstractApiTest
     /**
      * @depends test_capture_reservation
      */
-    public function test_capture_reservation_data()
+    public function test_capture_reservation_data(): void
     {
         $api = $this->getCaptureReservation();
         $api->setTransaction(123);
@@ -51,7 +51,7 @@ class CaptureReservationTest extends AbstractApiTest
         $this->assertCount(1, $response->Transactions);
     }
 
-    public function test_capture_reservation_transactions_data()
+    public function test_capture_reservation_transactions_data(): void
     {
         $api = $this->getCaptureReservation();
         $api->setTransaction(123);
@@ -65,7 +65,7 @@ class CaptureReservationTest extends AbstractApiTest
         $this->assertEquals(1, $transaction->ReservedAmount);
     }
 
-    public function test_capture_reservation_transaction_request()
+    public function test_capture_reservation_transaction_request(): void
     {
         $transaction = new Transaction();
         $transaction->TransactionId = 456;
@@ -89,7 +89,7 @@ class CaptureReservationTest extends AbstractApiTest
         $this->assertEquals('5.00', $parts['sales_tax']);
     }
 
-    public function test_capture_reservation_transaction_orderlines()
+    public function test_capture_reservation_transaction_orderlines(): void
     {
         $transaction = new Transaction();
         $transaction->TransactionId = 456;
@@ -115,7 +115,7 @@ class CaptureReservationTest extends AbstractApiTest
         $this->assertEquals('kg', $line['unitCode']);
     }
 
-    public function test_capture_reservation_transaction_orderlines_object()
+    public function test_capture_reservation_transaction_orderlines_object(): void
     {
         $transaction = new Transaction();
         $transaction->TransactionId = 456;
@@ -133,7 +133,7 @@ class CaptureReservationTest extends AbstractApiTest
         $this->assertCount(1, $parts['orderLines']);
     }
 
-    public function test_capture_reservation_transaction_orderlines_randomarray()
+    public function test_capture_reservation_transaction_orderlines_randomarray(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage(sprintf(
@@ -150,7 +150,7 @@ class CaptureReservationTest extends AbstractApiTest
         $api->call();
     }
 
-    public function test_capture_reservation_transaction_handleexception()
+    public function test_capture_reservation_transaction_handleexception(): void
     {
         $this->expectException(ClientException::class);
 

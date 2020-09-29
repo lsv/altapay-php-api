@@ -25,7 +25,7 @@ class SetupSubscriptionTest extends AbstractApiTest
         ;
     }
 
-    public function test_charge_subscription_error()
+    public function test_charge_subscription_error(): void
     {
         $this->expectException(ResponseMessageException::class);
         $this->expectExceptionMessage(
@@ -47,7 +47,7 @@ class SetupSubscriptionTest extends AbstractApiTest
         $api->call();
     }
 
-    public function test_url()
+    public function test_url(): void
     {
         $api = $this->getapi();
         $api->setTerminal('my terminal');
@@ -67,7 +67,7 @@ class SetupSubscriptionTest extends AbstractApiTest
         $this->assertEquals(155.23, $parts['surcharge']);
     }
 
-    public function test_response()
+    public function test_response(): void
     {
         $api = $this->getapi();
         $api->setTerminal('my terminal');

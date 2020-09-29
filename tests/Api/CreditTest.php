@@ -28,7 +28,7 @@ class CreditTest extends AbstractApiTest
         ;
     }
 
-    public function test_options()
+    public function test_options(): void
     {
         $this->expectException(CreditCardTokenAndCardUsedException::class);
 
@@ -43,7 +43,7 @@ class CreditTest extends AbstractApiTest
         $api->call();
     }
 
-    public function test_creditcard_options()
+    public function test_creditcard_options(): void
     {
         $card = new Card(1234567890, 5, 19, 122);
         $api = $this->getCredit();
@@ -67,7 +67,7 @@ class CreditTest extends AbstractApiTest
         $this->assertEquals(122, $parts['cvc']);
     }
 
-    public function test_creditcardtoken_options()
+    public function test_creditcardtoken_options(): void
     {
         $api = $this->getCredit();
         $api->setTerminal('terminal');
@@ -101,7 +101,7 @@ class CreditTest extends AbstractApiTest
      * @dataProvider paymentSourceDataProvider
      * @param string $type
      */
-    public function test_paymentsource_options($type)
+    public function test_paymentsource_options($type): void
     {
         $api = $this->getCredit();
         $api->setTerminal('terminal');
@@ -113,7 +113,7 @@ class CreditTest extends AbstractApiTest
         $api->call();
     }
 
-    public function test_paymentsource_invalid_options()
+    public function test_paymentsource_invalid_options(): void
     {
         $this->expectException(InvalidOptionsException::class);
 
@@ -127,7 +127,7 @@ class CreditTest extends AbstractApiTest
         $api->call();
     }
 
-    public function test_response()
+    public function test_response(): void
     {
         $card = new Card(1234567890, 5, 19, 122);
         $api = $this->getCredit();

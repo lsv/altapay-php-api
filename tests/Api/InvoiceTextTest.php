@@ -26,7 +26,7 @@ class InvoiceTextTest extends AbstractApiTest
         ;
     }
 
-    public function test_url()
+    public function test_url(): void
     {
         $trans = new Transaction();
         $trans->TransactionId = 'my transaction number';
@@ -43,7 +43,7 @@ class InvoiceTextTest extends AbstractApiTest
         $this->assertEquals(35.33, $parts['amount']);
     }
 
-    public function test_object()
+    public function test_object(): void
     {
         $trans = new Transaction();
         $trans->TransactionId = 'my transaction number';

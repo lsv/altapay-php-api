@@ -27,7 +27,7 @@ class RefundCapturedReservationTest extends AbstractApiTest
         ;
     }
 
-    public function test_refund_reservation()
+    public function test_refund_reservation(): void
     {
         $api = $this->getRefundCaptureReservation();
         $api->setTransaction(123);
@@ -37,7 +37,7 @@ class RefundCapturedReservationTest extends AbstractApiTest
     /**
      * @depends test_refund_reservation
      */
-    public function test_capture_refund_data()
+    public function test_capture_refund_data(): void
     {
         $api = $this->getRefundCaptureReservation();
         $api->setTransaction(123);
@@ -54,7 +54,7 @@ class RefundCapturedReservationTest extends AbstractApiTest
     /**
      * @depends test_refund_reservation
      */
-    public function test_capture_refund_transactions_data()
+    public function test_capture_refund_transactions_data(): void
     {
         $api = $this->getRefundCaptureReservation();
         $api->setTransaction(123);
@@ -71,7 +71,7 @@ class RefundCapturedReservationTest extends AbstractApiTest
     /**
      * @depends test_refund_reservation
      */
-    public function test_capture_refund_transaction_request()
+    public function test_capture_refund_transaction_request(): void
     {
         $transaction = new Transaction();
         $transaction->TransactionId = 456;
@@ -98,7 +98,7 @@ class RefundCapturedReservationTest extends AbstractApiTest
     /**
      * @depends test_refund_reservation
      */
-    public function test_capture_refund_transaction_orderlines()
+    public function test_capture_refund_transaction_orderlines(): void
     {
         $orderlines = [];
         $orderline = new OrderLine('White sugar', 'productid', 1.5, 5.75);
@@ -138,7 +138,7 @@ class RefundCapturedReservationTest extends AbstractApiTest
     /**
      * @depends test_refund_reservation
      */
-    public function test_capture_refund_transaction_orderlines_object()
+    public function test_capture_refund_transaction_orderlines_object(): void
     {
         $transaction = new Transaction();
         $transaction->TransactionId = 456;
@@ -159,7 +159,7 @@ class RefundCapturedReservationTest extends AbstractApiTest
     /**
      * @depends test_refund_reservation
      */
-    public function test_capture_refund_transaction_orderlines_randomarray()
+    public function test_capture_refund_transaction_orderlines_randomarray(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage(sprintf(
@@ -176,7 +176,7 @@ class RefundCapturedReservationTest extends AbstractApiTest
         $api->call();
     }
 
-    public function test_capture_refund_transaction_handleexception()
+    public function test_capture_refund_transaction_handleexception(): void
     {
         $this->expectException(ClientException::class);
 

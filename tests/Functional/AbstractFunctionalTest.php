@@ -14,7 +14,7 @@ abstract class AbstractFunctionalTest extends AbstractTest
     /**
      * @return void
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         if (! file_exists(__DIR__ . '/../../.env.php')) {
             $this->markTestSkipped(

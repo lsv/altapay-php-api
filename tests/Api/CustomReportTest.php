@@ -23,7 +23,7 @@ class CustomReportTest extends AbstractApiTest
         ;
     }
 
-    public function test_custom_download_with_id()
+    public function test_custom_download_with_id(): void
     {
         $api = $this->getCustomReport();
         $api->setCustomReportId('0c55e643-49c2-492c-ab61-1014426dce5d');
@@ -34,7 +34,7 @@ class CustomReportTest extends AbstractApiTest
         $this->assertEquals('0c55e643-49c2-492c-ab61-1014426dce5d', $parts['id']);
     }
 
-    public function test_funding_download()
+    public function test_funding_download(): void
     {
         $api = $this->getCustomReport();
         $api->setCustomReportId('0c55e643-49c2-492c-ab61-1014426dce5d');

@@ -31,7 +31,7 @@ class PaymentRequestTest extends AbstractApiTest
         ;
     }
 
-    public function test_required_options()
+    public function test_required_options(): void
     {
         $this->expectException(MissingOptionsException::class);
         $this->expectExceptionMessage(
@@ -42,7 +42,7 @@ class PaymentRequestTest extends AbstractApiTest
         $api->call();
     }
 
-    public function test_required_url()
+    public function test_required_url(): void
     {
         $api = $this->getapi();
         $api->setAmount(200.50);
@@ -60,7 +60,7 @@ class PaymentRequestTest extends AbstractApiTest
         $this->assertEquals(957, $parts['currency']);
     }
 
-    public function test_options_url()
+    public function test_options_url(): void
     {
         $api = $this->getapi();
         $api->setAmount(200.50);
@@ -156,7 +156,7 @@ class PaymentRequestTest extends AbstractApiTest
         $this->assertEquals('2016-11-25', $parts['customer_created_date']);
     }
 
-    public function test_response()
+    public function test_response(): void
     {
         $api = $this->getapi();
         $api->setAmount(200.50);
@@ -172,7 +172,7 @@ class PaymentRequestTest extends AbstractApiTest
         $this->assertEquals('https://gateway.altapaysecure.com/eCommerce.php/API/embeddedPaymentWindow?pid=2349494a-6adf-49f7-8096-2125a969e104', $response->DynamicJavascriptUrl);
     }
 
-    public function test_language_types()
+    public function test_language_types(): void
     {
         $this->allowedTypes(
             LanguageTypes::class,
@@ -204,7 +204,7 @@ class PaymentRequestTest extends AbstractApiTest
      * @param string $key
      * @param string $setter
      */
-    private function allowedTypes($class, $key, $setter)
+    private function allowedTypes($class, $key, $setter): void
     {
         foreach ($class::getAllowed() as $type) {
             $api = $this->getapi();
@@ -229,7 +229,7 @@ class PaymentRequestTest extends AbstractApiTest
      * @param string $key
      * @param string $method
      */
-    private function disallowedTypes($class, $key, $method)
+    private function disallowedTypes($class, $key, $method): void
     {
         $this->expectException(InvalidOptionsException::class);
         $this->expectExceptionMessage(

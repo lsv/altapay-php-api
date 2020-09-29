@@ -24,7 +24,7 @@ class InvoiceReservationTest extends AbstractApiTest
         ;
     }
 
-    public function test_missing_all_options()
+    public function test_missing_all_options(): void
     {
         $this->expectException(MissingOptionsException::class);
         $this->expectExceptionMessage(
@@ -33,7 +33,7 @@ class InvoiceReservationTest extends AbstractApiTest
         $this->getapi()->call();
     }
 
-    public function test_url()
+    public function test_url(): void
     {
         $api = $this->getapi();
         $api->setTerminal('my terminal');
@@ -51,7 +51,7 @@ class InvoiceReservationTest extends AbstractApiTest
         $this->assertEquals(957, $parts['currency']);
     }
 
-    public function test_options()
+    public function test_options(): void
     {
         $api = $this->getapi();
         $api->setTerminal('my terminal');

@@ -25,18 +25,18 @@ class FactoryTest extends AbstractTest
      * @dataProvider dataProvider
      * @param class-string $class
      */
-    public function test_can_create($class)
+    public function test_can_create($class): void
     {
         $this->assertInstanceOf($class, Factory::create($class, $this->getAuth()));
     }
 
-    public function test_does_not_exists()
+    public function test_does_not_exists(): void
     {
         $this->expectException(ClassDoesNotExistsException::class);
         Factory::create('Foo\Bar', $this->getAuth());
     }
 
-    public function test_does_not_exists_exception_catch()
+    public function test_does_not_exists_exception_catch(): void
     {
         try {
             Factory::create('Foo\Bar', $this->getAuth());

@@ -26,7 +26,7 @@ class ChargeSubscriptionTest extends AbstractApiTest
         ;
     }
 
-    public function test_charge_subscription()
+    public function test_charge_subscription(): void
     {
         $api = $this->getChargeSubscription();
         $api->setTransaction(123);
@@ -36,7 +36,7 @@ class ChargeSubscriptionTest extends AbstractApiTest
     /**
      * @depends test_charge_subscription
      */
-    public function test_charge_subscription_data()
+    public function test_charge_subscription_data(): void
     {
         $api = $this->getChargeSubscription();
         $api->setTransaction(123);
@@ -46,7 +46,7 @@ class ChargeSubscriptionTest extends AbstractApiTest
         $this->assertCount(2, $response->Transactions);
     }
 
-    public function test_charge_subscription_querypath()
+    public function test_charge_subscription_querypath(): void
     {
         $transaction = new Transaction();
         $transaction->TransactionId = 456;
@@ -79,7 +79,7 @@ class ChargeSubscriptionTest extends AbstractApiTest
         $this->assertEquals('my trans id has spaces', $parts['transaction_id']);
     }
 
-    public function test_charge_subscription_transaction_handleexception()
+    public function test_charge_subscription_transaction_handleexception(): void
     {
         $this->expectException(ClientException::class);
 

@@ -25,14 +25,14 @@ class TerminalsTest extends AbstractApiTest
         ;
     }
 
-    public function test_url()
+    public function test_url(): void
     {
         $api = $this->getTerminals();
         $api->call();
         $this->assertEquals($this->getExceptedUri('getTerminals'), $api->getRawRequest()->getUri()->getPath());
     }
 
-    public function test_header()
+    public function test_header(): void
     {
         $api = $this->getTerminals();
         $response = $api->call();
@@ -44,7 +44,7 @@ class TerminalsTest extends AbstractApiTest
         $this->assertEquals('', $response->Header->ErrorMessage);
     }
 
-    public function test_response()
+    public function test_response(): void
     {
         $api = $this->getTerminals();
         $response = $api->call();
@@ -57,7 +57,7 @@ class TerminalsTest extends AbstractApiTest
     /**
      * @depends test_response
      */
-    public function test_response_terminal()
+    public function test_response_terminal(): void
     {
         $api = $this->getTerminals();
         $response = $api->call();
@@ -71,7 +71,7 @@ class TerminalsTest extends AbstractApiTest
         $this->assertCount(4, $terminal->Natures);
     }
 
-    public function test_attr_fail()
+    public function test_attr_fail(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage(
