@@ -120,8 +120,8 @@ class PaymentsTest extends AbstractApiTest
      */
     public function test_multiple_payment_transaction_data()
     {
-        /** @var Transaction $data */
         $data = $this->getMultiplePaymentTransaction()[0];
+        $this->assertInstanceOf(Transaction::class, $data);
 
         $this->assertEquals(1, $data->TransactionId);
         $this->assertEquals('ccc1479c-37f9-4962-8d2c-662d75117e9d', $data->PaymentId);
@@ -172,8 +172,8 @@ class PaymentsTest extends AbstractApiTest
      */
     public function test_multiple_payment_paymentnatureservice_data()
     {
-        /** @var PaymentNatureService $data */
         $data = $this->getMultiplePaymentTransaction()[0]->PaymentNatureService;
+        $this->assertInstanceOf(PaymentNatureService::class, $data);
 
         $this->assertEquals('TestAcquirer', $data->name);
         $this->assertTrue($data->SupportsRefunds);
@@ -206,7 +206,6 @@ class PaymentsTest extends AbstractApiTest
      */
     public function test_multiple_payment_paymentinfos_data($line, $name, $value)
     {
-        /** @var PaymentInfo[] $datas */
         $datas = $this->getMultiplePaymentTransaction()[0]->PaymentInfos;
 
         $this->assertEquals($name, $datas[$line]->name, 'checking name');
@@ -218,7 +217,6 @@ class PaymentsTest extends AbstractApiTest
      */
     public function test_multiple_payment_customerinfo_data()
     {
-        /** @var CustomerInfo $data */
         $data = $this->getMultiplePaymentTransaction()[0]->CustomerInfo;
 
         $this->assertStringStartsWith('Mozilla/5.0', $data->UserAgent);
@@ -229,15 +227,15 @@ class PaymentsTest extends AbstractApiTest
         $this->assertEquals('12345678', $data->OrganisationNumber);
         $this->assertInstanceOf(Country::class, $data->CountryOfOrigin);
 
-        /** @var Country $country */
         $country = $data->CountryOfOrigin;
+        $this->assertInstanceOf(Country::class, $country);
         $this->assertEquals('DK', $country->Country);
         $this->assertEquals('BillingAddress', $country->Source);
 
         $this->assertInstanceOf(Address::class, $data->BillingAddress);
 
-        /** @var Address $address */
         $address = $data->BillingAddress;
+        $this->assertInstanceOf(Address::class, $address);
         $this->assertEquals('Palle', $address->Firstname);
         $this->assertEquals('Simonsen', $address->Lastname);
         $this->assertEquals('Rosenkæret 13', $address->Address);
@@ -247,8 +245,8 @@ class PaymentsTest extends AbstractApiTest
 
         $this->assertInstanceOf(Address::class, $data->ShippingAddress);
 
-        /** @var Address $address */
         $address = $data->ShippingAddress;
+        $this->assertInstanceOf(Address::class, $address);
         $this->assertNull($address->Firstname);
         $this->assertNull($address->Lastname);
         $this->assertNull($address->Address);
@@ -264,8 +262,8 @@ class PaymentsTest extends AbstractApiTest
      */
     public function test_multiple_payment_reconciliationidentifiers_data()
     {
-        /** @var ReconciliationIdentifier $data */
         $data = $this->getMultiplePaymentTransaction()[0]->ReconciliationIdentifiers[0];
+        $this->assertInstanceOf(ReconciliationIdentifier::class, $data);
 
         $this->assertEquals('f4e2533e-c578-4383-b075-bc8a6866784a', $data->Id);
         $this->assertEquals(1.00, $data->Amount);

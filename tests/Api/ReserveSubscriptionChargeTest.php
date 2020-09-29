@@ -40,8 +40,8 @@ class ReserveSubscriptionChargeTest extends AbstractApiTest
     {
         $api = $this->getReserveSubscriptionCharge();
         $api->setTransaction(123);
-        /** @var ReserveSubscriptionResponse $response */
         $response = $api->call();
+        $this->assertInstanceOf(ReserveSubscriptionResponse::class, $response);
         $this->assertEquals('Success', $response->Result);
         $this->assertCount(2, $response->Transactions);
     }

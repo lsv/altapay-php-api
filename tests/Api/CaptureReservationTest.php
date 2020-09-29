@@ -41,9 +41,9 @@ class CaptureReservationTest extends AbstractApiTest
     {
         $api = $this->getCaptureReservation();
         $api->setTransaction(123);
-        /** @var CaptureReservationResponse $response */
         $response = $api->call();
 
+        $this->assertInstanceOf(CaptureReservationResponse::class, $response);
         $this->assertEquals(0.20, $response->CaptureAmount);
         $this->assertEquals('978', $response->CaptureCurrency);
         $this->assertEquals('Success', $response->Result);
@@ -55,10 +55,10 @@ class CaptureReservationTest extends AbstractApiTest
     {
         $api = $this->getCaptureReservation();
         $api->setTransaction(123);
-        /** @var CaptureReservationResponse $response */
         $response = $api->call();
-        /** @var Transaction $transaction */
+        $this->assertInstanceOf(CaptureReservationResponse::class, $response);
         $transaction = $response->Transactions[0];
+        $this->assertInstanceOf(Transaction::class, $transaction);
         $this->assertEquals(1, $transaction->TransactionId);
         $this->assertEquals(978, $transaction->MerchantCurrency);
         $this->assertEquals(13.37, $transaction->FraudRiskScore);

@@ -55,7 +55,6 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
             ->setCurrency('DKK')
             ->setCard($this->getValidCard())
         ;
-        /** @var ReservationOfFixedAmountResponse $response */
         $response = $api->call();
         $this->assertInstanceOf(ReservationOfFixedAmountResponse::class, $response);
 
@@ -64,7 +63,6 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
         $api
             ->setTransaction($response->Transactions[0])
         ;
-        /** @var CaptureReservationResponse $response */
         $response = $api->call();
         $this->assertInstanceOf(CaptureReservationResponse::class, $response);
 
@@ -73,7 +71,6 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
         $api
             ->setTransaction($response->Transactions[0])
         ;
-        /** @var RefundResponse $response */
         $response = $api->call();
         $this->assertInstanceOf(RefundResponse::class, $response);
 
@@ -194,7 +191,6 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
             ->setCard($this->generateCard(4170000000000121))
             ->setFraudService('maxmind')
         ;
-        /** @var ReservationOfFixedAmountResponse $response */
         $response = $api->call();
         $this->assertInstanceOf(ReservationOfFixedAmountResponse::class, $response);
         $this->assertEquals('Deny', $response->Transactions[0]->FraudRecommendation);
@@ -211,7 +207,6 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
             ->setCard($this->generateCard(4170000000000105))
             ->setFraudService('maxmind')
         ;
-        /** @var ReservationOfFixedAmountResponse $response */
         $response = $api->call();
         $this->assertInstanceOf(ReservationOfFixedAmountResponse::class, $response);
         $this->assertEquals('Deny', $response->Transactions[0]->FraudRecommendation);

@@ -75,7 +75,6 @@ class SetupSubscriptionTest extends AbstractApiTest
         $api->setCurrency(957);
         $api->setShopOrderId('order id');
 
-        /** @var SetupSubscriptionResponse $response */
         $response = $api->call();
 
         $this->assertInstanceOf(SetupSubscriptionResponse::class, $response);

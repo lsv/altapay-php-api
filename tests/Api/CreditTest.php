@@ -134,7 +134,6 @@ class CreditTest extends AbstractApiTest
         $api->setCurrency(967);
         $api->setCard($card);
 
-        /** @var CreditResponse $response */
         $response = $api->call();
 
         $this->assertInstanceOf(CreditResponse::class, $response);

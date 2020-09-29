@@ -76,7 +76,6 @@ abstract class AbstractResponse
                 // Do nothing if element setter not found.
             }
 
-            /** @var \SimpleXMLElement $child */
             foreach ($xml->children() as $child) {
                 if (isset($this->childs[$child->getName()])) {
                     $builder = $this->childs[$child->getName()];

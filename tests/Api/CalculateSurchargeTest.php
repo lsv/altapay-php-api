@@ -113,8 +113,8 @@ class CalculateSurchargeTest extends AbstractApiTest
         $api->setCurrency('dkk');
         $api->setCreditCardToken('1234');
         $api->setTerminal('my terminal');
-        /** @var SurchargeResponse $response */
         $response = $api->call();
+        $this->assertInstanceOf(SurchargeResponse::class, $response);
 
         $this->assertEquals('Success', $response->Result);
         $this->assertEquals('12.34', $response->SurchageAmount);

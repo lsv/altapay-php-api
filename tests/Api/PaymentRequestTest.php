@@ -163,7 +163,6 @@ class PaymentRequestTest extends AbstractApiTest
         $api->setCurrency(957);
         $api->setShopOrderId('order id');
         $api->setTerminal('my terminal');
-        /** @var PaymentRequestResponse $response */
         $response = $api->call();
 
         $this->assertInstanceOf(PaymentRequestResponse::class, $response);

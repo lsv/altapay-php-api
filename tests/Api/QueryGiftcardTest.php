@@ -48,8 +48,8 @@ class QueryGiftcardTest extends AbstractApiTest
         $api = $this->getapi();
         $api->setTerminal('my terminal');
         $api->setGiftcard($card);
-        /** @var GiftcardResponse $response */
         $response = $api->call();
+        $this->assertInstanceOf(GiftcardResponse::class, $response);
 
         $this->assertEquals('Success', $response->Result);
         $this->assertCount(2, $response->Accounts);

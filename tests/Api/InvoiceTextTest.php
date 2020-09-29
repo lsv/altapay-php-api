@@ -51,8 +51,8 @@ class InvoiceTextTest extends AbstractApiTest
         $api = $this->getinvoicetext();
         $api->setTransaction($trans);
         $api->setAmount(35.33);
-        /** @var InvoiceTextDocument $response */
         $response = $api->call();
+        $this->assertInstanceOf(InvoiceTextDocument::class, $response);
 
         $this->assertEquals('200', $response->AccountOfferMinimumToPay);
         $this->assertStringStartsWith('Ønsker du å delbetale', $response->AccountOfferText);

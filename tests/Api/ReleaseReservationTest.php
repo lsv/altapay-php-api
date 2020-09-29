@@ -40,8 +40,8 @@ class ReleaseReservationTest extends AbstractApiTest
     {
         $api = $this->getReleaseReservation();
         $api->setTransaction(123);
-        /** @var ReleaseReservationDocument $response */
         $response = $api->call();
+        $this->assertInstanceOf(ReleaseReservationDocument::class, $response);
         $this->assertEquals('Success', $response->Result);
         $this->assertCount(1, $response->Transactions);
     }

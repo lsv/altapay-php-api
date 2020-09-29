@@ -40,8 +40,8 @@ class ChargeSubscriptionTest extends AbstractApiTest
     {
         $api = $this->getChargeSubscription();
         $api->setTransaction(123);
-        /** @var ChargeSubscriptionDocument $response */
         $response = $api->call();
+        $this->assertInstanceOf(ChargeSubscriptionDocument::class, $response);
         $this->assertEquals('Success', $response->Result);
         $this->assertCount(2, $response->Transactions);
     }

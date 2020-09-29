@@ -62,16 +62,16 @@ class FundingListTest extends AbstractApiTest
     public function test_fundlinglist_single()
     {
         $api = $this->getSingleFundingsList();
-        /** @var FundingsResponse $response */
         $response = $api->call();
+        $this->assertInstanceOf(FundingsResponse::class, $response);
         $this->assertCount(1, $response->Fundings, 'num fundings');
     }
 
     public function test_fundlinglist_multiple()
     {
         $api = $this->getMultipleFundingsList();
-        /** @var FundingsResponse $response */
         $response = $api->call();
+        $this->assertInstanceOf(FundingsResponse::class, $response);
         $this->assertCount(2, $response->Fundings, 'num fundings');
     }
 
@@ -81,8 +81,8 @@ class FundingListTest extends AbstractApiTest
     public function test_funding_object()
     {
         $api = $this->getMultipleFundingsList();
-        /** @var Funding $response */
         $response = $api->call()->Fundings[0];
+        $this->assertInstanceOf(Funding::class, $response);
 
         $this->assertEquals('CreatedByTest', $response->Filename);
         $this->assertEquals('1234567890123456', $response->ContractIdentifier);

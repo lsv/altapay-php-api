@@ -41,8 +41,8 @@ class RefundCapturedReservationTest extends AbstractApiTest
     {
         $api = $this->getRefundCaptureReservation();
         $api->setTransaction(123);
-        /** @var RefundResponse $response */
         $response = $api->call();
+        $this->assertInstanceOf(RefundResponse::class, $response);
 
         $this->assertEquals(0.12, $response->getRefundAmount());
         $this->assertEquals('978', $response->RefundCurrency);
@@ -58,10 +58,10 @@ class RefundCapturedReservationTest extends AbstractApiTest
     {
         $api = $this->getRefundCaptureReservation();
         $api->setTransaction(123);
-        /** @var RefundResponse $response */
         $response = $api->call();
-        /** @var Transaction $transaction */
+        $this->assertInstanceOf(RefundResponse::class, $response);
         $transaction = $response->Transactions[0];
+        $this->assertInstanceOf(Transaction::class, $transaction);
         $this->assertEquals(1, $transaction->TransactionId);
         $this->assertEquals(978, $transaction->MerchantCurrency);
         $this->assertEquals(13.37, $transaction->FraudRiskScore);

@@ -35,8 +35,8 @@ class TerminalsTest extends AbstractApiTest
     public function test_header()
     {
         $api = $this->getTerminals();
-        /** @var TerminalsResponse $response */
         $response = $api->call();
+        $this->assertInstanceOf(TerminalsResponse::class, $response);
         $this->assertInstanceOf(\DateTime::class, $response->Header->Date);
         $this->assertEquals('07-01-2016', $response->Header->Date->format('d-m-Y'));
         $this->assertEquals('API/getTerminals', $response->Header->Path);
@@ -47,8 +47,8 @@ class TerminalsTest extends AbstractApiTest
     public function test_response()
     {
         $api = $this->getTerminals();
-        /** @var TerminalsResponse $response */
         $response = $api->call();
+        $this->assertInstanceOf(TerminalsResponse::class, $response);
 
         $this->assertCount(2, $response->Terminals);
         $this->assertEquals('Success', $response->Result);
@@ -60,12 +60,12 @@ class TerminalsTest extends AbstractApiTest
     public function test_response_terminal()
     {
         $api = $this->getTerminals();
-        /** @var Terminal $terminal */
-        /** @var TerminalsResponse $response */
         $response = $api->call();
+        $this->assertInstanceOf(TerminalsResponse::class, $response);
         $this->assertCount(2, $response->Terminals);
 
         $terminal = $response->Terminals[0];
+        $this->assertInstanceOf(Terminal::class, $terminal);
         $this->assertEquals('AltaPay Multi-Nature Terminal', $terminal->Title);
         $this->assertEquals('DK', $terminal->Country);
         $this->assertCount(4, $terminal->Natures);

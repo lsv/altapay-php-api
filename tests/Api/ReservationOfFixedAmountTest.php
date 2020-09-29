@@ -327,7 +327,6 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setCurrency(957);
         $api->setShopOrderId('order id');
 
-        /** @var ReservationOfFixedAmountResponse $response */
         $response = $api->call();
 
         $this->assertInstanceOf(ReservationOfFixedAmountResponse::class, $response);
@@ -350,7 +349,6 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setCurrency(957);
         $api->setShopOrderId('order id');
 
-        /** @var ReservationOfFixedAmountResponse $response */
         $response = $api->call();
         $this->assertInstanceOf(ReservationOfFixedAmountResponse::class, $response);
     }

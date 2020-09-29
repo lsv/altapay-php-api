@@ -23,7 +23,7 @@
 
 namespace Altapay\Traits;
 
-use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Csv to array trait
@@ -41,7 +41,7 @@ trait CsvToArrayTrait
     public function __toArray($includeHeader = false)
     {
         $output = [];
-        /** @var Response $response */
+        /** @var ResponseInterface $response */
         $response = $this->getRawResponse();
         $lines = explode("\n", (string) $response->getBody());
         $lineNumber = 0;
