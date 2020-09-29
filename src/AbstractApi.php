@@ -235,21 +235,19 @@ abstract class AbstractApi
      */
     protected function validateResponse($response)
     {
-        if ($response instanceof AbstractResponse) {
-            if ($response->Header->ErrorCode != 0) {
-                throw new Exceptions\ResponseHeaderException($response->Header);
-            }
+        if ($response->Header->ErrorCode != 0) {
+            throw new Exceptions\ResponseHeaderException($response->Header);
+        }
 
-            if (property_exists($response, 'MerchantErrorMessage')) {
-                if ($response->MerchantErrorMessage) {
-                    throw new Exceptions\ResponseMessageException($response->MerchantErrorMessage);
-                }
+        if (property_exists($response, 'MerchantErrorMessage')) {
+            if ($response->MerchantErrorMessage) {
+                throw new Exceptions\ResponseMessageException($response->MerchantErrorMessage);
             }
+        }
 
-            if (property_exists($response, 'CardHolderErrorMessage') && property_exists($response, 'CardHolderMessageMustBeShown')) {
-                if ($response->CardHolderMessageMustBeShown) {
-                    throw new Exceptions\ResponseMessageException($response->CardHolderErrorMessage);
-                }
+        if (property_exists($response, 'CardHolderErrorMessage') && property_exists($response, 'CardHolderMessageMustBeShown')) {
+            if ($response->CardHolderMessageMustBeShown) {
+                throw new Exceptions\ResponseMessageException($response->CardHolderErrorMessage);
             }
         }
     }
@@ -275,7 +273,9 @@ abstract class AbstractApi
             $response       = $this->getClient()->send($request);
             $this->response = $response;
             $output         = $this->handleResponse($request, $response);
-            $this->validateResponse($output);
+            if ($output instanceof AbstractResponse) {
+                $this->validateResponse($output);
+            }
 
             return $output;
         } catch (GuzzleHttpClientException $e) {
