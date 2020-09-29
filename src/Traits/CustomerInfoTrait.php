@@ -34,6 +34,7 @@ trait CustomerInfoTrait
      * Customer info - used for fraud detection
      *
      * @param Customer $customer
+     *
      * @return $this
      */
     public function setCustomerInfo(Customer $customer)
@@ -49,6 +50,7 @@ trait CustomerInfoTrait
      * Resolve amount option
      *
      * @param OptionsResolver $resolver
+     *
      * @return void
      */
     protected function setCustomerInfoResolver(OptionsResolver $resolver)

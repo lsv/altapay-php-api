@@ -30,6 +30,7 @@ use Altapay\Serializer\ResponseSerializer;
 use Altapay\Traits\TerminalTrait;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -43,6 +44,7 @@ class QueryGiftcard extends AbstractApi
      * Gift card to check
      *
      * @param Giftcard $giftcard
+     *
      * @return $this
      */
     public function setGiftcard(Giftcard $giftcard)
@@ -55,6 +57,7 @@ class QueryGiftcard extends AbstractApi
      * Configure options
      *
      * @param OptionsResolver $resolver
+     *
      * @return void
      */
     protected function configureOptions(OptionsResolver $resolver)
@@ -66,11 +69,12 @@ class QueryGiftcard extends AbstractApi
     /**
      * Handle response
      *
-     * @param Request $request
-     * @param Response $response
-     * @return mixed
+     * @param Request           $request
+     * @param ResponseInterface $response
+     *
+     * @return GiftcardResponse
      */
-    protected function handleResponse(Request $request, Response $response)
+    protected function handleResponse(Request $request, ResponseInterface $response)
     {
         $body = (string) $response->getBody();
         $xml = simplexml_load_string($body);
@@ -80,7 +84,8 @@ class QueryGiftcard extends AbstractApi
     /**
      * Url to api call
      *
-     * @param array $options Resolved options
+     * @param array<string, mixed> $options Resolved options
+     *
      * @return string
      */
     protected function getUrl(array $options)

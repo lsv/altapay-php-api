@@ -34,7 +34,8 @@ trait OrderlinesTrait
 {
 
     /**
-     * @param array|OrderLine $orderLines
+     * @param array<OrderLine>|OrderLine $orderLines
+     *
      * @return $this
      */
     public function setOrderLines($orderLines)

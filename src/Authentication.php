@@ -52,6 +52,7 @@ class Authentication
 
     /**
      * Authentication constructor.
+     *
      * @param string $username
      * @param string $password
      * @param string $baseurl

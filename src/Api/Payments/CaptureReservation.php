@@ -33,6 +33,7 @@ use Altapay\Traits\TransactionsTrait;
 use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -83,7 +84,7 @@ class CaptureReservation extends AbstractApi
     /**
      * The sales tax amount is used if you wish to indicate how much of the gross amount was sales tax
      *
-     * @param string $salesTax
+     * @param numeric $salesTax
      *
      * @return $this
      */
@@ -135,12 +136,12 @@ class CaptureReservation extends AbstractApi
     /**
      * Handle response
      *
-     * @param Request  $request
-     * @param Response $response
+     * @param Request           $request
+     * @param ResponseInterface $response
      *
      * @return CaptureReservationResponse
      */
-    protected function handleResponse(Request $request, Response $response)
+    protected function handleResponse(Request $request, ResponseInterface $response)
     {
         $body = (string)$response->getBody();
         $xml  = simplexml_load_string($body);
@@ -156,7 +157,7 @@ class CaptureReservation extends AbstractApi
     }
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     protected function getBasicHeaders()
     {
@@ -171,7 +172,7 @@ class CaptureReservation extends AbstractApi
     /**
      * Url to api call
      *
-     * @param array $options Resolved options
+     * @param array<string, mixed> $options Resolved options
      *
      * @return string
      */

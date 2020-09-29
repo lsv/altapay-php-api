@@ -35,7 +35,8 @@ trait CsvToArrayTrait
      * Convert csv response to array
      *
      * @param bool $includeHeader
-     * @return array
+     *
+     * @return array<int, array<int, string>>
      */
     public function __toArray($includeHeader = false)
     {

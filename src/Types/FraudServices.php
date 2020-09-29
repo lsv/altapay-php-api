@@ -55,6 +55,7 @@ class FraudServices implements TypeInterface
      * Is the requested value allowed
      *
      * @param string $value
+     *
      * @return bool
      */
     public static function isAllowed($value)

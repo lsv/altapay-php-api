@@ -208,6 +208,7 @@ class CurrencyTypes
 
     /**
      * @param string $code
+     *
      * @return bool
      */
     public static function currencyCodeExists($code)
@@ -217,6 +218,7 @@ class CurrencyTypes
 
     /**
      * @param int $number
+     *
      * @return bool
      */
     public static function currencyNumberExists($number)

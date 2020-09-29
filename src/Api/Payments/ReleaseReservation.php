@@ -32,6 +32,7 @@ use Altapay\Traits\TransactionsTrait;
 use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -61,12 +62,12 @@ class ReleaseReservation extends AbstractApi
     /**
      * Handle response
      *
-     * @param Request  $request
-     * @param Response $response
+     * @param Request           $request
+     * @param ResponseInterface $response
      *
      * @return ReleaseReservationResponse
      */
-    protected function handleResponse(Request $request, Response $response)
+    protected function handleResponse(Request $request, ResponseInterface $response)
     {
         $body = (string)$response->getBody();
         $xml  = simplexml_load_string($body);
@@ -75,7 +76,7 @@ class ReleaseReservation extends AbstractApi
     }
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     protected function getBasicHeaders()
     {
@@ -90,7 +91,7 @@ class ReleaseReservation extends AbstractApi
     /**
      * Url to api call
      *
-     * @param array $options Resolved options
+     * @param array<string, mixed> $options Resolved options
      *
      * @return string
      */
@@ -115,6 +116,7 @@ class ReleaseReservation extends AbstractApi
 
     /**
      * @return \Altapay\Response\AbstractResponse|PaymentRequestResponse|bool
+     *
      * @throws \Altapay\Exceptions\ResponseHeaderException
      * @throws \Altapay\Exceptions\ResponseMessageException
      * @throws \GuzzleHttp\Exception\GuzzleException

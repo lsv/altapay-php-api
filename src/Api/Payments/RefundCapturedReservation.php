@@ -31,6 +31,7 @@ use Altapay\Traits;
 use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -118,13 +119,14 @@ class RefundCapturedReservation extends AbstractApi
     /**
      * Handle response
      *
-     * @param Request  $request
-     * @param Response $response
+     * @param Request           $request
+     * @param ResponseInterface $response
      *
-     * @return \Altapay\Response\AbstractResponse|array
+     * @return \Altapay\Response\AbstractResponse
+     *
      * @throws \Exception
      */
-    protected function handleResponse(Request $request, Response $response)
+    protected function handleResponse(Request $request, ResponseInterface $response)
     {
         $body = (string)$response->getBody();
         $xml  = simplexml_load_string($body);
@@ -141,7 +143,7 @@ class RefundCapturedReservation extends AbstractApi
     }
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     protected function getBasicHeaders()
     {
@@ -156,7 +158,7 @@ class RefundCapturedReservation extends AbstractApi
     /**
      * Url to api call
      *
-     * @param array $options Resolved options
+     * @param array<string, mixed> $options Resolved options
      *
      * @return string
      */
@@ -182,7 +184,7 @@ class RefundCapturedReservation extends AbstractApi
     /**
      * Generate the response
      *
-     * @return array|bool|\Altapay\Response\AbstractResponse|void
+     * @return \Altapay\Response\AbstractResponse
      */
     protected function doResponse()
     {

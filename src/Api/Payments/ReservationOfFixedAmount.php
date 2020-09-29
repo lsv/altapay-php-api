@@ -31,6 +31,7 @@ use Altapay\Traits;
 use Altapay\Types;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -231,12 +232,12 @@ class ReservationOfFixedAmount extends AbstractApi
     /**
      * Handle response
      *
-     * @param Request  $request
-     * @param Response $response
+     * @param Request           $request
+     * @param ResponseInterface $response
      *
      * @return ReservationOfFixedAmountResponse
      */
-    protected function handleResponse(Request $request, Response $response)
+    protected function handleResponse(Request $request, ResponseInterface $response)
     {
         $body = (string)$response->getBody();
         $xml  = simplexml_load_string($body);
@@ -247,7 +248,7 @@ class ReservationOfFixedAmount extends AbstractApi
     /**
      * Url to api call
      *
-     * @param array<string, string> $options Resolved options
+     * @param array<string, mixed> $options Resolved options
      *
      * @return string
      */

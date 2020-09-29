@@ -29,6 +29,7 @@ use Altapay\Serializer\ResponseSerializer;
 use Altapay\Traits;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -43,6 +44,7 @@ class ChargeSubscription extends AbstractApi
      * If you wish to define the reconciliation identifier used in the reconciliation csv files
      *
      * @param string $identifier
+     *
      * @return $this
      */
     public function setReconciliationIdentifier($identifier)
@@ -55,6 +57,7 @@ class ChargeSubscription extends AbstractApi
      * Configure options
      *
      * @param OptionsResolver $resolver
+     *
      * @return void
      */
     protected function configureOptions(OptionsResolver $resolver)
@@ -67,11 +70,12 @@ class ChargeSubscription extends AbstractApi
     /**
      * Handle response
      *
-     * @param Request $request
-     * @param Response $response
+     * @param Request           $request
+     * @param ResponseInterface $response
+     *
      * @return ChargeSubscriptionResponse
      */
-    protected function handleResponse(Request $request, Response $response)
+    protected function handleResponse(Request $request, ResponseInterface $response)
     {
         $body = (string) $response->getBody();
         $xml = simplexml_load_string($body);
@@ -81,7 +85,8 @@ class ChargeSubscription extends AbstractApi
     /**
      * Url to api call
      *
-     * @param array $options Resolved options
+     * @param array<string, mixed> $options Resolved options
+     *
      * @return string
      */
     protected function getUrl(array $options)

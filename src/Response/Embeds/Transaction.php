@@ -25,10 +25,15 @@ namespace Altapay\Response\Embeds;
 
 use DateTime;
 use Altapay\Response\AbstractResponse;
+use Altapay\Response\Embeds\PaymentInfo;
 
 class Transaction extends AbstractResponse
 {
-    /** @var array<string, array<string, mixed>> */
+    /**
+     * Childs of the response
+     *
+     * @var array<string, array<string, mixed>>
+     */
     protected $childs = [
         'PaymentNatureService'      => [
             'class' => PaymentNatureService::class,
@@ -57,7 +62,7 @@ class Transaction extends AbstractResponse
     ];
 
     /**
-     * @var string
+     * @var int
      */
     public $TransactionId;
 
@@ -252,9 +257,9 @@ class Transaction extends AbstractResponse
     public $ChargebackEvents;
 
     /**
-     * @var string
+     * @var PaymentInfo[]
      */
-    public $PaymentInfos;
+    public $PaymentInfos = [];
 
     /**
      * @var CustomerInfo
@@ -262,9 +267,9 @@ class Transaction extends AbstractResponse
     public $CustomerInfo;
 
     /**
-     * @var string
+     * @var ReconciliationIdentifier[]
      */
-    public $ReconciliationIdentifiers;
+    public $ReconciliationIdentifiers = [];
 
     /**
      * @var string

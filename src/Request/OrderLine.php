@@ -25,6 +25,7 @@ namespace Altapay\Request;
 
 class OrderLine extends AbstractSerializer
 {
+    /** @var array<int, string> */
     private static $goodsTypes = ['shipment', 'handling', 'item'];
 
     /**
@@ -125,7 +126,7 @@ class OrderLine extends AbstractSerializer
      *
      * @param string $goodsType
      *
-     * @return OrderLine
+     * @return $this
      */
     public function setGoodsType($goodsType)
     {
@@ -157,7 +158,7 @@ class OrderLine extends AbstractSerializer
     /**
      * Serialize a object
      *
-     * @return array
+     * @return array<string, string>
      */
     public function serialize()
     {

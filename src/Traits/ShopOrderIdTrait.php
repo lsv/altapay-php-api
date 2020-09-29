@@ -33,6 +33,7 @@ trait ShopOrderIdTrait
      * this is what we will post back to you so you know which order a given payment is associated with.
      *
      * @param string $shopOrderId
+     *
      * @return $this
      */
     public function setShopOrderId($shopOrderId)
@@ -45,6 +46,7 @@ trait ShopOrderIdTrait
      * Resolve terminal option
      *
      * @param OptionsResolver $resolver
+     *
      * @return void
      */
     public function setShopOrderIdResolver(OptionsResolver $resolver)

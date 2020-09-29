@@ -33,6 +33,7 @@ use Altapay\Types;
 use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -303,12 +304,12 @@ class PaymentRequest extends AbstractApi
     /**
      * Handle response
      *
-     * @param Request  $request
-     * @param Response $response
+     * @param Request           $request
+     * @param ResponseInterface $response
      *
      * @return PaymentRequestResponse
      */
-    protected function handleResponse(Request $request, Response $response)
+    protected function handleResponse(Request $request, ResponseInterface $response)
     {
         $body = (string)$response->getBody();
         $xml  = simplexml_load_string($body);
@@ -317,7 +318,7 @@ class PaymentRequest extends AbstractApi
     }
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     protected function getBasicHeaders()
     {
@@ -332,7 +333,7 @@ class PaymentRequest extends AbstractApi
     /**
      * Url to api call
      *
-     * @param array $options Resolved options
+     * @param array<string, mixed> $options Resolved options
      *
      * @return string
      */
@@ -357,6 +358,7 @@ class PaymentRequest extends AbstractApi
 
     /**
      * @return \Altapay\Response\AbstractResponse|PaymentRequestResponse|bool|void
+     *
      * @throws \Altapay\Exceptions\ResponseHeaderException
      * @throws \Altapay\Exceptions\ResponseMessageException
      * @throws \GuzzleHttp\Exception\GuzzleException

@@ -42,7 +42,7 @@ abstract class AbstractResponse
     /**
      * Childs of the response
      *
-     * @var array
+     * @var array<string, array<string, mixed>>
      */
     protected $childs = [];
 
@@ -98,6 +98,7 @@ abstract class AbstractResponse
      *
      * @param object            $object
      * @param \SimpleXMLElement $element
+     *
      * @return void
      */
     private function attributeSetter($object, \SimpleXMLElement $element)
@@ -124,6 +125,7 @@ abstract class AbstractResponse
      * @param object            $object
      * @param mixed             $data
      * @param \SimpleXMLElement $element
+     *
      * @return void
      */
     private function elementSetter($object, $data, \SimpleXMLElement $element)

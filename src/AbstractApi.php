@@ -60,14 +60,14 @@ abstract class AbstractApi
     /**
      * Not resolved options
      *
-     * @var array
+     * @var array<string, mixed>
      */
-    public $unresolvedOptions;
+    public $unresolvedOptions = [];
 
     /**
      * Resolved options
      *
-     * @var array
+     * @var array<string, mixed>
      */
     protected $options;
 
@@ -119,16 +119,16 @@ abstract class AbstractApi
      * Handle response
      *
      * @param Request  $request
-     * @param Response $response
+     * @param ResponseInterface $response
      *
      * @return AbstractResponse|string|array<Transaction>
      */
-    abstract protected function handleResponse(Request $request, Response $response);
+    abstract protected function handleResponse(Request $request, ResponseInterface $response);
 
     /**
      * Url to api call
      *
-     * @param array $options Resolved options
+     * @param array<string, mixed> $options Resolved options
      *
      * @return string
      */
@@ -141,7 +141,6 @@ abstract class AbstractApi
      */
     public function __construct(Authentication $authentication)
     {
-        $this->unresolvedOptions = [];
         $this->dispatcher        = new EventDispatcher();
         $this->httpClient        = new Client();
         $this->authentication    = $authentication;
@@ -151,7 +150,7 @@ abstract class AbstractApi
     /**
      * Generate the response
      *
-     * @return mixed
+     * @return AbstractResponse|string|array<Transaction>
      */
     public function call()
     {
@@ -206,6 +205,8 @@ abstract class AbstractApi
 
     /**
      * Resolve options
+     *
+     * @return void
      */
     protected function doConfigureOptions()
     {
@@ -225,7 +226,9 @@ abstract class AbstractApi
     /**
      * Validate response
      *
-     * @param mixed $response
+     * @param AbstractResponse $response
+     *
+     * @return void
      *
      * @throws Exceptions\ResponseHeaderException
      * @throws Exceptions\ResponseMessageException
@@ -253,6 +256,8 @@ abstract class AbstractApi
 
     /**
      * Generate the response
+     *
+     * @return AbstractResponse|string|array<Transaction>
      */
     protected function doResponse()
     {
@@ -352,6 +357,7 @@ abstract class AbstractApi
      * Resolve transaction
      *
      * @param OptionsResolver $resolver
+     *
      * @return void
      */
     protected function setTransactionResolver(OptionsResolver $resolver)
@@ -362,6 +368,7 @@ abstract class AbstractApi
      * Resolve orderlines
      *
      * @param OptionsResolver $resolver
+     *
      * @return void
      */
     protected function setOrderLinesResolver(OptionsResolver $resolver)
@@ -372,6 +379,7 @@ abstract class AbstractApi
      * Resolve amount option
      *
      * @param OptionsResolver $resolver
+     *
      * @return void
      */
     protected function setAmountResolver(OptionsResolver $resolver)
@@ -382,6 +390,7 @@ abstract class AbstractApi
      * Resolve terminal option
      *
      * @param OptionsResolver $resolver
+     *
      * @return void
      */
     protected function setTerminalResolver(OptionsResolver $resolver)
@@ -392,6 +401,7 @@ abstract class AbstractApi
      * Resolve currency option
      *
      * @param OptionsResolver $resolver
+     *
      * @return void
      */
     protected function setCurrencyResolver(OptionsResolver $resolver)
@@ -402,6 +412,7 @@ abstract class AbstractApi
      * Resolve shop order id
      *
      * @param OptionsResolver $resolver
+     *
      * @return void
      */
     protected function setShopOrderIdResolver(OptionsResolver $resolver)
@@ -412,6 +423,7 @@ abstract class AbstractApi
      * Resolve transaction info option
      *
      * @param OptionsResolver $resolver
+     *
      * @return void
      */
     protected function setTransactionInfoResolver(OptionsResolver $resolver)
@@ -422,6 +434,7 @@ abstract class AbstractApi
      * Resolve amount option
      *
      * @param OptionsResolver $resolver
+     *
      * @return void
      */
     protected function setCustomerInfoResolver(OptionsResolver $resolver)
