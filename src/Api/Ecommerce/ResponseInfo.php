@@ -12,7 +12,7 @@ class ResponseInfo extends Callback
     }
 
     /**
-     * @return RegisteredAddress
+     * @return string
      */
     public function getRegisteredAddress()
     {

@@ -39,7 +39,7 @@ class ResponseSerializer
      * @param bool              $childKey
      * @param \SimpleXMLElement $header
      *
-     * @return AbstractResponse|array
+     * @return AbstractResponse|array<int, AbstractResponse>
      */
     public static function serialize(
         $objectName,

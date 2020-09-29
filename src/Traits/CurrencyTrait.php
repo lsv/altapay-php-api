@@ -45,6 +45,7 @@ trait CurrencyTrait
      * Resolve amount option
      *
      * @param OptionsResolver $resolver
+     * @return void
      */
     protected function setCurrencyResolver(OptionsResolver $resolver)
     {

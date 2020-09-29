@@ -509,7 +509,7 @@ class Customer extends AbstractSerializer
     /**
      * Set Client Accept Language
      *
-     * @param $clientAcceptLanguage
+     * @param string $clientAcceptLanguage
      *
      * @return Customer
      */
@@ -523,7 +523,7 @@ class Customer extends AbstractSerializer
     /**
      * Set Client Accept Language
      *
-     * @param $httpUserAgent
+     * @param string $httpUserAgent
      *
      * @return Customer
      */
@@ -537,7 +537,7 @@ class Customer extends AbstractSerializer
     /**
      * Set Client Accept Language
      *
-     * @param $httpXForwardedFor
+     * @param string $httpXForwardedFor
      *
      * @return Customer
      */
@@ -551,7 +551,7 @@ class Customer extends AbstractSerializer
     /**
      * Set Client Session ID
      *
-     * @param $clientSessionID
+     * @param string $clientSessionID
      *
      * @return Customer
      */
@@ -666,9 +666,9 @@ class Customer extends AbstractSerializer
     }
 
     /**
-     * @param array   $output
-     * @param         $key
-     * @param Address $object
+     * @param array<string, string> $output
+     * @param string                $key
+     * @param Address               $object
      */
     private static function setAddress(array &$output, $key, Address $object)
     {

@@ -45,6 +45,7 @@ trait ShopOrderIdTrait
      * Resolve terminal option
      *
      * @param OptionsResolver $resolver
+     * @return void
      */
     public function setShopOrderIdResolver(OptionsResolver $resolver)
     {

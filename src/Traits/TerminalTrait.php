@@ -40,7 +40,7 @@ trait TerminalTrait
         if ($terminal instanceof Terminal) {
             $terminal = $terminal->Title;
         }
-        
+
         $this->unresolvedOptions['terminal'] = $terminal;
         return $this;
     }
@@ -49,6 +49,7 @@ trait TerminalTrait
      * Resolve terminal option
      *
      * @param OptionsResolver $resolver
+     * @return void
      */
     public function setTerminalResolver(OptionsResolver $resolver)
     {

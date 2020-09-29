@@ -24,11 +24,13 @@
 namespace Altapay\Api\Payments;
 
 use Altapay\AbstractApi;
+use Altapay\Exceptions;
 use Altapay\Response\CaptureReservationResponse;
 use Altapay\Serializer\ResponseSerializer;
 use Altapay\Traits\AmountTrait;
 use Altapay\Traits\OrderlinesTrait;
 use Altapay\Traits\TransactionsTrait;
+use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -96,7 +98,7 @@ class CaptureReservation extends AbstractApi
      * The shipping tracking info is used if you want to send the shipping tracking info
      * with invoice.
      *
-     * @param $shippingTrackingInfo
+     * @param string $shippingTrackingInfo
      *
      * @return $this
      */

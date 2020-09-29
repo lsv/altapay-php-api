@@ -49,6 +49,7 @@ trait TransactionsTrait
      * Resolve transaction option
      *
      * @param OptionsResolver $resolver
+     * @return void
      */
     protected function setTransactionResolver(OptionsResolver $resolver)
     {

@@ -44,6 +44,7 @@ trait AmountTrait
      * Resolve amount option
      *
      * @param OptionsResolver $resolver
+     * @return void
      */
     protected function setAmountResolver(OptionsResolver $resolver)
     {

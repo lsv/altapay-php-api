@@ -28,12 +28,12 @@ use Altapay\Response\AbstractResponse;
 class Address extends AbstractResponse
 {
     /**
-     * @var Firstname
+     * @var string
      */
     public $Firstname;
 
     /**
-     * @var Lastname
+     * @var string
      */
     public $Lastname;
 
@@ -43,17 +43,17 @@ class Address extends AbstractResponse
     public $Address;
 
     /**
-     * @var City
+     * @var string
      */
     public $City;
 
     /**
-     * @var PostalCode
+     * @var string
      */
     public $PostalCode;
 
     /**
-     * @var Region
+     * @var string
      */
     public $Region;
 
@@ -63,27 +63,27 @@ class Address extends AbstractResponse
     public $Country;
 
     /**
-     * @var billingAddress
+     * @var string
      */
     public $billingAddress;
 
     /**
-     * @var paymentMethod
+     * @var string
      */
     public $paymentMethod;
 
     /**
-     * @var currency
+     * @var string
      */
     public $currency;
 
     /**
-     * @var orderAmount
+     * @var string
      */
     public $orderAmount;
 
     /**
-     * @param $FirstName
+     * @param string $FirstName
      *
      * @return $this
      */

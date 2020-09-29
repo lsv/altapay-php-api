@@ -33,12 +33,13 @@ use Altapay\Serializer\ResponseSerializer;
  */
 class Callback
 {
+    /** @var array<string, string> */
     private $postedData;
 
     /**
      * Callback constructor.
      *
-     * @param $postedData
+     * @param array<string, string> $postedData
      */
     public function __construct($postedData)
     {
