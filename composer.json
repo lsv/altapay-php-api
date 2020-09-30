@@ -13,6 +13,14 @@
         "sort-packages": true,
         "bin-dir": "bin"
     },
+    "archive": {
+        "exclude": [
+            "build.xml",
+            "phpstan.neon",
+            "phpunit.xml.dist",
+            "tests"
+        ]
+    },
     "require": {
         "php": "^5.6 || ^7.0",
         "ext-date": "*",
