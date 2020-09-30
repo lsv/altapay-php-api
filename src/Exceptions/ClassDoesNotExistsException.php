@@ -31,9 +31,10 @@ class ClassDoesNotExistsException extends Exception
     /**
      * @param string $class
      */
-    public function __construct($class)
+    public function __construct(string $class)
     {
         $this->class = $class;
+        parent::__construct($class.' is not a known class.');
     }
 
     /**
