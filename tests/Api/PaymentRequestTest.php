@@ -50,7 +50,7 @@ class PaymentRequestTest extends AbstractApiTest
         $api->call();
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('createPaymentRequest/'), $request->getUri()->getPath());
+        $this->assertEquals($this->getExceptedUri('createPaymentRequest'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
         $this->assertEquals('my terminal', $parts['terminal']);
         $this->assertEquals('order id', $parts['shop_orderid']);
@@ -85,7 +85,7 @@ class PaymentRequestTest extends AbstractApiTest
         $api->call();
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('createPaymentRequest/'), $request->getUri()->getPath());
+        $this->assertEquals($this->getExceptedUri('createPaymentRequest'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
 
         $this->assertEquals('da', $parts['language']);
