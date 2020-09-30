@@ -217,7 +217,7 @@ class CaptureReservation extends AbstractApi
 
             return $output;
         } catch (GuzzleHttpClientException $e) {
-            throw new Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse());
+            throw new Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse(), $e);
         }
     }
 
