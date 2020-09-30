@@ -278,10 +278,10 @@ class PaymentRequest extends AbstractApi
         $resolver->setDefault('type', 'payment');
         $resolver->setAllowedValues('type', Types\PaymentTypes::getAllowed());
         $resolver->setAllowedValues('sale_reconciliation_identifier', function ($value) {
-            return strlen($value) <= 100;
+            return mb_strlen($value) <= 100;
         });
         $resolver->setAllowedValues('sale_invoice_number', function ($value) {
-            return strlen($value) <= 100;
+            return mb_strlen($value) <= 100;
         });
         $resolver->setAllowedTypes('sales_tax', ['int', 'float']);
         $resolver->setDefault('payment_source', 'eCommerce');
@@ -292,7 +292,7 @@ class PaymentRequest extends AbstractApi
             return $value->serialize();
         });
         $resolver->setAllowedValues('organisation_number', function ($value) {
-            return strlen($value) <= 20;
+            return mb_strlen($value) <= 20;
         });
         $resolver->setAllowedTypes('account_offer', 'bool');
         /** @noinspection PhpUnusedParameterInspection */
@@ -323,7 +323,7 @@ class PaymentRequest extends AbstractApi
     protected function getBasicHeaders()
     {
         $headers = parent::getBasicHeaders();
-        if (strtolower($this->getHttpMethod()) == 'post') {
+        if (mb_strtolower($this->getHttpMethod()) == 'post') {
             $headers['Content-Type'] = 'application/x-www-form-urlencoded';
         }
 
@@ -340,7 +340,7 @@ class PaymentRequest extends AbstractApi
     protected function getUrl(array $options)
     {
         $url = 'createPaymentRequest';
-        if (strtolower($this->getHttpMethod()) == 'get') {
+        if (mb_strtolower($this->getHttpMethod()) == 'get') {
             $query = $this->buildUrl($options);
             $url   = sprintf('%s/?%s', $url, $query);
         }
@@ -368,7 +368,7 @@ class PaymentRequest extends AbstractApi
         $this->doConfigureOptions();
         $headers           = $this->getBasicHeaders();
         $requestParameters = [$this->getHttpMethod(), $this->parseUrl(), $headers];
-        if (strtolower($this->getHttpMethod()) == 'post') {
+        if (mb_strtolower($this->getHttpMethod()) == 'post') {
             $requestParameters[] = $this->getPostOptions();
         }
         $request       = new Request(...$requestParameters);

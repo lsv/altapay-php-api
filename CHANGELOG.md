@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Better handle invalid responses
 - Corrected remaning warning messages
 - Corrected all types in code DocBlocks
+- Correctly handle non-US-ASCII symbols
 
 ### Removed
 - The definedFilters property

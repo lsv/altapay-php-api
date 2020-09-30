@@ -213,7 +213,7 @@ class CurrencyTypes
      */
     public static function currencyCodeExists($code)
     {
-        return array_key_exists(strtoupper($code), self::$currencies);
+        return array_key_exists(mb_strtoupper($code), self::$currencies);
     }
 
     /**

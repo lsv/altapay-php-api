@@ -477,7 +477,7 @@ class Customer extends AbstractSerializer
      */
     public function setGender($gender)
     {
-        switch (strtolower($gender)) {
+        switch (mb_strtolower($gender)) {
             case 'male':
             case 'm':
                 $this->gender = self::MALE;
