@@ -72,33 +72,6 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
 
     }
 
-
-//    public function test_preauth_3dsecure_attempt_fails()
-//    {
-//        $api = new ReservationOfFixedAmount($this->getAuth());
-//        $api
-//            ->setTerminal($this->getTerminal())
-//            ->setShopOrderId((string)time())
-//            ->setAmount(4.66)
-//            ->setCurrency('DKK')
-//            ->setCard($this->generateCard('4140000000000466'))
-//        ;
-//        $api->call();
-//    }
-//
-//    public function test_preauth_3dsecure_attempt_error()
-//    {
-//        $api = new ReservationOfFixedAmount($this->getAuth());
-//        $api
-//            ->setTerminal($this->getTerminal())
-//            ->setShopOrderId((string)time())
-//            ->setAmount(4.67)
-//            ->setCurrency('DKK')
-//            ->setCard($this->generateCard('4180000000000467'))
-//        ;
-//        $api->call();
-//    }
-
     public function test_preauth_declined_by_bank(): void
     {
         $this->expectException(ResponseMessageException::class);

@@ -2,8 +2,8 @@
 
 namespace Altapay\ApiTest\Functional;
 
-use Altapay\Authentication;
 use Altapay\Api\Test\TestAuthentication;
+use Altapay\Authentication;
 
 class TestAuthenticationTest extends AbstractFunctionalTest
 {
@@ -11,7 +11,7 @@ class TestAuthenticationTest extends AbstractFunctionalTest
     public function test_auth(): void
     {
         $response = (new TestAuthentication($this->getAuth()))->call();
-        $this->assertTrue($response);
+        $this->assertEquals('ok', $response);
     }
 
     public function test_auth_fails(): void
