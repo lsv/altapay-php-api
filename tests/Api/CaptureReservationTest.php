@@ -18,32 +18,30 @@ class CaptureReservationTest extends AbstractApiTest
      */
     protected function getCaptureReservation()
     {
-        $client = $this->getClient($mock = new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/capture.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/capture.xml');
 
         return (new CaptureReservation($this->getAuth()))
             ->setClient($client)
         ;
     }
 
-    public function test_capture_reservation()
+    public function test_capture_reservation(): void
     {
         $api = $this->getCaptureReservation();
-        $api->setTransaction(123);
+        $api->setTransaction('123');
         $this->assertInstanceOf(CaptureReservationResponse::class, $api->call());
     }
 
     /**
      * @depends test_capture_reservation
      */
-    public function test_capture_reservation_data()
+    public function test_capture_reservation_data(): void
     {
         $api = $this->getCaptureReservation();
-        $api->setTransaction(123);
-        /** @var CaptureReservationResponse $response */
+        $api->setTransaction('123');
         $response = $api->call();
 
+        $this->assertInstanceOf(CaptureReservationResponse::class, $response);
         $this->assertEquals(0.20, $response->CaptureAmount);
         $this->assertEquals('978', $response->CaptureCurrency);
         $this->assertEquals('Success', $response->Result);
@@ -51,21 +49,21 @@ class CaptureReservationTest extends AbstractApiTest
         $this->assertCount(1, $response->Transactions);
     }
 
-    public function test_capture_reservation_transactions_data()
+    public function test_capture_reservation_transactions_data(): void
     {
         $api = $this->getCaptureReservation();
-        $api->setTransaction(123);
-        /** @var CaptureReservationResponse $response */
+        $api->setTransaction('123');
         $response = $api->call();
-        /** @var Transaction $transaction */
+        $this->assertInstanceOf(CaptureReservationResponse::class, $response);
         $transaction = $response->Transactions[0];
+        $this->assertInstanceOf(Transaction::class, $transaction);
         $this->assertEquals(1, $transaction->TransactionId);
         $this->assertEquals(978, $transaction->MerchantCurrency);
         $this->assertEquals(13.37, $transaction->FraudRiskScore);
         $this->assertEquals(1, $transaction->ReservedAmount);
     }
 
-    public function test_capture_reservation_transaction_request()
+    public function test_capture_reservation_transaction_request(): void
     {
         $transaction = new Transaction();
         $transaction->TransactionId = 456;
@@ -80,7 +78,7 @@ class CaptureReservationTest extends AbstractApiTest
 
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('captureReservation/'), $request->getUri()->getPath());
+        $this->assertEquals($this->getExceptedUri('captureReservation'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
         $this->assertEquals(456, $parts['transaction_id']);
         $this->assertEquals(158, $parts['amount']);
@@ -89,7 +87,7 @@ class CaptureReservationTest extends AbstractApiTest
         $this->assertEquals('5.00', $parts['sales_tax']);
     }
 
-    public function test_capture_reservation_transaction_orderlines()
+    public function test_capture_reservation_transaction_orderlines(): void
     {
         $transaction = new Transaction();
         $transaction->TransactionId = 456;
@@ -101,7 +99,7 @@ class CaptureReservationTest extends AbstractApiTest
 
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('captureReservation/'), $request->getUri()->getPath());
+        $this->assertEquals($this->getExceptedUri('captureReservation'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
 
         $this->assertCount(2, $parts['orderLines']);
@@ -115,7 +113,7 @@ class CaptureReservationTest extends AbstractApiTest
         $this->assertEquals('kg', $line['unitCode']);
     }
 
-    public function test_capture_reservation_transaction_orderlines_object()
+    public function test_capture_reservation_transaction_orderlines_object(): void
     {
         $transaction = new Transaction();
         $transaction->TransactionId = 456;
@@ -127,15 +125,16 @@ class CaptureReservationTest extends AbstractApiTest
 
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('captureReservation/'), $request->getUri()->getPath());
+        $this->assertEquals($this->getExceptedUri('captureReservation'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
 
         $this->assertCount(1, $parts['orderLines']);
     }
 
-    public function test_capture_reservation_transaction_orderlines_randomarray()
+    public function test_capture_reservation_transaction_orderlines_randomarray(): void
     {
-        $this->setExpectedException(\InvalidArgumentException::class, sprintf(
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage(sprintf(
             'orderLines should all be a instance of "%s"',
             OrderLine::class
         ));
@@ -145,13 +144,13 @@ class CaptureReservationTest extends AbstractApiTest
 
         $api = $this->getCaptureReservation();
         $api->setTransaction($transaction);
-        $api->setOrderLines(['myobject']);
+        $api->setOrderLines([new OrderLine()]);
         $api->call();
     }
 
-    public function test_capture_reservation_transaction_handleexception()
+    public function test_capture_reservation_transaction_handleexception(): void
     {
-        $this->setExpectedException(ClientException::class);
+        $this->expectException(ClientException::class);
 
         $transaction = new Transaction();
         $transaction->TransactionId = 456;
@@ -162,7 +161,7 @@ class CaptureReservationTest extends AbstractApiTest
 
         $api = (new CaptureReservation($this->getAuth()))
             ->setClient($client)
-            ->setTransaction(123)
+            ->setTransaction('123')
         ;
         $api->call();
     }

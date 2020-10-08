@@ -4,7 +4,6 @@ namespace Altapay\ApiTest\Api;
 
 use Altapay\Api\Others\Terminals;
 use Altapay\Response\Embeds\Terminal;
-use Altapay\Response\TerminalsResponse as TerminalsDocument;
 use Altapay\Response\TerminalsResponse;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
@@ -17,27 +16,25 @@ class TerminalsTest extends AbstractApiTest
      */
     protected function getTerminals()
     {
-        $client = $this->getClient($mock = new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/terminals.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/terminals.xml');
 
         return (new Terminals($this->getAuth()))
             ->setClient($client)
         ;
     }
 
-    public function test_url()
+    public function test_url(): void
     {
         $api = $this->getTerminals();
         $api->call();
         $this->assertEquals($this->getExceptedUri('getTerminals'), $api->getRawRequest()->getUri()->getPath());
     }
 
-    public function test_header()
+    public function test_header(): void
     {
         $api = $this->getTerminals();
-        /** @var TerminalsDocument $response */
         $response = $api->call();
+        $this->assertInstanceOf(TerminalsResponse::class, $response);
         $this->assertInstanceOf(\DateTime::class, $response->Header->Date);
         $this->assertEquals('07-01-2016', $response->Header->Date->format('d-m-Y'));
         $this->assertEquals('API/getTerminals', $response->Header->Path);
@@ -45,11 +42,11 @@ class TerminalsTest extends AbstractApiTest
         $this->assertEquals('', $response->Header->ErrorMessage);
     }
 
-    public function test_response()
+    public function test_response(): void
     {
         $api = $this->getTerminals();
-        /** @var TerminalsDocument $response */
         $response = $api->call();
+        $this->assertInstanceOf(TerminalsResponse::class, $response);
 
         $this->assertCount(2, $response->Terminals);
         $this->assertEquals('Success', $response->Result);
@@ -58,31 +55,31 @@ class TerminalsTest extends AbstractApiTest
     /**
      * @depends test_response
      */
-    public function test_response_terminal()
+    public function test_response_terminal(): void
     {
         $api = $this->getTerminals();
-        /** @var Terminal $terminal */
-        /** @var TerminalsResponse $response */
         $response = $api->call();
+        $this->assertInstanceOf(TerminalsResponse::class, $response);
         $this->assertCount(2, $response->Terminals);
 
         $terminal = $response->Terminals[0];
-        $this->assertEquals('Altapay Multi-Nature Terminal', $terminal->Title);
+        $this->assertInstanceOf(Terminal::class, $terminal);
+        $this->assertEquals('AltaPay Multi-Nature Terminal', $terminal->Title);
         $this->assertEquals('DK', $terminal->Country);
         $this->assertCount(4, $terminal->Natures);
     }
 
-    public function test_attr_fail()
+    public function test_attr_fail(): void
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage(
             'The attribute "iddonotexists" on element "Title" does not have a setter or a property in class "Altapay\Response\Embeds\Terminal"'
         );
 
+        $client = $this->getXmlClient(__DIR__ . '/Results/terminals-fails.xml');
+
         (new Terminals($this->getAuth()))
-            ->setClient($this->getClient($mock = new MockHandler([
-                new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/terminals-fails.xml'))
-            ])))
+            ->setClient($client)
             ->call()
         ;
     }

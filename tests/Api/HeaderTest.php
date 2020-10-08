@@ -16,23 +16,21 @@ class HeaderTest extends AbstractApiTest
      */
     protected function getapi()
     {
-        $client = $this->getClient(new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/header_error.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/header_error.xml');
 
         return (new FundingList($this->getAuth()))
             ->setClient($client)
         ;
     }
 
-    public function test_get_header_error()
+    public function test_get_header_error(): void
     {
-        $this->setExpectedException(ResponseHeaderException::class);
+        $this->expectException(ResponseHeaderException::class);
         $api = $this->getapi();
         $api->call();
     }
 
-    public function test_get_header_error_data()
+    public function test_get_header_error_data(): void
     {
         try {
             $api = $this->getapi();

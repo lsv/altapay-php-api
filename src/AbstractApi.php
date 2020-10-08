@@ -23,13 +23,14 @@
 
 namespace Altapay;
 
-use Altapay\Exceptions;
 use Altapay\Response\AbstractResponse;
+use Altapay\Response\Embeds\Transaction;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -59,21 +60,14 @@ abstract class AbstractApi
     /**
      * Not resolved options
      *
-     * @var array
+     * @var array<string, mixed>
      */
-    public $unresolvedOptions;
-
-    /**
-     * Filters to go into the url
-     *
-     * @var array
-     */
-    protected $definedFilters = [];
+    public $unresolvedOptions = [];
 
     /**
      * Resolved options
      *
-     * @var array
+     * @var array<string, mixed>
      */
     protected $options;
 
@@ -87,14 +81,14 @@ abstract class AbstractApi
     /**
      * Response of the call
      *
-     * @var Response
+     * @var ResponseInterface
      */
     protected $response;
 
     /**
      * Base url
      *
-     * @var string
+     * @var string|null
      */
     protected $baseUrl;
 
@@ -125,16 +119,16 @@ abstract class AbstractApi
      * Handle response
      *
      * @param Request  $request
-     * @param Response $response
+     * @param ResponseInterface $response
      *
-     * @return AbstractResponse
+     * @return AbstractResponse|string|array<Transaction>
      */
-    abstract protected function handleResponse(Request $request, Response $response);
+    abstract protected function handleResponse(Request $request, ResponseInterface $response);
 
     /**
      * Url to api call
      *
-     * @param array $options Resolved options
+     * @param array<string, mixed> $options Resolved options
      *
      * @return string
      */
@@ -147,7 +141,6 @@ abstract class AbstractApi
      */
     public function __construct(Authentication $authentication)
     {
-        $this->unresolvedOptions = [];
         $this->dispatcher        = new EventDispatcher();
         $this->httpClient        = new Client();
         $this->authentication    = $authentication;
@@ -157,7 +150,7 @@ abstract class AbstractApi
     /**
      * Generate the response
      *
-     * @return mixed
+     * @return AbstractResponse|string|array<Transaction>
      */
     public function call()
     {
@@ -193,7 +186,7 @@ abstract class AbstractApi
      * Get the raw response
      * It is made after call() method has been called
      *
-     * @return Response
+     * @return ResponseInterface
      */
     public function getRawResponse()
     {
@@ -212,6 +205,8 @@ abstract class AbstractApi
 
     /**
      * Resolve options
+     *
+     * @return void
      */
     protected function doConfigureOptions()
     {
@@ -231,34 +226,36 @@ abstract class AbstractApi
     /**
      * Validate response
      *
-     * @param mixed $response
+     * @param AbstractResponse $response
+     *
+     * @return void
      *
      * @throws Exceptions\ResponseHeaderException
      * @throws Exceptions\ResponseMessageException
      */
     protected function validateResponse($response)
     {
-        if ($response instanceof AbstractResponse) {
-            if ($response->Header->ErrorCode != 0) {
-                throw new Exceptions\ResponseHeaderException($response->Header);
-            }
+        if ($response->Header->ErrorCode != 0) {
+            throw new Exceptions\ResponseHeaderException($response->Header);
+        }
 
-            if (property_exists($response, 'MerchantErrorMessage')) {
-                if ($response->MerchantErrorMessage) {
-                    throw new Exceptions\ResponseMessageException($response->MerchantErrorMessage);
-                }
+        if (property_exists($response, 'MerchantErrorMessage')) {
+            if ($response->MerchantErrorMessage) {
+                throw new Exceptions\ResponseMessageException($response->MerchantErrorMessage);
             }
+        }
 
-            if (property_exists($response, 'CardHolderErrorMessage') && property_exists($response, 'CardHolderMessageMustBeShown')) {
-                if ($response->CardHolderMessageMustBeShown) {
-                    throw new Exceptions\ResponseMessageException($response->CardHolderErrorMessage);
-                }
+        if (property_exists($response, 'CardHolderErrorMessage') && property_exists($response, 'CardHolderMessageMustBeShown')) {
+            if ($response->CardHolderMessageMustBeShown) {
+                throw new Exceptions\ResponseMessageException($response->CardHolderErrorMessage);
             }
         }
     }
 
     /**
      * Generate the response
+     *
+     * @return AbstractResponse|string|array<Transaction>
      */
     protected function doResponse()
     {
@@ -276,11 +273,13 @@ abstract class AbstractApi
             $response       = $this->getClient()->send($request);
             $this->response = $response;
             $output         = $this->handleResponse($request, $response);
-            $this->validateResponse($output);
+            if ($output instanceof AbstractResponse) {
+                $this->validateResponse($output);
+            }
 
             return $output;
         } catch (GuzzleHttpClientException $e) {
-            throw new Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse());
+            throw new Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse(), $e);
         }
     }
 
@@ -347,7 +346,7 @@ abstract class AbstractApi
     /**
      * Get the HTTP client
      *
-     * @return Client
+     * @return ClientInterface
      */
     protected function getClient()
     {
@@ -358,6 +357,7 @@ abstract class AbstractApi
      * Resolve transaction
      *
      * @param OptionsResolver $resolver
+     *
      * @return void
      */
     protected function setTransactionResolver(OptionsResolver $resolver)
@@ -368,6 +368,7 @@ abstract class AbstractApi
      * Resolve orderlines
      *
      * @param OptionsResolver $resolver
+     *
      * @return void
      */
     protected function setOrderLinesResolver(OptionsResolver $resolver)
@@ -378,6 +379,7 @@ abstract class AbstractApi
      * Resolve amount option
      *
      * @param OptionsResolver $resolver
+     *
      * @return void
      */
     protected function setAmountResolver(OptionsResolver $resolver)
@@ -388,6 +390,7 @@ abstract class AbstractApi
      * Resolve terminal option
      *
      * @param OptionsResolver $resolver
+     *
      * @return void
      */
     protected function setTerminalResolver(OptionsResolver $resolver)
@@ -398,6 +401,7 @@ abstract class AbstractApi
      * Resolve currency option
      *
      * @param OptionsResolver $resolver
+     *
      * @return void
      */
     protected function setCurrencyResolver(OptionsResolver $resolver)
@@ -408,6 +412,7 @@ abstract class AbstractApi
      * Resolve shop order id
      *
      * @param OptionsResolver $resolver
+     *
      * @return void
      */
     protected function setShopOrderIdResolver(OptionsResolver $resolver)
@@ -418,6 +423,7 @@ abstract class AbstractApi
      * Resolve transaction info option
      *
      * @param OptionsResolver $resolver
+     *
      * @return void
      */
     protected function setTransactionInfoResolver(OptionsResolver $resolver)
@@ -428,6 +434,7 @@ abstract class AbstractApi
      * Resolve amount option
      *
      * @param OptionsResolver $resolver
+     *
      * @return void
      */
     protected function setCustomerInfoResolver(OptionsResolver $resolver)

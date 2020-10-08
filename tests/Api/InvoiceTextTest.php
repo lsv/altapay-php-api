@@ -17,19 +17,17 @@ class InvoiceTextTest extends AbstractApiTest
      */
     protected function getinvoicetext()
     {
-        $client = $this->getClient($mock = new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/invoicetext.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/invoicetext.xml');
 
         return (new InvoiceText($this->getAuth()))
             ->setClient($client)
         ;
     }
 
-    public function test_url()
+    public function test_url(): void
     {
         $trans = new Transaction();
-        $trans->TransactionId = 'my transaction number';
+        $trans->TransactionId = 123;
 
         $api = $this->getinvoicetext();
         $api->setTransaction($trans);
@@ -39,20 +37,20 @@ class InvoiceTextTest extends AbstractApiTest
 
         $this->assertEquals($this->getExceptedUri('getInvoiceText/'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
-        $this->assertEquals('my transaction number', $parts['transaction_id']);
+        $this->assertEquals(123, $parts['transaction_id']);
         $this->assertEquals(35.33, $parts['amount']);
     }
 
-    public function test_object()
+    public function test_object(): void
     {
         $trans = new Transaction();
-        $trans->TransactionId = 'my transaction number';
+        $trans->TransactionId = 123;
 
         $api = $this->getinvoicetext();
         $api->setTransaction($trans);
         $api->setAmount(35.33);
-        /** @var InvoiceTextDocument $response */
         $response = $api->call();
+        $this->assertInstanceOf(InvoiceTextDocument::class, $response);
 
         $this->assertEquals('200', $response->AccountOfferMinimumToPay);
         $this->assertStringStartsWith('Ønsker du å delbetale', $response->AccountOfferText);

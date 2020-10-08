@@ -16,16 +16,14 @@ class QueryGiftcardTest extends AbstractApiTest
      */
     protected function getapi()
     {
-        $client = $this->getClient($mock = new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/querygiftcard.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/querygiftcard.xml');
 
         return (new QueryGiftcard($this->getAuth()))
             ->setClient($client)
         ;
     }
 
-    public function test_route()
+    public function test_route(): void
     {
         $card = new Giftcard('account', 'provider', '1234-1234');
         $api = $this->getapi();
@@ -42,14 +40,14 @@ class QueryGiftcardTest extends AbstractApiTest
         $this->assertEquals('1234-1234', $parts['giftcard']['token']);
     }
 
-    public function test_response()
+    public function test_response(): void
     {
         $card = new Giftcard('account', 'provider', '1234-1234');
         $api = $this->getapi();
         $api->setTerminal('my terminal');
         $api->setGiftcard($card);
-        /** @var GiftcardResponse $response */
         $response = $api->call();
+        $this->assertInstanceOf(GiftcardResponse::class, $response);
 
         $this->assertEquals('Success', $response->Result);
         $this->assertCount(2, $response->Accounts);

@@ -10,14 +10,14 @@ use Altapay\Request\Customer;
 class CustomerTest extends AbstractTest
 {
 
-    public function test_customer()
+    public function test_customer(): void
     {
         $billingAddress = new Address();
         $shippingAddress = new Address();
 
         $customer = new Customer($billingAddress);
         $customer->setShipping($shippingAddress);
-        $customer->setOrganisationNumber(123);
+        $customer->setOrganisationNumber('123');
         $customer->setPersonalIdentifyNumber('20304050');
         $customer->setGender('f');
         $serialized = $customer->serialize();
@@ -44,9 +44,10 @@ class CustomerTest extends AbstractTest
 
     }
 
-    public function test_gender_exception()
+    public function test_gender_exception(): void
     {
-        $this->setExpectedException(Exception::class, 'setGender() only allows the value (m, male, f or female)');
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('setGender() only allows the value (m, male, f or female)');
         $billingAddress = new Address();
         $customer = new Customer($billingAddress);
         $customer->setGender('foo');

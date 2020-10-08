@@ -51,15 +51,15 @@ class Callback
      */
     public function call()
     {
-        $xml = simplexml_load_string($this->postedData['xml']);
-        /** @var CallbackResponse $response */
-        $response = ResponseSerializer::serialize(CallbackResponse::class, $xml->Body, false, $xml->Header);
+        $xml = new \SimpleXMLElement($this->postedData['xml']);
+
+        $response = ResponseSerializer::serialize(CallbackResponse::class, $xml->Body, $xml->Header);
         if (isset($this->postedData['shop_orderid'])) {
             $response->shopOrderId = $this->postedData['shop_orderid'];
         }
 
         if (isset($this->postedData['currency'])) {
-            $response->currency = $this->postedData['currency'];
+            $response->currency = (int)$this->postedData['currency'];
         }
 
         if (isset($this->postedData['type'])) {
@@ -91,7 +91,7 @@ class Callback
         }
 
         if (isset($this->postedData['require_capture'])) {
-            $response->requireCapture = $this->postedData['require_capture'];
+            $response->requireCapture = (bool)$this->postedData['require_capture'];
         }
 
         if (isset($this->postedData['payment_status'])) {

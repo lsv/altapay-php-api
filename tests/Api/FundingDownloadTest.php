@@ -15,16 +15,14 @@ class FundingDownloadTest extends AbstractApiTest
      */
     protected function getFundingDownload()
     {
-        $client = $this->getClient($mock = new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/fundingdownload.txt'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/fundingdownload.txt');
 
         return (new FundingDownload($this->getAuth()))
             ->setClient($client)
         ;
     }
 
-    public function test_funding_download_with_link()
+    public function test_funding_download_with_link(): void
     {
         $api = $this->getFundingDownload();
         $api->setFundingDownloadLink('https://myshop.altapaysecure.com/merchant/API/fundingDownload?id=32');
@@ -36,7 +34,7 @@ class FundingDownloadTest extends AbstractApiTest
         $this->assertEquals(32, $parts['id']);
     }
 
-    public function test_funding_download_with_object()
+    public function test_funding_download_with_object(): void
     {
         $funding = new Funding();
         $funding->DownloadLink = 'https://thisismyshop.altapaysecure.com/merchant/API/fundingDownload?id=99';
@@ -51,11 +49,12 @@ class FundingDownloadTest extends AbstractApiTest
         $this->assertEquals(99, $parts['id']);
     }
 
-    public function test_funding_download()
+    public function test_funding_download(): void
     {
         $api = $this->getFundingDownload();
         $api->setFundingDownloadLink('https://myshop.altapaysecure.com/merchant/API/fundingDownload?id=32');
         $response = $api->call();
+        $this->assertInternalType('string', $response);
         $this->assertStringStartsWith('Date;', $response);
 
         $csv = $api->__toArray(true);

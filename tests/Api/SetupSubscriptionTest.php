@@ -16,25 +16,21 @@ class SetupSubscriptionTest extends AbstractApiTest
      */
     protected function getapi()
     {
-        $client = $this->getClient($mock = new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/reservationoffixedamount.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/reservationoffixedamount.xml');
 
         return (new SetupSubscription($this->getAuth()))
             ->setClient($client)
         ;
     }
 
-    public function test_charge_subscription_error()
+    public function test_charge_subscription_error(): void
     {
-        $this->setExpectedException(
-            ResponseMessageException::class,
+        $this->expectException(ResponseMessageException::class);
+        $this->expectExceptionMessage(
             'TestAcquirer[pan=1466 or amount=14660]'
         );
 
-        $client = $this->getClient($mock = new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/setupsubscription_fail.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/setupsubscription_fail.xml');
 
         $api = (new SetupSubscription($this->getAuth()))
             ->setClient($client)
@@ -47,7 +43,7 @@ class SetupSubscriptionTest extends AbstractApiTest
         $api->call();
     }
 
-    public function test_url()
+    public function test_url(): void
     {
         $api = $this->getapi();
         $api->setTerminal('my terminal');
@@ -67,7 +63,7 @@ class SetupSubscriptionTest extends AbstractApiTest
         $this->assertEquals(155.23, $parts['surcharge']);
     }
 
-    public function test_response()
+    public function test_response(): void
     {
         $api = $this->getapi();
         $api->setTerminal('my terminal');
@@ -75,7 +71,6 @@ class SetupSubscriptionTest extends AbstractApiTest
         $api->setCurrency(957);
         $api->setShopOrderId('order id');
 
-        /** @var SetupSubscriptionResponse $response */
         $response = $api->call();
 
         $this->assertInstanceOf(SetupSubscriptionResponse::class, $response);

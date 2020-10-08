@@ -8,6 +8,11 @@ class OrderLineRequestTestSerializer extends OrderLine
 {
     public function serialize()
     {
-        return $this->get($this, 'foobar');
+        $result = $this->get($this, 'foobar');
+        if ($this->get($this, 'foobar') === false) {
+            throw new \Exception('Got false');
+        }
+
+        return $result;
     }
 }

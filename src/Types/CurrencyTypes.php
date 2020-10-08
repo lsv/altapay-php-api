@@ -208,15 +208,17 @@ class CurrencyTypes
 
     /**
      * @param string $code
+     *
      * @return bool
      */
     public static function currencyCodeExists($code)
     {
-        return array_key_exists(strtoupper($code), self::$currencies);
+        return array_key_exists(mb_strtoupper($code), self::$currencies);
     }
 
     /**
      * @param int $number
+     *
      * @return bool
      */
     public static function currencyNumberExists($number)

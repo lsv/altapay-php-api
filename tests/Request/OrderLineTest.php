@@ -8,9 +8,9 @@ use Altapay\Request\OrderLine;
 class OrderLineTest extends AbstractTest
 {
 
-    public function test_orderline()
+    public function test_orderline(): void
     {
-        $line = new OrderLine('description', 12, 2, 12.50);
+        $line = new OrderLine('description', '12', 2, 12.50);
         $line->setGoodsType('item');
         $line->taxAmount = 4.75;
         $line->taxPercent = 38;
@@ -47,6 +47,9 @@ class OrderLineTest extends AbstractTest
 
     }
 
+    /**
+     * @return array<int, array<int, mixed>>
+     */
     public function dataProvider()
     {
         return [
@@ -62,26 +65,29 @@ class OrderLineTest extends AbstractTest
      * @param string $type
      * @param bool $exception
      */
-    public function test_can_not_set_goodstypes($type, $exception = false)
+    public function test_can_not_set_goodstypes($type, $exception = false): void
     {
         if ($exception) {
-            $this->setExpectedException(
-                \InvalidArgumentException::class,
+            $this->expectException(\InvalidArgumentException::class);
+            $this->expectExceptionMessage(
                 'goodsType should be one of "shipment|handling|item" you have selected "' . $type . '"'
             );
         }
 
-        $line = new OrderLine('description', 12, 2, 12.50);
+        $line = new OrderLine('description', '12', 2, 12.50);
         $line->setGoodsType($type);
         $s = $line->serialize();
 
         $this->assertEquals($type, $s['goodsType']);
     }
 
-    public function test_serializer()
+    public function test_serializer(): void
     {
-        $line = new OrderLineRequestTestSerializer('description', 12, 2, 12.50);
-        $this->assertFalse($line->serialize());
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('Got false');
+
+        $line = new OrderLineRequestTestSerializer('description', '12', 2, 12.50);
+        $line->serialize();
     }
 
 }

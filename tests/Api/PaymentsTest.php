@@ -17,33 +17,39 @@ use GuzzleHttp\Psr7\Response;
 
 class PaymentsTest extends AbstractApiTest
 {
+    /**
+     * @return Transaction[]
+     */
     protected function getMultiplePaymentTransaction()
     {
-        $client = $this->getClient($mock = new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/payments.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/payments.xml');
 
         $api = (new Payments($this->getAuth()))
             ->setClient($client)
         ;
-        return $api->call();
+        $result = $api->call();
+        $this->assertInternalType('array', $result);
+        return $result;
     }
 
+    /**
+     * @return Transaction[]
+     */
     protected function getSinglePaymentTransaction()
     {
-        $client = $this->getClient(new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/payment.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/payment.xml');
 
         $api = (new Payments($this->getAuth()))
             ->setClient($client)
         ;
-        return $api->call();
+        $result = $api->call();
+        $this->assertInternalType('array', $result);
+        return $result;
     }
 
-    public function test_payments_exception()
+    public function test_payments_exception(): void
     {
-        $this->setExpectedException(ClientException::class);
+        $this->expectException(ClientException::class);
 
         $client = $this->getClient($mock = new MockHandler([
             new Response(400)
@@ -55,11 +61,9 @@ class PaymentsTest extends AbstractApiTest
         ;
     }
 
-    public function test_payments_routing()
+    public function test_payments_routing(): void
     {
-        $client = $this->getClient($mock = new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/payments.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/payments.xml');
 
         $api = (new Payments($this->getAuth()))
             ->setClient($client)
@@ -84,14 +88,12 @@ class PaymentsTest extends AbstractApiTest
         $this->assertEquals('mypaymentid', $parts['payment_id']);
     }
 
-    public function test_payments_transaction_object()
+    public function test_payments_transaction_object(): void
     {
-        $client = $this->getClient($mock = new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/payments.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/payments.xml');
 
         $trans = new Transaction();
-        $trans->TransactionId = 'my trans number';
+        $trans->TransactionId = 123;
 
         $api = (new Payments($this->getAuth()))
             ->setClient($client)
@@ -102,15 +104,15 @@ class PaymentsTest extends AbstractApiTest
         $this->assertEquals($this->getExceptedUri('payments/'), $api->getRawRequest()->getUri()->getPath());
         parse_str($api->getRawRequest()->getUri()->getQuery(), $parts);
 
-        $this->assertEquals('my trans number', $parts['transaction_id']);
+        $this->assertEquals(123, $parts['transaction_id']);
     }
 
-    public function test_single_payment_transaction_count()
+    public function test_single_payment_transaction_count(): void
     {
         $this->assertCount(1, $this->getSinglePaymentTransaction());
     }
 
-    public function test_multiple_payment_transaction_count()
+    public function test_multiple_payment_transaction_count(): void
     {
         $this->assertCount(2, $this->getMultiplePaymentTransaction());
     }
@@ -118,10 +120,10 @@ class PaymentsTest extends AbstractApiTest
     /**
      * @depends test_multiple_payment_transaction_count
      */
-    public function test_multiple_payment_transaction_data()
+    public function test_multiple_payment_transaction_data(): void
     {
-        /** @var Transaction $data */
         $data = $this->getMultiplePaymentTransaction()[0];
+        $this->assertInstanceOf(Transaction::class, $data);
 
         $this->assertEquals(1, $data->TransactionId);
         $this->assertEquals('ccc1479c-37f9-4962-8d2c-662d75117e9d', $data->PaymentId);
@@ -133,8 +135,8 @@ class PaymentsTest extends AbstractApiTest
         $this->assertEquals('Merchant', $data->LiableForChargeback);
         $this->assertEquals('4f244dec4907eba0f6432e53b17a60ebcf51365e', $data->BlacklistToken);
         $this->assertEquals('myorderid', $data->ShopOrderId);
-        $this->assertEquals('Altapay Shop', $data->Shop);
-        $this->assertEquals('Altapay Test Terminal', $data->Terminal);
+        $this->assertEquals('AltaPay Shop', $data->Shop);
+        $this->assertEquals('AltaPay Test Terminal', $data->Terminal);
         $this->assertEquals('captured', $data->TransactionStatus);
         $this->assertEquals('NONE', $data->ReasonCode);
         $this->assertEquals('978', $data->MerchantCurrency);
@@ -170,10 +172,10 @@ class PaymentsTest extends AbstractApiTest
     /**
      * @depends test_multiple_payment_transaction_data
      */
-    public function test_multiple_payment_paymentnatureservice_data()
+    public function test_multiple_payment_paymentnatureservice_data(): void
     {
-        /** @var PaymentNatureService $data */
         $data = $this->getMultiplePaymentTransaction()[0]->PaymentNatureService;
+        $this->assertInstanceOf(PaymentNatureService::class, $data);
 
         $this->assertEquals('TestAcquirer', $data->name);
         $this->assertTrue($data->SupportsRefunds);
@@ -182,6 +184,9 @@ class PaymentsTest extends AbstractApiTest
         $this->assertFalse($data->SupportsMultipleRefunds);
     }
 
+    /**
+     * @return array<int, array<int, mixed>>
+     */
     public function paymentinfosDataprovider()
     {
         return [
@@ -189,7 +194,7 @@ class PaymentsTest extends AbstractApiTest
                     0, 'Form_Created_At', '2010-09-28 12:34:56'
                 ],
                 [
-                    1, 'Form_Provider', 'Altapay Test Form'
+                    1, 'Form_Provider', 'AltaPay Test Form'
                 ],
                 [
                     2, 'Merchant_Provided_Info', 'Some info by merchant'
@@ -204,9 +209,8 @@ class PaymentsTest extends AbstractApiTest
      * @param string $name
      * @param string $value
      */
-    public function test_multiple_payment_paymentinfos_data($line, $name, $value)
+    public function test_multiple_payment_paymentinfos_data($line, $name, $value): void
     {
-        /** @var PaymentInfo[] $datas */
         $datas = $this->getMultiplePaymentTransaction()[0]->PaymentInfos;
 
         $this->assertEquals($name, $datas[$line]->name, 'checking name');
@@ -216,9 +220,8 @@ class PaymentsTest extends AbstractApiTest
     /**
      * @depends test_multiple_payment_transaction_data
      */
-    public function test_multiple_payment_customerinfo_data()
+    public function test_multiple_payment_customerinfo_data(): void
     {
-        /** @var CustomerInfo $data */
         $data = $this->getMultiplePaymentTransaction()[0]->CustomerInfo;
 
         $this->assertStringStartsWith('Mozilla/5.0', $data->UserAgent);
@@ -229,15 +232,15 @@ class PaymentsTest extends AbstractApiTest
         $this->assertEquals('12345678', $data->OrganisationNumber);
         $this->assertInstanceOf(Country::class, $data->CountryOfOrigin);
 
-        /** @var Country $country */
         $country = $data->CountryOfOrigin;
+        $this->assertInstanceOf(Country::class, $country);
         $this->assertEquals('DK', $country->Country);
         $this->assertEquals('BillingAddress', $country->Source);
 
         $this->assertInstanceOf(Address::class, $data->BillingAddress);
 
-        /** @var Address $address */
         $address = $data->BillingAddress;
+        $this->assertInstanceOf(Address::class, $address);
         $this->assertEquals('Palle', $address->Firstname);
         $this->assertEquals('Simonsen', $address->Lastname);
         $this->assertEquals('Rosenkæret 13', $address->Address);
@@ -247,8 +250,8 @@ class PaymentsTest extends AbstractApiTest
 
         $this->assertInstanceOf(Address::class, $data->ShippingAddress);
 
-        /** @var Address $address */
         $address = $data->ShippingAddress;
+        $this->assertInstanceOf(Address::class, $address);
         $this->assertNull($address->Firstname);
         $this->assertNull($address->Lastname);
         $this->assertNull($address->Address);
@@ -262,10 +265,10 @@ class PaymentsTest extends AbstractApiTest
     /**
      * @depends      test_multiple_payment_transaction_data
      */
-    public function test_multiple_payment_reconciliationidentifiers_data()
+    public function test_multiple_payment_reconciliationidentifiers_data(): void
     {
-        /** @var ReconciliationIdentifier $data */
         $data = $this->getMultiplePaymentTransaction()[0]->ReconciliationIdentifiers[0];
+        $this->assertInstanceOf(ReconciliationIdentifier::class, $data);
 
         $this->assertEquals('f4e2533e-c578-4383-b075-bc8a6866784a', $data->Id);
         $this->assertEquals(1.00, $data->Amount);

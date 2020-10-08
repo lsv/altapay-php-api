@@ -5,11 +5,12 @@ namespace Altapay\ApiTest\Api;
 use Altapay\Api\Ecommerce\Callback;
 use Altapay\Response\CallbackResponse;
 
-class CallbackTest extends \PHPUnit_Framework_TestCase
+class CallbackTest extends \PHPUnit\Framework\TestCase
 {
+    /** @var array<string, string> */
     private $data;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->data = [
             'shop_orderid' => '000000022',
@@ -157,7 +158,7 @@ XML
         ];
     }
 
-    public function test_can_handle_callback()
+    public function test_can_handle_callback(): void
     {
         $call = new Callback($this->data);
         $response = $call->call();

@@ -27,5 +27,6 @@ use Altapay\Response\AbstractResponse;
 
 class Shop extends AbstractResponse
 {
+    /** @var string */
     public $Shop;
 }

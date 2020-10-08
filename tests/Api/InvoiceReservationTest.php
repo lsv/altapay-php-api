@@ -15,25 +15,23 @@ class InvoiceReservationTest extends AbstractApiTest
      */
     protected function getapi()
     {
-        $client = $this->getClient($mock = new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/invoicereservation.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/invoicereservation.xml');
 
         return (new InvoiceReservation($this->getAuth()))
             ->setClient($client)
         ;
     }
 
-    public function test_missing_all_options()
+    public function test_missing_all_options(): void
     {
-        $this->setExpectedException(
-            MissingOptionsException::class,
+        $this->expectException(MissingOptionsException::class);
+        $this->expectExceptionMessage(
             'The required options "amount", "currency", "shop_orderid", "terminal" are missing.'
         );
         $this->getapi()->call();
     }
 
-    public function test_url()
+    public function test_url(): void
     {
         $api = $this->getapi();
         $api->setTerminal('my terminal');
@@ -51,7 +49,7 @@ class InvoiceReservationTest extends AbstractApiTest
         $this->assertEquals(957, $parts['currency']);
     }
 
-    public function test_options()
+    public function test_options(): void
     {
         $api = $this->getapi();
         $api->setTerminal('my terminal');

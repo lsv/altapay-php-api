@@ -9,16 +9,35 @@ use Altapay\ApiTest\AbstractTest;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Response;
 
 abstract class AbstractApiTest extends AbstractTest
 {
 
+    /**
+     * @return Client
+     */
     protected function getClient(MockHandler $mock)
     {
         $handler = HandlerStack::create($mock);
         return new Client(['handler' => $handler]);
     }
 
+    protected function getXmlClient(string $xmlPath): Client
+    {
+        return $this->getClient(new MockHandler([
+            new Response(
+                200,
+                ['text-content' => 'application/xml'],
+                file_get_contents($xmlPath) ?: null
+            )
+        ]));
+    }
+
+    /**
+     * @param string $uri
+     * @return string
+     */
     protected function getExceptedUri($uri)
     {
         return '/merchant/API/' . $uri;

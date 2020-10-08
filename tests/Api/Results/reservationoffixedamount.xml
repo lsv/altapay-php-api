@@ -20,7 +20,7 @@
                 <BlacklistToken>4f244dec4907eba0f6432e53b17a60ebcf51365e</BlacklistToken>
                 <ShopOrderId>myorder123</ShopOrderId>
                 <Shop>Altapay Functional Test Shop</Shop>
-                <Terminal>Altapay Test Terminal</Terminal>
+                <Terminal>AltaPay Test Terminal</Terminal>
                 <TransactionStatus>preauth</TransactionStatus>
                 <ReasonCode>NONE</ReasonCode>
                 <MerchantCurrency>978</MerchantCurrency>

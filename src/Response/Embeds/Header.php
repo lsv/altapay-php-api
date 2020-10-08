@@ -35,16 +35,20 @@ class Header extends AbstractResponse
      */
     public $Date;
 
+    /** @var string */
     public $Path;
 
+    /** @var int */
     public $ErrorCode;
 
+    /** @var string */
     public $ErrorMessage;
 
     /**
      * Set date
      *
      * @param string $date
+     *
      * @return $this
      */
     public function setDate($date)

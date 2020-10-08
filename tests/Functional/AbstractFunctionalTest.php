@@ -14,7 +14,7 @@ abstract class AbstractFunctionalTest extends AbstractTest
     /**
      * @return void
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         if (! file_exists(__DIR__ . '/../../.env.php')) {
             $this->markTestSkipped(
@@ -55,13 +55,17 @@ abstract class AbstractFunctionalTest extends AbstractTest
         return $this->generateCard(self::VALID_VISA_CARD_NUMBER);
     }
 
+    /**
+     * @param string $number
+     * @return Card
+     */
     protected function generateCard($number)
     {
         return new Card(
             $number,
             (new \DateTime())->format('m'),
             (new \DateTime())->add(new \DateInterval('P1Y'))->format('Y'),
-            123
+            '123'
         );
     }
 

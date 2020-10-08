@@ -22,19 +22,17 @@ class PaymentRequestTest extends AbstractApiTest
      */
     protected function getapi()
     {
-        $client = $this->getClient($mock = new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/paymentrequest.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/paymentrequest.xml');
 
         return (new PaymentRequest($this->getAuth()))
             ->setClient($client)
         ;
     }
 
-    public function test_required_options()
+    public function test_required_options(): void
     {
-        $this->setExpectedException(
-            MissingOptionsException::class,
+        $this->expectException(MissingOptionsException::class);
+        $this->expectExceptionMessage(
             'The required options "amount", "currency", "shop_orderid", "terminal" are missing.'
         );
 
@@ -42,7 +40,7 @@ class PaymentRequestTest extends AbstractApiTest
         $api->call();
     }
 
-    public function test_required_url()
+    public function test_required_url(): void
     {
         $api = $this->getapi();
         $api->setAmount(200.50);
@@ -52,7 +50,7 @@ class PaymentRequestTest extends AbstractApiTest
         $api->call();
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('createPaymentRequest/'), $request->getUri()->getPath());
+        $this->assertEquals($this->getExceptedUri('createPaymentRequest'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
         $this->assertEquals('my terminal', $parts['terminal']);
         $this->assertEquals('order id', $parts['shop_orderid']);
@@ -60,7 +58,7 @@ class PaymentRequestTest extends AbstractApiTest
         $this->assertEquals(957, $parts['currency']);
     }
 
-    public function test_options_url()
+    public function test_options_url(): void
     {
         $api = $this->getapi();
         $api->setAmount(200.50);
@@ -87,15 +85,12 @@ class PaymentRequestTest extends AbstractApiTest
         $api->call();
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('createPaymentRequest/'), $request->getUri()->getPath());
+        $this->assertEquals($this->getExceptedUri('createPaymentRequest'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
 
-        foreach(PaymentRequest::REQUIRED_QUERY_PARAMS as $QUERY_PARAM){
-            $this->assertArrayHasKey($QUERY_PARAM,$parts,'Create Payment Request is missing the "'.$QUERY_PARAM.'" query parameter.');
-        }
         $this->assertEquals('da', $parts['language']);
-        $this->assertTrue(is_numeric($parts['amount']),'Amount is not numeric');
-        $this->assertTrue(is_numeric($parts['currency']),'Currency is not numeric');
+        $this->assertIsNumeric($parts['amount'],'Amount is not numeric');
+        $this->assertIsNumeric($parts['currency'],'Currency is not numeric');
         $this->assertEquals('my terminal', $parts['terminal']);
         $this->assertEquals('order id', $parts['shop_orderid']);
         $this->assertEquals(200.50, ((float)$parts['amount']));
@@ -128,7 +123,7 @@ class PaymentRequestTest extends AbstractApiTest
         $this->assertEquals('kg', $line['unitCode']);
 
         // Config
-        $this->assertTrue(is_array($parts['config']));
+        $this->assertIsArray($parts['config']);
         $config = $parts['config'];
         $this->assertEquals(sprintf('%s/%s', self::CONFIG_URL, 'form'), $config['callback_form']);
         $this->assertEquals(sprintf('%s/%s', self::CONFIG_URL, 'ok'), $config['callback_ok']);
@@ -156,14 +151,13 @@ class PaymentRequestTest extends AbstractApiTest
         $this->assertEquals('2016-11-25', $parts['customer_created_date']);
     }
 
-    public function test_response()
+    public function test_response(): void
     {
         $api = $this->getapi();
         $api->setAmount(200.50);
         $api->setCurrency(957);
         $api->setShopOrderId('order id');
         $api->setTerminal('my terminal');
-        /** @var PaymentRequestResponse $response */
         $response = $api->call();
 
         $this->assertInstanceOf(PaymentRequestResponse::class, $response);
@@ -173,7 +167,7 @@ class PaymentRequestTest extends AbstractApiTest
         $this->assertEquals('https://gateway.altapaysecure.com/eCommerce.php/API/embeddedPaymentWindow?pid=2349494a-6adf-49f7-8096-2125a969e104', $response->DynamicJavascriptUrl);
     }
 
-    public function test_language_types()
+    public function test_language_types(): void
     {
         $this->allowedTypes(
             LanguageTypes::class,
@@ -182,6 +176,9 @@ class PaymentRequestTest extends AbstractApiTest
         );
     }
 
+    /**
+     * @return Config
+     */
     protected function getConfig()
     {
         $config = new Config();
@@ -202,7 +199,7 @@ class PaymentRequestTest extends AbstractApiTest
      * @param string $key
      * @param string $setter
      */
-    private function allowedTypes($class, $key, $setter)
+    private function allowedTypes($class, $key, $setter): void
     {
         foreach ($class::getAllowed() as $type) {
             $api = $this->getapi();
@@ -227,10 +224,10 @@ class PaymentRequestTest extends AbstractApiTest
      * @param string $key
      * @param string $method
      */
-    private function disallowedTypes($class, $key, $method)
+    private function disallowedTypes($class, $key, $method): void
     {
-        $this->setExpectedException(
-            InvalidOptionsException::class,
+        $this->expectException(InvalidOptionsException::class);
+        $this->expectExceptionMessage(
             sprintf(
                 'The option "%s" with value "not allowed type" is invalid. Accepted values are: "%s".',
                 $key,
