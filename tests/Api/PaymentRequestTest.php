@@ -52,6 +52,10 @@ class PaymentRequestTest extends AbstractApiTest
 
         $this->assertEquals($this->getExceptedUri('createPaymentRequest'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
+        if(strtolower($request->getMethod()) == 'post'){
+            unset($parts);
+            parse_str($request->getBody()->getContents(),$parts);
+        }
         $this->assertEquals('my terminal', $parts['terminal']);
         $this->assertEquals('order id', $parts['shop_orderid']);
         $this->assertEquals(200.50, $parts['amount']);
@@ -87,7 +91,10 @@ class PaymentRequestTest extends AbstractApiTest
 
         $this->assertEquals($this->getExceptedUri('createPaymentRequest'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
-
+        if(strtolower($request->getMethod()) == 'post'){
+            unset($parts);
+            parse_str($request->getBody()->getContents(),$parts);
+        }
         $this->assertEquals('da', $parts['language']);
         $this->assertIsNumeric($parts['amount'],'Amount is not numeric');
         $this->assertIsNumeric($parts['currency'],'Currency is not numeric');
@@ -95,11 +102,6 @@ class PaymentRequestTest extends AbstractApiTest
         $this->assertEquals('order id', $parts['shop_orderid']);
         $this->assertEquals(200.50, ((float)$parts['amount']));
         $this->assertEquals(957, ((int)$parts['currency']));
-        if(strtolower($request->getMethod()) == 'post'){
-            unset($parts);
-            parse_str($request->getBody()->getContents(),$parts);
-        }
-
         $this->assertEquals('payment', $parts['type']);
         $this->assertEquals($cctoken, $parts['ccToken']);
         $this->assertEquals('identifier', $parts['sale_reconciliation_identifier']);
@@ -211,8 +213,11 @@ class PaymentRequestTest extends AbstractApiTest
             $api->call();
             $request = $api->getRawRequest();
             parse_str($request->getUri()->getQuery(), $parts);
+            if(strtolower($request->getMethod()) == 'post'){
+                unset($parts);
+                parse_str($request->getBody()->getContents(),$parts);
+            }
             $this->assertEquals($type, $parts[$key]);
-
             $this->assertTrue($class::isAllowed($type));
         }
 

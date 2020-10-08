@@ -86,6 +86,10 @@ class RefundCapturedReservationTest extends AbstractApiTest
 
         $this->assertEquals($this->getExceptedUri('refundCapturedReservation'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
+        if(strtolower($request->getMethod()) == 'post'){
+            unset($parts);
+            parse_str($request->getBody()->getContents(),$parts);
+        }
         $this->assertEquals(456, $parts['transaction_id']);
         $this->assertEquals(158, $parts['amount']);
         $this->assertEquals('myidentifier', $parts['reconciliation_identifier']);
@@ -121,7 +125,10 @@ class RefundCapturedReservationTest extends AbstractApiTest
 
         $this->assertEquals($this->getExceptedUri('refundCapturedReservation'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
-
+        if(strtolower($request->getMethod()) == 'post'){
+            unset($parts);
+            parse_str($request->getBody()->getContents(),$parts);
+        }
         $this->assertCount(2, $parts['orderLines']);
         $line = $parts['orderLines'][1];
 
@@ -150,28 +157,11 @@ class RefundCapturedReservationTest extends AbstractApiTest
 
         $this->assertEquals($this->getExceptedUri('refundCapturedReservation'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
-
+        if(strtolower($request->getMethod()) == 'post'){
+            unset($parts);
+            parse_str($request->getBody()->getContents(),$parts);
+        }
         $this->assertCount(1, $parts['orderLines']);
-    }
-
-    /**
-     * @depends test_refund_reservation
-     */
-    public function test_capture_refund_transaction_orderlines_randomarray(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage(sprintf(
-            'orderLines should all be a instance of "%s"',
-            OrderLine::class
-        ));
-
-        $transaction = new Transaction();
-        $transaction->TransactionId = 456;
-
-        $api = $this->getRefundCaptureReservation();
-        $api->setTransaction($transaction);
-        $api->setOrderLines([new OrderLine()]);
-        $api->call();
     }
 
     public function test_capture_refund_transaction_handleexception(): void

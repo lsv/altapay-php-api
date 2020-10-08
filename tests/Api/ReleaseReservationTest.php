@@ -56,21 +56,33 @@ class ReleaseReservationTest extends AbstractApiTest
 
         $this->assertEquals($this->getExceptedUri('releaseReservation'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
+        if(strtolower($request->getMethod()) == 'post'){
+            unset($parts);
+            parse_str($request->getBody()->getContents(),$parts);
+        }
         $this->assertEquals(456, $parts['transaction_id']);
 
         $api = $this->getReleaseReservation();
-        $api->setTransaction('helloworld');
+        $api->setTransaction('123');
         $api->call();
         $request = $api->getRawRequest();
         parse_str($request->getUri()->getQuery(), $parts);
-        $this->assertEquals('helloworld', $parts['transaction_id']);
+        if(strtolower($request->getMethod()) == 'post'){
+            unset($parts);
+            parse_str($request->getBody()->getContents(),$parts);
+        }
+        $this->assertEquals(123, $parts['transaction_id']);
 
         $api = $this->getReleaseReservation();
-        $api->setTransaction('my trans id has spaces');
+        $api->setTransaction('152');
         $api->call();
         $request = $api->getRawRequest();
         parse_str($request->getUri()->getQuery(), $parts);
-        $this->assertEquals('my trans id has spaces', $parts['transaction_id']);
+        if(strtolower($request->getMethod()) == 'post'){
+            unset($parts);
+            parse_str($request->getBody()->getContents(),$parts);
+        }
+        $this->assertEquals(152, $parts['transaction_id']);
     }
 
     public function test_capture_reservation_transaction_handleexception(): void
