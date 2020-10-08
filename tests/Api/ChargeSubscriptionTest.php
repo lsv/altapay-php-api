@@ -20,8 +20,7 @@ class ChargeSubscriptionTest extends AbstractApiTest
         $client = $this->getXmlClient(__DIR__ . '/Results/setupsubscription.xml');
 
         return (new ChargeSubscription($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
     }
 
     public function test_charge_subscription(): void
@@ -46,7 +45,7 @@ class ChargeSubscriptionTest extends AbstractApiTest
 
     public function test_charge_subscription_querypath(): void
     {
-        $transaction = new Transaction();
+        $transaction                = new Transaction();
         $transaction->TransactionId = 456;
 
         $api = $this->getChargeSubscription();
@@ -81,7 +80,7 @@ class ChargeSubscriptionTest extends AbstractApiTest
     {
         $this->expectException(ClientException::class);
 
-        $transaction = new Transaction();
+        $transaction                = new Transaction();
         $transaction->TransactionId = 456;
 
         $client = $this->getClient($mock = new MockHandler([
@@ -90,8 +89,7 @@ class ChargeSubscriptionTest extends AbstractApiTest
 
         $api = (new ChargeSubscription($this->getAuth()))
             ->setClient($client)
-            ->setTransaction('123')
-        ;
+            ->setTransaction('123');
         $api->call();
     }
 }

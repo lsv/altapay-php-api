@@ -25,8 +25,7 @@ class PaymentRequestTest extends AbstractApiTest
         $client = $this->getXmlClient(__DIR__ . '/Results/paymentrequest.xml');
 
         return (new PaymentRequest($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
     }
 
     public function test_required_options(): void
@@ -52,9 +51,9 @@ class PaymentRequestTest extends AbstractApiTest
 
         $this->assertEquals($this->getExceptedUri('createPaymentRequest'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
-        if(strtolower($request->getMethod()) == 'post'){
+        if (strtolower($request->getMethod()) == 'post') {
             unset($parts);
-            parse_str($request->getBody()->getContents(),$parts);
+            parse_str($request->getBody()->getContents(), $parts);
         }
         $this->assertEquals('my terminal', $parts['terminal']);
         $this->assertEquals('order id', $parts['shop_orderid']);
@@ -91,13 +90,13 @@ class PaymentRequestTest extends AbstractApiTest
 
         $this->assertEquals($this->getExceptedUri('createPaymentRequest'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
-        if(strtolower($request->getMethod()) == 'post'){
+        if (strtolower($request->getMethod()) == 'post') {
             unset($parts);
-            parse_str($request->getBody()->getContents(),$parts);
+            parse_str($request->getBody()->getContents(), $parts);
         }
         $this->assertEquals('da', $parts['language']);
-        $this->assertIsNumeric($parts['amount'],'Amount is not numeric');
-        $this->assertIsNumeric($parts['currency'],'Currency is not numeric');
+        $this->assertIsNumeric($parts['amount'], 'Amount is not numeric');
+        $this->assertIsNumeric($parts['currency'], 'Currency is not numeric');
         $this->assertEquals('my terminal', $parts['terminal']);
         $this->assertEquals('order id', $parts['shop_orderid']);
         $this->assertEquals(200.50, ((float)$parts['amount']));
@@ -165,8 +164,10 @@ class PaymentRequestTest extends AbstractApiTest
         $this->assertInstanceOf(PaymentRequestResponse::class, $response);
         $this->assertEquals('Success', $response->Result);
         $this->assertEquals('2349494a-6adf-49f7-8096-2125a969e104', $response->PaymentRequestId);
-        $this->assertEquals('https://gateway.altapaysecure.com/merchant.php/API/requestForm?pid=2349494a-6adf-49f7-8096-2125a969e104', $response->Url);
-        $this->assertEquals('https://gateway.altapaysecure.com/eCommerce.php/API/embeddedPaymentWindow?pid=2349494a-6adf-49f7-8096-2125a969e104', $response->DynamicJavascriptUrl);
+        $this->assertEquals('https://gateway.altapaysecure.com/merchant.php/API/requestForm?pid=2349494a-6adf-49f7-8096-2125a969e104',
+            $response->Url);
+        $this->assertEquals('https://gateway.altapaysecure.com/eCommerce.php/API/embeddedPaymentWindow?pid=2349494a-6adf-49f7-8096-2125a969e104',
+            $response->DynamicJavascriptUrl);
     }
 
     public function test_language_types(): void
@@ -191,15 +192,15 @@ class PaymentRequestTest extends AbstractApiTest
             ->setCallbackRedirect(sprintf('%s/%s', self::CONFIG_URL, 'redirect'))
             ->setCallbackOpen(sprintf('%s/%s', self::CONFIG_URL, 'open'))
             ->setCallbackNotification(sprintf('%s/%s', self::CONFIG_URL, 'notification'))
-            ->setCallbackVerifyOrder(sprintf('%s/%s', self::CONFIG_URL, 'verify'))
-        ;
+            ->setCallbackVerifyOrder(sprintf('%s/%s', self::CONFIG_URL, 'verify'));
+
         return $config;
     }
 
     /**
      * @param string|TypeInterface $class
-     * @param string $key
-     * @param string $setter
+     * @param string               $key
+     * @param string               $setter
      */
     private function allowedTypes($class, $key, $setter): void
     {
@@ -213,9 +214,9 @@ class PaymentRequestTest extends AbstractApiTest
             $api->call();
             $request = $api->getRawRequest();
             parse_str($request->getUri()->getQuery(), $parts);
-            if(strtolower($request->getMethod()) == 'post'){
+            if (strtolower($request->getMethod()) == 'post') {
                 unset($parts);
-                parse_str($request->getBody()->getContents(),$parts);
+                parse_str($request->getBody()->getContents(), $parts);
             }
             $this->assertEquals($type, $parts[$key]);
             $this->assertTrue($class::isAllowed($type));
@@ -226,8 +227,8 @@ class PaymentRequestTest extends AbstractApiTest
 
     /**
      * @param string|TypeInterface $class
-     * @param string $key
-     * @param string $method
+     * @param string               $key
+     * @param string               $method
      */
     private function disallowedTypes($class, $key, $method): void
     {
@@ -241,7 +242,7 @@ class PaymentRequestTest extends AbstractApiTest
         );
 
         $type = 'not allowed type';
-        $api = $this->getapi();
+        $api  = $this->getapi();
         $api->setAmount(200.50);
         $api->setCurrency(957);
         $api->setShopOrderId('order id');

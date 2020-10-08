@@ -30,8 +30,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $client = $this->getXmlClient(__DIR__ . '/Results/reservationoffixedamount.xml');
 
         return (new ReservationOfFixedAmount($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
     }
 
     public function test_missing_all_options(): void
@@ -79,7 +78,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
 
     public function test_terminal(): void
     {
-        $terminal = new Terminal();
+        $terminal        = new Terminal();
         $terminal->Title = 'terminal object';
 
         $api = $this->getapi();
@@ -222,23 +221,23 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setCurrency(957);
         $api->setShopOrderId('order id');
 
-        $billing = new Address();
-        $billing->Firstname = 'First name';
-        $billing->Lastname = 'Last name';
-        $billing->Address = 'my address';
-        $billing->City = 'Somewhere';
+        $billing             = new Address();
+        $billing->Firstname  = 'First name';
+        $billing->Lastname   = 'Last name';
+        $billing->Address    = 'my address';
+        $billing->City       = 'Somewhere';
         $billing->PostalCode = '2000';
-        $billing->Region = '0';
-        $billing->Country = 'DK';
+        $billing->Region     = '0';
+        $billing->Country    = 'DK';
 
-        $shipping = new Address();
-        $shipping->Firstname = 'First name';
-        $shipping->Lastname = 'Last name';
-        $shipping->Address = 'my address';
-        $shipping->City = 'Somewhere';
+        $shipping             = new Address();
+        $shipping->Firstname  = 'First name';
+        $shipping->Lastname   = 'Last name';
+        $shipping->Address    = 'my address';
+        $shipping->City       = 'Somewhere';
         $shipping->PostalCode = '2000';
-        $shipping->Region = '0';
-        $shipping->Country = 'DK';
+        $shipping->Region     = '0';
+        $shipping->Country    = 'DK';
 
         $customer = new Customer($billing);
         $customer->setShipping($shipping);
@@ -337,8 +336,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $client = $this->getXmlClient(__DIR__ . '/Results/reservationoffixedamount_2.xml');
 
         $api = (new ReservationOfFixedAmount($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
 
         $api->setTerminal('my terminal');
         $api->setAmount(200.50);
@@ -351,8 +349,8 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
 
     /**
      * @param string|TypeInterface $class
-     * @param string $key
-     * @param string $setter
+     * @param string               $key
+     * @param string               $setter
      */
     private function allowedTypes($class, $key, $setter): void
     {
@@ -376,8 +374,8 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
 
     /**
      * @param string|TypeInterface $class
-     * @param string $key
-     * @param string $method
+     * @param string               $key
+     * @param string               $method
      */
     private function disallowedTypes($class, $key, $method): void
     {
@@ -391,7 +389,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         );
 
         $type = 'not allowed type';
-        $api = $this->getapi();
+        $api  = $this->getapi();
         $api->setTerminal('my terminal');
         $api->setAmount(200.50);
         $api->setCurrency(957);

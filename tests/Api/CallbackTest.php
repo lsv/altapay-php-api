@@ -13,21 +13,21 @@ class CallbackTest extends \PHPUnit\Framework\TestCase
     public function setUp(): void
     {
         $this->data = [
-            'shop_orderid' => '000000022',
-            'currency' => '840',
-            'type' => 'payment',
-            'embedded_window' => '0',
-            'amount' => '0',
-            'transaction_id' => '10975531',
-            'payment_id' => 'd28df6b4-122d-49e2-add0-19c8271260b0',
-            'nature' => 'CreditCard',
-            'require_capture' => 'false',
-            'payment_status' => 'created',
+            'shop_orderid'       => '000000022',
+            'currency'           => '840',
+            'type'               => 'payment',
+            'embedded_window'    => '0',
+            'amount'             => '0',
+            'transaction_id'     => '10975531',
+            'payment_id'         => 'd28df6b4-122d-49e2-add0-19c8271260b0',
+            'nature'             => 'CreditCard',
+            'require_capture'    => 'false',
+            'payment_status'     => 'created',
             'masked_credit_card' => '457168*********0000',
-            'blacklist_token' => '1ba7bdb2752394286d511de4e9cc18d9f75f2946',
-            'credit_card_token' => '3fd3d781cc2faf1e8bb6d50e5ae2220554acbb14',
-            'status' => 'incomplete',
-            'xml' => <<<XML
+            'blacklist_token'    => '1ba7bdb2752394286d511de4e9cc18d9f75f2946',
+            'credit_card_token'  => '3fd3d781cc2faf1e8bb6d50e5ae2220554acbb14',
+            'status'             => 'incomplete',
+            'xml'                => <<<XML
 <?xml version="1.0"?>
 <APIResponse version="20170228">
     <Header>
@@ -160,7 +160,7 @@ XML
 
     public function test_can_handle_callback(): void
     {
-        $call = new Callback($this->data);
+        $call     = new Callback($this->data);
         $response = $call->call();
         $this->assertInstanceOf(CallbackResponse::class, $response);
         $this->assertEquals('d28df6b4-122d-49e2-add0-19c8271260b0', $response->paymentId);

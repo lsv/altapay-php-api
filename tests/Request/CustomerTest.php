@@ -12,7 +12,7 @@ class CustomerTest extends AbstractTest
 
     public function test_customer(): void
     {
-        $billingAddress = new Address();
+        $billingAddress  = new Address();
         $shippingAddress = new Address();
 
         $customer = new Customer($billingAddress);
@@ -49,7 +49,7 @@ class CustomerTest extends AbstractTest
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('setGender() only allows the value (m, male, f or female)');
         $billingAddress = new Address();
-        $customer = new Customer($billingAddress);
+        $customer       = new Customer($billingAddress);
         $customer->setGender('foo');
     }
 

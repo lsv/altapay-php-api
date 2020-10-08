@@ -21,8 +21,7 @@ class RefundCapturedReservationTest extends AbstractApiTest
         $client = $this->getXmlClient(__DIR__ . '/Results/refundcapture.xml');
 
         return (new RefundCapturedReservation($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
     }
 
     public function test_refund_reservation(): void
@@ -71,7 +70,7 @@ class RefundCapturedReservationTest extends AbstractApiTest
      */
     public function test_capture_refund_transaction_request(): void
     {
-        $transaction = new Transaction();
+        $transaction                = new Transaction();
         $transaction->TransactionId = 456;
 
         $api = $this->getRefundCaptureReservation();
@@ -86,9 +85,9 @@ class RefundCapturedReservationTest extends AbstractApiTest
 
         $this->assertEquals($this->getExceptedUri('refundCapturedReservation'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
-        if(strtolower($request->getMethod()) == 'post'){
+        if (strtolower($request->getMethod()) == 'post') {
             unset($parts);
-            parse_str($request->getBody()->getContents(),$parts);
+            parse_str($request->getBody()->getContents(), $parts);
         }
         $this->assertEquals(456, $parts['transaction_id']);
         $this->assertEquals(158, $parts['amount']);
@@ -102,18 +101,18 @@ class RefundCapturedReservationTest extends AbstractApiTest
      */
     public function test_capture_refund_transaction_orderlines(): void
     {
-        $orderlines = [];
-        $orderline = new OrderLine('White sugar', 'productid', 1.5, 5.75);
+        $orderlines            = [];
+        $orderline             = new OrderLine('White sugar', 'productid', 1.5, 5.75);
         $orderline->taxPercent = 20;
-        $orderline->unitCode = 'kg';
-        $orderlines[] = $orderline;
+        $orderline->unitCode   = 'kg';
+        $orderlines[]          = $orderline;
 
-        $orderline = new OrderLine('Brown sugar', 'productid2', 2.5, 8.75);
-        $orderline->unitCode = 'kg';
+        $orderline             = new OrderLine('Brown sugar', 'productid2', 2.5, 8.75);
+        $orderline->unitCode   = 'kg';
         $orderline->taxPercent = 20;
-        $orderlines[] = $orderline;
+        $orderlines[]          = $orderline;
 
-        $transaction = new Transaction();
+        $transaction                = new Transaction();
         $transaction->TransactionId = 456;
 
         $api = $this->getRefundCaptureReservation();
@@ -125,9 +124,9 @@ class RefundCapturedReservationTest extends AbstractApiTest
 
         $this->assertEquals($this->getExceptedUri('refundCapturedReservation'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
-        if(strtolower($request->getMethod()) == 'post'){
+        if (strtolower($request->getMethod()) == 'post') {
             unset($parts);
-            parse_str($request->getBody()->getContents(),$parts);
+            parse_str($request->getBody()->getContents(), $parts);
         }
         $this->assertCount(2, $parts['orderLines']);
         $line = $parts['orderLines'][1];
@@ -145,7 +144,7 @@ class RefundCapturedReservationTest extends AbstractApiTest
      */
     public function test_capture_refund_transaction_orderlines_object(): void
     {
-        $transaction = new Transaction();
+        $transaction                = new Transaction();
         $transaction->TransactionId = 456;
 
         $api = $this->getRefundCaptureReservation();
@@ -157,9 +156,9 @@ class RefundCapturedReservationTest extends AbstractApiTest
 
         $this->assertEquals($this->getExceptedUri('refundCapturedReservation'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
-        if(strtolower($request->getMethod()) == 'post'){
+        if (strtolower($request->getMethod()) == 'post') {
             unset($parts);
-            parse_str($request->getBody()->getContents(),$parts);
+            parse_str($request->getBody()->getContents(), $parts);
         }
         $this->assertCount(1, $parts['orderLines']);
     }
@@ -168,7 +167,7 @@ class RefundCapturedReservationTest extends AbstractApiTest
     {
         $this->expectException(ClientException::class);
 
-        $transaction = new Transaction();
+        $transaction                = new Transaction();
         $transaction->TransactionId = 456;
 
         $client = $this->getClient($mock = new MockHandler([
@@ -177,8 +176,7 @@ class RefundCapturedReservationTest extends AbstractApiTest
 
         $api = (new RefundCapturedReservation($this->getAuth()))
             ->setClient($client)
-            ->setTransaction('123')
-        ;
+            ->setTransaction('123');
         $api->call();
     }
 }

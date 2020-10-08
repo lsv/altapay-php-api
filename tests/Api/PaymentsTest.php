@@ -24,11 +24,11 @@ class PaymentsTest extends AbstractApiTest
     {
         $client = $this->getXmlClient(__DIR__ . '/Results/payments.xml');
 
-        $api = (new Payments($this->getAuth()))
-            ->setClient($client)
-        ;
+        $api    = (new Payments($this->getAuth()))
+            ->setClient($client);
         $result = $api->call();
         $this->assertInternalType('array', $result);
+
         return $result;
     }
 
@@ -39,11 +39,11 @@ class PaymentsTest extends AbstractApiTest
     {
         $client = $this->getXmlClient(__DIR__ . '/Results/payment.xml');
 
-        $api = (new Payments($this->getAuth()))
-            ->setClient($client)
-        ;
+        $api    = (new Payments($this->getAuth()))
+            ->setClient($client);
         $result = $api->call();
         $this->assertInternalType('array', $result);
+
         return $result;
     }
 
@@ -57,8 +57,7 @@ class PaymentsTest extends AbstractApiTest
 
         (new Payments($this->getAuth()))
             ->setClient($client)
-            ->call()
-        ;
+            ->call();
     }
 
     public function test_payments_routing(): void
@@ -71,8 +70,7 @@ class PaymentsTest extends AbstractApiTest
             ->setTerminal('terminalvalue')
             ->setShopOrderId('shoporderid')
             ->setShop('shopkey')
-            ->setPaymentId('mypaymentid')
-        ;
+            ->setPaymentId('mypaymentid');
         $api->call();
 
         $this->assertInstanceOf(Request::class, $api->getRawRequest());
@@ -92,13 +90,12 @@ class PaymentsTest extends AbstractApiTest
     {
         $client = $this->getXmlClient(__DIR__ . '/Results/payments.xml');
 
-        $trans = new Transaction();
+        $trans                = new Transaction();
         $trans->TransactionId = 123;
 
         $api = (new Payments($this->getAuth()))
             ->setClient($client)
-            ->setTransaction($trans)
-        ;
+            ->setTransaction($trans);
         $api->call();
 
         $this->assertEquals($this->getExceptedUri('payments/'), $api->getRawRequest()->getUri()->getPath());
@@ -190,21 +187,28 @@ class PaymentsTest extends AbstractApiTest
     public function paymentinfosDataprovider()
     {
         return [
-                [
-                    0, 'Form_Created_At', '2010-09-28 12:34:56'
-                ],
-                [
-                    1, 'Form_Provider', 'AltaPay Test Form'
-                ],
-                [
-                    2, 'Merchant_Provided_Info', 'Some info by merchant'
-                ]
-            ];
+            [
+                0,
+                'Form_Created_At',
+                '2010-09-28 12:34:56'
+            ],
+            [
+                1,
+                'Form_Provider',
+                'AltaPay Test Form'
+            ],
+            [
+                2,
+                'Merchant_Provided_Info',
+                'Some info by merchant'
+            ]
+        ];
     }
 
     /**
      * @dataProvider paymentinfosDataprovider
      * @depends      test_multiple_payment_transaction_data
+     *
      * @param string $line
      * @param string $name
      * @param string $value

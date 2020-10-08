@@ -56,7 +56,8 @@
                 </PaymentInfos>
                 <CustomerInfo>
                     <UserAgent>Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.7
-                        (KHTML, like Gecko) Chrome/16.0.912.41 Safari/535.7</UserAgent>
+                        (KHTML, like Gecko) Chrome/16.0.912.41 Safari/535.7
+                    </UserAgent>
                     <IpAddress>127.127.127.127</IpAddress>
                     <Email>support@altapay.com</Email>
                     <Username>support</Username>
@@ -74,8 +75,8 @@
                         <PostalCode>2860</PostalCode>
                         <Country>DK</Country>
                     </BillingAddress>
-                    <ShippingAddress />
-                    <RegisteredAddress />
+                    <ShippingAddress/>
+                    <RegisteredAddress/>
                 </CustomerInfo>
                 <ReconciliationIdentifiers>
                     <ReconciliationIdentifier>

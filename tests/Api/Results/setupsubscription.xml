@@ -49,7 +49,7 @@
                     <PaymentInfo name="Merchant_Provided_Info">Some info by merchant</PaymentInfo>
                 </PaymentInfos>
                 <CustomerInfo/>
-                <ReconciliationIdentifiers />
+                <ReconciliationIdentifiers/>
             </Transaction>
             <Transaction>
                 <TransactionId>2</TransactionId>

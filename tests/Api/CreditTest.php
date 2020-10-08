@@ -22,8 +22,7 @@ class CreditTest extends AbstractApiTest
         $client = $this->getXmlClient(__DIR__ . '/Results/reservationoffixedamount.xml');
 
         return (new Credit($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
     }
 
     public function test_options(): void
@@ -31,7 +30,7 @@ class CreditTest extends AbstractApiTest
         $this->expectException(CreditCardTokenAndCardUsedException::class);
 
         $card = new Card('1234', '12', '12', '122');
-        $api = $this->getCredit();
+        $api  = $this->getCredit();
         $api->setTerminal('123');
         $api->setShopOrderId('123');
         $api->setAmount(20.44);
@@ -44,7 +43,7 @@ class CreditTest extends AbstractApiTest
     public function test_creditcard_options(): void
     {
         $card = new Card('1234567890', '05', '19', '122');
-        $api = $this->getCredit();
+        $api  = $this->getCredit();
         $api->setTerminal('terminal');
         $api->setShopOrderId('123');
         $api->setAmount(20.44);
@@ -97,6 +96,7 @@ class CreditTest extends AbstractApiTest
 
     /**
      * @dataProvider paymentSourceDataProvider
+     *
      * @param string $type
      */
     public function test_paymentsource_options($type): void
@@ -130,7 +130,7 @@ class CreditTest extends AbstractApiTest
     public function test_response(): void
     {
         $card = new Card('1234567890', '05', '19', '122');
-        $api = $this->getCredit();
+        $api  = $this->getCredit();
         $api->setTerminal('terminal');
         $api->setShopOrderId('123');
         $api->setAmount(20.44);

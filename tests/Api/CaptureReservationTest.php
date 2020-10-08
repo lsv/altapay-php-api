@@ -23,8 +23,7 @@ class CaptureReservationTest extends AbstractApiTest
         $client = $this->getXmlClient(__DIR__ . '/Results/capture.xml');
 
         return (new CaptureReservation($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
     }
 
     public function test_capture_reservation(): void
@@ -67,8 +66,8 @@ class CaptureReservationTest extends AbstractApiTest
 
     public function test_capture_reservation_transaction_request(): void
     {
-        $transaction = new Transaction();
-        $transaction->TransactionId = 456;
+        $transaction                = new Transaction();
+        $transaction->TransactionId = '456';
 
         $api = $this->getCaptureReservation();
         $api->setTransaction($transaction);
@@ -82,9 +81,9 @@ class CaptureReservationTest extends AbstractApiTest
 
         $this->assertEquals($this->getExceptedUri('captureReservation'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
-        if(strtolower($request->getMethod()) == 'post'){
+        if (strtolower($request->getMethod()) == 'post') {
             unset($parts);
-            parse_str($request->getBody()->getContents(),$parts);
+            parse_str($request->getBody()->getContents(), $parts);
         }
         $this->assertEquals(456, $parts['transaction_id']);
         $this->assertEquals(158, $parts['amount']);
@@ -95,8 +94,8 @@ class CaptureReservationTest extends AbstractApiTest
 
     public function test_capture_reservation_transaction_orderlines(): void
     {
-        $transaction = new Transaction();
-        $transaction->TransactionId = 456;
+        $transaction                = new Transaction();
+        $transaction->TransactionId = '456';
 
         $api = $this->getCaptureReservation();
         $api->setTransaction($transaction);
@@ -108,9 +107,9 @@ class CaptureReservationTest extends AbstractApiTest
         $this->assertEquals($this->getExceptedUri('captureReservation'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
 
-        if(strtolower($request->getMethod()) == 'post'){
+        if (strtolower($request->getMethod()) == 'post') {
             unset($parts);
-            parse_str($request->getBody()->getContents(),$parts);
+            parse_str($request->getBody()->getContents(), $parts);
         }
         $this->assertCount(2, $parts['orderLines']);
         $line = $parts['orderLines'][1];
@@ -124,8 +123,8 @@ class CaptureReservationTest extends AbstractApiTest
 
     public function test_capture_reservation_transaction_orderlines_object(): void
     {
-        $transaction = new Transaction();
-        $transaction->TransactionId = 456;
+        $transaction                = new Transaction();
+        $transaction->TransactionId = '456';
 
         $api = $this->getCaptureReservation();
         $api->setTransaction($transaction);
@@ -136,9 +135,9 @@ class CaptureReservationTest extends AbstractApiTest
 
         $this->assertEquals($this->getExceptedUri('captureReservation'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
-        if(strtolower($request->getMethod()) == 'post'){
+        if (strtolower($request->getMethod()) == 'post') {
             unset($parts);
-            parse_str($request->getBody()->getContents(),$parts);
+            parse_str($request->getBody()->getContents(), $parts);
         }
         $this->assertCount(1, $parts['orderLines']);
     }
@@ -147,7 +146,7 @@ class CaptureReservationTest extends AbstractApiTest
     {
         $this->expectException(ClientException::class);
 
-        $transaction = new Transaction();
+        $transaction                = new Transaction();
         $transaction->TransactionId = 456;
 
         $client = $this->getClient($mock = new MockHandler([
@@ -156,8 +155,7 @@ class CaptureReservationTest extends AbstractApiTest
 
         $api = (new CaptureReservation($this->getAuth()))
             ->setClient($client)
-            ->setTransaction('123')
-        ;
+            ->setTransaction('123');
         $api->call();
     }
 }

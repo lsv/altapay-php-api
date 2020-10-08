@@ -19,8 +19,7 @@ class SetupSubscriptionTest extends AbstractApiTest
         $client = $this->getXmlClient(__DIR__ . '/Results/reservationoffixedamount.xml');
 
         return (new SetupSubscription($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
     }
 
     public function test_charge_subscription_error(): void
@@ -33,8 +32,7 @@ class SetupSubscriptionTest extends AbstractApiTest
         $client = $this->getXmlClient(__DIR__ . '/Results/setupsubscription_fail.xml');
 
         $api = (new SetupSubscription($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
         $api->setTerminal('my terminal');
         $api->setAmount(200.50);
         $api->setCurrency(957);

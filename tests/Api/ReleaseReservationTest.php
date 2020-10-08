@@ -20,8 +20,7 @@ class ReleaseReservationTest extends AbstractApiTest
         $client = $this->getXmlClient(__DIR__ . '/Results/release.xml');
 
         return (new ReleaseReservation($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
     }
 
     public function test_release_reservation(): void
@@ -46,8 +45,8 @@ class ReleaseReservationTest extends AbstractApiTest
 
     public function test_release_reservation_querypath(): void
     {
-        $transaction = new Transaction();
-        $transaction->TransactionId = 456;
+        $transaction                = new Transaction();
+        $transaction->TransactionId = '456';
 
         $api = $this->getReleaseReservation();
         $api->setTransaction($transaction);
@@ -56,9 +55,9 @@ class ReleaseReservationTest extends AbstractApiTest
 
         $this->assertEquals($this->getExceptedUri('releaseReservation'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
-        if(strtolower($request->getMethod()) == 'post'){
+        if (strtolower($request->getMethod()) == 'post') {
             unset($parts);
-            parse_str($request->getBody()->getContents(),$parts);
+            parse_str($request->getBody()->getContents(), $parts);
         }
         $this->assertEquals(456, $parts['transaction_id']);
 
@@ -67,9 +66,9 @@ class ReleaseReservationTest extends AbstractApiTest
         $api->call();
         $request = $api->getRawRequest();
         parse_str($request->getUri()->getQuery(), $parts);
-        if(strtolower($request->getMethod()) == 'post'){
+        if (strtolower($request->getMethod()) == 'post') {
             unset($parts);
-            parse_str($request->getBody()->getContents(),$parts);
+            parse_str($request->getBody()->getContents(), $parts);
         }
         $this->assertEquals(123, $parts['transaction_id']);
 
@@ -78,9 +77,9 @@ class ReleaseReservationTest extends AbstractApiTest
         $api->call();
         $request = $api->getRawRequest();
         parse_str($request->getUri()->getQuery(), $parts);
-        if(strtolower($request->getMethod()) == 'post'){
+        if (strtolower($request->getMethod()) == 'post') {
             unset($parts);
-            parse_str($request->getBody()->getContents(),$parts);
+            parse_str($request->getBody()->getContents(), $parts);
         }
         $this->assertEquals(152, $parts['transaction_id']);
     }
@@ -89,7 +88,7 @@ class ReleaseReservationTest extends AbstractApiTest
     {
         $this->expectException(ClientException::class);
 
-        $transaction = new Transaction();
+        $transaction                = new Transaction();
         $transaction->TransactionId = 456;
 
         $client = $this->getClient($mock = new MockHandler([
@@ -98,8 +97,7 @@ class ReleaseReservationTest extends AbstractApiTest
 
         $api = (new ReleaseReservation($this->getAuth()))
             ->setClient($client)
-            ->setTransaction('123')
-        ;
+            ->setTransaction('123');
         $api->call();
     }
 }

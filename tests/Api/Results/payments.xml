@@ -4,10 +4,10 @@
         <Date>2010-09-29T12:34:56+02:00</Date>
         <Path>API/payments</Path>
         <ErrorCode>0</ErrorCode>
-        <ErrorMessage />
+        <ErrorMessage/>
     </Header>
     <Body>
-        <ResultFilter />
+        <ResultFilter/>
         <Transactions>
             <Transaction>
                 <TransactionId>1</TransactionId>
@@ -51,7 +51,8 @@
                 </PaymentInfos>
                 <CustomerInfo>
                     <UserAgent>Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.7
-                        (KHTML, like Gecko) Chrome/16.0.912.41 Safari/535.7</UserAgent>
+                        (KHTML, like Gecko) Chrome/16.0.912.41 Safari/535.7
+                    </UserAgent>
                     <IpAddress>127.127.127.127</IpAddress>
                     <Email>support@altapay.com</Email>
                     <Username>support</Username>
@@ -122,7 +123,8 @@
                 </PaymentInfos>
                 <CustomerInfo>
                     <UserAgent>Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.7
-                        (KHTML, like Gecko) Chrome/16.0.912.41 Safari/535.7</UserAgent>
+                        (KHTML, like Gecko) Chrome/16.0.912.41 Safari/535.7
+                    </UserAgent>
                     <IpAddress>127.127.127.127</IpAddress>
                     <Email>support@altapay.com</Email>
                     <Username>support</Username>

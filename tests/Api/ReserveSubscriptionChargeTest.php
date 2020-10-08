@@ -20,8 +20,7 @@ class ReserveSubscriptionChargeTest extends AbstractApiTest
         $client = $this->getXmlClient(__DIR__ . '/Results/reservesubscription.xml');
 
         return (new ReserveSubscriptionCharge($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
     }
 
     public function test_reserve_subscription_charge(): void
@@ -46,7 +45,7 @@ class ReserveSubscriptionChargeTest extends AbstractApiTest
 
     public function test_reserve_subscription_charge_querypath(): void
     {
-        $transaction = new Transaction();
+        $transaction                = new Transaction();
         $transaction->TransactionId = 456;
 
         $api = $this->getReserveSubscriptionCharge();
@@ -79,7 +78,7 @@ class ReserveSubscriptionChargeTest extends AbstractApiTest
     {
         $this->expectException(ClientException::class);
 
-        $transaction = new Transaction();
+        $transaction                = new Transaction();
         $transaction->TransactionId = 456;
 
         $client = $this->getClient($mock = new MockHandler([
@@ -88,8 +87,7 @@ class ReserveSubscriptionChargeTest extends AbstractApiTest
 
         $api = (new ReserveSubscriptionCharge($this->getAuth()))
             ->setClient($client)
-            ->setTransaction('123')
-        ;
+            ->setTransaction('123');
         $api->call();
     }
 }

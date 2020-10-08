@@ -16,8 +16,7 @@ class TestConnectionTest extends AbstractApiTest
         ]));
 
         $api = (new TestConnection())
-            ->setClient($client)
-        ;
+            ->setClient($client);
 
         $this->assertSame('ok', $api->call());
         $this->assertEquals($this->getExceptedUri('testConnection'), $api->getRawRequest()->getUri()->getPath());
@@ -32,8 +31,7 @@ class TestConnectionTest extends AbstractApiTest
         ]));
 
         $api = (new TestConnection())
-            ->setClient($client)
-        ;
+            ->setClient($client);
 
         try {
             $api->call();
@@ -50,8 +48,7 @@ class TestConnectionTest extends AbstractApiTest
         ]));
 
         $api = (new TestConnection())
-            ->setClient($client)
-        ;
+            ->setClient($client);
 
         $this->assertSame('ok', $api->call());
         $this->assertEquals($this->getExceptedUri('testConnection'), $api->getRawRequest()->getUri()->getPath());

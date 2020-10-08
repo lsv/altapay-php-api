@@ -12,11 +12,11 @@ class OrderLineTest extends AbstractTest
     {
         $line = new OrderLine('description', '12', 2, 12.50);
         $line->setGoodsType('item');
-        $line->taxAmount = 4.75;
+        $line->taxAmount  = 4.75;
         $line->taxPercent = 38;
-        $line->unitCode = 'code';
-        $line->discount = 1;
-        $line->imageUrl = 'https://image.com';
+        $line->unitCode   = 'code';
+        $line->discount   = 1;
+        $line->imageUrl   = 'https://image.com';
         $line->productUrl = 'https://image.com';
 
         $serialized = $line->serialize();
@@ -62,8 +62,9 @@ class OrderLineTest extends AbstractTest
 
     /**
      * @dataProvider dataProvider
+     *
      * @param string $type
-     * @param bool $exception
+     * @param bool   $exception
      */
     public function test_can_not_set_goodstypes($type, $exception = false): void
     {

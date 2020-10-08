@@ -19,8 +19,7 @@ class TerminalsTest extends AbstractApiTest
         $client = $this->getXmlClient(__DIR__ . '/Results/terminals.xml');
 
         return (new Terminals($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
     }
 
     public function test_url(): void
@@ -32,7 +31,7 @@ class TerminalsTest extends AbstractApiTest
 
     public function test_header(): void
     {
-        $api = $this->getTerminals();
+        $api      = $this->getTerminals();
         $response = $api->call();
         $this->assertInstanceOf(TerminalsResponse::class, $response);
         $this->assertInstanceOf(\DateTime::class, $response->Header->Date);
@@ -44,7 +43,7 @@ class TerminalsTest extends AbstractApiTest
 
     public function test_response(): void
     {
-        $api = $this->getTerminals();
+        $api      = $this->getTerminals();
         $response = $api->call();
         $this->assertInstanceOf(TerminalsResponse::class, $response);
 
@@ -57,7 +56,7 @@ class TerminalsTest extends AbstractApiTest
      */
     public function test_response_terminal(): void
     {
-        $api = $this->getTerminals();
+        $api      = $this->getTerminals();
         $response = $api->call();
         $this->assertInstanceOf(TerminalsResponse::class, $response);
         $this->assertCount(2, $response->Terminals);
@@ -80,7 +79,6 @@ class TerminalsTest extends AbstractApiTest
 
         (new Terminals($this->getAuth()))
             ->setClient($client)
-            ->call()
-        ;
+            ->call();
     }
 }

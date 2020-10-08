@@ -18,8 +18,7 @@ class InvoiceReservationTest extends AbstractApiTest
         $client = $this->getXmlClient(__DIR__ . '/Results/invoicereservation.xml');
 
         return (new InvoiceReservation($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
     }
 
     public function test_missing_all_options(): void

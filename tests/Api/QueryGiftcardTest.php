@@ -19,14 +19,13 @@ class QueryGiftcardTest extends AbstractApiTest
         $client = $this->getXmlClient(__DIR__ . '/Results/querygiftcard.xml');
 
         return (new QueryGiftcard($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
     }
 
     public function test_route(): void
     {
         $card = new Giftcard('account', 'provider', '1234-1234');
-        $api = $this->getapi();
+        $api  = $this->getapi();
         $api->setTerminal('my terminal');
         $api->setGiftcard($card);
         $api->call();
@@ -43,7 +42,7 @@ class QueryGiftcardTest extends AbstractApiTest
     public function test_response(): void
     {
         $card = new Giftcard('account', 'provider', '1234-1234');
-        $api = $this->getapi();
+        $api  = $this->getapi();
         $api->setTerminal('my terminal');
         $api->setGiftcard($card);
         $response = $api->call();

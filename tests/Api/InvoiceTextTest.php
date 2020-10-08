@@ -20,13 +20,12 @@ class InvoiceTextTest extends AbstractApiTest
         $client = $this->getXmlClient(__DIR__ . '/Results/invoicetext.xml');
 
         return (new InvoiceText($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
     }
 
     public function test_url(): void
     {
-        $trans = new Transaction();
+        $trans                = new Transaction();
         $trans->TransactionId = 123;
 
         $api = $this->getinvoicetext();
@@ -43,7 +42,7 @@ class InvoiceTextTest extends AbstractApiTest
 
     public function test_object(): void
     {
-        $trans = new Transaction();
+        $trans                = new Transaction();
         $trans->TransactionId = 123;
 
         $api = $this->getinvoicetext();

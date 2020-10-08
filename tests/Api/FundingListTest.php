@@ -20,8 +20,7 @@ class FundingListTest extends AbstractApiTest
         $client = $this->getXmlClient(__DIR__ . '/Results/multiplefundinglist.xml');
 
         return (new FundingList($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
     }
 
     /**
@@ -32,8 +31,7 @@ class FundingListTest extends AbstractApiTest
         $client = $this->getXmlClient(__DIR__ . '/Results/singlefundinglist.xml');
 
         return (new FundingList($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
     }
 
     public function test_fundlinglist_routing(): void
@@ -57,7 +55,7 @@ class FundingListTest extends AbstractApiTest
 
     public function test_fundlinglist_single(): void
     {
-        $api = $this->getSingleFundingsList();
+        $api      = $this->getSingleFundingsList();
         $response = $api->call();
         $this->assertInstanceOf(FundingsResponse::class, $response);
         $this->assertCount(1, $response->Fundings, 'num fundings');
@@ -65,7 +63,7 @@ class FundingListTest extends AbstractApiTest
 
     public function test_fundlinglist_multiple(): void
     {
-        $api = $this->getMultipleFundingsList();
+        $api      = $this->getMultipleFundingsList();
         $response = $api->call();
         $this->assertInstanceOf(FundingsResponse::class, $response);
         $this->assertCount(2, $response->Fundings, 'num fundings');
@@ -76,7 +74,7 @@ class FundingListTest extends AbstractApiTest
      */
     public function test_funding_object(): void
     {
-        $api = $this->getMultipleFundingsList();
+        $api      = $this->getMultipleFundingsList();
         $response = $api->call();
         $this->assertInstanceOf(FundingsResponse::class, $response);
         $funding = $response->Fundings[0];

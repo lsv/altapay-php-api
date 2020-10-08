@@ -17,8 +17,7 @@ class CustomReportTest extends AbstractApiTest
         $client = $this->getXmlClient(__DIR__ . '/Results/customreport.txt');
 
         return (new CustomReport($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
     }
 
     public function test_custom_download_with_id(): void

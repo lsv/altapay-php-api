@@ -18,8 +18,7 @@ class CalculateSurchargeTest extends AbstractApiTest
         $client = $this->getXmlClient(__DIR__ . '/Results/calculatesurcharge.xml');
 
         return (new CalculateSurcharge($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
     }
 
     public function test_options_fields_not_allowed_when_payment_id_is_set(): void

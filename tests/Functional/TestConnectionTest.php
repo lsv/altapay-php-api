@@ -10,8 +10,7 @@ class TestConnectionTest extends AbstractFunctionalTest
     public function test_connection(): void
     {
         $response = (new TestConnection())
-            ->call()
-        ;
+            ->call();
 
         $this->assertTrue($response);
     }
@@ -19,8 +18,7 @@ class TestConnectionTest extends AbstractFunctionalTest
     public function test_connection_fails(): void
     {
         $response = (new TestConnection('http//idonotexists.mecom'))
-            ->call()
-        ;
+            ->call();
 
         $this->assertFalse($response);
     }

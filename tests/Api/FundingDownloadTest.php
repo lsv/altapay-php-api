@@ -18,8 +18,7 @@ class FundingDownloadTest extends AbstractApiTest
         $client = $this->getXmlClient(__DIR__ . '/Results/fundingdownload.txt');
 
         return (new FundingDownload($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
     }
 
     public function test_funding_download_with_link(): void
@@ -36,7 +35,7 @@ class FundingDownloadTest extends AbstractApiTest
 
     public function test_funding_download_with_object(): void
     {
-        $funding = new Funding();
+        $funding               = new Funding();
         $funding->DownloadLink = 'https://thisismyshop.altapaysecure.com/merchant/API/fundingDownload?id=99';
 
         $api = $this->getFundingDownload();

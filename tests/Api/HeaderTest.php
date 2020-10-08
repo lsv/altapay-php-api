@@ -19,8 +19,7 @@ class HeaderTest extends AbstractApiTest
         $client = $this->getXmlClient(__DIR__ . '/Results/header_error.xml');
 
         return (new FundingList($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
     }
 
     public function test_get_header_error(): void
