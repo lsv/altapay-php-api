@@ -62,7 +62,7 @@ class Transaction extends AbstractResponse
     ];
 
     /**
-     * @var int
+     * @var string
      */
     public $TransactionId;
 
@@ -122,12 +122,12 @@ class Transaction extends AbstractResponse
     public $ShopOrderId;
 
     /**
-     * @var Shop
+     * @var string
      */
     public $Shop;
 
     /**
-     * @var Terminal
+     * @var string
      */
     public $Terminal;
 

@@ -38,7 +38,7 @@ class Header extends AbstractResponse
     /** @var string */
     public $Path;
 
-    /** @var int */
+    /** @var numeric-string */
     public $ErrorCode;
 
     /** @var string */

@@ -58,7 +58,7 @@ class Funding extends AbstractResponse
      */
     public $FundingDate;
 
-    /** @var float */
+    /** @var string */
     public $Amount;
 
     /**
