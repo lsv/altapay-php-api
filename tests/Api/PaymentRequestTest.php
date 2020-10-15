@@ -14,7 +14,6 @@ use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 
 class PaymentRequestTest extends AbstractApiTest
 {
-
     const CONFIG_URL = 'https://myshop.com/callback';
 
     /**
@@ -156,10 +155,14 @@ class PaymentRequestTest extends AbstractApiTest
         $this->assertInstanceOf(PaymentRequestResponse::class, $response);
         $this->assertSame('Success', $response->Result);
         $this->assertSame('2349494a-6adf-49f7-8096-2125a969e104', $response->PaymentRequestId);
-        $this->assertSame('https://gateway.altapaysecure.com/merchant.php/API/requestForm?pid=2349494a-6adf-49f7-8096-2125a969e104',
-            $response->Url);
-        $this->assertSame('https://gateway.altapaysecure.com/eCommerce.php/API/embeddedPaymentWindow?pid=2349494a-6adf-49f7-8096-2125a969e104',
-            $response->DynamicJavascriptUrl);
+        $this->assertSame(
+            'https://gateway.altapaysecure.com/merchant.php/API/requestForm?pid=2349494a-6adf-49f7-8096-2125a969e104',
+            $response->Url
+        );
+        $this->assertSame(
+            'https://gateway.altapaysecure.com/eCommerce.php/API/embeddedPaymentWindow?pid=2349494a-6adf-49f7-8096-2125a969e104',
+            $response->DynamicJavascriptUrl
+        );
     }
 
     public function test_language_types(): void
@@ -240,5 +243,4 @@ class PaymentRequestTest extends AbstractApiTest
         $api->call();
         $this->assertFalse($class::isAllowed($type));
     }
-
 }

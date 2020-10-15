@@ -8,7 +8,6 @@ use Altapay\ApiTest\AbstractTest;
 
 abstract class AbstractFunctionalTest extends AbstractTest
 {
-
     const VALID_VISA_CARD_NUMBER = '4140000000001466';
 
     /**
@@ -69,5 +68,4 @@ abstract class AbstractFunctionalTest extends AbstractTest
             '123'
         );
     }
-
 }

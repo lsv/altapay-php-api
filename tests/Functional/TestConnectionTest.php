@@ -6,7 +6,6 @@ use Altapay\Api\Test\TestConnection;
 
 class TestConnectionTest extends AbstractFunctionalTest
 {
-
     public function test_connection(): void
     {
         $response = (new TestConnection())
@@ -22,5 +21,4 @@ class TestConnectionTest extends AbstractFunctionalTest
 
         $this->assertSame('ok', $response);
     }
-
 }

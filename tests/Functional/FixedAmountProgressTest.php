@@ -14,7 +14,6 @@ use Altapay\Response\ReservationOfFixedAmountResponse;
 
 class FixedAmountProgressTest extends AbstractFunctionalTest
 {
-
     public function test_create_fixed_amount_fails(): void
     {
         $this->expectException(ResponseHeaderException::class);
@@ -69,7 +68,6 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
             ->setTransaction($response->Transactions[0]);
         $response = $api->call();
         $this->assertInstanceOf(RefundResponse::class, $response);
-
     }
 
     public function test_preauth_declined_by_bank(): void
@@ -179,5 +177,4 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
         $this->assertInstanceOf(ReservationOfFixedAmountResponse::class, $response);
         $this->assertSame('Deny', $response->Transactions[0]->FraudRecommendation);
     }
-
 }

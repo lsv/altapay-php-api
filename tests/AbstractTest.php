@@ -39,5 +39,4 @@ abstract class AbstractTest extends \PHPUnit\Framework\TestCase
     {
         return new Authentication('test_username', 'test_password');
     }
-
 }

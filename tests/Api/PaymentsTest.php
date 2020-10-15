@@ -27,7 +27,7 @@ class PaymentsTest extends AbstractApiTest
         $api    = (new Payments($this->getAuth()))
             ->setClient($client);
         $result = $api->call();
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
 
         return $result;
     }
@@ -42,7 +42,7 @@ class PaymentsTest extends AbstractApiTest
         $api    = (new Payments($this->getAuth()))
             ->setClient($client);
         $result = $api->call();
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
 
         return $result;
     }

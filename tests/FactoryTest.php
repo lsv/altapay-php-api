@@ -54,5 +54,4 @@ class FactoryTest extends AbstractTest
             $this->assertSame('Foo\Bar', $e->getClass());
         }
     }
-
 }

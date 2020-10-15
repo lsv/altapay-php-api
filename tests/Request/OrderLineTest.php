@@ -7,7 +7,6 @@ use Altapay\Request\OrderLine;
 
 class OrderLineTest extends AbstractTest
 {
-
     public function test_orderline(): void
     {
         $line = new OrderLine('description', '12', 2, 12.50);
@@ -44,7 +43,6 @@ class OrderLineTest extends AbstractTest
         $this->assertSame('item', $serialized['goodsType']);
         $this->assertSame('https://image.com', $serialized['imageUrl']);
         $this->assertSame('https://image.com', $serialized['productUrl']);
-
     }
 
     /**
@@ -90,5 +88,4 @@ class OrderLineTest extends AbstractTest
         $line = new OrderLineRequestTestSerializer('description', '12', 2, 12.50);
         $line->serialize();
     }
-
 }

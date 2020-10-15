@@ -9,7 +9,6 @@ use Altapay\Request\Customer;
 
 class CustomerTest extends AbstractTest
 {
-
     public function test_customer(): void
     {
         $billingAddress  = new Address();
@@ -41,7 +40,6 @@ class CustomerTest extends AbstractTest
         $customer->setGender('male');
         $serialized = $customer->serialize();
         $this->assertSame(Customer::MALE, $serialized['gender']);
-
     }
 
     public function test_gender_exception(): void
@@ -52,5 +50,4 @@ class CustomerTest extends AbstractTest
         $customer       = new Customer($billingAddress);
         $customer->setGender('foo');
     }
-
 }

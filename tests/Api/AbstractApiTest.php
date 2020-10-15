@@ -93,5 +93,4 @@ abstract class AbstractApiTest extends AbstractTest
 
         return $orderlines;
     }
-
 }

@@ -53,7 +53,7 @@ class FundingDownloadTest extends AbstractApiTest
         $api = $this->getFundingDownload();
         $api->setFundingDownloadLink('https://myshop.altapaysecure.com/merchant/API/fundingDownload?id=32');
         $response = $api->call();
-        $this->assertInternalType('string', $response);
+        $this->assertIsString($response);
         $this->assertStringStartsWith('Date;', $response);
 
         $csv = $api->__toArray(true);
