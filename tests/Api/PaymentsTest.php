@@ -91,7 +91,7 @@ class PaymentsTest extends AbstractApiTest
         $client = $this->getXmlClient(__DIR__ . '/Results/payments.xml');
 
         $trans                = new Transaction();
-        $trans->TransactionId = 123;
+        $trans->TransactionId = '123';
 
         $api = (new Payments($this->getAuth()))
             ->setClient($client)

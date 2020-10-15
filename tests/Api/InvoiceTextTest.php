@@ -26,7 +26,7 @@ class InvoiceTextTest extends AbstractApiTest
     public function test_url(): void
     {
         $trans                = new Transaction();
-        $trans->TransactionId = 123;
+        $trans->TransactionId = '123';
 
         $api = $this->getinvoicetext();
         $api->setTransaction($trans);
@@ -43,7 +43,7 @@ class InvoiceTextTest extends AbstractApiTest
     public function test_object(): void
     {
         $trans                = new Transaction();
-        $trans->TransactionId = 123;
+        $trans->TransactionId = '123';
 
         $api = $this->getinvoicetext();
         $api->setTransaction($trans);

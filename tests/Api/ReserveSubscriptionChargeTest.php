@@ -46,7 +46,7 @@ class ReserveSubscriptionChargeTest extends AbstractApiTest
     public function test_reserve_subscription_charge_querypath(): void
     {
         $transaction                = new Transaction();
-        $transaction->TransactionId = 456;
+        $transaction->TransactionId = '456';
 
         $api = $this->getReserveSubscriptionCharge();
         $api->setTransaction($transaction);
@@ -79,7 +79,7 @@ class ReserveSubscriptionChargeTest extends AbstractApiTest
         $this->expectException(ClientException::class);
 
         $transaction                = new Transaction();
-        $transaction->TransactionId = 456;
+        $transaction->TransactionId = '456';
 
         $client = $this->getClient($mock = new MockHandler([
             new Response(400, ['text-content' => 'application/xml'])

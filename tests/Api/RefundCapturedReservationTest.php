@@ -71,7 +71,7 @@ class RefundCapturedReservationTest extends AbstractApiTest
     public function test_capture_refund_transaction_request(): void
     {
         $transaction                = new Transaction();
-        $transaction->TransactionId = 456;
+        $transaction->TransactionId = '456';
 
         $api = $this->getRefundCaptureReservation();
         $api->setTransaction($transaction);
@@ -109,7 +109,7 @@ class RefundCapturedReservationTest extends AbstractApiTest
         $orderlines[]          = $orderline;
 
         $transaction                = new Transaction();
-        $transaction->TransactionId = 456;
+        $transaction->TransactionId = '456';
 
         $api = $this->getRefundCaptureReservation();
         $api->setTransaction($transaction);
@@ -137,7 +137,7 @@ class RefundCapturedReservationTest extends AbstractApiTest
     public function test_capture_refund_transaction_orderlines_object(): void
     {
         $transaction                = new Transaction();
-        $transaction->TransactionId = 456;
+        $transaction->TransactionId = '456';
 
         $api = $this->getRefundCaptureReservation();
         $api->setTransaction($transaction);
@@ -156,7 +156,7 @@ class RefundCapturedReservationTest extends AbstractApiTest
         $this->expectException(ClientException::class);
 
         $transaction                = new Transaction();
-        $transaction->TransactionId = 456;
+        $transaction->TransactionId = '456';
 
         $client = $this->getClient($mock = new MockHandler([
             new Response(400, ['text-content' => 'application/xml'])
