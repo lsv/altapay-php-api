@@ -9,7 +9,10 @@
     <Body>
         <Result>Success</Result>
         <PaymentRequestId>2349494a-6adf-49f7-8096-2125a969e104</PaymentRequestId>
-        <Url>https://gateway.altapaysecure.com/merchant.php/API/requestForm?pid=2349494a-6adf-49f7-8096-2125a969e104</Url>
-        <DynamicJavascriptUrl>https://gateway.altapaysecure.com/eCommerce.php/API/embeddedPaymentWindow?pid=2349494a-6adf-49f7-8096-2125a969e104</DynamicJavascriptUrl>
+        <Url>https://gateway.altapaysecure.com/merchant.php/API/requestForm?pid=2349494a-6adf-49f7-8096-2125a969e104
+        </Url>
+        <DynamicJavascriptUrl>
+            https://gateway.altapaysecure.com/eCommerce.php/API/embeddedPaymentWindow?pid=2349494a-6adf-49f7-8096-2125a969e104
+        </DynamicJavascriptUrl>
     </Body>
 </APIResponse>

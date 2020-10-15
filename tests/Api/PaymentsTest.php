@@ -24,11 +24,11 @@ class PaymentsTest extends AbstractApiTest
     {
         $client = $this->getXmlClient(__DIR__ . '/Results/payments.xml');
 
-        $api = (new Payments($this->getAuth()))
-            ->setClient($client)
-        ;
+        $api    = (new Payments($this->getAuth()))
+            ->setClient($client);
         $result = $api->call();
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
+
         return $result;
     }
 
@@ -39,11 +39,11 @@ class PaymentsTest extends AbstractApiTest
     {
         $client = $this->getXmlClient(__DIR__ . '/Results/payment.xml');
 
-        $api = (new Payments($this->getAuth()))
-            ->setClient($client)
-        ;
+        $api    = (new Payments($this->getAuth()))
+            ->setClient($client);
         $result = $api->call();
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
+
         return $result;
     }
 
@@ -57,8 +57,7 @@ class PaymentsTest extends AbstractApiTest
 
         (new Payments($this->getAuth()))
             ->setClient($client)
-            ->call()
-        ;
+            ->call();
     }
 
     public function test_payments_routing(): void
@@ -71,40 +70,38 @@ class PaymentsTest extends AbstractApiTest
             ->setTerminal('terminalvalue')
             ->setShopOrderId('shoporderid')
             ->setShop('shopkey')
-            ->setPaymentId('mypaymentid')
-        ;
+            ->setPaymentId('mypaymentid');
         $api->call();
 
         $this->assertInstanceOf(Request::class, $api->getRawRequest());
         $this->assertInstanceOf(Response::class, $api->getRawResponse());
 
-        $this->assertEquals($this->getExceptedUri('payments/'), $api->getRawRequest()->getUri()->getPath());
+        $this->assertSame($this->getExceptedUri('payments/'), $api->getRawRequest()->getUri()->getPath());
         parse_str($api->getRawRequest()->getUri()->getQuery(), $parts);
 
-        $this->assertEquals('transactionid', $parts['transaction_id']);
-        $this->assertEquals('terminalvalue', $parts['terminal']);
-        $this->assertEquals('shoporderid', $parts['shop_orderid']);
-        $this->assertEquals('shopkey', $parts['shop']);
-        $this->assertEquals('mypaymentid', $parts['payment_id']);
+        $this->assertSame('transactionid', $parts['transaction_id']);
+        $this->assertSame('terminalvalue', $parts['terminal']);
+        $this->assertSame('shoporderid', $parts['shop_orderid']);
+        $this->assertSame('shopkey', $parts['shop']);
+        $this->assertSame('mypaymentid', $parts['payment_id']);
     }
 
     public function test_payments_transaction_object(): void
     {
         $client = $this->getXmlClient(__DIR__ . '/Results/payments.xml');
 
-        $trans = new Transaction();
-        $trans->TransactionId = 123;
+        $trans                = new Transaction();
+        $trans->TransactionId = '123';
 
         $api = (new Payments($this->getAuth()))
             ->setClient($client)
-            ->setTransaction($trans)
-        ;
+            ->setTransaction($trans);
         $api->call();
 
-        $this->assertEquals($this->getExceptedUri('payments/'), $api->getRawRequest()->getUri()->getPath());
+        $this->assertSame($this->getExceptedUri('payments/'), $api->getRawRequest()->getUri()->getPath());
         parse_str($api->getRawRequest()->getUri()->getQuery(), $parts);
 
-        $this->assertEquals(123, $parts['transaction_id']);
+        $this->assertSame('123', $parts['transaction_id']);
     }
 
     public function test_single_payment_transaction_count(): void
@@ -125,36 +122,36 @@ class PaymentsTest extends AbstractApiTest
         $data = $this->getMultiplePaymentTransaction()[0];
         $this->assertInstanceOf(Transaction::class, $data);
 
-        $this->assertEquals(1, $data->TransactionId);
-        $this->assertEquals('ccc1479c-37f9-4962-8d2c-662d75117e9d', $data->PaymentId);
-        $this->assertEquals('Valid', $data->CardStatus);
-        $this->assertEquals('93f534a2f5d66d6ab3f16c8a7bb7e852656d4bb2', $data->CreditCardToken);
-        $this->assertEquals('411111******1111', $data->CreditCardMaskedPan);
-        $this->assertEquals('false', $data->IsTokenized);
-        $this->assertEquals('Not_Applicable', $data->ThreeDSecureResult);
-        $this->assertEquals('Merchant', $data->LiableForChargeback);
-        $this->assertEquals('4f244dec4907eba0f6432e53b17a60ebcf51365e', $data->BlacklistToken);
-        $this->assertEquals('myorderid', $data->ShopOrderId);
-        $this->assertEquals('AltaPay Shop', $data->Shop);
-        $this->assertEquals('AltaPay Test Terminal', $data->Terminal);
-        $this->assertEquals('captured', $data->TransactionStatus);
-        $this->assertEquals('NONE', $data->ReasonCode);
-        $this->assertEquals('978', $data->MerchantCurrency);
-        $this->assertEquals('EUR', $data->MerchantCurrencyAlpha);
-        $this->assertEquals('978', $data->CardHolderCurrency);
-        $this->assertEquals('EUR', $data->CardHolderCurrencyAlpha);
-        $this->assertEquals(1.00, $data->ReservedAmount);
-        $this->assertEquals(1.00, $data->CapturedAmount);
-        $this->assertEquals(0, $data->RefundedAmount);
-        $this->assertEquals(0, $data->RecurringDefaultAmount);
+        $this->assertSame('1', $data->TransactionId);
+        $this->assertSame('ccc1479c-37f9-4962-8d2c-662d75117e9d', $data->PaymentId);
+        $this->assertSame('Valid', $data->CardStatus);
+        $this->assertSame('93f534a2f5d66d6ab3f16c8a7bb7e852656d4bb2', $data->CreditCardToken);
+        $this->assertSame('411111******1111', $data->CreditCardMaskedPan);
+        $this->assertSame('false', $data->IsTokenized);
+        $this->assertSame('Not_Applicable', $data->ThreeDSecureResult);
+        $this->assertSame('Merchant', $data->LiableForChargeback);
+        $this->assertSame('4f244dec4907eba0f6432e53b17a60ebcf51365e', $data->BlacklistToken);
+        $this->assertSame('myorderid', $data->ShopOrderId);
+        $this->assertSame('AltaPay Shop', $data->Shop);
+        $this->assertSame('AltaPay Test Terminal', $data->Terminal);
+        $this->assertSame('captured', $data->TransactionStatus);
+        $this->assertSame('NONE', $data->ReasonCode);
+        $this->assertSame('978', $data->MerchantCurrency);
+        $this->assertSame('EUR', $data->MerchantCurrencyAlpha);
+        $this->assertSame('978', $data->CardHolderCurrency);
+        $this->assertSame('EUR', $data->CardHolderCurrencyAlpha);
+        $this->assertSame(1.00, $data->ReservedAmount);
+        $this->assertSame(1.00, $data->CapturedAmount);
+        $this->assertSame(0.0, $data->RefundedAmount);
+        $this->assertSame(0.0, $data->RecurringDefaultAmount);
         $this->assertInstanceOf(\DateTime::class, $data->CreatedDate);
         $this->assertInstanceOf(\DateTime::class, $data->UpdatedDate);
-        $this->assertEquals('28-09-2010', $data->CreatedDate->format('d-m-Y'));
-        $this->assertEquals('28-09-2010', $data->UpdatedDate->format('d-m-Y'));
-        $this->assertEquals('CreditCard', $data->PaymentNature);
-        $this->assertEquals('eCommerce', $data->PaymentSource);
-        $this->assertEquals(13.37, $data->FraudRiskScore);
-        $this->assertEquals('Fraud detection explanation', $data->FraudExplanation);
+        $this->assertSame('28-09-2010', $data->CreatedDate->format('d-m-Y'));
+        $this->assertSame('28-09-2010', $data->UpdatedDate->format('d-m-Y'));
+        $this->assertSame('CreditCard', $data->PaymentNature);
+        $this->assertSame('eCommerce', $data->PaymentSource);
+        $this->assertSame(13.37, $data->FraudRiskScore);
+        $this->assertSame('Fraud detection explanation', $data->FraudExplanation);
 
         // Payment nature service
         $this->assertInstanceOf(PaymentNatureService::class, $data->PaymentNatureService);
@@ -177,7 +174,7 @@ class PaymentsTest extends AbstractApiTest
         $data = $this->getMultiplePaymentTransaction()[0]->PaymentNatureService;
         $this->assertInstanceOf(PaymentNatureService::class, $data);
 
-        $this->assertEquals('TestAcquirer', $data->name);
+        $this->assertSame('TestAcquirer', $data->name);
         $this->assertTrue($data->SupportsRefunds);
         $this->assertTrue($data->SupportsRelease);
         $this->assertTrue($data->SupportsMultipleCaptures);
@@ -190,21 +187,28 @@ class PaymentsTest extends AbstractApiTest
     public function paymentinfosDataprovider()
     {
         return [
-                [
-                    0, 'Form_Created_At', '2010-09-28 12:34:56'
-                ],
-                [
-                    1, 'Form_Provider', 'AltaPay Test Form'
-                ],
-                [
-                    2, 'Merchant_Provided_Info', 'Some info by merchant'
-                ]
-            ];
+            [
+                0,
+                'Form_Created_At',
+                '2010-09-28 12:34:56'
+            ],
+            [
+                1,
+                'Form_Provider',
+                'AltaPay Test Form'
+            ],
+            [
+                2,
+                'Merchant_Provided_Info',
+                'Some info by merchant'
+            ]
+        ];
     }
 
     /**
      * @dataProvider paymentinfosDataprovider
      * @depends      test_multiple_payment_transaction_data
+     *
      * @param string $line
      * @param string $name
      * @param string $value
@@ -213,8 +217,8 @@ class PaymentsTest extends AbstractApiTest
     {
         $datas = $this->getMultiplePaymentTransaction()[0]->PaymentInfos;
 
-        $this->assertEquals($name, $datas[$line]->name, 'checking name');
-        $this->assertEquals($value, $datas[$line]->PaymentInfo, 'checking value');
+        $this->assertSame($name, $datas[$line]->name, 'checking name');
+        $this->assertSame($value, $datas[$line]->PaymentInfo, 'checking value');
     }
 
     /**
@@ -225,28 +229,28 @@ class PaymentsTest extends AbstractApiTest
         $data = $this->getMultiplePaymentTransaction()[0]->CustomerInfo;
 
         $this->assertStringStartsWith('Mozilla/5.0', $data->UserAgent);
-        $this->assertEquals('127.127.127.127', $data->IpAddress);
-        $this->assertEquals('support@altapay.com', $data->Email);
-        $this->assertEquals('support', $data->Username);
-        $this->assertEquals('+45 7020 0056', $data->CustomerPhone);
-        $this->assertEquals('12345678', $data->OrganisationNumber);
+        $this->assertSame('127.127.127.127', $data->IpAddress);
+        $this->assertSame('support@altapay.com', $data->Email);
+        $this->assertSame('support', $data->Username);
+        $this->assertSame('+45 7020 0056', $data->CustomerPhone);
+        $this->assertSame('12345678', $data->OrganisationNumber);
         $this->assertInstanceOf(Country::class, $data->CountryOfOrigin);
 
         $country = $data->CountryOfOrigin;
         $this->assertInstanceOf(Country::class, $country);
-        $this->assertEquals('DK', $country->Country);
-        $this->assertEquals('BillingAddress', $country->Source);
+        $this->assertSame('DK', $country->Country);
+        $this->assertSame('BillingAddress', $country->Source);
 
         $this->assertInstanceOf(Address::class, $data->BillingAddress);
 
         $address = $data->BillingAddress;
         $this->assertInstanceOf(Address::class, $address);
-        $this->assertEquals('Palle', $address->Firstname);
-        $this->assertEquals('Simonsen', $address->Lastname);
-        $this->assertEquals('Rosenkæret 13', $address->Address);
-        $this->assertEquals('Søborg', $address->City);
-        $this->assertEquals('2860', $address->PostalCode);
-        $this->assertEquals('DK', $address->Country);
+        $this->assertSame('Palle', $address->Firstname);
+        $this->assertSame('Simonsen', $address->Lastname);
+        $this->assertSame('Rosenkæret 13', $address->Address);
+        $this->assertSame('Søborg', $address->City);
+        $this->assertSame('2860', $address->PostalCode);
+        $this->assertSame('DK', $address->Country);
 
         $this->assertInstanceOf(Address::class, $data->ShippingAddress);
 
@@ -270,11 +274,11 @@ class PaymentsTest extends AbstractApiTest
         $data = $this->getMultiplePaymentTransaction()[0]->ReconciliationIdentifiers[0];
         $this->assertInstanceOf(ReconciliationIdentifier::class, $data);
 
-        $this->assertEquals('f4e2533e-c578-4383-b075-bc8a6866784a', $data->Id);
-        $this->assertEquals(1.00, $data->Amount);
-        $this->assertEquals('captured', $data->Type);
+        $this->assertSame('f4e2533e-c578-4383-b075-bc8a6866784a', $data->Id);
+        $this->assertSame(1.00, $data->Amount);
+        $this->assertSame('captured', $data->Type);
         $this->assertInstanceOf(\DateTime::class, $data->Date);
-        $this->assertEquals('28-09-2010', $data->Date->format('d-m-Y'));
-        $this->assertEquals('978', $data->currency);
+        $this->assertSame('28-09-2010', $data->Date->format('d-m-Y'));
+        $this->assertSame('978', $data->currency);
     }
 }

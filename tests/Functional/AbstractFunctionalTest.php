@@ -8,7 +8,6 @@ use Altapay\ApiTest\AbstractTest;
 
 abstract class AbstractFunctionalTest extends AbstractTest
 {
-
     const VALID_VISA_CARD_NUMBER = '4140000000001466';
 
     /**
@@ -16,7 +15,7 @@ abstract class AbstractFunctionalTest extends AbstractTest
      */
     protected function setUp(): void
     {
-        if (! file_exists(__DIR__ . '/../../.env.php')) {
+        if (!file_exists(__DIR__ . '/../../.env.php')) {
             $this->markTestSkipped(
                 'Can not test functional because .env.php file does not exists'
             );
@@ -57,6 +56,7 @@ abstract class AbstractFunctionalTest extends AbstractTest
 
     /**
      * @param string $number
+     *
      * @return Card
      */
     protected function generateCard($number)
@@ -68,5 +68,4 @@ abstract class AbstractFunctionalTest extends AbstractTest
             '123'
         );
     }
-
 }

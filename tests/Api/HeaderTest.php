@@ -19,8 +19,7 @@ class HeaderTest extends AbstractApiTest
         $client = $this->getXmlClient(__DIR__ . '/Results/header_error.xml');
 
         return (new FundingList($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
     }
 
     public function test_get_header_error(): void
@@ -37,8 +36,8 @@ class HeaderTest extends AbstractApiTest
             $api->call();
         } catch (ResponseHeaderException $e) {
             $this->assertInstanceOf(Header::class, $e->getHeader());
-            $this->assertEquals('200', $e->getHeader()->ErrorCode);
-            $this->assertEquals('This request has error', $e->getHeader()->ErrorMessage);
+            $this->assertSame('200', $e->getHeader()->ErrorCode);
+            $this->assertSame('This request has error', $e->getHeader()->ErrorMessage);
         }
     }
 }

@@ -9,11 +9,18 @@
     <Body>
         <InvoiceText>
             <AccountOfferMinimumToPay>200</AccountOfferMinimumToPay>
-            <AccountOfferText>Ønsker du å delbetale denne fakturaen går du enkelt inn på paybybill.gothiagroup.com. Brukernavnet tilsvarer ditt fakturanummer og passordet er angitt på fakturaen. Etter at du har godkjent vilkårene, betaler du inn aktiveringsbeløpet som er angitt på fakturaen. Det vil da opprettes en kundekonto hos Arvato som gjør at du kan dele opp fakturabeløpet over tid gjennom tilsendt månedsfaktura.</AccountOfferText>
+            <AccountOfferText>Ønsker du å delbetale denne fakturaen går du enkelt inn på paybybill.gothiagroup.com.
+                Brukernavnet tilsvarer ditt fakturanummer og passordet er angitt på fakturaen. Etter at du har godkjent
+                vilkårene, betaler du inn aktiveringsbeløpet som er angitt på fakturaen. Det vil da opprettes en
+                kundekonto hos Arvato som gjør at du kan dele opp fakturabeløpet over tid gjennom tilsendt
+                månedsfaktura.
+            </AccountOfferText>
             <BankAccountNumber>123456789</BankAccountNumber>
             <LogonText>Logg på kunde.gothiagroup.com med fakturanr og passord. Passord : xxxxxx</LogonText>
             <OcrNumber>234234523</OcrNumber>
-            <MandatoryInvoiceText>Fordringen er overdraget Arvato Financial Group AB til ejendom. Betaling, indsigelser samt alle.</MandatoryInvoiceText>
+            <MandatoryInvoiceText>Fordringen er overdraget Arvato Financial Group AB til ejendom. Betaling, indsigelser
+                samt alle.
+            </MandatoryInvoiceText>
             <InvoiceNumber>7373</InvoiceNumber>
             <CustomerNumber>832</CustomerNumber>
             <InvoiceDate>2011-03-10T15:36:43+01:00</InvoiceDate>
