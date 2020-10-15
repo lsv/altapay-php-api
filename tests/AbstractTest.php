@@ -28,6 +28,7 @@ abstract class AbstractTest extends \PHPUnit\Framework\TestCase
         for ($i = 0; $i < $length; $i++) {
             $randstring .= $characters[rand(0, strlen($characters) - 1)];
         }
+
         return $randstring;
     }
 
@@ -38,5 +39,4 @@ abstract class AbstractTest extends \PHPUnit\Framework\TestCase
     {
         return new Authentication('test_username', 'test_password');
     }
-
 }

@@ -20,8 +20,7 @@ class FundingListTest extends AbstractApiTest
         $client = $this->getXmlClient(__DIR__ . '/Results/multiplefundinglist.xml');
 
         return (new FundingList($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
     }
 
     /**
@@ -32,8 +31,7 @@ class FundingListTest extends AbstractApiTest
         $client = $this->getXmlClient(__DIR__ . '/Results/singlefundinglist.xml');
 
         return (new FundingList($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
     }
 
     public function test_fundlinglist_routing(): void
@@ -41,23 +39,23 @@ class FundingListTest extends AbstractApiTest
         $api = $this->getMultipleFundingsList();
         $api->call();
 
-        $this->assertEquals($this->getExceptedUri('fundingList/'), $api->getRawRequest()->getUri()->getPath());
+        $this->assertSame($this->getExceptedUri('fundingList/'), $api->getRawRequest()->getUri()->getPath());
         parse_str($api->getRawRequest()->getUri()->getQuery(), $parts);
 
-        $this->assertEquals(0, $parts['page']);
+        $this->assertSame('0', $parts['page']);
 
         $api = $this->getMultipleFundingsList();
         $api->setPage(9);
         $api->call();
 
-        $this->assertEquals($this->getExceptedUri('fundingList/'), $api->getRawRequest()->getUri()->getPath());
+        $this->assertSame($this->getExceptedUri('fundingList/'), $api->getRawRequest()->getUri()->getPath());
         parse_str($api->getRawRequest()->getUri()->getQuery(), $parts);
-        $this->assertEquals(9, $parts['page']);
+        $this->assertSame('9', $parts['page']);
     }
 
     public function test_fundlinglist_single(): void
     {
-        $api = $this->getSingleFundingsList();
+        $api      = $this->getSingleFundingsList();
         $response = $api->call();
         $this->assertInstanceOf(FundingsResponse::class, $response);
         $this->assertCount(1, $response->Fundings, 'num fundings');
@@ -65,7 +63,7 @@ class FundingListTest extends AbstractApiTest
 
     public function test_fundlinglist_multiple(): void
     {
-        $api = $this->getMultipleFundingsList();
+        $api      = $this->getMultipleFundingsList();
         $response = $api->call();
         $this->assertInstanceOf(FundingsResponse::class, $response);
         $this->assertCount(2, $response->Fundings, 'num fundings');
@@ -76,21 +74,21 @@ class FundingListTest extends AbstractApiTest
      */
     public function test_funding_object(): void
     {
-        $api = $this->getMultipleFundingsList();
+        $api      = $this->getMultipleFundingsList();
         $response = $api->call();
         $this->assertInstanceOf(FundingsResponse::class, $response);
         $funding = $response->Fundings[0];
         $this->assertInstanceOf(Funding::class, $funding);
 
-        $this->assertEquals('CreatedByTest', $funding->Filename);
-        $this->assertEquals('1234567890123456', $funding->ContractIdentifier);
+        $this->assertSame('CreatedByTest', $funding->Filename);
+        $this->assertSame('1234567890123456', $funding->ContractIdentifier);
         $this->assertCount(2, $funding->Shops);
-        $this->assertEquals('TestAcquirer', $funding->Acquirer);
+        $this->assertSame('TestAcquirer', $funding->Acquirer);
         $this->assertInstanceOf(\DateTime::class, $funding->FundingDate);
-        $this->assertEquals('26-09-2010', $funding->FundingDate->format('d-m-Y'));
-        $this->assertEquals('50.00 EUR', $funding->Amount);
+        $this->assertSame('26-09-2010', $funding->FundingDate->format('d-m-Y'));
+        $this->assertSame('50.00 EUR', $funding->Amount);
         $this->assertInstanceOf(\DateTime::class, $funding->CreatedDate);
-        $this->assertEquals('27-09-2010', $funding->CreatedDate->format('d-m-Y'));
-        $this->assertEquals('http://localhost/merchant.php/API/fundingDownload?id=1', $funding->DownloadLink);
+        $this->assertSame('27-09-2010', $funding->CreatedDate->format('d-m-Y'));
+        $this->assertSame('http://localhost/merchant.php/API/fundingDownload?id=1', $funding->DownloadLink);
     }
 }

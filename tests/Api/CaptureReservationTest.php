@@ -3,8 +3,8 @@
 namespace Altapay\ApiTest\Api;
 
 use Altapay\Api\Payments\CaptureReservation;
-use Altapay\Response\CaptureReservationResponse;
 use Altapay\Request\OrderLine;
+use Altapay\Response\CaptureReservationResponse;
 use Altapay\Response\Embeds\Transaction;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Handler\MockHandler;
@@ -21,8 +21,7 @@ class CaptureReservationTest extends AbstractApiTest
         $client = $this->getXmlClient(__DIR__ . '/Results/capture.xml');
 
         return (new CaptureReservation($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
     }
 
     public function test_capture_reservation(): void
@@ -42,10 +41,10 @@ class CaptureReservationTest extends AbstractApiTest
         $response = $api->call();
 
         $this->assertInstanceOf(CaptureReservationResponse::class, $response);
-        $this->assertEquals(0.20, $response->CaptureAmount);
-        $this->assertEquals('978', $response->CaptureCurrency);
-        $this->assertEquals('Success', $response->Result);
-        $this->assertEquals('Success', $response->CaptureResult);
+        $this->assertSame(0.20, $response->CaptureAmount);
+        $this->assertSame('978', $response->CaptureCurrency);
+        $this->assertSame('Success', $response->Result);
+        $this->assertSame('Success', $response->CaptureResult);
         $this->assertCount(1, $response->Transactions);
     }
 
@@ -57,16 +56,16 @@ class CaptureReservationTest extends AbstractApiTest
         $this->assertInstanceOf(CaptureReservationResponse::class, $response);
         $transaction = $response->Transactions[0];
         $this->assertInstanceOf(Transaction::class, $transaction);
-        $this->assertEquals(1, $transaction->TransactionId);
-        $this->assertEquals(978, $transaction->MerchantCurrency);
-        $this->assertEquals(13.37, $transaction->FraudRiskScore);
-        $this->assertEquals(1, $transaction->ReservedAmount);
+        $this->assertSame('1', $transaction->TransactionId);
+        $this->assertSame('978', $transaction->MerchantCurrency);
+        $this->assertSame(13.37, $transaction->FraudRiskScore);
+        $this->assertSame(1.0, $transaction->ReservedAmount);
     }
 
     public function test_capture_reservation_transaction_request(): void
     {
-        $transaction = new Transaction();
-        $transaction->TransactionId = 456;
+        $transaction                = new Transaction();
+        $transaction->TransactionId = '456';
 
         $api = $this->getCaptureReservation();
         $api->setTransaction($transaction);
@@ -78,19 +77,19 @@ class CaptureReservationTest extends AbstractApiTest
 
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('captureReservation'), $request->getUri()->getPath());
-        parse_str($request->getUri()->getQuery(), $parts);
-        $this->assertEquals(456, $parts['transaction_id']);
-        $this->assertEquals(158, $parts['amount']);
-        $this->assertEquals('myidentifier', $parts['reconciliation_identifier']);
-        $this->assertEquals('number', $parts['invoice_number']);
-        $this->assertEquals('5.00', $parts['sales_tax']);
+        $this->assertSame($this->getExceptedUri('captureReservation'), $request->getUri()->getPath());
+        parse_str($request->getBody()->getContents(), $parts);
+        $this->assertSame('456', $parts['transaction_id']);
+        $this->assertSame('158', $parts['amount']);
+        $this->assertSame('myidentifier', $parts['reconciliation_identifier']);
+        $this->assertSame('number', $parts['invoice_number']);
+        $this->assertSame('5', $parts['sales_tax']);
     }
 
     public function test_capture_reservation_transaction_orderlines(): void
     {
-        $transaction = new Transaction();
-        $transaction->TransactionId = 456;
+        $transaction                = new Transaction();
+        $transaction->TransactionId = '456';
 
         $api = $this->getCaptureReservation();
         $api->setTransaction($transaction);
@@ -99,24 +98,22 @@ class CaptureReservationTest extends AbstractApiTest
 
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('captureReservation'), $request->getUri()->getPath());
-        parse_str($request->getUri()->getQuery(), $parts);
-
+        $this->assertSame($this->getExceptedUri('captureReservation'), $request->getUri()->getPath());
+        parse_str($request->getBody()->getContents(), $parts);
         $this->assertCount(2, $parts['orderLines']);
         $line = $parts['orderLines'][1];
-
-        $this->assertEquals('Brown sugar', $line['description']);
-        $this->assertEquals('productid2', $line['itemId']);
-        $this->assertEquals('2.5', $line['quantity']);
-        $this->assertEquals('8.75', $line['unitPrice']);
-        $this->assertEquals('20', $line['taxPercent']);
-        $this->assertEquals('kg', $line['unitCode']);
+        $this->assertSame('Brown sugar', $line['description']);
+        $this->assertSame('productid2', $line['itemId']);
+        $this->assertSame('2.5', $line['quantity']);
+        $this->assertSame('8.75', $line['unitPrice']);
+        $this->assertSame('20', $line['taxPercent']);
+        $this->assertSame('kg', $line['unitCode']);
     }
 
     public function test_capture_reservation_transaction_orderlines_object(): void
     {
-        $transaction = new Transaction();
-        $transaction->TransactionId = 456;
+        $transaction                = new Transaction();
+        $transaction->TransactionId = '456';
 
         $api = $this->getCaptureReservation();
         $api->setTransaction($transaction);
@@ -125,44 +122,25 @@ class CaptureReservationTest extends AbstractApiTest
 
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('captureReservation'), $request->getUri()->getPath());
-        parse_str($request->getUri()->getQuery(), $parts);
-
+        $this->assertSame($this->getExceptedUri('captureReservation'), $request->getUri()->getPath());
+        parse_str($request->getBody()->getContents(), $parts);
         $this->assertCount(1, $parts['orderLines']);
-    }
-
-    public function test_capture_reservation_transaction_orderlines_randomarray(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage(sprintf(
-            'orderLines should all be a instance of "%s"',
-            OrderLine::class
-        ));
-
-        $transaction = new Transaction();
-        $transaction->TransactionId = 456;
-
-        $api = $this->getCaptureReservation();
-        $api->setTransaction($transaction);
-        $api->setOrderLines([new OrderLine()]);
-        $api->call();
     }
 
     public function test_capture_reservation_transaction_handleexception(): void
     {
         $this->expectException(ClientException::class);
 
-        $transaction = new Transaction();
-        $transaction->TransactionId = 456;
+        $transaction                = new Transaction();
+        $transaction->TransactionId = '456';
 
         $client = $this->getClient($mock = new MockHandler([
-            new Response(400, ['text-content' => 'application/xml'])
+            new Response(400, ['text-content' => 'application/xml']),
         ]));
 
         $api = (new CaptureReservation($this->getAuth()))
             ->setClient($client)
-            ->setTransaction('123')
-        ;
+            ->setTransaction('123');
         $api->call();
     }
 }

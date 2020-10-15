@@ -20,8 +20,7 @@ class ReleaseReservationTest extends AbstractApiTest
         $client = $this->getXmlClient(__DIR__ . '/Results/release.xml');
 
         return (new ReleaseReservation($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
     }
 
     public function test_release_reservation(): void
@@ -40,45 +39,45 @@ class ReleaseReservationTest extends AbstractApiTest
         $api->setTransaction('123');
         $response = $api->call();
         $this->assertInstanceOf(ReleaseReservationDocument::class, $response);
-        $this->assertEquals('Success', $response->Result);
+        $this->assertSame('Success', $response->Result);
         $this->assertCount(1, $response->Transactions);
     }
 
     public function test_release_reservation_querypath(): void
     {
-        $transaction = new Transaction();
-        $transaction->TransactionId = 456;
+        $transaction                = new Transaction();
+        $transaction->TransactionId = '456';
 
         $api = $this->getReleaseReservation();
         $api->setTransaction($transaction);
         $api->call();
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('releaseReservation'), $request->getUri()->getPath());
-        parse_str($request->getUri()->getQuery(), $parts);
-        $this->assertEquals(456, $parts['transaction_id']);
+        $this->assertSame($this->getExceptedUri('releaseReservation'), $request->getUri()->getPath());
+        parse_str($request->getBody()->getContents(), $parts);
+        $this->assertSame('456', $parts['transaction_id']);
 
         $api = $this->getReleaseReservation();
-        $api->setTransaction('helloworld');
+        $api->setTransaction('123');
         $api->call();
         $request = $api->getRawRequest();
-        parse_str($request->getUri()->getQuery(), $parts);
-        $this->assertEquals('helloworld', $parts['transaction_id']);
+        parse_str($request->getBody()->getContents(), $parts);
+        $this->assertSame('123', $parts['transaction_id']);
 
         $api = $this->getReleaseReservation();
-        $api->setTransaction('my trans id has spaces');
+        $api->setTransaction('152');
         $api->call();
         $request = $api->getRawRequest();
-        parse_str($request->getUri()->getQuery(), $parts);
-        $this->assertEquals('my trans id has spaces', $parts['transaction_id']);
+        parse_str($request->getBody()->getContents(), $parts);
+        $this->assertSame('152', $parts['transaction_id']);
     }
 
     public function test_capture_reservation_transaction_handleexception(): void
     {
         $this->expectException(ClientException::class);
 
-        $transaction = new Transaction();
-        $transaction->TransactionId = 456;
+        $transaction                = new Transaction();
+        $transaction->TransactionId = '456';
 
         $client = $this->getClient($mock = new MockHandler([
             new Response(400, ['text-content' => 'application/xml'])
@@ -86,8 +85,7 @@ class ReleaseReservationTest extends AbstractApiTest
 
         $api = (new ReleaseReservation($this->getAuth()))
             ->setClient($client)
-            ->setTransaction('123')
-        ;
+            ->setTransaction('123');
         $api->call();
     }
 }

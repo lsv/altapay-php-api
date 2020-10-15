@@ -13,18 +13,20 @@ class FactoryTest extends AbstractTest
      */
     public function dataProvider()
     {
-        $refClass = new \ReflectionClass(Factory::class);
+        $refClass  = new \ReflectionClass(Factory::class);
         $constants = $refClass->getConstants();
-        $output = [];
+        $output    = [];
         foreach ($constants as $class) {
             $output[] = [$class];
         }
+
         return $output;
     }
 
     /**
      * @dataProvider dataProvider
-     * @param class-string $class
+     *
+     * @param        class-string $class
      */
     public function test_can_create($class): void
     {
@@ -36,7 +38,7 @@ class FactoryTest extends AbstractTest
         $this->expectException(ClassDoesNotExistsException::class);
 
         /** @var class-string */
-        $invalidClassName ='Foo\Bar';
+        $invalidClassName = 'Foo\Bar';
 
         Factory::create($invalidClassName, $this->getAuth());
     }
@@ -44,13 +46,12 @@ class FactoryTest extends AbstractTest
     public function test_does_not_exists_exception_catch(): void
     {
         /** @var class-string */
-        $invalidClassName ='Foo\Bar';
+        $invalidClassName = 'Foo\Bar';
 
         try {
             Factory::create($invalidClassName, $this->getAuth());
         } catch (ClassDoesNotExistsException $e) {
-            $this->assertEquals('Foo\Bar', $e->getClass());
+            $this->assertSame('Foo\Bar', $e->getClass());
         }
     }
-
 }

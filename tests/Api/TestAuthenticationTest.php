@@ -16,11 +16,10 @@ class TestAuthenticationTest extends AbstractApiTest
         ]));
 
         $api = (new TestAuthentication($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
 
         $this->assertSame('ok', $api->call());
-        $this->assertEquals($this->getExceptedUri('login'), $api->getRawRequest()->getUri()->getPath());
+        $this->assertSame($this->getExceptedUri('login'), $api->getRawRequest()->getUri()->getPath());
     }
 
     public function test_auth_fail(): void
@@ -32,13 +31,12 @@ class TestAuthenticationTest extends AbstractApiTest
         ]));
 
         $api = (new TestAuthentication($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
 
         try {
             $api->call();
         } catch (ClientException $e) {
-            $this->assertEquals($this->getExceptedUri('login'), $api->getRawRequest()->getUri()->getPath());
+            $this->assertSame($this->getExceptedUri('login'), $api->getRawRequest()->getUri()->getPath());
             throw $e;
         }
     }

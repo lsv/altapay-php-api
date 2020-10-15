@@ -14,7 +14,6 @@ use Altapay\Response\ReservationOfFixedAmountResponse;
 
 class FixedAmountProgressTest extends AbstractFunctionalTest
 {
-
     public function test_create_fixed_amount_fails(): void
     {
         $this->expectException(ResponseHeaderException::class);
@@ -24,8 +23,7 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
             ->setTerminal($this->getTerminal())
             ->setShopOrderId((string)time())
             ->setAmount($this->getFaker()->randomFloat(2, 1, 50))
-            ->setCurrency('DKK')
-        ;
+            ->setCurrency('DKK');
         $api->call();
     }
 
@@ -53,55 +51,24 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
             ->setShopOrderId((string)time())
             ->setAmount($this->getFaker()->randomFloat(2, 1, 50))
             ->setCurrency('DKK')
-            ->setCard($this->getValidCard())
-        ;
+            ->setCard($this->getValidCard());
         $response = $api->call();
         $this->assertInstanceOf(ReservationOfFixedAmountResponse::class, $response);
 
         // Capture
         $api = new CaptureReservation($this->getAuth());
         $api
-            ->setTransaction($response->Transactions[0])
-        ;
+            ->setTransaction($response->Transactions[0]);
         $response = $api->call();
         $this->assertInstanceOf(CaptureReservationResponse::class, $response);
 
         // Refund
         $api = new RefundCapturedReservation($this->getAuth());
         $api
-            ->setTransaction($response->Transactions[0])
-        ;
+            ->setTransaction($response->Transactions[0]);
         $response = $api->call();
         $this->assertInstanceOf(RefundResponse::class, $response);
-
     }
-
-
-//    public function test_preauth_3dsecure_attempt_fails()
-//    {
-//        $api = new ReservationOfFixedAmount($this->getAuth());
-//        $api
-//            ->setTerminal($this->getTerminal())
-//            ->setShopOrderId((string)time())
-//            ->setAmount(4.66)
-//            ->setCurrency('DKK')
-//            ->setCard($this->generateCard('4140000000000466'))
-//        ;
-//        $api->call();
-//    }
-//
-//    public function test_preauth_3dsecure_attempt_error()
-//    {
-//        $api = new ReservationOfFixedAmount($this->getAuth());
-//        $api
-//            ->setTerminal($this->getTerminal())
-//            ->setShopOrderId((string)time())
-//            ->setAmount(4.67)
-//            ->setCurrency('DKK')
-//            ->setCard($this->generateCard('4180000000000467'))
-//        ;
-//        $api->call();
-//    }
 
     public function test_preauth_declined_by_bank(): void
     {
@@ -114,8 +81,7 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
             ->setShopOrderId((string)time())
             ->setAmount(5.66)
             ->setCurrency('DKK')
-            ->setCard($this->generateCard('4180000000000566'))
-        ;
+            ->setCard($this->generateCard('4180000000000566'));
         $api->call();
     }
 
@@ -130,8 +96,7 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
             ->setShopOrderId((string)time())
             ->setAmount(5.67)
             ->setCurrency('DKK')
-            ->setCard($this->generateCard('4130000000000567'))
-        ;
+            ->setCard($this->generateCard('4130000000000567'));
         $api->call();
     }
 
@@ -192,11 +157,10 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
             ->setAmount(102)
             ->setCurrency('DKK')
             ->setCard($this->generateCard('4170000000000121'))
-            ->setFraudService('maxmind')
-        ;
+            ->setFraudService('maxmind');
         $response = $api->call();
         $this->assertInstanceOf(ReservationOfFixedAmountResponse::class, $response);
-        $this->assertEquals('Deny', $response->Transactions[0]->FraudRecommendation);
+        $this->assertSame('Deny', $response->Transactions[0]->FraudRecommendation);
     }
 
     public function test_fraud_check_deny(): void
@@ -208,11 +172,9 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
             ->setAmount(110)
             ->setCurrency('DKK')
             ->setCard($this->generateCard('4170000000000105'))
-            ->setFraudService('maxmind')
-        ;
+            ->setFraudService('maxmind');
         $response = $api->call();
         $this->assertInstanceOf(ReservationOfFixedAmountResponse::class, $response);
-        $this->assertEquals('Deny', $response->Transactions[0]->FraudRecommendation);
+        $this->assertSame('Deny', $response->Transactions[0]->FraudRecommendation);
     }
-
 }
