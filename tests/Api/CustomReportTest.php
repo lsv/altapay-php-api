@@ -26,9 +26,9 @@ class CustomReportTest extends AbstractApiTest
         $api->setCustomReportId('0c55e643-49c2-492c-ab61-1014426dce5d');
         $api->call();
 
-        $this->assertEquals($this->getExceptedUri('getCustomReport'), $api->getRawRequest()->getUri()->getPath());
+        $this->assertSame($this->getExceptedUri('getCustomReport'), $api->getRawRequest()->getUri()->getPath());
         parse_str($api->getRawRequest()->getUri()->getQuery(), $parts);
-        $this->assertEquals('0c55e643-49c2-492c-ab61-1014426dce5d', $parts['id']);
+        $this->assertSame('0c55e643-49c2-492c-ab61-1014426dce5d', $parts['id']);
     }
 
     public function test_funding_download(): void

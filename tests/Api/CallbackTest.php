@@ -163,11 +163,11 @@ XML
         $call     = new Callback($this->data);
         $response = $call->call();
         $this->assertInstanceOf(CallbackResponse::class, $response);
-        $this->assertEquals('d28df6b4-122d-49e2-add0-19c8271260b0', $response->paymentId);
-        $this->assertEquals('000000022', $response->shopOrderId);
-        $this->assertEquals('incomplete', $response->status);
+        $this->assertSame('d28df6b4-122d-49e2-add0-19c8271260b0', $response->paymentId);
+        $this->assertSame('000000022', $response->shopOrderId);
+        $this->assertSame('incomplete', $response->status);
         $this->assertCount(1, $response->Transactions);
-        $this->assertEquals('1682', $response->Transactions[0]->TransactionId);
-        $this->assertEquals('Failed', $response->Result);
+        $this->assertSame('1682', $response->Transactions[0]->TransactionId);
+        $this->assertSame('Failed', $response->Result);
     }
 }

@@ -33,17 +33,17 @@ class OrderLineTest extends AbstractTest
         $this->assertArrayHasKey('imageUrl', $serialized);
         $this->assertArrayHasKey('productUrl', $serialized);
 
-        $this->assertEquals('description', $serialized['description']);
-        $this->assertEquals(12, $serialized['itemId']);
-        $this->assertEquals(2, $serialized['quantity']);
-        $this->assertEquals(12.50, $serialized['unitPrice']);
-        $this->assertEquals(4.75, $serialized['taxAmount']);
-        $this->assertEquals(38, $serialized['taxPercent']);
-        $this->assertEquals('code', $serialized['unitCode']);
-        $this->assertEquals(1, $serialized['discount']);
-        $this->assertEquals('item', $serialized['goodsType']);
-        $this->assertEquals('https://image.com', $serialized['imageUrl']);
-        $this->assertEquals('https://image.com', $serialized['productUrl']);
+        $this->assertSame('description', $serialized['description']);
+        $this->assertSame('12', $serialized['itemId']);
+        $this->assertSame(2, $serialized['quantity']);
+        $this->assertSame(12.5, $serialized['unitPrice']);
+        $this->assertSame(4.75, $serialized['taxAmount']);
+        $this->assertSame(38, $serialized['taxPercent']);
+        $this->assertSame('code', $serialized['unitCode']);
+        $this->assertSame(1, $serialized['discount']);
+        $this->assertSame('item', $serialized['goodsType']);
+        $this->assertSame('https://image.com', $serialized['imageUrl']);
+        $this->assertSame('https://image.com', $serialized['productUrl']);
 
     }
 
@@ -79,7 +79,7 @@ class OrderLineTest extends AbstractTest
         $line->setGoodsType($type);
         $s = $line->serialize();
 
-        $this->assertEquals($type, $s['goodsType']);
+        $this->assertSame($type, $s['goodsType']);
     }
 
     public function test_serializer(): void

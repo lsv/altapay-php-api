@@ -80,10 +80,10 @@ class CalculateSurchargeTest extends AbstractApiTest
         $api->call();
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('calculateSurcharge/'), $request->getUri()->getPath());
+        $this->assertSame($this->getExceptedUri('calculateSurcharge/'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
-        $this->assertEquals(200.5, $parts['amount']);
-        $this->assertEquals('123', $parts['payment_id']);
+        $this->assertSame('200.5', $parts['amount']);
+        $this->assertSame('123', $parts['payment_id']);
     }
 
     public function test_fields_route(): void
@@ -96,12 +96,12 @@ class CalculateSurchargeTest extends AbstractApiTest
         $api->call();
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('calculateSurcharge/'), $request->getUri()->getPath());
+        $this->assertSame($this->getExceptedUri('calculateSurcharge/'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
-        $this->assertEquals('200', $parts['amount']);
-        $this->assertEquals('DKK', $parts['currency']);
-        $this->assertEquals('1234', $parts['credit_card_token']);
-        $this->assertEquals('my terminal', $parts['terminal']);
+        $this->assertSame('200', $parts['amount']);
+        $this->assertSame('DKK', $parts['currency']);
+        $this->assertSame('1234', $parts['credit_card_token']);
+        $this->assertSame('my terminal', $parts['terminal']);
     }
 
     /**
@@ -117,8 +117,8 @@ class CalculateSurchargeTest extends AbstractApiTest
         $response = $api->call();
         $this->assertInstanceOf(SurchargeResponse::class, $response);
 
-        $this->assertEquals('Success', $response->Result);
-        $this->assertEquals('12.34', $response->SurchageAmount);
+        $this->assertSame('Success', $response->Result);
+        $this->assertSame('12.34', $response->SurchageAmount);
         $this->assertNull($response->ThreeDSecureResult);
     }
 }

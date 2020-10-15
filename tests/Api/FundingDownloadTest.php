@@ -27,10 +27,10 @@ class FundingDownloadTest extends AbstractApiTest
         $api->setFundingDownloadLink('https://myshop.altapaysecure.com/merchant/API/fundingDownload?id=32');
         $api->call();
 
-        $this->assertEquals('myshop.altapaysecure.com', $api->getRawRequest()->getUri()->getHost());
-        $this->assertEquals('/merchant/API/fundingDownload', $api->getRawRequest()->getUri()->getPath());
+        $this->assertSame('myshop.altapaysecure.com', $api->getRawRequest()->getUri()->getHost());
+        $this->assertSame('/merchant/API/fundingDownload', $api->getRawRequest()->getUri()->getPath());
         parse_str($api->getRawRequest()->getUri()->getQuery(), $parts);
-        $this->assertEquals(32, $parts['id']);
+        $this->assertSame('32', $parts['id']);
     }
 
     public function test_funding_download_with_object(): void
@@ -42,10 +42,10 @@ class FundingDownloadTest extends AbstractApiTest
         $api->setFunding($funding);
         $api->call();
 
-        $this->assertEquals('thisismyshop.altapaysecure.com', $api->getRawRequest()->getUri()->getHost());
-        $this->assertEquals('/merchant/API/fundingDownload', $api->getRawRequest()->getUri()->getPath());
+        $this->assertSame('thisismyshop.altapaysecure.com', $api->getRawRequest()->getUri()->getHost());
+        $this->assertSame('/merchant/API/fundingDownload', $api->getRawRequest()->getUri()->getPath());
         parse_str($api->getRawRequest()->getUri()->getQuery(), $parts);
-        $this->assertEquals(99, $parts['id']);
+        $this->assertSame('99', $parts['id']);
     }
 
     public function test_funding_download(): void

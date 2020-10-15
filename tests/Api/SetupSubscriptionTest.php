@@ -52,13 +52,13 @@ class SetupSubscriptionTest extends AbstractApiTest
         $api->call();
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('setupSubscription/'), $request->getUri()->getPath());
+        $this->assertSame($this->getExceptedUri('setupSubscription/'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
-        $this->assertEquals('my terminal', $parts['terminal']);
-        $this->assertEquals('order id', $parts['shop_orderid']);
-        $this->assertEquals(200.50, $parts['amount']);
-        $this->assertEquals(957, $parts['currency']);
-        $this->assertEquals(155.23, $parts['surcharge']);
+        $this->assertSame('my terminal', $parts['terminal']);
+        $this->assertSame('order id', $parts['shop_orderid']);
+        $this->assertSame('200.5', $parts['amount']);
+        $this->assertSame('957', $parts['currency']);
+        $this->assertSame('155.23', $parts['surcharge']);
     }
 
     public function test_response(): void
@@ -72,7 +72,7 @@ class SetupSubscriptionTest extends AbstractApiTest
         $response = $api->call();
 
         $this->assertInstanceOf(SetupSubscriptionResponse::class, $response);
-        $this->assertEquals('Success', $response->Result);
+        $this->assertSame('Success', $response->Result);
         $this->assertCount(1, $response->Transactions);
     }
 }

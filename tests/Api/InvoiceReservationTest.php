@@ -40,12 +40,12 @@ class InvoiceReservationTest extends AbstractApiTest
         $api->call();
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('createInvoiceReservation/'), $request->getUri()->getPath());
+        $this->assertSame($this->getExceptedUri('createInvoiceReservation/'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
-        $this->assertEquals('my terminal', $parts['terminal']);
-        $this->assertEquals('order id', $parts['shop_orderid']);
-        $this->assertEquals(200.50, $parts['amount']);
-        $this->assertEquals(957, $parts['currency']);
+        $this->assertSame('my terminal', $parts['terminal']);
+        $this->assertSame('order id', $parts['shop_orderid']);
+        $this->assertSame('200.5', $parts['amount']);
+        $this->assertSame('957', $parts['currency']);
     }
 
     public function test_options(): void
@@ -66,10 +66,10 @@ class InvoiceReservationTest extends AbstractApiTest
         $request = $api->getRawRequest();
 
         parse_str($request->getUri()->getQuery(), $parts);
-        $this->assertEquals('subscriptionAndCharge', $parts['type']);
-        $this->assertEquals('account', $parts['accountNumber']);
-        $this->assertEquals('mail_order', $parts['payment_source']);
-        $this->assertEquals('code', $parts['bankCode']);
-        $this->assertEquals('maxmind', $parts['fraud_service']);
+        $this->assertSame('subscriptionAndCharge', $parts['type']);
+        $this->assertSame('account', $parts['accountNumber']);
+        $this->assertSame('mail_order', $parts['payment_source']);
+        $this->assertSame('code', $parts['bankCode']);
+        $this->assertSame('maxmind', $parts['fraud_service']);
     }
 }

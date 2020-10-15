@@ -51,7 +51,7 @@ class FactoryTest extends AbstractTest
         try {
             Factory::create($invalidClassName, $this->getAuth());
         } catch (ClassDoesNotExistsException $e) {
-            $this->assertEquals('Foo\Bar', $e->getClass());
+            $this->assertSame('Foo\Bar', $e->getClass());
         }
     }
 

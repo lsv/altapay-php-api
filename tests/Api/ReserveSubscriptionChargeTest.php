@@ -39,7 +39,7 @@ class ReserveSubscriptionChargeTest extends AbstractApiTest
         $api->setTransaction('123');
         $response = $api->call();
         $this->assertInstanceOf(ReserveSubscriptionResponse::class, $response);
-        $this->assertEquals('Success', $response->Result);
+        $this->assertSame('Success', $response->Result);
         $this->assertCount(2, $response->Transactions);
     }
 
@@ -53,9 +53,9 @@ class ReserveSubscriptionChargeTest extends AbstractApiTest
         $api->call();
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('reserveSubscriptionCharge/'), $request->getUri()->getPath());
+        $this->assertSame($this->getExceptedUri('reserveSubscriptionCharge/'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
-        $this->assertEquals(456, $parts['transaction_id']);
+        $this->assertSame('456', $parts['transaction_id']);
 
         $api = $this->getReserveSubscriptionCharge();
         $api->setTransaction('helloworld');
@@ -63,15 +63,15 @@ class ReserveSubscriptionChargeTest extends AbstractApiTest
         $api->call();
         $request = $api->getRawRequest();
         parse_str($request->getUri()->getQuery(), $parts);
-        $this->assertEquals('helloworld', $parts['transaction_id']);
-        $this->assertEquals(200.5, $parts['amount']);
+        $this->assertSame('helloworld', $parts['transaction_id']);
+        $this->assertSame('200.5', $parts['amount']);
 
         $api = $this->getReserveSubscriptionCharge();
         $api->setTransaction('my trans id has spaces');
         $api->call();
         $request = $api->getRawRequest();
         parse_str($request->getUri()->getQuery(), $parts);
-        $this->assertEquals('my trans id has spaces', $parts['transaction_id']);
+        $this->assertSame('my trans id has spaces', $parts['transaction_id']);
     }
 
     public function test_reserve_subscription_charge_querypath_handleexception(): void

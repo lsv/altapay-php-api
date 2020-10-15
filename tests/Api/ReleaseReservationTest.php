@@ -39,7 +39,7 @@ class ReleaseReservationTest extends AbstractApiTest
         $api->setTransaction('123');
         $response = $api->call();
         $this->assertInstanceOf(ReleaseReservationDocument::class, $response);
-        $this->assertEquals('Success', $response->Result);
+        $this->assertSame('Success', $response->Result);
         $this->assertCount(1, $response->Transactions);
     }
 
@@ -53,35 +53,23 @@ class ReleaseReservationTest extends AbstractApiTest
         $api->call();
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('releaseReservation'), $request->getUri()->getPath());
-        parse_str($request->getUri()->getQuery(), $parts);
-        if (strtolower($request->getMethod()) == 'post') {
-            unset($parts);
-            parse_str($request->getBody()->getContents(), $parts);
-        }
-        $this->assertEquals(456, $parts['transaction_id']);
+        $this->assertSame($this->getExceptedUri('releaseReservation'), $request->getUri()->getPath());
+        parse_str($request->getBody()->getContents(), $parts);
+        $this->assertSame('456', $parts['transaction_id']);
 
         $api = $this->getReleaseReservation();
         $api->setTransaction('123');
         $api->call();
         $request = $api->getRawRequest();
-        parse_str($request->getUri()->getQuery(), $parts);
-        if (strtolower($request->getMethod()) == 'post') {
-            unset($parts);
-            parse_str($request->getBody()->getContents(), $parts);
-        }
-        $this->assertEquals(123, $parts['transaction_id']);
+        parse_str($request->getBody()->getContents(), $parts);
+        $this->assertSame('123', $parts['transaction_id']);
 
         $api = $this->getReleaseReservation();
         $api->setTransaction('152');
         $api->call();
         $request = $api->getRawRequest();
-        parse_str($request->getUri()->getQuery(), $parts);
-        if (strtolower($request->getMethod()) == 'post') {
-            unset($parts);
-            parse_str($request->getBody()->getContents(), $parts);
-        }
-        $this->assertEquals(152, $parts['transaction_id']);
+        parse_str($request->getBody()->getContents(), $parts);
+        $this->assertSame('152', $parts['transaction_id']);
     }
 
     public function test_capture_reservation_transaction_handleexception(): void

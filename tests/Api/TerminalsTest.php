@@ -26,7 +26,7 @@ class TerminalsTest extends AbstractApiTest
     {
         $api = $this->getTerminals();
         $api->call();
-        $this->assertEquals($this->getExceptedUri('getTerminals'), $api->getRawRequest()->getUri()->getPath());
+        $this->assertSame($this->getExceptedUri('getTerminals'), $api->getRawRequest()->getUri()->getPath());
     }
 
     public function test_header(): void
@@ -35,10 +35,10 @@ class TerminalsTest extends AbstractApiTest
         $response = $api->call();
         $this->assertInstanceOf(TerminalsResponse::class, $response);
         $this->assertInstanceOf(\DateTime::class, $response->Header->Date);
-        $this->assertEquals('07-01-2016', $response->Header->Date->format('d-m-Y'));
-        $this->assertEquals('API/getTerminals', $response->Header->Path);
-        $this->assertEquals('0', $response->Header->ErrorCode);
-        $this->assertEquals('', $response->Header->ErrorMessage);
+        $this->assertSame('07-01-2016', $response->Header->Date->format('d-m-Y'));
+        $this->assertSame('API/getTerminals', $response->Header->Path);
+        $this->assertSame('0', $response->Header->ErrorCode);
+        $this->assertSame('', $response->Header->ErrorMessage);
     }
 
     public function test_response(): void
@@ -48,7 +48,7 @@ class TerminalsTest extends AbstractApiTest
         $this->assertInstanceOf(TerminalsResponse::class, $response);
 
         $this->assertCount(2, $response->Terminals);
-        $this->assertEquals('Success', $response->Result);
+        $this->assertSame('Success', $response->Result);
     }
 
     /**
@@ -63,8 +63,8 @@ class TerminalsTest extends AbstractApiTest
 
         $terminal = $response->Terminals[0];
         $this->assertInstanceOf(Terminal::class, $terminal);
-        $this->assertEquals('AltaPay Multi-Nature Terminal', $terminal->Title);
-        $this->assertEquals('DK', $terminal->Country);
+        $this->assertSame('AltaPay Multi-Nature Terminal', $terminal->Title);
+        $this->assertSame('DK', $terminal->Country);
         $this->assertCount(4, $terminal->Natures);
     }
 

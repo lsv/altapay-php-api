@@ -41,10 +41,10 @@ class RefundCapturedReservationTest extends AbstractApiTest
         $response = $api->call();
         $this->assertInstanceOf(RefundResponse::class, $response);
 
-        $this->assertEquals(0.12, $response->getRefundAmount());
-        $this->assertEquals('978', $response->RefundCurrency);
-        $this->assertEquals('Success', $response->Result);
-        $this->assertEquals('Success', $response->RefundResult);
+        $this->assertSame(0.12, $response->getRefundAmount());
+        $this->assertSame('978', $response->RefundCurrency);
+        $this->assertSame('Success', $response->Result);
+        $this->assertSame('Success', $response->RefundResult);
         $this->assertCount(1, $response->Transactions);
     }
 
@@ -59,10 +59,10 @@ class RefundCapturedReservationTest extends AbstractApiTest
         $this->assertInstanceOf(RefundResponse::class, $response);
         $transaction = $response->Transactions[0];
         $this->assertInstanceOf(Transaction::class, $transaction);
-        $this->assertEquals(1, $transaction->TransactionId);
-        $this->assertEquals(978, $transaction->MerchantCurrency);
-        $this->assertEquals(13.37, $transaction->FraudRiskScore);
-        $this->assertEquals(1, $transaction->ReservedAmount);
+        $this->assertSame('1', $transaction->TransactionId);
+        $this->assertSame('978', $transaction->MerchantCurrency);
+        $this->assertSame(13.37, $transaction->FraudRiskScore);
+        $this->assertSame(1.0, $transaction->ReservedAmount);
     }
 
     /**
@@ -83,17 +83,13 @@ class RefundCapturedReservationTest extends AbstractApiTest
 
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('refundCapturedReservation'), $request->getUri()->getPath());
-        parse_str($request->getUri()->getQuery(), $parts);
-        if (strtolower($request->getMethod()) == 'post') {
-            unset($parts);
-            parse_str($request->getBody()->getContents(), $parts);
-        }
-        $this->assertEquals(456, $parts['transaction_id']);
-        $this->assertEquals(158, $parts['amount']);
-        $this->assertEquals('myidentifier', $parts['reconciliation_identifier']);
-        $this->assertEquals('number', $parts['invoice_number']);
-        $this->assertEquals('1', $parts['allow_over_refund']);
+        $this->assertSame($this->getExceptedUri('refundCapturedReservation'), $request->getUri()->getPath());
+        parse_str($request->getBody()->getContents(), $parts);
+        $this->assertSame('456', $parts['transaction_id']);
+        $this->assertSame('158', $parts['amount']);
+        $this->assertSame('myidentifier', $parts['reconciliation_identifier']);
+        $this->assertSame('number', $parts['invoice_number']);
+        $this->assertSame('1', $parts['allow_over_refund']);
     }
 
     /**
@@ -122,21 +118,17 @@ class RefundCapturedReservationTest extends AbstractApiTest
 
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('refundCapturedReservation'), $request->getUri()->getPath());
-        parse_str($request->getUri()->getQuery(), $parts);
-        if (strtolower($request->getMethod()) == 'post') {
-            unset($parts);
-            parse_str($request->getBody()->getContents(), $parts);
-        }
+        $this->assertSame($this->getExceptedUri('refundCapturedReservation'), $request->getUri()->getPath());
+        parse_str($request->getBody()->getContents(), $parts);
         $this->assertCount(2, $parts['orderLines']);
         $line = $parts['orderLines'][1];
 
-        $this->assertEquals('Brown sugar', $line['description']);
-        $this->assertEquals('productid2', $line['itemId']);
-        $this->assertEquals('2.5', $line['quantity']);
-        $this->assertEquals('8.75', $line['unitPrice']);
-        $this->assertEquals('20', $line['taxPercent']);
-        $this->assertEquals('kg', $line['unitCode']);
+        $this->assertSame('Brown sugar', $line['description']);
+        $this->assertSame('productid2', $line['itemId']);
+        $this->assertSame('2.5', $line['quantity']);
+        $this->assertSame('8.75', $line['unitPrice']);
+        $this->assertSame('20', $line['taxPercent']);
+        $this->assertSame('kg', $line['unitCode']);
     }
 
     /**
@@ -154,12 +146,8 @@ class RefundCapturedReservationTest extends AbstractApiTest
 
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('refundCapturedReservation'), $request->getUri()->getPath());
-        parse_str($request->getUri()->getQuery(), $parts);
-        if (strtolower($request->getMethod()) == 'post') {
-            unset($parts);
-            parse_str($request->getBody()->getContents(), $parts);
-        }
+        $this->assertSame($this->getExceptedUri('refundCapturedReservation'), $request->getUri()->getPath());
+        parse_str($request->getBody()->getContents(), $parts);
         $this->assertCount(1, $parts['orderLines']);
     }
 

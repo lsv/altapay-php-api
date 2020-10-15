@@ -52,16 +52,16 @@ class CreditTest extends AbstractApiTest
         $api->call();
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('credit'), $request->getUri()->getPath());
+        $this->assertSame($this->getExceptedUri('credit'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
-        $this->assertEquals('terminal', $parts['terminal']);
-        $this->assertEquals(123, $parts['shop_orderid']);
-        $this->assertEquals(20.44, $parts['amount']);
-        $this->assertEquals(967, $parts['currency']);
-        $this->assertEquals(1234567890, $parts['cardnum']);
-        $this->assertEquals(5, $parts['emonth']);
-        $this->assertEquals(19, $parts['eyear']);
-        $this->assertEquals(122, $parts['cvc']);
+        $this->assertSame('terminal', $parts['terminal']);
+        $this->assertSame('123', $parts['shop_orderid']);
+        $this->assertSame('20.44', $parts['amount']);
+        $this->assertSame('967', $parts['currency']);
+        $this->assertSame('1234567890', $parts['cardnum']);
+        $this->assertSame('05', $parts['emonth']);
+        $this->assertSame('19', $parts['eyear']);
+        $this->assertSame('122', $parts['cvc']);
     }
 
     public function test_creditcardtoken_options(): void
@@ -75,13 +75,13 @@ class CreditTest extends AbstractApiTest
         $api->call();
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('credit'), $request->getUri()->getPath());
+        $this->assertSame($this->getExceptedUri('credit'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
-        $this->assertEquals('terminal', $parts['terminal']);
-        $this->assertEquals(123, $parts['shop_orderid']);
-        $this->assertEquals(20.44, $parts['amount']);
-        $this->assertEquals(967, $parts['currency']);
-        $this->assertEquals('token', $parts['credit_card_token']);
+        $this->assertSame('terminal', $parts['terminal']);
+        $this->assertSame('123', $parts['shop_orderid']);
+        $this->assertSame('20.44', $parts['amount']);
+        $this->assertSame('967', $parts['currency']);
+        $this->assertSame('token', $parts['credit_card_token']);
     }
 
     /**
@@ -140,7 +140,7 @@ class CreditTest extends AbstractApiTest
         $response = $api->call();
 
         $this->assertInstanceOf(CreditResponse::class, $response);
-        $this->assertEquals('Success', $response->Result);
+        $this->assertSame('Success', $response->Result);
         $this->assertCount(1, $response->Transactions);
     }
 }

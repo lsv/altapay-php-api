@@ -11,7 +11,7 @@ class TestAuthenticationTest extends AbstractFunctionalTest
     public function test_auth(): void
     {
         $response = (new TestAuthentication($this->getAuth()))->call();
-        $this->assertEquals('ok', $response);
+        $this->assertSame('ok', $response);
     }
 
     public function test_auth_fails(): void

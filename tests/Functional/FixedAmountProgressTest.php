@@ -162,7 +162,7 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
             ->setFraudService('maxmind');
         $response = $api->call();
         $this->assertInstanceOf(ReservationOfFixedAmountResponse::class, $response);
-        $this->assertEquals('Deny', $response->Transactions[0]->FraudRecommendation);
+        $this->assertSame('Deny', $response->Transactions[0]->FraudRecommendation);
     }
 
     public function test_fraud_check_deny(): void
@@ -177,7 +177,7 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
             ->setFraudService('maxmind');
         $response = $api->call();
         $this->assertInstanceOf(ReservationOfFixedAmountResponse::class, $response);
-        $this->assertEquals('Deny', $response->Transactions[0]->FraudRecommendation);
+        $this->assertSame('Deny', $response->Transactions[0]->FraudRecommendation);
     }
 
 }

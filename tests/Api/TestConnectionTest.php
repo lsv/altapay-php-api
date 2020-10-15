@@ -19,7 +19,7 @@ class TestConnectionTest extends AbstractApiTest
             ->setClient($client);
 
         $this->assertSame('ok', $api->call());
-        $this->assertEquals($this->getExceptedUri('testConnection'), $api->getRawRequest()->getUri()->getPath());
+        $this->assertSame($this->getExceptedUri('testConnection'), $api->getRawRequest()->getUri()->getPath());
     }
 
     public function test_connection_off(): void
@@ -36,7 +36,7 @@ class TestConnectionTest extends AbstractApiTest
         try {
             $api->call();
         } catch (ClientException $e) {
-            $this->assertEquals($this->getExceptedUri('testConnection'), $api->getRawRequest()->getUri()->getPath());
+            $this->assertSame($this->getExceptedUri('testConnection'), $api->getRawRequest()->getUri()->getPath());
             throw $e;
         }
     }
@@ -51,6 +51,6 @@ class TestConnectionTest extends AbstractApiTest
             ->setClient($client);
 
         $this->assertSame('ok', $api->call());
-        $this->assertEquals($this->getExceptedUri('testConnection'), $api->getRawRequest()->getUri()->getPath());
+        $this->assertSame($this->getExceptedUri('testConnection'), $api->getRawRequest()->getUri()->getPath());
     }
 }

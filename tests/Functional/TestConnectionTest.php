@@ -12,7 +12,7 @@ class TestConnectionTest extends AbstractFunctionalTest
         $response = (new TestConnection())
             ->call();
 
-        $this->assertEquals('ok', $response);
+        $this->assertSame('ok', $response);
     }
 
     public function test_connection_fails(): void
@@ -20,7 +20,7 @@ class TestConnectionTest extends AbstractFunctionalTest
         $response = (new TestConnection('http//idonotexists.mecom'))
             ->call();
 
-        $this->assertEquals('ok', $response);
+        $this->assertSame('ok', $response);
     }
 
 }

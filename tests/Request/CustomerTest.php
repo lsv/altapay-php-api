@@ -26,21 +26,21 @@ class CustomerTest extends AbstractTest
         $this->assertArrayHasKey('personalIdentifyNumber', $serialized);
         $this->assertArrayHasKey('gender', $serialized);
 
-        $this->assertEquals(123, $serialized['organisationNumber']);
-        $this->assertEquals('20304050', $serialized['personalIdentifyNumber']);
-        $this->assertEquals('F', $serialized['gender']);
+        $this->assertSame('123', $serialized['organisationNumber']);
+        $this->assertSame('20304050', $serialized['personalIdentifyNumber']);
+        $this->assertSame('F', $serialized['gender']);
 
         $customer->setGender('m');
         $serialized = $customer->serialize();
-        $this->assertEquals('M', $serialized['gender']);
+        $this->assertSame('M', $serialized['gender']);
 
         $customer->setGender('female');
         $serialized = $customer->serialize();
-        $this->assertEquals(Customer::FEMALE, $serialized['gender']);
+        $this->assertSame(Customer::FEMALE, $serialized['gender']);
 
         $customer->setGender('male');
         $serialized = $customer->serialize();
-        $this->assertEquals(Customer::MALE, $serialized['gender']);
+        $this->assertSame(Customer::MALE, $serialized['gender']);
 
     }
 
