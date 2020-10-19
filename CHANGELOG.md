@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Fixes
+
+## [3.1.0] - 2020-10-19
+### Added
 - Support for installation and autoloading via composer
 - Document all function arguments
 - Added DynamicJavascriptUrl on PensioCreatePaymentRequest
