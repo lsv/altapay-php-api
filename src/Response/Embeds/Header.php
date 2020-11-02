@@ -75,7 +75,7 @@ class Header extends AbstractResponse
     /**
      * Set ErrorCode
      *
-     * @param string $ErrorCode
+     * @param numeric-string $ErrorCode
      *
      * @return $this
      */
