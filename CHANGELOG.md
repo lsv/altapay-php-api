@@ -11,6 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixes
 
+## [Unreleased]
+### Added
+- Added missing setters
+### Fixes
+- Correctly parse boolean parameters
+
 ## [3.1.0] - 2020-10-19
 ### Added
 - Support for installation and autoloading via composer
