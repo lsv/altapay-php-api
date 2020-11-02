@@ -91,7 +91,7 @@ class Callback
         }
 
         if (isset($this->postedData['require_capture'])) {
-            $response->requireCapture = $this->postedData['require_capture'];
+            $response->requireCapture = filter_var($this->postedData['require_capture'], FILTER_VALIDATE_BOOLEAN);
         }
 
         if (isset($this->postedData['payment_status'])) {
