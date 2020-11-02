@@ -59,7 +59,7 @@ class Callback
         }
 
         if (isset($this->postedData['currency'])) {
-            $response->currency = (int)$this->postedData['currency'];
+            $response->currency = (int) $this->postedData['currency'];
         }
 
         if (isset($this->postedData['type'])) {
@@ -67,11 +67,11 @@ class Callback
         }
 
         if (isset($this->postedData['embedded_window'])) {
-            $response->embeddedWindow = (bool)$this->postedData['embedded_window'];
+            $response->embeddedWindow = $this->postedData['embedded_window'];
         }
 
         if (isset($this->postedData['amount'])) {
-            $response->amount = (float)$this->postedData['amount'];
+            $response->amount = (float) $this->postedData['amount'];
         }
 
         if (isset($this->postedData['transaction_id'])) {
@@ -91,7 +91,7 @@ class Callback
         }
 
         if (isset($this->postedData['require_capture'])) {
-            $response->requireCapture = (bool)$this->postedData['require_capture'];
+            $response->requireCapture = $this->postedData['require_capture'];
         }
 
         if (isset($this->postedData['payment_status'])) {
