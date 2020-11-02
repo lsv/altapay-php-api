@@ -67,7 +67,7 @@ class Callback
         }
 
         if (isset($this->postedData['embedded_window'])) {
-            $response->embeddedWindow = $this->postedData['embedded_window'];
+            $response->embeddedWindow = filter_var($this->postedData['embedded_window'], FILTER_VALIDATE_BOOLEAN);
         }
 
         if (isset($this->postedData['amount'])) {
