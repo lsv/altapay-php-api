@@ -21,14 +21,18 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Api\Payments;
+namespace Altapay\Api\Payments;
 
-use Valitor\AbstractApi;
-use Valitor\Response\ReleaseReservationResponse;
-use Valitor\Serializer\ResponseSerializer;
-use Valitor\Traits\TransactionsTrait;
+use Altapay\AbstractApi;
+use Altapay\Exceptions;
+use Altapay\Response\ReleaseReservationResponse;
+use Altapay\Response\PaymentRequestResponse;
+use Altapay\Serializer\ResponseSerializer;
+use Altapay\Traits\TransactionsTrait;
+use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -58,26 +62,26 @@ class ReleaseReservation extends AbstractApi
     /**
      * Handle response
      *
-     * @param Request  $request
-     * @param Response $response
+     * @param Request           $request
+     * @param ResponseInterface $response
      *
      * @return ReleaseReservationResponse
      */
-    protected function handleResponse(Request $request, Response $response)
+    protected function handleResponse(Request $request, ResponseInterface $response)
     {
         $body = (string)$response->getBody();
-        $xml  = simplexml_load_string($body);
+        $xml  = new \SimpleXMLElement($body);
 
-        return ResponseSerializer::serialize(ReleaseReservationResponse::class, $xml->Body, false, $xml->Header);
+        return ResponseSerializer::serialize(ReleaseReservationResponse::class, $xml->Body, $xml->Header);
     }
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     protected function getBasicHeaders()
     {
         $headers = parent::getBasicHeaders();
-        if (strtolower($this->getHttpMethod()) == 'post') {
+        if (mb_strtolower($this->getHttpMethod()) == 'post') {
             $headers['Content-Type'] = 'application/x-www-form-urlencoded';
         }
 
@@ -87,14 +91,14 @@ class ReleaseReservation extends AbstractApi
     /**
      * Url to api call
      *
-     * @param array $options Resolved options
+     * @param array<string, mixed> $options Resolved options
      *
      * @return string
      */
     protected function getUrl(array $options)
     {
         $url = 'releaseReservation';
-        if (strtolower($this->getHttpMethod()) == 'get') {
+        if (mb_strtolower($this->getHttpMethod()) == 'get') {
             $query = $this->buildUrl($options);
             $url   = sprintf('%s/?%s', $url, $query);
         }
@@ -111,9 +115,10 @@ class ReleaseReservation extends AbstractApi
     }
 
     /**
-     * @return \Valitor\Response\AbstractResponse|PaymentRequestResponse|bool|void
-     * @throws \Valitor\Exceptions\ResponseHeaderException
-     * @throws \Valitor\Exceptions\ResponseMessageException
+     * @return \Altapay\Response\AbstractResponse|PaymentRequestResponse|bool
+     *
+     * @throws \Altapay\Exceptions\ResponseHeaderException
+     * @throws \Altapay\Exceptions\ResponseMessageException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     protected function doResponse()
@@ -121,7 +126,7 @@ class ReleaseReservation extends AbstractApi
         $this->doConfigureOptions();
         $headers           = $this->getBasicHeaders();
         $requestParameters = [$this->getHttpMethod(), $this->parseUrl(), $headers];
-        if (strtolower($this->getHttpMethod()) == 'post') {
+        if (mb_strtolower($this->getHttpMethod()) == 'post') {
             $requestParameters[] = $this->getPostOptions();
         }
         $request       = new Request(...$requestParameters);
@@ -135,9 +140,7 @@ class ReleaseReservation extends AbstractApi
 
             return $output;
         } catch (GuzzleHttpClientException $e) {
-            $exception = new Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse());
-
-            return $this->handleExceptionResponse($exception);
+            throw new Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse(), $e);
         }
     }
 
@@ -148,6 +151,6 @@ class ReleaseReservation extends AbstractApi
     {
         $options = $this->options;
 
-        return http_build_query($options, null, '&');
+        return http_build_query($options, '', '&');
     }
 }

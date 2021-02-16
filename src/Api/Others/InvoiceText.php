@@ -21,14 +21,15 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Api\Others;
+namespace Altapay\Api\Others;
 
-use Valitor\AbstractApi;
-use Valitor\Response\InvoiceTextResponse;
-use Valitor\Serializer\ResponseSerializer;
-use Valitor\Traits;
+use Altapay\AbstractApi;
+use Altapay\Response\InvoiceTextResponse;
+use Altapay\Serializer\ResponseSerializer;
+use Altapay\Traits;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -46,6 +47,7 @@ class InvoiceText extends AbstractApi
      * Configure options
      *
      * @param OptionsResolver $resolver
+     *
      * @return void
      */
     protected function configureOptions(OptionsResolver $resolver)
@@ -56,21 +58,24 @@ class InvoiceText extends AbstractApi
     /**
      * Handle response
      *
-     * @param Request $request
-     * @param Response $response
+     * @param Request           $request
+     * @param ResponseInterface $response
+     *
      * @return InvoiceTextResponse
      */
-    protected function handleResponse(Request $request, Response $response)
+    protected function handleResponse(Request $request, ResponseInterface $response)
     {
         $body = (string) $response->getBody();
-        $xml = simplexml_load_string($body);
-        return ResponseSerializer::serialize(InvoiceTextResponse::class, $xml->Body->InvoiceText, false, $xml->Header);
+        $xml = new \SimpleXMLElement($body);
+
+        return ResponseSerializer::serialize(InvoiceTextResponse::class, $xml->Body->InvoiceText, $xml->Header);
     }
 
     /**
      * Url to api call
      *
-     * @param array $options Resolved options
+     * @param array<string, mixed> $options Resolved options
+     *
      * @return string
      */
     protected function getUrl(array $options)

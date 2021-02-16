@@ -1,2 +1,2 @@
-[<](../index.md) Valitor - PHP Api - Charge subscription
+[<](../index.md) Altapay - PHP Api - Charge subscription
 =====================================================

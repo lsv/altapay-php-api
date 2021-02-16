@@ -21,9 +21,9 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Traits;
+namespace Altapay\Traits;
 
-use Valitor\Response\Embeds\Transaction;
+use Altapay\Response\Embeds\Transaction;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -37,6 +37,7 @@ trait TransactionsTrait
      * The id of a specific payment.
      *
      * @param string|Transaction $transactionId
+     *
      * @return $this
      */
     public function setTransaction($transactionId)
@@ -49,6 +50,8 @@ trait TransactionsTrait
      * Resolve transaction option
      *
      * @param OptionsResolver $resolver
+     *
+     * @return void
      */
     protected function setTransactionResolver(OptionsResolver $resolver)
     {

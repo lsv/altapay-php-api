@@ -21,20 +21,19 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Response;
+namespace Altapay\Response;
 
-use Valitor\Response\Embeds\Transaction;
+use Altapay\Response\Embeds\Transaction;
 
 /**
  * Class ReleaseReservation
  */
 class ReleaseReservationResponse extends AbstractResponse
 {
-
     /**
-     * Childs
+     * Childs of the response
      *
-     * @var array
+     * @var array<string, array<string, mixed>>
      */
     protected $childs = [
         'Transactions' => [
@@ -54,6 +53,7 @@ class ReleaseReservationResponse extends AbstractResponse
      * Result
      *
      * @var string
+     *
      * @deprecated
      */
     public $CancelResult;

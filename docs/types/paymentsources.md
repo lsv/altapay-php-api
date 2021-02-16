@@ -1,4 +1,4 @@
-[<](../index.md) Valitor - PHP Api - Payment sources
+[<](../index.md) Altapay - PHP Api - Payment sources
 ====================================================
 
 Following payment sources are accepted

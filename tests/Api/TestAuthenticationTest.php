@@ -1,38 +1,43 @@
 <?php
 
-namespace Valitor\ApiTest\Api;
+namespace Altapay\ApiTest\Api;
 
-use Valitor\Api\Test\TestAuthentication;
+use Altapay\Api\Test\TestAuthentication;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
+use Altapay\Exceptions\ClientException;
 
 class TestAuthenticationTest extends AbstractApiTest
 {
-    public function test_auth_ok()
+    public function test_auth_ok(): void
     {
         $client = $this->getClient($mock = new MockHandler([
             new Response(200)
         ]));
 
         $api = (new TestAuthentication($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
 
-        $this->assertTrue($api->call());
-        $this->assertEquals($this->getExceptedUri('login'), $api->getRawRequest()->getUri()->getPath());
+        $this->assertSame('ok', $api->call());
+        $this->assertSame($this->getExceptedUri('login'), $api->getRawRequest()->getUri()->getPath());
     }
 
-    public function test_auth_fail()
+    public function test_auth_fail(): void
     {
+        $this->expectException(ClientException::class);
+
         $client = $this->getClient($mock = new MockHandler([
             new Response(400)
         ]));
 
         $api = (new TestAuthentication($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
 
-        $this->assertFalse($api->call());
-        $this->assertEquals($this->getExceptedUri('login'), $api->getRawRequest()->getUri()->getPath());
+        try {
+            $api->call();
+        } catch (ClientException $e) {
+            $this->assertSame($this->getExceptedUri('login'), $api->getRawRequest()->getUri()->getPath());
+            throw $e;
+        }
     }
 }

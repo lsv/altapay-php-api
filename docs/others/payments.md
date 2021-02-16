@@ -1,4 +1,4 @@
-[<](../index.md) Valitor - PHP Api - Payments
+[<](../index.md) Altapay - PHP Api - Payments
 ==========================================
 
 This action is used to find and check the status of a specific payment. This action takes some optional parameters which will limit the number of results.
@@ -16,17 +16,17 @@ Please note that the maximum number of transactions returned is 10.
 # Request
 
 ```php
-$request = new \Valitor\Api\Others\Payments($auth);
+$request = new \Altapay\Api\Others\Payments($auth);
 // Do the call
 try {
     $response = $request->call();
     // See Response below
-} catch (\Valitor\Exceptions\ClientException $e) {
+} catch (\Altapay\Exceptions\ClientException $e) {
     // Could not connect
-} catch (\Valitor\Exceptions\ResponseHeaderException $e) {
+} catch (\Altapay\Exceptions\ResponseHeaderException $e) {
     // Response error in header
     $e->getHeader()->ErrorMessage
-} catch (\Valitor\Exceptions\ResponseMessageException $e) {
+} catch (\Altapay\Exceptions\ResponseMessageException $e) {
     // Error message
     $e->getMessage();
 }
@@ -50,7 +50,7 @@ try {
 ### Example
 
 ```php
-$request = new \Valitor\Api\Others\Payments($auth);
+$request = new \Altapay\Api\Others\Payments($auth);
 $request->setTransaction('12345678');
 $request->setPaymentId('12345678-12345678');
 $request->setShopOrderId('shop order id');
@@ -62,4 +62,4 @@ $request->setShopOrderId('shop order id');
 $response = $request->call();
 ```
 
-Response is a array of [`\Valitor\Response\Embeds\Transaction`](../types/transaction.md) objects
+Response is a array of [`\Altapay\Response\Embeds\Transaction`](../types/transaction.md) objects

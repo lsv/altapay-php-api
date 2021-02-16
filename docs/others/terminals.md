@@ -1,4 +1,4 @@
-[<](../index.md) Valitor - PHP Api - Terminals
+[<](../index.md) Altapay - PHP Api - Terminals
 ===========================================
 
 This method will allow you to extract a list of terminals that you have access to. The list will contains some details about the terminals..
@@ -12,17 +12,17 @@ This method will allow you to extract a list of terminals that you have access t
 # Request
 
 ```php
-$request = new \Valitor\Api\Others\Terminals($auth);
+$request = new \Altapay\Api\Others\Terminals($auth);
 // Do the call
 try {
     $response = $request->call();
     // See Response below
-} catch (\Valitor\Exceptions\ClientException $e) {
+} catch (\Altapay\Exceptions\ClientException $e) {
     // Could not connect
-} catch (\Valitor\Exceptions\ResponseHeaderException $e) {
+} catch (\Altapay\Exceptions\ResponseHeaderException $e) {
     // Response error in header
     $e->getHeader()->ErrorMessage
-} catch (\Valitor\Exceptions\ResponseMessageException $e) {
+} catch (\Altapay\Exceptions\ResponseMessageException $e) {
     // Error message
     $e->getMessage();
 }
@@ -39,7 +39,7 @@ No optional options allowed
 ### Example
 
 ```php
-$request = new \Valitor\Api\Others\Terminals($auth);
+$request = new \Altapay\Api\Others\Terminals($auth);
 ```
 
 # Response
@@ -48,11 +48,11 @@ $request = new \Valitor\Api\Others\Terminals($auth);
 $response = $request->call();
 ```
 
-Response is now a object of `\Valitor\Response\TerminalsResponse`
+Response is now a object of `\Altapay\Response\TerminalsResponse`
 
 | Method  | Description | Type |
 |---|---|---|
 | `$response->Result` | | string
-| `$response->Terminals` | array of `\Valitor\Response\Embeds\Terminal` objects | array
+| `$response->Terminals` | array of `\Altapay\Response\Embeds\Terminal` objects | array
 
 See [here for description of the terminal object](../types/terminal.md)

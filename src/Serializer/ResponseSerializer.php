@@ -21,44 +21,59 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Serializer;
+namespace Altapay\Serializer;
 
-use Valitor\Response\AbstractResponse;
+use Altapay\Response\AbstractResponse;
 
 /**
  * Response serializer
  */
 class ResponseSerializer
 {
-
     /**
      * Serialize a response
      *
-     * @param string $objectName
+     * @template T of AbstractResponse
+     *
+     * @param class-string<T>   $objectName
      * @param \SimpleXMLElement $data
-     * @param bool $childKey
      * @param \SimpleXMLElement $header
-     * @return AbstractResponse|array
+     *
+     * @return T
      */
     public static function serialize(
         $objectName,
         \SimpleXMLElement $data,
-        $childKey = false,
         \SimpleXMLElement $header = null
     ) {
-        if ($childKey !== false) {
-            $documents = [];
-            foreach ($data->{$childKey} as $d) {
-                /** @var AbstractResponse $object */
-                $object = new $objectName;
-                $documents[] = $object->deserialize($d);
-            }
-            return $documents;
-        }
-
-        /** @var AbstractResponse $object */
         $object = new $objectName;
         $object->headerSetter($header);
+
         return $object->deserialize($data);
+    }
+
+    /**
+     * Serialize a response
+     *
+     * @template T of AbstractResponse
+     *
+     * @param class-string<T>   $objectName
+     * @param \SimpleXMLElement $data
+     * @param string            $childKey
+     *
+     * @return array<int, T>
+     */
+    public static function serializeChildren(
+        $objectName,
+        \SimpleXMLElement $data,
+        $childKey
+    ) {
+        $documents = [];
+        foreach ($data->{$childKey} as $d) {
+            $object      = new $objectName;
+            $documents[] = $object->deserialize($d);
+        }
+
+        return $documents;
     }
 }

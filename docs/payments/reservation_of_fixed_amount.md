@@ -1,2 +1,2 @@
-[<](../index.md) Valitor - PHP Api - Reservation of fixed amount
+[<](../index.md) Altapay - PHP Api - Reservation of fixed amount
 ================================================================

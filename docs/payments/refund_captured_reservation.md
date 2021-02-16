@@ -1,2 +1,2 @@
-[<](../index.md) Valitor - PHP Api - Refund captured reservation
+[<](../index.md) Altapay - PHP Api - Refund captured reservation
 =============================================================
