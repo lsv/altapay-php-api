@@ -51,6 +51,11 @@ abstract class AbstractApi
     const VERSION = 'API';
 
     /**
+     * PHP API version
+     */
+    const PHP_API_VERSION = '3.1.2';
+
+    /**
      * Event dispatcher
      *
      * @var EventDispatcher
@@ -299,6 +304,26 @@ abstract class AbstractApi
     }
 
     /**
+     * Get User Agent details
+     *
+     * @return string
+     */
+    protected function getUserAgent()
+    {
+        static $userAgent = '';
+
+        if (!$userAgent) {
+            $userAgent = 'api-php/' . self::PHP_API_VERSION;
+            if (extension_loaded('curl') && function_exists('curl_version')) {
+                $userAgent .= ' curl/' . \curl_version()['version'];
+            }
+            $userAgent .= ' PHP/' . PHP_VERSION;
+        }
+
+        return $userAgent;
+    }
+
+    /**
      * Build url
      *
      * @param array<string, string> $options
@@ -339,6 +364,8 @@ abstract class AbstractApi
                 base64_encode($this->authentication->getUsername() . ':' . $this->authentication->getPassword())
             );
         }
+
+        $headers['User-Agent'] = $this->getUserAgent();
 
         return $headers;
     }
