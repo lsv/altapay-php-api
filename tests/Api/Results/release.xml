@@ -20,8 +20,8 @@
                 <LiableForChargeback>Merchant</LiableForChargeback>
                 <BlacklistToken>4f244dec4907eba0f6432e53b17a60ebcf51365e</BlacklistToken>
                 <ShopOrderId>myorderid</ShopOrderId>
-                <Shop>Valitor Shop</Shop>
-                <Terminal>Valitor Test Terminal</Terminal>
+                <Shop>AltaPay Shop</Shop>
+                <Terminal>AltaPay Test Terminal</Terminal>
                 <TransactionStatus>released</TransactionStatus>
                 <ReasonCode>NONE</ReasonCode>
                 <MerchantCurrency>978</MerchantCurrency>
@@ -46,7 +46,7 @@
                 <FraudExplanation>Fraud detection explanation</FraudExplanation>
                 <PaymentInfos>
                     <PaymentInfo name="Form_Created_At">2010-09-28 12:34:56</PaymentInfo>
-                    <PaymentInfo name="Form_Provider">Valitor Test Form</PaymentInfo>
+                    <PaymentInfo name="Form_Provider">AltaPay Test Form</PaymentInfo>
                     <PaymentInfo name="Merchant_Provided_Info">Some info by merchant</PaymentInfo>
                 </PaymentInfos>
                 <CustomerInfo>

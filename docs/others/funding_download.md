@@ -1,4 +1,4 @@
-[<](../index.md) Valitor - PHP Api - Funding download
+[<](../index.md) Altapay - PHP Api - Funding download
 ==================================================
 
 Used to get a comma separated value file containing the details of a funding.
@@ -11,18 +11,18 @@ Used to get a comma separated value file containing the details of a funding.
 # Request
 
 ```php
-$request = new \Valitor\Api\Others\FundingDownload($auth);
+$request = new \Altapay\Api\Others\FundingDownload($auth);
 $request->setFunding($funding);
 // Do the call
 try {
     $response = $request->call();
     // See Response below
-} catch (\Valitor\Exceptions\ClientException $e) {
+} catch (\Altapay\Exceptions\ClientException $e) {
     // Could not connect
-} catch (\Valitor\Exceptions\ResponseHeaderException $e) {
+} catch (\Altapay\Exceptions\ResponseHeaderException $e) {
     // Response error in header
     $e->getHeader()->ErrorMessage
-} catch (\Valitor\Exceptions\ResponseMessageException $e) {
+} catch (\Altapay\Exceptions\ResponseMessageException $e) {
     // Error message
     $e->getMessage();
 }
@@ -37,7 +37,7 @@ try {
 ##### Example
 
 ```php
-$request = new \Valitor\Api\Others\FundingDownload($auth);
+$request = new \Altapay\Api\Others\FundingDownload($auth);
 $request->setFunding($funding);
 $response = $request->call();
 ```
@@ -53,7 +53,7 @@ $response = $request->call();
 ```
 
 Date;Type;ID;"Reconciliation Identifier";Payment;Order;Terminal;Shop;"Transaction Currency";"Transaction Amount";"Exchange Rate";"Settlement Currency";"Settlement Amount";"Fixed Fee";"Fixed Fee VAT";"Rate Based Fee";"Rate Based Fee VAT"
-"2010-09-22 00:00:00";payment;5;3f664acc-c71d-45e6-8c6a-a15838451a77;5;"settlement functional4c9a127b159a0";"Valitor Test Terminal";"Valitor Functional Test Shop";EUR;50.00;100.000000;EUR;50.00;;;;
+"2010-09-22 00:00:00";payment;5;3f664acc-c71d-45e6-8c6a-a15838451a77;5;"settlement functional4c9a127b159a0";"Altapay Test Terminal";"Altapay Functional Test Shop";EUR;50.00;100.000000;EUR;50.00;;;;
 ```
 
 **Note** that the columns in the output are defined by each individual report.

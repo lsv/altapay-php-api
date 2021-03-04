@@ -1,10 +1,10 @@
 <?php
 
-namespace Valitor\ApiTest\Api;
+namespace Altapay\ApiTest\Api;
 
-use Valitor\Api\Others\FundingList;
-use Valitor\Exceptions\ResponseHeaderException;
-use Valitor\Response\Embeds\Header;
+use Altapay\Api\Others\FundingList;
+use Altapay\Exceptions\ResponseHeaderException;
+use Altapay\Response\Embeds\Header;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 
@@ -16,31 +16,28 @@ class HeaderTest extends AbstractApiTest
      */
     protected function getapi()
     {
-        $client = $this->getClient(new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/header_error.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/header_error.xml');
 
         return (new FundingList($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
     }
 
-    public function test_get_header_error()
+    public function test_get_header_error(): void
     {
-        $this->setExpectedException(ResponseHeaderException::class);
+        $this->expectException(ResponseHeaderException::class);
         $api = $this->getapi();
         $api->call();
     }
 
-    public function test_get_header_error_data()
+    public function test_get_header_error_data(): void
     {
         try {
             $api = $this->getapi();
             $api->call();
         } catch (ResponseHeaderException $e) {
             $this->assertInstanceOf(Header::class, $e->getHeader());
-            $this->assertEquals('200', $e->getHeader()->ErrorCode);
-            $this->assertEquals('This request has error', $e->getHeader()->ErrorMessage);
+            $this->assertSame('200', $e->getHeader()->ErrorCode);
+            $this->assertSame('This request has error', $e->getHeader()->ErrorMessage);
         }
     }
 }

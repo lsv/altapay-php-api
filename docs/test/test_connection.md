@@ -1,12 +1,12 @@
-[<](../index.md) Valitor - PHP Api - Test connection
+[<](../index.md) Altapay - PHP Api - Test connection
 =================================================
 
-For testing if your server can reach Valitor's gateway you can use this call
+For testing if your server can reach Altapay's gateway you can use this call
 
 ```php
 $baseurl = 'https://<YourShopName>.altapaysecure.com';
 // Or leave $baseurl to null, to test up against the test gateway
-$response = (new \Valitor\Api\Test\TestConnection($baseurl))->call();
+$response = (new \Altapay\Api\Test\TestConnection($baseurl))->call();
 
 if ($response) {
     // Connection successful

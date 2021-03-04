@@ -1,4 +1,4 @@
-[<](../index.md) Valitor - PHP Api - Invoice text
+[<](../index.md) Altapay - PHP Api - Invoice text
 ==============================================
 
 GetInvoiceText is used for gathering information to print on the customer invoice for invoice/Arvato payments. This is typically used when merchants print their own invoices from their backend system. As the invoice sent to the customer needs to include some information from Arvato, this call is mandatory if you use Arvato's PayByBill-product.
@@ -16,19 +16,19 @@ Please refer to Arvato documentation for further details.
 # Request
 
 ```php
-$request = new \Valitor\Api\Others\InvoiceText($auth);
+$request = new \Altapay\Api\Others\InvoiceText($auth);
 $request->setTransactionId('12345');
 $request->setAmount(200.50);
 // Do the call
 try {
     $response = $request->call();
     // See Response below
-} catch (\Valitor\Exceptions\ClientException $e) {
+} catch (\Altapay\Exceptions\ClientException $e) {
     // Could not connect
-} catch (\Valitor\Exceptions\ResponseHeaderException $e) {
+} catch (\Altapay\Exceptions\ResponseHeaderException $e) {
     // Response error in header
     $e->getHeader()->ErrorMessage
-} catch (\Valitor\Exceptions\ResponseMessageException $e) {
+} catch (\Altapay\Exceptions\ResponseMessageException $e) {
     // Error message
     $e->getMessage();
 }
@@ -48,7 +48,7 @@ No optional options allowed
 ### Example
 
 ```php
-$request = new \Valitor\Api\Others\InvoiceText($auth);
+$request = new \Altapay\Api\Others\InvoiceText($auth);
 $request->setAmount(200.50);
 $request->setTransaction('12345678');
 // Or
@@ -61,7 +61,7 @@ $request->setTransaction($transactionObject);
 $response = $request->call();
 ```
 
-Response is now a object of `\Valitor\Response\InvoiceTextResponse`
+Response is now a object of `\Altapay\Response\InvoiceTextResponse`
 
 | Method  | Description | Type |
 |---|---|---|
@@ -75,10 +75,10 @@ Response is now a object of `\Valitor\Response\InvoiceTextResponse`
 | `$response->CustomerNumber` | | string
 | `$response->InvoiceDate` | | DateTime
 | `$response->DueDate` | | DateTime
-| `$response->TextInfos` | array of `\Valitor\Response\Embeds\TextInfo` object | array
-| `$response->Address` | | `\Valitor\Response\Embeds\Address` object
+| `$response->TextInfos` | array of `\Altapay\Response\Embeds\TextInfo` object | array
+| `$response->Address` | | `\Altapay\Response\Embeds\Address` object
 
-### `\Valitor\Response\Embeds\Address` object
+### `\Altapay\Response\Embeds\Address` object
 
 | Method  | Description | Type |
 |---|---|---|
@@ -90,7 +90,7 @@ Response is now a object of `\Valitor\Response\InvoiceTextResponse`
 | `$object->Region` |  | string
 | `$object->Country` |  | string
 
-### `\Valitor\Response\Embeds\TextInfo` object
+### `\Altapay\Response\Embeds\TextInfo` object
 
 | Method  | Description | Type |
 |---|---|---|

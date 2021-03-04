@@ -1,2 +1,2 @@
-[<](../index.md) Valitor - PHP Api - Credit
+[<](../index.md) Altapay - PHP Api - Credit
 ========================================

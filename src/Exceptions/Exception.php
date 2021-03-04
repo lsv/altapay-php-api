@@ -21,7 +21,7 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Exceptions;
+namespace Altapay\Exceptions;
 
 class Exception extends \Exception
 {

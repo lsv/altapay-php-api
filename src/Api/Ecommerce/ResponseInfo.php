@@ -1,8 +1,8 @@
 <?php
 
-namespace Valitor\Api\Ecommerce;
+namespace Altapay\Api\Ecommerce;
 
-use Valitor\Api\Ecommerce\Callback;
+use Altapay\Response\Embeds\Address;
 
 class ResponseInfo extends Callback
 {
@@ -12,12 +12,12 @@ class ResponseInfo extends Callback
     }
 
     /**
-     * @return RegisteredAddress
+     * @return Address|null
      */
     public function getRegisteredAddress()
     {
         $response          = $this->call();
-        $registeredAddress = '';
+        $registeredAddress = null;
         if (isset($response->Transactions[0]->CustomerInfo->RegisteredAddress)) {
             $registeredAddress = $response->Transactions[0]->CustomerInfo->RegisteredAddress;
         }

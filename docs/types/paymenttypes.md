@@ -1,4 +1,4 @@
-[<](../index.md) Valitor - PHP Api - Payment types
+[<](../index.md) Altapay - PHP Api - Payment types
 ==================================================
 
 Following payment types are accepted

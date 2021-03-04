@@ -21,14 +21,17 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Api\Payments;
+namespace Altapay\Api\Payments;
 
-use Valitor\AbstractApi;
-use Valitor\Response\RefundResponse;
-use Valitor\Serializer\ResponseSerializer;
-use Valitor\Traits;
+use Altapay\AbstractApi;
+use Altapay\Exceptions;
+use Altapay\Response\RefundResponse;
+use Altapay\Serializer\ResponseSerializer;
+use Altapay\Traits;
+use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -116,21 +119,22 @@ class RefundCapturedReservation extends AbstractApi
     /**
      * Handle response
      *
-     * @param Request  $request
-     * @param Response $response
+     * @param Request           $request
+     * @param ResponseInterface $response
      *
-     * @return \Valitor\Response\AbstractResponse|array
+     * @return \Altapay\Response\AbstractResponse
+     *
      * @throws \Exception
      */
-    protected function handleResponse(Request $request, Response $response)
+    protected function handleResponse(Request $request, ResponseInterface $response)
     {
         $body = (string)$response->getBody();
-        $xml  = simplexml_load_string($body);
+        $xml  = new \SimpleXMLElement($body);
         if ($xml->Body->Result == 'Error' || $xml->Body->Result == 'Failed') {
             throw new \Exception($xml->Body->MerchantErrorMessage);
         }
         try {
-            $data = ResponseSerializer::serialize(RefundResponse::class, $xml->Body, false, $xml->Header);
+            $data = ResponseSerializer::serialize(RefundResponse::class, $xml->Body, $xml->Header);
 
             return $data;
         } catch (\Exception $e) {
@@ -139,12 +143,12 @@ class RefundCapturedReservation extends AbstractApi
     }
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     protected function getBasicHeaders()
     {
         $headers = parent::getBasicHeaders();
-        if (strtolower($this->getHttpMethod()) == 'post') {
+        if (mb_strtolower($this->getHttpMethod()) == 'post') {
             $headers['Content-Type'] = 'application/x-www-form-urlencoded';
         }
 
@@ -154,21 +158,20 @@ class RefundCapturedReservation extends AbstractApi
     /**
      * Url to api call
      *
-     * @param array $options Resolved options
+     * @param array<string, mixed> $options Resolved options
      *
      * @return string
      */
     protected function getUrl(array $options)
     {
         $url = 'refundCapturedReservation';
-        if (strtolower($this->getHttpMethod()) == 'get') {
+        if (mb_strtolower($this->getHttpMethod()) == 'get') {
             $query = $this->buildUrl($options);
             $url   = sprintf('%s/?%s', $url, $query);
         }
 
         return $url;
     }
-
 
     /**
      * @return string
@@ -178,18 +181,17 @@ class RefundCapturedReservation extends AbstractApi
         return 'POST';
     }
 
-
     /**
      * Generate the response
      *
-     * @return array|bool|\Valitor\Response\AbstractResponse|void
+     * @return \Altapay\Response\AbstractResponse
      */
     protected function doResponse()
     {
         $this->doConfigureOptions();
         $headers           = $this->getBasicHeaders();
         $requestParameters = [$this->getHttpMethod(), $this->parseUrl(), $headers];
-        if (strtolower($this->getHttpMethod()) == 'post') {
+        if (mb_strtolower($this->getHttpMethod()) == 'post') {
             $requestParameters[] = $this->getPostOptions();
         }
 
@@ -203,9 +205,7 @@ class RefundCapturedReservation extends AbstractApi
 
             return $output;
         } catch (GuzzleHttpClientException $e) {
-            $exception = new Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse());
-
-            return $this->handleExceptionResponse($exception);
+            throw new Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse(), $e);
         }
     }
 
@@ -216,6 +216,6 @@ class RefundCapturedReservation extends AbstractApi
     {
         $options = $this->options;
 
-        return http_build_query($options, null, '&');
+        return http_build_query($options, '', '&');
     }
 }

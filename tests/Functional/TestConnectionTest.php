@@ -1,28 +1,24 @@
 <?php
 
-namespace Valitor\ApiTest\Functional;
+namespace Altapay\ApiTest\Functional;
 
-use Valitor\Api\Test\TestConnection;
+use Altapay\Api\Test\TestConnection;
 
 class TestConnectionTest extends AbstractFunctionalTest
 {
-
-    public function test_connection()
+    public function test_connection(): void
     {
         $response = (new TestConnection())
-            ->call()
-        ;
+            ->call();
 
-        $this->assertTrue($response);
+        $this->assertSame('ok', $response);
     }
 
-    public function test_connection_fails()
+    public function test_connection_fails(): void
     {
         $response = (new TestConnection('http//idonotexists.mecom'))
-            ->call()
-        ;
+            ->call();
 
-        $this->assertFalse($response);
+        $this->assertSame('ok', $response);
     }
-
 }

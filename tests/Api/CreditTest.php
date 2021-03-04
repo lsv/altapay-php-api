@@ -1,12 +1,12 @@
 <?php
 
-namespace Valitor\ApiTest\Api;
+namespace Altapay\ApiTest\Api;
 
-use Valitor\Api\Payments\Credit;
-use Valitor\Request\Card;
-use Valitor\Exceptions\CreditCardTokenAndCardUsedException;
-use Valitor\Response\CreditResponse as CreditResponse;
-use Valitor\Types\PaymentSources;
+use Altapay\Api\Payments\Credit;
+use Altapay\Request\Card;
+use Altapay\Exceptions\CreditCardTokenAndCardUsedException;
+use Altapay\Response\CreditResponse as CreditResponse;
+use Altapay\Types\PaymentSources;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
@@ -19,23 +19,20 @@ class CreditTest extends AbstractApiTest
      */
     protected function getCredit()
     {
-        $client = $this->getClient($mock = new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/reservationoffixedamount.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/reservationoffixedamount.xml');
 
         return (new Credit($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
     }
 
-    public function test_options()
+    public function test_options(): void
     {
-        $this->setExpectedException(CreditCardTokenAndCardUsedException::class);
+        $this->expectException(CreditCardTokenAndCardUsedException::class);
 
-        $card = new Card(1234, 12, 12, 122);
-        $api = $this->getCredit();
+        $card = new Card('1234', '12', '12', '122');
+        $api  = $this->getCredit();
         $api->setTerminal('123');
-        $api->setShopOrderId(123);
+        $api->setShopOrderId('123');
         $api->setAmount(20.44);
         $api->setCurrency(967);
         $api->setCard($card);
@@ -43,50 +40,53 @@ class CreditTest extends AbstractApiTest
         $api->call();
     }
 
-    public function test_creditcard_options()
+    public function test_creditcard_options(): void
     {
-        $card = new Card(1234567890, 5, 19, 122);
-        $api = $this->getCredit();
+        $card = new Card('1234567890', '05', '19', '122');
+        $api  = $this->getCredit();
         $api->setTerminal('terminal');
-        $api->setShopOrderId(123);
+        $api->setShopOrderId('123');
         $api->setAmount(20.44);
         $api->setCurrency(967);
         $api->setCard($card);
         $api->call();
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('credit'), $request->getUri()->getPath());
+        $this->assertSame($this->getExceptedUri('credit'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
-        $this->assertEquals('terminal', $parts['terminal']);
-        $this->assertEquals(123, $parts['shop_orderid']);
-        $this->assertEquals(20.44, $parts['amount']);
-        $this->assertEquals(967, $parts['currency']);
-        $this->assertEquals(1234567890, $parts['cardnum']);
-        $this->assertEquals(5, $parts['emonth']);
-        $this->assertEquals(19, $parts['eyear']);
-        $this->assertEquals(122, $parts['cvc']);
+        $this->assertSame('terminal', $parts['terminal']);
+        $this->assertSame('123', $parts['shop_orderid']);
+        $this->assertSame('20.44', $parts['amount']);
+        $this->assertSame('967', $parts['currency']);
+        $this->assertSame('1234567890', $parts['cardnum']);
+        $this->assertSame('05', $parts['emonth']);
+        $this->assertSame('19', $parts['eyear']);
+        $this->assertSame('122', $parts['cvc']);
     }
 
-    public function test_creditcardtoken_options()
+    public function test_creditcardtoken_options(): void
     {
         $api = $this->getCredit();
         $api->setTerminal('terminal');
-        $api->setShopOrderId(123);
+        $api->setShopOrderId('123');
         $api->setAmount(20.44);
         $api->setCurrency(967);
         $api->setCreditCardToken('token');
         $api->call();
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('credit'), $request->getUri()->getPath());
+        $this->assertSame($this->getExceptedUri('credit'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
-        $this->assertEquals('terminal', $parts['terminal']);
-        $this->assertEquals(123, $parts['shop_orderid']);
-        $this->assertEquals(20.44, $parts['amount']);
-        $this->assertEquals(967, $parts['currency']);
-        $this->assertEquals('token', $parts['credit_card_token']);
+        $this->assertSame('terminal', $parts['terminal']);
+        $this->assertSame('123', $parts['shop_orderid']);
+        $this->assertSame('20.44', $parts['amount']);
+        $this->assertSame('967', $parts['currency']);
+        $this->assertSame('token', $parts['credit_card_token']);
     }
 
+    /**
+     * @return array<int, array<int, string>>
+     */
     public function paymentSourceDataProvider()
     {
         return [
@@ -96,27 +96,30 @@ class CreditTest extends AbstractApiTest
 
     /**
      * @dataProvider paymentSourceDataProvider
+     *
      * @param string $type
      */
-    public function test_paymentsource_options($type)
+    public function test_paymentsource_options($type): void
     {
         $api = $this->getCredit();
         $api->setTerminal('terminal');
-        $api->setShopOrderId(123);
+        $api->setShopOrderId('123');
         $api->setAmount(20.44);
         $api->setCurrency(967);
         $api->setCreditCardToken('token');
         $api->setPaymentSource($type);
-        $api->call();
+        $response = $api->call();
+
+        $this->assertInstanceOf(CreditResponse::class, $response);
     }
 
-    public function test_paymentsource_invalid_options()
+    public function test_paymentsource_invalid_options(): void
     {
-        $this->setExpectedException(InvalidOptionsException::class);
+        $this->expectException(InvalidOptionsException::class);
 
         $api = $this->getCredit();
         $api->setTerminal('terminal');
-        $api->setShopOrderId(123);
+        $api->setShopOrderId('123');
         $api->setAmount(20.44);
         $api->setCurrency(967);
         $api->setCreditCardToken('token');
@@ -124,21 +127,20 @@ class CreditTest extends AbstractApiTest
         $api->call();
     }
 
-    public function test_response()
+    public function test_response(): void
     {
-        $card = new Card(1234567890, 5, 19, 122);
-        $api = $this->getCredit();
+        $card = new Card('1234567890', '05', '19', '122');
+        $api  = $this->getCredit();
         $api->setTerminal('terminal');
-        $api->setShopOrderId(123);
+        $api->setShopOrderId('123');
         $api->setAmount(20.44);
         $api->setCurrency(967);
         $api->setCard($card);
 
-        /** @var CreditResponse $response */
         $response = $api->call();
 
         $this->assertInstanceOf(CreditResponse::class, $response);
-        $this->assertEquals('Success', $response->Result);
+        $this->assertSame('Success', $response->Result);
         $this->assertCount(1, $response->Transactions);
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace Valitor\ApiTest\Api;
+namespace Altapay\ApiTest\Api;
 
-use Valitor\Api\Payments\InvoiceReservation;
+use Altapay\Api\Payments\InvoiceReservation;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
@@ -15,25 +15,22 @@ class InvoiceReservationTest extends AbstractApiTest
      */
     protected function getapi()
     {
-        $client = $this->getClient($mock = new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/invoicereservation.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/invoicereservation.xml');
 
         return (new InvoiceReservation($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
     }
 
-    public function test_missing_all_options()
+    public function test_missing_all_options(): void
     {
-        $this->setExpectedException(
-            MissingOptionsException::class,
+        $this->expectException(MissingOptionsException::class);
+        $this->expectExceptionMessage(
             'The required options "amount", "currency", "shop_orderid", "terminal" are missing.'
         );
         $this->getapi()->call();
     }
 
-    public function test_url()
+    public function test_url(): void
     {
         $api = $this->getapi();
         $api->setTerminal('my terminal');
@@ -43,15 +40,15 @@ class InvoiceReservationTest extends AbstractApiTest
         $api->call();
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('createInvoiceReservation/'), $request->getUri()->getPath());
+        $this->assertSame($this->getExceptedUri('createInvoiceReservation/'), $request->getUri()->getPath());
         parse_str($request->getUri()->getQuery(), $parts);
-        $this->assertEquals('my terminal', $parts['terminal']);
-        $this->assertEquals('order id', $parts['shop_orderid']);
-        $this->assertEquals(200.50, $parts['amount']);
-        $this->assertEquals(957, $parts['currency']);
+        $this->assertSame('my terminal', $parts['terminal']);
+        $this->assertSame('order id', $parts['shop_orderid']);
+        $this->assertSame('200.5', $parts['amount']);
+        $this->assertSame('957', $parts['currency']);
     }
 
-    public function test_options()
+    public function test_options(): void
     {
         $api = $this->getapi();
         $api->setTerminal('my terminal');
@@ -69,10 +66,10 @@ class InvoiceReservationTest extends AbstractApiTest
         $request = $api->getRawRequest();
 
         parse_str($request->getUri()->getQuery(), $parts);
-        $this->assertEquals('subscriptionAndCharge', $parts['type']);
-        $this->assertEquals('account', $parts['accountNumber']);
-        $this->assertEquals('mail_order', $parts['payment_source']);
-        $this->assertEquals('code', $parts['bankCode']);
-        $this->assertEquals('maxmind', $parts['fraud_service']);
+        $this->assertSame('subscriptionAndCharge', $parts['type']);
+        $this->assertSame('account', $parts['accountNumber']);
+        $this->assertSame('mail_order', $parts['payment_source']);
+        $this->assertSame('code', $parts['bankCode']);
+        $this->assertSame('maxmind', $parts['fraud_service']);
     }
 }
