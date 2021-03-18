@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Added User-Agent in API call headers
 - Added new properties for ReleaseReservationResponse class
+- Added new property and setter for ChargeSubscriptionResponse class
 
 ### Changed
 
