@@ -25,8 +25,6 @@ jobs:
 
      - name: Install composer and run PhpStan
        run: |
-         pwd
-         ls -al
          composer install
          vendor/phpstan/phpstan/phpstan analyze .
        working-directory: api-php
