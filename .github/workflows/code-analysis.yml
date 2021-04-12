@@ -7,19 +7,26 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-
+  php-stan:
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        php-versions: ['7.4']
     steps:
-    - uses: actions/checkout@v2
-      with:
-        path: api-php
+     - name: Install PHP 7.4
+       uses: shivammathur/setup-php@v2
+       with:
+         php-version: ${{ matrix.php-versions }}
+         ini-values: "post_max_size=256M" #optional
 
-    - name: Install composer and run PhpStan
-      run: |
-        pwd
-        ls -al
-        composer install
-        vendor/phpstan/phpstan/phpstan analyze .
-      working-directory: api-php
+     - uses: actions/checkout@v2
+       with:
+         path: api-php
+
+     - name: Install composer and run PhpStan
+       run: |
+         pwd
+         ls -al
+         composer install
+         vendor/phpstan/phpstan/phpstan analyze .
+       working-directory: api-php
