@@ -123,7 +123,7 @@ abstract class AbstractApi
     /**
      * Handle response
      *
-     * @param Request  $request
+     * @param Request           $request
      * @param ResponseInterface $response
      *
      * @return AbstractResponse|string|array<Transaction>
@@ -146,10 +146,10 @@ abstract class AbstractApi
      */
     public function __construct(Authentication $authentication)
     {
-        $this->dispatcher        = new EventDispatcher();
-        $this->httpClient        = new Client();
-        $this->authentication    = $authentication;
-        $this->baseUrl           = $authentication->getBaseurl();
+        $this->dispatcher     = new EventDispatcher();
+        $this->httpClient     = new Client();
+        $this->authentication = $authentication;
+        $this->baseUrl        = $authentication->getBaseurl();
     }
 
     /**
@@ -315,7 +315,10 @@ abstract class AbstractApi
         if (!$userAgent) {
             $userAgent = 'api-php/' . self::PHP_API_VERSION;
             if (extension_loaded('curl') && function_exists('curl_version')) {
-                $userAgent .= ' curl/' . \curl_version()['version'];
+                $curlInfo = \curl_version();
+                if (is_array($curlInfo) && array_key_exists("version", $curlInfo)) {
+                    $userAgent .= ' curl/' . $curlInfo["version"];
+                }
             }
             $userAgent .= ' PHP/' . PHP_VERSION;
         }

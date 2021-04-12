@@ -1,0 +1,30 @@
+name: PHP Code Analysis
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  php-stan:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-versions: ['7.4']
+    steps:
+     - name: Install PHP 7.4
+       uses: shivammathur/setup-php@v2
+       with:
+         php-version: ${{ matrix.php-versions }}
+         ini-values: "post_max_size=256M" #optional
+
+     - uses: actions/checkout@v2
+       with:
+         path: api-php
+
+     - name: Install composer and run PhpStan
+       run: |
+         composer install
+         vendor/phpstan/phpstan/phpstan analyze .
+       working-directory: api-php
