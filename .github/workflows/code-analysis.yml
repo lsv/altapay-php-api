@@ -32,11 +32,14 @@ jobs:
      - name: Run PHP-CS-Fixer
        run: |
          vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix . --dry-run
+       working-directory: api-php
 
      - name: Run Linter for PHP
        run: |
          vendor/overtrue/phplint/bin/phplint ./ --exclude=vendor
+       working-directory: api-php
 
      - name: Run PHPUnit tests
        run: |
          vendor/phpunit/phpunit/phpunit tests
+       working-directory: api-php
