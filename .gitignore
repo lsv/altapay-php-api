@@ -4,6 +4,5 @@
 /bin
 /.env.php
 /_.env.php
-/composer.lock
 /.php_cs.cache
 /.idea
