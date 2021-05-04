@@ -17,24 +17,19 @@ jobs:
          ini-values: "post_max_size=256M" #optional
 
      - uses: actions/checkout@v2
-       with:
-         path: api-php
 
      - name: Install composer and run PhpStan
        run: |
          composer install
          vendor/phpstan/phpstan/phpstan analyze .
-       working-directory: api-php
 
      - name: Run PHP-CS-Fixer
        run: |
          vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix . --dry-run
-       working-directory: api-php
 
      - name: Run PHPUnit tests
        run: |
          vendor/phpunit/phpunit/phpunit tests
-       working-directory: api-php
     
      - name: Install PHP
        uses: shivammathur/setup-php@v2
@@ -42,11 +37,8 @@ jobs:
          php-version: '5.6'
          ini-values: "post_max_size=256M"
          
-     - name: Check php --version
-       run: |
-         php -v
-         
      - name: Run Linter for PHP
-       run: |
-         vendor/overtrue/phplint/bin/phplint ./ --exclude=vendor
-       working-directory: api-php
+       uses: StephaneBour/actions-php-lint@5.6
+       with:
+         dir: './src'
+         

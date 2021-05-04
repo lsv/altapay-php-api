@@ -40,8 +40,7 @@
         "phpstan/phpstan": "^0.12.44",
         "phpstan/phpstan-phpunit": "*",
         "phpstan/phpstan-strict-rules": "^0.12.5",
-        "phpunit/phpunit": "^7.0 || ^8.0",
-        "overtrue/phplint": "*"
+        "phpunit/phpunit": "^7.0 || ^8.0"
     },
     "autoload": {
         "psr-4": {
