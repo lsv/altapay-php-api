@@ -39,7 +39,6 @@ jobs:
          php-version: '5.6'
          
      - name: Run Linter for PHP5.6
-       run: |
        uses: StephaneBour/actions-php-lint@5.6
        with:
          dir: './src'
