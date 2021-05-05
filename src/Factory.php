@@ -33,7 +33,7 @@ use Altapay\Api\Test;
 class Factory
 {
     const ECOMMERCE_PAYMENT_REQUEST = Ecommerce\PaymentRequest::class;
-    ECOMMERCE_CALLBACK = Ecommerce\Callback::class;
+    const ECOMMERCE_CALLBACK = Ecommerce\Callback::class;
 
     const OTHERS_CALCULATE_SURCHARGE = Others\CalculateSurcharge::class;
     const OTHERS_CUSTOM_REPORT = Others\CustomReport::class;
