@@ -10,17 +10,19 @@ jobs:
   php-stan:
     runs-on: ubuntu-latest
     steps:
-     - name: Install PHP
+     - name: Install PHP 7.4
        uses: shivammathur/setup-php@v2
        with:
          php-version: '7.4'
-         ini-values: "post_max_size=256M" #optional
 
      - uses: actions/checkout@v2
 
-     - name: Install composer and run PhpStan
+     - name: Install required packages with composer 
        run: |
          composer install
+
+     - name: Run PhpStan
+       run: |
          vendor/phpstan/phpstan/phpstan analyze .
 
      - name: Run PHP-CS-Fixer
@@ -31,13 +33,12 @@ jobs:
        run: |
          vendor/phpunit/phpunit/phpunit tests
     
-     - name: Install PHP
+     - name: Install PHP 5.6
        uses: shivammathur/setup-php@v2
        with:
          php-version: '5.6'
-         ini-values: "post_max_size=256M"
          
-     - name: Run Linter for PHP
+     - name: Run Linter for PHP5.6
        uses: StephaneBour/actions-php-lint@5.6
        with:
          dir: './src'
