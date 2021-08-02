@@ -221,7 +221,7 @@ class CurrencyTypes
      *
      * @return bool
      */
-    public static function currencyNumberExists(string $number)
+    public static function currencyNumberExists($number)
     {
         return array_key_exists($number, array_flip(self::$currencies));
     }
