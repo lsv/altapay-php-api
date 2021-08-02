@@ -39,7 +39,7 @@
         "fzaninotto/faker": "^1.6",
         "phpstan/phpstan": "^0.12.94",
         "phpstan/phpstan-phpunit": "*",
-        "phpstan/phpstan-strict-rules": "^0.12.5",
+        "phpstan/phpstan-strict-rules": "^0.12.10",
         "phpunit/phpunit": "^7.0 || ^8.0"
     },
     "autoload": {
