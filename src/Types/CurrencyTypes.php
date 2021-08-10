@@ -217,7 +217,7 @@ class CurrencyTypes
     }
 
     /**
-     * @param int $number
+     * @param string $number
      *
      * @return bool
      */

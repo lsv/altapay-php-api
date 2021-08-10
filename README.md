@@ -33,6 +33,7 @@ The AltaPay API PHP requires PHP 5.6.0 or grater with the following extensions i
 
 - date
 - filter
+- mbstring
 - pcre
 - Reflection
 - SimpleXML
