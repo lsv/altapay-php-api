@@ -1,9 +1,8 @@
-Altapay - API PHP
-=================
+# AltaPay - API PHP
 
-For accessing Altapay payment gateway through the API
+For accessing AltaPay payment gateway through the API
 
-## Install
+## Installation
 
 `composer require altapay/api-php`
 
@@ -25,8 +24,6 @@ try {
 }
 ```
 
-More details in the [documentation](docs/index.md)
-
 ## Requirements
 
 The AltaPay API PHP requires PHP 5.6.0 or grater with the following extensions installed:
@@ -42,8 +39,15 @@ The AltaPay API PHP requires PHP 5.6.0 or grater with the following extensions i
 
 ## Changelog
 
-See [CHANGELOG.md](CHANGELOG.md)
+See [Changelog](CHANGELOG.md) for all the release notes.
 
 ## License
 
-See [LICENSE](LICENSE)
+Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
+
+## Documentation
+
+For more details please see [documentation](docs/index.md)
+
+## Contact
+Feel free to contact our support team (support@altapay.com) if you need any assistance.
