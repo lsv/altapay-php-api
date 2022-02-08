@@ -9,7 +9,6 @@ use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 
 class InvoiceReservationTest extends AbstractApiTest
 {
-
     /**
      * @return InvoiceReservation
      */

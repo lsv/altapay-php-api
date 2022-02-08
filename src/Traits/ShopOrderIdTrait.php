@@ -27,7 +27,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 trait ShopOrderIdTrait
 {
-
     /**
      * The id of the order in your web shop,
      * this is what we will post back to you so you know which order a given payment is associated with.

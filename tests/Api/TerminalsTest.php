@@ -10,7 +10,6 @@ use GuzzleHttp\Psr7\Response;
 
 class TerminalsTest extends AbstractApiTest
 {
-
     /**
      * @return Terminals
      */

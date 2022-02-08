@@ -25,7 +25,6 @@ namespace Altapay\Types;
 
 interface TypeInterface
 {
-
     /**
      * Get allowed values
      *

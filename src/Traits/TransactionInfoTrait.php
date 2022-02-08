@@ -27,7 +27,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 trait TransactionInfoTrait
 {
-
     /**
      * This is a one-dimensional associative array.
      * This is where you put any value that you would like to bind to the payment.

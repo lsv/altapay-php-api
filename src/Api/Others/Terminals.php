@@ -37,7 +37,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class Terminals extends AbstractApi
 {
-
     /**
      * Configure options
      *

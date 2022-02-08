@@ -28,7 +28,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 trait TerminalTrait
 {
-
     /**
      * The name of the terminal the payment will be made on.
      *

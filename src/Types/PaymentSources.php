@@ -28,7 +28,6 @@ namespace Altapay\Types;
  */
 class PaymentSources implements TypeInterface
 {
-
     /**
      * Allowed payment sources
      *

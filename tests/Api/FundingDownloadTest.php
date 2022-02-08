@@ -9,7 +9,6 @@ use GuzzleHttp\Psr7\Response;
 
 class FundingDownloadTest extends AbstractApiTest
 {
-
     /**
      * @return FundingDownload
      */

@@ -10,7 +10,6 @@ use GuzzleHttp\Psr7\Response;
 
 class HeaderTest extends AbstractApiTest
 {
-
     /**
      * @return FundingList
      */

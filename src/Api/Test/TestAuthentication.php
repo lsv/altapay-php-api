@@ -36,7 +36,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class TestAuthentication extends AbstractApi
 {
-
     /**
      * Configure options
      *

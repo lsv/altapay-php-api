@@ -27,7 +27,6 @@ use Altapay\Response\AbstractResponse;
 
 class Header extends AbstractResponse
 {
-
     /**
      * Date for the response
      *

@@ -27,7 +27,6 @@ use Altapay\Response\Embeds\Header;
 
 class ResponseHeaderException extends Exception
 {
-
     /**
      * @var Header
      */

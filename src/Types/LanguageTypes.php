@@ -25,7 +25,6 @@ namespace Altapay\Types;
 
 class LanguageTypes implements TypeInterface
 {
-
     /**
      * Allowed languages
      * nb, nn will be converted to no.

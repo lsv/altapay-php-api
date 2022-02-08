@@ -12,7 +12,6 @@ use GuzzleHttp\Psr7\Response;
 
 class RefundCapturedReservationTest extends AbstractApiTest
 {
-
     /**
      * @return RefundCapturedReservation
      */

@@ -36,7 +36,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class FundingList extends AbstractApi
 {
-
     /**
      * This method will only show 100 fundings pr. call. Setting this parameter allows you to fetch more.
      *
