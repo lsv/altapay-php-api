@@ -25,6 +25,7 @@ namespace Altapay\Response;
 
 class PaymentRequestResponse extends AbstractResponse
 {
+
     /**
      * The result
      *

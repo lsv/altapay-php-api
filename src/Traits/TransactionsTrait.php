@@ -32,6 +32,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 trait TransactionsTrait
 {
+
     /**
      * The id of a specific payment.
      *

@@ -10,6 +10,7 @@ use GuzzleHttp\Psr7\Response;
 
 class QueryGiftcardTest extends AbstractApiTest
 {
+
     /**
      * @return QueryGiftcard
      */

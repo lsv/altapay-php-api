@@ -11,6 +11,7 @@ use GuzzleHttp\Psr7\Response;
 
 class InvoiceTextTest extends AbstractApiTest
 {
+
     /**
      * @return InvoiceText
      */

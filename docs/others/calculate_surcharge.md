@@ -7,7 +7,7 @@ This method is used to calculate the surcharge beforehand, based on a previously
     + [Required](#required)
         * [Example](#example)
 - [Response](#response)
-    + [3D results](#3d-results)
+    + [3D results](#3d_results)
 
 # Request
 

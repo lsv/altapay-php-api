@@ -32,6 +32,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 trait OrderlinesTrait
 {
+
     /**
      * @param array<OrderLine>|OrderLine $orderLines
      *

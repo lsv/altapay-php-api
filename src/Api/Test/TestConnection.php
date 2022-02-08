@@ -36,6 +36,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class TestConnection extends AbstractApi
 {
+
     /**
      * TestConnection constructor.
      *

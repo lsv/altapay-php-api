@@ -21,6 +21,7 @@ use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 
 class ReservationOfFixedAmountTest extends AbstractApiTest
 {
+
     /**
      * @return ReservationOfFixedAmount
      */

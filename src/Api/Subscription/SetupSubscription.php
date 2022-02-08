@@ -37,6 +37,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class SetupSubscription extends ReservationOfFixedAmount
 {
+
     /**
      * Configure options
      *

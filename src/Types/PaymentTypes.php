@@ -28,6 +28,7 @@ namespace Altapay\Types;
  */
 class PaymentTypes implements TypeInterface
 {
+
     /**
      * Allowed payment types
      *

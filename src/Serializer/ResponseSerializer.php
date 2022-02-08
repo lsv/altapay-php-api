@@ -46,7 +46,7 @@ class ResponseSerializer
         \SimpleXMLElement $data,
         \SimpleXMLElement $header = null
     ) {
-        $object = new $objectName();
+        $object = new $objectName;
         $object->headerSetter($header);
 
         return $object->deserialize($data);
@@ -70,7 +70,7 @@ class ResponseSerializer
     ) {
         $documents = [];
         foreach ($data->{$childKey} as $d) {
-            $object      = new $objectName();
+            $object      = new $objectName;
             $documents[] = $object->deserialize($d);
         }
 

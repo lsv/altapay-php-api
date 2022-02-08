@@ -25,6 +25,7 @@ namespace Altapay\Types;
 
 class ShippingMethods implements TypeInterface
 {
+
     /**
      * Allowed payment types
      *

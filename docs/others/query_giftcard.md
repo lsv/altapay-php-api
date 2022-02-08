@@ -35,7 +35,7 @@ try {
 | Method  | Description | Type |
 |---|---|---|
 | setTerminal(string or Terminal object) | The name of the terminal to check against. | string or [Terminal object](../types/terminal.md)
-| setGiftcard(Giftcard) | The giftcard | [Giftcard object](#giftcard-object)
+| setGiftcard(Giftcard) | The giftcard | [Giftcard object](#giftcard_object)
 
 ### Optional
 
