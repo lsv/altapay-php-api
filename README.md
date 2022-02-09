@@ -26,7 +26,7 @@ try {
 
 ## Requirements
 
-The AltaPay API PHP requires PHP 5.6.0 or grater with the following extensions installed:
+The AltaPay API PHP requires PHP 5.6.0 or greater with the following extensions installed:
 
 - date
 - filter
