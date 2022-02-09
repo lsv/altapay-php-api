@@ -22,14 +22,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for installation and autoloading via composer
 - Document all function arguments
 - Added DynamicJavascriptUrl on PensioCreatePaymentRequest
-- The previous exception is now forwareded
+- The previous exception is now forwarded
 
 ### Changed
 - Split ResponseSerializer serialize() and serializeChildren()
 
 ### Fixes
 - Better handle invalid responses
-- Corrected remaning warning messages
+- Corrected remaining warning messages
 - Corrected all types in code DocBlocks
 - Correctly handle non-US-ASCII symbols
 - Make sure all exceptions have a message
@@ -61,7 +61,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.0.0] - 2019-12-19
 **Changed**
-- Rebranding from Altapay to Valitor
+- Rebranding from AltaPay to Valitor
 
 ## [1.8.0] - 2019-08-30
 **Added**
