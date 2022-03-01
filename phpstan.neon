@@ -8,6 +8,6 @@ services:
 parameters:
 	paths:
 		- ./
-	excludes_analyse:
+	excludePaths:
 		- vendor
 	level: max
