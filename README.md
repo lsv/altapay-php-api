@@ -8,7 +8,7 @@ For accessing AltaPay payment gateway through the API
 
 ## Usage
 
-For doing a [`capture`](docs/capture.md) the following can be used
+For doing a [`capture`](docs/payments/capture_reservation.md) the following can be used
 
 ```php
 $auth = new \Altapay\Authentication('username', 'password' , 'myshop.gateway.com');
@@ -26,7 +26,7 @@ try {
 
 ## Requirements
 
-The AltaPay API PHP requires PHP 5.6.0 or grater with the following extensions installed:
+The AltaPay API PHP requires PHP 5.6.0 or greater with the following extensions installed:
 
 - date
 - filter

@@ -7,7 +7,7 @@ This method is used to calculate the surcharge beforehand, based on a previously
     + [Required](#required)
         * [Example](#example)
 - [Response](#response)
-    + [3D results](#3d_results)
+    + [3D results](#3d-results)
 
 # Request
 
@@ -33,13 +33,13 @@ try {
 
 ### Required
 
-| Method  | Description | Type |
-|---|---|---|
-| setAmount(float) | The amount to calculate the surcharge from | float
-| setCurrency(string) | Either 3 letter or 3 digit currency code. ISO-4217 | string, int - [See currencies](../types/currencies.md)
-| setTerminal(string) | The name of the terminal the payment will be made on. | string
-| setCreditCardToken(string) | A credit card token previously received from an eCommerce payment or an other MO/TO payment. | string
-| setPaymentId(string) | The id of an existing payment/subscription to base calculation on. If payment id is sent, only amount of the other parameters should be sent. | string
+| Method                     | Description                                                                                                                                   | Type                                                   |
+|----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------|
+| setAmount(float)           | The amount to calculate the surcharge from                                                                                                    | float                                                  |
+| setCurrency(string)        | Either 3 letter or 3 digit currency code. ISO-4217                                                                                            | string, int - [See currencies](../types/currencies.md) |
+| setTerminal(string)        | The name of the terminal the payment will be made on.                                                                                         | string                                                 |
+| setCreditCardToken(string) | A credit card token previously received from an eCommerce payment or an other MO/TO payment.                                                  | string                                                 |
+| setPaymentId(string)       | The id of an existing payment/subscription to base calculation on. If payment id is sent, only amount of the other parameters should be sent. | string                                                 |
 
 ###### Example
 
@@ -63,11 +63,11 @@ $request->setAmount(125.50);
 
 Object of `\Altapay\Response\SurchargeResponse`
 
-| Method  | Description | Type |
-|---|---|---|
-| `$response->Result` | The result | string
-| `$response->SurchargeAmount` | The amount of which will be surcharged | float
-| `$response->ThreeDSecureResult` | The 3d secure result | string
+| Method                          | Description                            | Type   |
+|---------------------------------|----------------------------------------|--------|
+| `$response->Result`             | The result                             | string |
+| `$response->SurchargeAmount`    | The amount of which will be surcharged | float  |
+| `$response->ThreeDSecureResult` | The 3d secure result                   | string |
 
 ### 3D results
 

@@ -32,10 +32,10 @@ try {
 
 ### Required
 
-| Method  | Description | Type |
-|---|---|---|
-| setTerminal(string or Terminal object) | The name of the terminal to check against. | string or [Terminal object](../types/terminal.md)
-| setGiftcard(Giftcard) | The giftcard | [Giftcard object](#giftcard_object)
+| Method                                 | Description                                | Type                                              |
+|----------------------------------------|--------------------------------------------|---------------------------------------------------|
+| setTerminal(string or Terminal object) | The name of the terminal to check against. | string or [Terminal object](../types/terminal.md) |
+| setGiftcard(Giftcard)                  | The giftcard                               | [Giftcard object](#giftcard-object)               |
 
 ### Optional
 
@@ -68,14 +68,14 @@ $response = $request->call();
 
 Response is now a object of `\Altapay\Response\GiftcardResponse`
 
-| Method  | Description | Type |
-|---|---|---|
-| `$response->Result` | | string
-| `$response->Accounts` | array of `\Altapay\Response\Embeds\GiftCardAccount` object | array
+| Method                | Description                                                | Type   |
+|-----------------------|------------------------------------------------------------|--------|
+| `$response->Result`   |                                                            | string |
+| `$response->Accounts` | array of `\Altapay\Response\Embeds\GiftCardAccount` object | array  |
 
 `\Altapay\Response\Embeds\GiftCardAccount` object
 
-| Method  | Description | Type |
-|---|---|---|
-| `$object->Currency` |  | string
-| `$object->Balance` |  | float
+| Method              | Description | Type   |
+|---------------------|-------------|--------|
+| `$object->Currency` |             | string |
+| `$object->Balance`  |             | float  |
