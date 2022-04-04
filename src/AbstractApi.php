@@ -53,7 +53,7 @@ abstract class AbstractApi
     /**
      * PHP API version
      */
-    const PHP_API_VERSION = '3.2.0';
+    const PHP_API_VERSION = '3.2.1';
 
     /**
      * Event dispatcher
