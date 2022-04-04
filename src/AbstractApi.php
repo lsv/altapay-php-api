@@ -225,6 +225,8 @@ abstract class AbstractApi
         $this->setShopOrderIdResolver($resolver);
         $this->setTransactionInfoResolver($resolver);
         $this->setCustomerInfoResolver($resolver);
+        $this->setValidationUrlResolver($resolver);
+        $this->setAppleDomainResolver($resolver);
         $this->options = $resolver->resolve($this->unresolvedOptions);
     }
 
@@ -468,6 +470,28 @@ abstract class AbstractApi
      * @return void
      */
     protected function setCustomerInfoResolver(OptionsResolver $resolver)
+    {
+    }
+
+    /**
+     * Resolve validationUrl option
+     *
+     * @param OptionsResolver $resolver
+     *
+     * @return void
+     */
+    protected function setValidationUrlResolver(OptionsResolver $resolver)
+    {
+    }
+
+    /**
+     * Resolve applepaydomain option
+     *
+     * @param OptionsResolver $resolver
+     *
+     * @return void
+     */
+    protected function setAppleDomainResolver(OptionsResolver $resolver)
     {
     }
 }
