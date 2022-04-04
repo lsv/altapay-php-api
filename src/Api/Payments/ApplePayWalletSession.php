@@ -24,6 +24,7 @@
 namespace Altapay\Api\Payments;
 
 use Altapay\AbstractApi;
+use Altapay\Exceptions;
 use Altapay\Serializer\ResponseSerializer;
 use Altapay\Traits\TerminalTrait;
 use Altapay\Response\PaymentRequestResponse;
@@ -82,7 +83,7 @@ class ApplePayWalletSession extends AbstractApi
      * @param Request           $request
      * @param ResponseInterface $response
      *
-     * @return CaptureReservationResponse
+     * @return PaymentRequestResponse
      */
     protected function handleResponse(Request $request, ResponseInterface $response)
     {
