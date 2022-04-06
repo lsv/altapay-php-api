@@ -34,7 +34,7 @@ use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ApplePayWalletSession extends AbstractApi
+class CardWalletSession extends AbstractApi
 {
     use TerminalTrait;
 
