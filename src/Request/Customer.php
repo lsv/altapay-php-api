@@ -21,9 +21,9 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Request;
+namespace Altapay\Request;
 
-use Valitor\Exceptions\Exception;
+use Altapay\Exceptions\Exception;
 
 class Customer extends AbstractSerializer
 {
@@ -139,14 +139,14 @@ class Customer extends AbstractSerializer
     /**
      * The birth date of the customer
      *
-     * @var \DateTime
+     * @var \DateTime|null
      */
     private $birthdate;
 
     /**
      * The creation date of the customer in your system
      *
-     * @var \DateTime
+     * @var \DateTime|null
      */
     private $createdDate;
 
@@ -172,6 +172,41 @@ class Customer extends AbstractSerializer
     private $shippingRef;
 
     /**
+     * Client IP Address.
+     *
+     * @var string
+     */
+    private $clientIP;
+
+    /**
+     * Client accept language.
+     *
+     * @var string
+     */
+    private $clientAcceptLanguage;
+
+    /**
+     * HTTP User Agent.
+     *
+     * @var string
+     */
+    private $httpUserAgent;
+
+    /**
+     * Header that is used by the trusted proxy to refer to.
+     *
+     * @var string
+     */
+    private $httpXForwardedFor;
+
+    /**
+     * Client Session ID.
+     *
+     * @var string
+     */
+    private $clientSessionID;
+
+    /**
      * Customer constructor.
      *
      * @param Address $billingAddress Billing address
@@ -184,7 +219,7 @@ class Customer extends AbstractSerializer
     /**
      * @param Address $shipping
      *
-     * @return Customer
+     * @return $this
      */
     public function setShipping(Address $shipping)
     {
@@ -198,7 +233,7 @@ class Customer extends AbstractSerializer
      *
      * @param string $email
      *
-     * @return Customer
+     * @return $this
      */
     public function setEmail($email)
     {
@@ -212,7 +247,7 @@ class Customer extends AbstractSerializer
      *
      * @param string $username
      *
-     * @return Customer
+     * @return $this
      */
     public function setUsername($username)
     {
@@ -226,7 +261,7 @@ class Customer extends AbstractSerializer
      *
      * @param string $type
      *
-     * @return Customer
+     * @return $this
      */
     public function setType($type)
     {
@@ -240,7 +275,7 @@ class Customer extends AbstractSerializer
      *
      * @param string $companyName
      *
-     * @return Customer
+     * @return $this
      */
     public function setCompanyName($companyName)
     {
@@ -254,7 +289,7 @@ class Customer extends AbstractSerializer
      *
      * @param string $companyType
      *
-     * @return Customer
+     * @return $this
      */
     public function setCompanyType($companyType)
     {
@@ -268,7 +303,7 @@ class Customer extends AbstractSerializer
      *
      * @param string $vatId
      *
-     * @return Customer
+     * @return $this
      */
     public function setVatId($vatId)
     {
@@ -282,7 +317,7 @@ class Customer extends AbstractSerializer
      *
      * @param string $billingAtt
      *
-     * @return Customer
+     * @return $this
      */
     public function setBillingAtt($billingAtt)
     {
@@ -296,7 +331,7 @@ class Customer extends AbstractSerializer
      *
      * @param string $shippingAtt
      *
-     * @return Customer
+     * @return $this
      */
     public function setShippingAtt($shippingAtt)
     {
@@ -310,7 +345,7 @@ class Customer extends AbstractSerializer
      *
      * @param string $phone
      *
-     * @return Customer
+     * @return $this
      */
     public function setPhone($phone)
     {
@@ -324,7 +359,7 @@ class Customer extends AbstractSerializer
      *
      * @param string $bankName
      *
-     * @return Customer
+     * @return $this
      */
     public function setBankName($bankName)
     {
@@ -338,7 +373,7 @@ class Customer extends AbstractSerializer
      *
      * @param string $bankPhone
      *
-     * @return Customer
+     * @return $this
      */
     public function setBankPhone($bankPhone)
     {
@@ -352,7 +387,7 @@ class Customer extends AbstractSerializer
      *
      * @param \DateTime $birthdate
      *
-     * @return Customer
+     * @return $this
      */
     public function setBirthdate($birthdate)
     {
@@ -366,7 +401,7 @@ class Customer extends AbstractSerializer
      *
      * @param \DateTime $createdDate
      *
-     * @return Customer
+     * @return $this
      */
     public function setCreatedDate(\DateTime $createdDate)
     {
@@ -376,7 +411,7 @@ class Customer extends AbstractSerializer
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getCreatedDate()
     {
@@ -386,7 +421,7 @@ class Customer extends AbstractSerializer
     /**
      * @param string $organisationNumber
      *
-     * @return Customer
+     * @return $this
      */
     public function setOrganisationNumber($organisationNumber)
     {
@@ -398,7 +433,7 @@ class Customer extends AbstractSerializer
     /**
      * @param string $personalIdentifyNumber
      *
-     * @return Customer
+     * @return $this
      */
     public function setPersonalIdentifyNumber($personalIdentifyNumber)
     {
@@ -410,7 +445,7 @@ class Customer extends AbstractSerializer
     /**
      * @param string $billingRef
      *
-     * @return Customer
+     * @return $this
      */
     public function setBillingRef($billingRef)
     {
@@ -422,7 +457,7 @@ class Customer extends AbstractSerializer
     /**
      * @param string $shippingRef
      *
-     * @return Customer
+     * @return $this
      */
     public function setShippingRef($shippingRef)
     {
@@ -436,12 +471,13 @@ class Customer extends AbstractSerializer
      *
      * @param string $gender
      *
-     * @return Customer
+     * @return $this
+     *
      * @throws Exception
      */
     public function setGender($gender)
     {
-        switch (strtolower($gender)) {
+        switch (mb_strtolower($gender)) {
             case 'male':
             case 'm':
                 $this->gender = self::MALE;
@@ -458,9 +494,79 @@ class Customer extends AbstractSerializer
     }
 
     /**
+     * Set Client IP
+     *
+     * @param string $clientIP
+     *
+     * @return $this
+     */
+    public function setClientIP($clientIP)
+    {
+        $this->clientIP = $clientIP;
+
+        return $this;
+    }
+
+    /**
+     * Set Client Accept Language
+     *
+     * @param string $clientAcceptLanguage
+     *
+     * @return $this
+     */
+    public function setClientAcceptLanguage($clientAcceptLanguage)
+    {
+        $this->clientAcceptLanguage = $clientAcceptLanguage;
+
+        return $this;
+    }
+
+    /**
+     * Set Client Accept Language
+     *
+     * @param string $httpUserAgent
+     *
+     * @return $this
+     */
+    public function setHttpUserAgent($httpUserAgent)
+    {
+        $this->httpUserAgent = $httpUserAgent;
+
+        return $this;
+    }
+
+    /**
+     * Set Client Accept Language
+     *
+     * @param string $httpXForwardedFor
+     *
+     * @return $this
+     */
+    public function setHttpXForwardedFor($httpXForwardedFor)
+    {
+        $this->httpXForwardedFor = $httpXForwardedFor;
+
+        return $this;
+    }
+
+    /**
+     * Set Client Session ID
+     *
+     * @param string $clientSessionID
+     *
+     * @return $this
+     */
+    public function setClientSessionID($clientSessionID)
+    {
+        $this->clientSessionID = $clientSessionID;
+
+        return $this;
+    }
+
+    /**
      * Serialize a object
      *
-     * @return array
+     * @return array<string, string>
      */
     public function serialize()
     {
@@ -526,24 +632,24 @@ class Customer extends AbstractSerializer
             $output['gender'] = $this->gender;
         }
 
-        if (isset($_SERVER['REMOTE_ADDR'])) {
-            $output['client_ip'] = $_SERVER['REMOTE_ADDR'];
+        if ($this->clientIP) {
+            $output['client_ip'] = $this->clientIP;
         }
 
-        if (session_id()) {
-            $output['client_session_id'] = md5(session_id());
+        if ($this->clientSessionID) {
+            $output['client_session_id'] = $this->clientSessionID;
         }
 
-        if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
-            $output['client_accept_language'] = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+        if ($this->clientAcceptLanguage) {
+            $output['client_accept_language'] = $this->clientAcceptLanguage;
         }
 
-        if (isset($_SERVER['HTTP_USER_AGENT'])) {
-            $output['client_user_agent'] = $_SERVER['HTTP_USER_AGENT'];
+        if ($this->httpUserAgent) {
+            $output['client_user_agent'] = $this->httpUserAgent;
         }
 
-        if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            $output['client_forwarded_ip'] = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        if ($this->httpXForwardedFor) {
+            $output['client_forwarded_ip'] = $this->httpXForwardedFor;
         }
 
         if ($this->billingRef) {
@@ -561,9 +667,11 @@ class Customer extends AbstractSerializer
     }
 
     /**
-     * @param array   $output
-     * @param         $key
-     * @param Address $object
+     * @param array<string, string> $output
+     * @param string                $key
+     * @param Address               $object
+     *
+     * @return void
      */
     private static function setAddress(array &$output, $key, Address $object)
     {

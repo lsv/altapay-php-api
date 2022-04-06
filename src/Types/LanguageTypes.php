@@ -21,7 +21,7 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Types;
+namespace Altapay\Types;
 
 class LanguageTypes implements TypeInterface
 {
@@ -30,18 +30,19 @@ class LanguageTypes implements TypeInterface
      * Allowed languages
      * nb, nn will be converted to no.
      * ee will be converted to et
-     * @var array
+     *
+     * @var array<int, string>
      */
     private static $languages = [
-	    'cs', 'da', 'de', 'en', 'es', 'fi', 'fr', 'ja',
-	    'lt', 'nb', 'nl', 'nn', 'no', 'pl', 'sv','th', 'tr', 'zh',
-	    'et', 'ee', 'it', 'pt', 'eu'
+        'cs', 'da', 'de', 'en', 'es', 'fi', 'fr', 'ja',
+        'lt', 'nl', 'no', 'nb', 'nn', 'pl', 'sv','th', 'tr', 'zh',
+        'et', 'ee', 'it', 'pt', 'eu'
     ];
 
     /**
      * Get allowed values
      *
-     * @return array
+     * @return array<int, string>
      */
     public static function getAllowed()
     {
@@ -52,6 +53,7 @@ class LanguageTypes implements TypeInterface
      * Is the requested value allowed
      *
      * @param string $value
+     *
      * @return bool
      */
     public static function isAllowed($value)

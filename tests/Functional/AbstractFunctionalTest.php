@@ -1,19 +1,21 @@
 <?php
 
-namespace Valitor\ApiTest\Functional;
+namespace Altapay\ApiTest\Functional;
 
-use Valitor\Authentication;
-use Valitor\Request\Card;
-use Valitor\ApiTest\AbstractTest;
+use Altapay\Authentication;
+use Altapay\Request\Card;
+use Altapay\ApiTest\AbstractTest;
 
 abstract class AbstractFunctionalTest extends AbstractTest
 {
-
     const VALID_VISA_CARD_NUMBER = '4140000000001466';
 
-    protected function setUp()
+    /**
+     * @return void
+     */
+    protected function setUp(): void
     {
-        if (! file_exists(__DIR__ . '/../../.env.php')) {
+        if (!file_exists(__DIR__ . '/../../.env.php')) {
             $this->markTestSkipped(
                 'Can not test functional because .env.php file does not exists'
             );
@@ -52,14 +54,18 @@ abstract class AbstractFunctionalTest extends AbstractTest
         return $this->generateCard(self::VALID_VISA_CARD_NUMBER);
     }
 
+    /**
+     * @param string $number
+     *
+     * @return Card
+     */
     protected function generateCard($number)
     {
         return new Card(
             $number,
             (new \DateTime())->format('m'),
             (new \DateTime())->add(new \DateInterval('P1Y'))->format('Y'),
-            123
+            '123'
         );
     }
-
 }

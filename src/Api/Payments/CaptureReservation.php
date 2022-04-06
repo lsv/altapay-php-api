@@ -21,16 +21,19 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Api\Payments;
+namespace Altapay\Api\Payments;
 
-use Valitor\AbstractApi;
-use Valitor\Response\CaptureReservationResponse;
-use Valitor\Serializer\ResponseSerializer;
-use Valitor\Traits\AmountTrait;
-use Valitor\Traits\OrderlinesTrait;
-use Valitor\Traits\TransactionsTrait;
+use Altapay\AbstractApi;
+use Altapay\Exceptions;
+use Altapay\Response\CaptureReservationResponse;
+use Altapay\Serializer\ResponseSerializer;
+use Altapay\Traits\AmountTrait;
+use Altapay\Traits\OrderlinesTrait;
+use Altapay\Traits\TransactionsTrait;
+use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -41,7 +44,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * which means if the capture fails the system will automatically try to reauth the payment and then capture again.
  * Reauthed payments, however, do not have cvv or 3d-secure protection, which means the
  * protection against chargebacks is not as good.
- * If you wish to disable auto reauth for one or more of your terminals please contact Valitor.
+ * If you wish to disable auto reauth for one or more of your terminals please contact Altapay.
  */
 class CaptureReservation extends AbstractApi
 {
@@ -81,7 +84,7 @@ class CaptureReservation extends AbstractApi
     /**
      * The sales tax amount is used if you wish to indicate how much of the gross amount was sales tax
      *
-     * @param string $salesTax
+     * @param numeric $salesTax
      *
      * @return $this
      */
@@ -96,7 +99,7 @@ class CaptureReservation extends AbstractApi
      * The shipping tracking info is used if you want to send the shipping tracking info
      * with invoice.
      *
-     * @param $shippingTrackingInfo
+     * @param string $shippingTrackingInfo
      *
      * @return $this
      */
@@ -133,35 +136,33 @@ class CaptureReservation extends AbstractApi
     /**
      * Handle response
      *
-     * @param Request  $request
-     * @param Response $response
+     * @param Request           $request
+     * @param ResponseInterface $response
      *
      * @return CaptureReservationResponse
      */
-    protected function handleResponse(Request $request, Response $response)
+    protected function handleResponse(Request $request, ResponseInterface $response)
     {
         $body = (string)$response->getBody();
-        $xml  = simplexml_load_string($body);
+        $xml  = new \SimpleXMLElement($body);
         if ($xml->Body->Result == 'Error') {
             throw new \Exception($xml->Body->MerchantErrorMessage);
         }
 
         try {
-            $data = ResponseSerializer::serialize(CaptureReservationResponse::class, $xml->Body, false, $xml->Header);
-
-            return $data;
+            return ResponseSerializer::serialize(CaptureReservationResponse::class, $xml->Body, $xml->Header);
         } catch (\Exception $e) {
             throw $e;
         }
     }
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     protected function getBasicHeaders()
     {
         $headers = parent::getBasicHeaders();
-        if (strtolower($this->getHttpMethod()) == 'post') {
+        if (mb_strtolower($this->getHttpMethod()) == 'post') {
             $headers['Content-Type'] = 'application/x-www-form-urlencoded';
         }
 
@@ -171,14 +172,14 @@ class CaptureReservation extends AbstractApi
     /**
      * Url to api call
      *
-     * @param array $options Resolved options
+     * @param array<string, mixed> $options Resolved options
      *
      * @return string
      */
     protected function getUrl(array $options)
     {
         $url = 'captureReservation';
-        if (strtolower($this->getHttpMethod()) == 'get') {
+        if (mb_strtolower($this->getHttpMethod()) == 'get') {
             $query = $this->buildUrl($options);
             $url   = sprintf('%s/?%s', $url, $query);
         }
@@ -202,7 +203,7 @@ class CaptureReservation extends AbstractApi
         $this->doConfigureOptions();
         $headers           = $this->getBasicHeaders();
         $requestParameters = [$this->getHttpMethod(), $this->parseUrl(), $headers];
-        if (strtolower($this->getHttpMethod()) == 'post') {
+        if (mb_strtolower($this->getHttpMethod()) == 'post') {
             $requestParameters[] = $this->getPostOptions();
         }
 
@@ -216,9 +217,7 @@ class CaptureReservation extends AbstractApi
 
             return $output;
         } catch (GuzzleHttpClientException $e) {
-            $exception = new Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse());
-
-            return $this->handleExceptionResponse($exception);
+            throw new Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse(), $e);
         }
     }
 
@@ -229,6 +228,6 @@ class CaptureReservation extends AbstractApi
     {
         $options = $this->options;
 
-        return http_build_query($options, null, '&');
+        return http_build_query($options, '', '&');
     }
 }

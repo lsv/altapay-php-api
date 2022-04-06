@@ -1,23 +1,14 @@
-Altapay - PHP API &ndash; [![Build Status](https://travis-ci.org/lsv/altapay-php-api.svg?branch=master)](https://travis-ci.org/lsv/altapay-php-api) [![codecov](https://codecov.io/gh/lsv/altapay-php-api/branch/master/graph/badge.svg)](https://codecov.io/gh/lsv/altapay-php-api) [![SensioLabsInsight](https://insight.sensiolabs.com/projects/ec01dcf9-d9dd-4227-b116-8c72617b79bc/mini.png)](https://insight.sensiolabs.com/projects/ec01dcf9-d9dd-4227-b116-8c72617b79bc)
-=================
+# AltaPay - API PHP
 
-For accessing Altapay payment gateway through the API
+For accessing AltaPay payment gateway through the API
 
-### Install
+## Installation
 
-`composer require lsv/altapay-php-api`
+`composer require altapay/api-php`
 
-or add it to your `composer.json` file
+## Usage
 
-```json
-"require": {
-    "lsv/altapay-php-api": "^1.0"
-}
-```
-
-### Usage
-
-For doing a [`capture`](docs/capture.md) the following can be used
+For doing a [`capture`](docs/payments/capture_reservation.md) the following can be used
 
 ```php
 $auth = new \Altapay\Authentication('username', 'password' , 'myshop.gateway.com');
@@ -33,16 +24,27 @@ try {
 }
 ```
 
-More details in the [documentation](docs/index.md)
+## Requirements
 
-### License
+The AltaPay API PHP requires PHP 5.6.0 or greater with the following extensions installed:
 
-The MIT License (MIT)
+- date
+- filter
+- mbstring
+- pcre
+- Reflection
+- SimpleXML
+- spl
 
-Copyright (c) 2016 Martin Aarhof martin.aarhof@gmail.com
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+## Changelog
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+See [Changelog](CHANGELOG.md) for all the release notes.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+## License
+
+Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
+
+## Documentation
+
+For more details please see [documentation](docs/index.md)

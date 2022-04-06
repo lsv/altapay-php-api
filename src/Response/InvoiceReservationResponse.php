@@ -21,7 +21,7 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Response;
+namespace Altapay\Response;
 
 class InvoiceReservationResponse extends ReservationOfFixedAmountResponse
 {

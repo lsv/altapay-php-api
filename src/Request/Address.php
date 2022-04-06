@@ -21,9 +21,9 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Request;
+namespace Altapay\Request;
 
-use Valitor\Response\Embeds\Address as BaseAddress;
+use Altapay\Response\Embeds\Address as BaseAddress;
 
 class Address extends BaseAddress
 {

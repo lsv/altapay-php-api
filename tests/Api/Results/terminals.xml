@@ -10,7 +10,7 @@
         <Result>Success</Result>
         <Terminals>
             <Terminal>
-                <Title>Valitor Multi-Nature Terminal</Title>
+                <Title>AltaPay Multi-Nature Terminal</Title>
                 <Country>DK</Country>
                 <Natures>
                     <Nature>CreditCard</Nature>
@@ -24,7 +24,7 @@
                 </Currencies>
             </Terminal>
             <Terminal>
-                <Title>Valitor BankPayment Terminal</Title>
+                <Title>AltaPay BankPayment Terminal</Title>
                 <Country></Country>
                 <Natures>
                     <Nature>BankPayment</Nature>

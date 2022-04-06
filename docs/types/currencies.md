@@ -1,4 +1,4 @@
-[<](../index.md) Valitor - PHP Api - Currencies
+[<](../index.md) Altapay - PHP Api - Currencies
 ===============================================
 
 Following currencies are accepted by either number or code

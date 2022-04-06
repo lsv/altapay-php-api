@@ -21,12 +21,13 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Api\Others;
+namespace Altapay\Api\Others;
 
-use Valitor\AbstractApi;
-use Valitor\Traits\CsvToArrayTrait;
+use Altapay\AbstractApi;
+use Altapay\Traits\CsvToArrayTrait;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -34,7 +35,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * Find the id and see the optional parameters that can be passed to each custom report on the
  * custom report details page in the merchant interface (this is only visible if you have api credentials).
  *
- * Custom reports can be enabled by Valitor support.
+ * Custom reports can be enabled by AltaPay support.
  */
 class CustomReport extends AbstractApi
 {
@@ -44,6 +45,7 @@ class CustomReport extends AbstractApi
      * Report id - find the id in the url when viewing the custom report in the merchant interface.
      *
      * @param string $id
+     *
      * @return $this
      */
     public function setCustomReportId($id)
@@ -56,6 +58,7 @@ class CustomReport extends AbstractApi
      * Configure options
      *
      * @param OptionsResolver $resolver
+     *
      * @return void
      */
     protected function configureOptions(OptionsResolver $resolver)
@@ -67,11 +70,12 @@ class CustomReport extends AbstractApi
     /**
      * Handle response
      *
-     * @param Request $request
-     * @param Response $response
+     * @param Request           $request
+     * @param ResponseInterface $response
+     *
      * @return string
      */
-    protected function handleResponse(Request $request, Response $response)
+    protected function handleResponse(Request $request, ResponseInterface $response)
     {
         return (string) $response->getBody();
     }
@@ -79,7 +83,8 @@ class CustomReport extends AbstractApi
     /**
      * Url to api call
      *
-     * @param array $options Resolved options
+     * @param array<string, mixed> $options Resolved options
+     *
      * @return string
      */
     protected function getUrl(array $options)

@@ -21,20 +21,19 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Response;
+namespace Altapay\Response;
 
-use Valitor\Response\Embeds\Transaction;
+use Altapay\Response\Embeds\Transaction;
 
 /**
  * Class Refund
  */
 class RefundResponse extends AbstractResponse
 {
-
     /**
-     * Childs
+     * Childs of the response
      *
-     * @var array
+     * @var array<string, array<string, mixed>>
      */
     protected $childs = [
         'Transactions' => [
@@ -68,6 +67,7 @@ class RefundResponse extends AbstractResponse
      * The result
      *
      * @var string
+     *
      * @deprecated
      */
     public $RefundResult;
@@ -83,7 +83,8 @@ class RefundResponse extends AbstractResponse
      * Sets the refunded amount
      *
      * @param float $RefundAmount
-     * @return RefundResponse
+     *
+     * @return $this
      */
     public function setRefundedAmount($RefundAmount)
     {
@@ -95,7 +96,8 @@ class RefundResponse extends AbstractResponse
      * Sets the refunded amount
      *
      * @param float $refundAmount
-     * @return RefundResponse
+     *
+     * @return $this
      */
     public function setRefundAmount($refundAmount)
     {

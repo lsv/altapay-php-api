@@ -1,0 +1,13 @@
+includes:
+	- vendor/phpstan/phpstan-phpunit/extension.neon
+services:
+	-
+		class: PHPStan\Rules\Classes\RequireParentConstructCallRule
+		tags:
+			- phpstan.rules.rule
+parameters:
+	paths:
+		- ./
+	excludePaths:
+		- vendor
+	level: max

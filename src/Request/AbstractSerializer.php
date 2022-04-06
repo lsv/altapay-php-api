@@ -21,7 +21,7 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Request;
+namespace Altapay\Request;
 
 /**
  * Serialize object
@@ -32,7 +32,7 @@ abstract class AbstractSerializer
     /**
      * Serialize a object
      *
-     * @return array
+     * @return array<string, string>
      */
     abstract public function serialize();
 
@@ -41,7 +41,8 @@ abstract class AbstractSerializer
      *
      * @param object $object
      * @param string $property
-     * @return bool|mixed
+     *
+     * @return mixed
      */
     protected function get($object, $property)
     {

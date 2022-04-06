@@ -21,9 +21,9 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Traits;
+namespace Altapay\Traits;
 
-use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Csv to array trait
@@ -35,12 +35,13 @@ trait CsvToArrayTrait
      * Convert csv response to array
      *
      * @param bool $includeHeader
-     * @return array
+     *
+     * @return array<int, array<int, string>>
      */
     public function __toArray($includeHeader = false)
     {
         $output = [];
-        /** @var Response $response */
+        /** @var ResponseInterface $response */
         $response = $this->getRawResponse();
         $lines = explode("\n", (string) $response->getBody());
         $lineNumber = 0;

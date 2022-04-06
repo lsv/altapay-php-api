@@ -13,14 +13,14 @@
                 <TransactionId>416</TransactionId>
                 <PaymentId>ccc1479c-37f9-4962-8d2c-662d75117e9d</PaymentId>
                 <CardStatus>NoCreditCard</CardStatus>
-                <CreditCardToken />
-                <CreditCardMaskedPan />
+                <CreditCardToken/>
+                <CreditCardMaskedPan/>
                 <ThreeDSecureResult>Not_Applicable</ThreeDSecureResult>
                 <LiableForChargeback>Merchant</LiableForChargeback>
                 <BlacklistToken/>
                 <ShopOrderId>asdf23</ShopOrderId>
-                <Shop>Valitor Test Shop</Shop>
-                <Terminal>Valitor Test Terminal</Terminal>
+                <Shop>AltaPay Test Shop</Shop>
+                <Terminal>AltaPay Test Terminal</Terminal>
                 <TransactionStatus>invoice_initialized</TransactionStatus>
                 <ReasonCode>NONE</ReasonCode>
                 <MerchantCurrency>978</MerchantCurrency>
@@ -42,9 +42,9 @@
                     <SupportsMultipleRefunds>false</SupportsMultipleRefunds>
                 </PaymentNatureService>
                 <PaymentNature>Invoice</PaymentNature>
-                <PaymentInfos />
+                <PaymentInfos/>
                 <CustomerInfo/>
-                <ReconciliationIdentifiers />
+                <ReconciliationIdentifiers/>
             </Transaction>
         </Transactions>
     </Body>

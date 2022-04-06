@@ -1,32 +1,33 @@
 <?php
 
-namespace Valitor\ApiTest\Api;
+namespace Altapay\ApiTest\Api;
 
-use Valitor\Api\Ecommerce\Callback;
-use Valitor\Response\CallbackResponse;
+use Altapay\Api\Ecommerce\Callback;
+use Altapay\Response\CallbackResponse;
 
-class CallbackTest extends \PHPUnit_Framework_TestCase
+class CallbackTest extends \PHPUnit\Framework\TestCase
 {
+    /** @var array<string, string> */
     private $data;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->data = [
-            'shop_orderid' => '000000022',
-            'currency' => '840',
-            'type' => 'payment',
-            'embedded_window' => '0',
-            'amount' => '0',
-            'transaction_id' => '10975531',
-            'payment_id' => 'd28df6b4-122d-49e2-add0-19c8271260b0',
-            'nature' => 'CreditCard',
-            'require_capture' => 'false',
-            'payment_status' => 'created',
+            'shop_orderid'       => '000000022',
+            'currency'           => '840',
+            'type'               => 'payment',
+            'embedded_window'    => '0',
+            'amount'             => '0',
+            'transaction_id'     => '10975531',
+            'payment_id'         => 'd28df6b4-122d-49e2-add0-19c8271260b0',
+            'nature'             => 'CreditCard',
+            'require_capture'    => 'false',
+            'payment_status'     => 'created',
             'masked_credit_card' => '457168*********0000',
-            'blacklist_token' => '1ba7bdb2752394286d511de4e9cc18d9f75f2946',
-            'credit_card_token' => '3fd3d781cc2faf1e8bb6d50e5ae2220554acbb14',
-            'status' => 'incomplete',
-            'xml' => <<<XML
+            'blacklist_token'    => '1ba7bdb2752394286d511de4e9cc18d9f75f2946',
+            'credit_card_token'  => '3fd3d781cc2faf1e8bb6d50e5ae2220554acbb14',
+            'status'             => 'incomplete',
+            'xml'                => <<<XML
 <?xml version="1.0"?>
 <APIResponse version="20170228">
     <Header>
@@ -77,7 +78,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
                 <PaymentNature>CreditCard</PaymentNature>
                 <PaymentSource>eCommerce</PaymentSource>
                 <PaymentSchemeName>Visa</PaymentSchemeName>
-                <PaymentNatureService name="ValitorAcquirer">
+                <PaymentNatureService name="AltapayAcquirer">
                     <SupportsRefunds>true</SupportsRefunds>
                     <SupportsRelease>true</SupportsRelease>
                     <SupportsMultipleCaptures>true</SupportsMultipleCaptures>
@@ -157,16 +158,16 @@ XML
         ];
     }
 
-    public function test_can_handle_callback()
+    public function test_can_handle_callback(): void
     {
-        $call = new Callback($this->data);
+        $call     = new Callback($this->data);
         $response = $call->call();
         $this->assertInstanceOf(CallbackResponse::class, $response);
-        $this->assertEquals('d28df6b4-122d-49e2-add0-19c8271260b0', $response->paymentId);
-        $this->assertEquals('000000022', $response->shopOrderId);
-        $this->assertEquals('incomplete', $response->status);
+        $this->assertSame('d28df6b4-122d-49e2-add0-19c8271260b0', $response->paymentId);
+        $this->assertSame('000000022', $response->shopOrderId);
+        $this->assertSame('incomplete', $response->status);
         $this->assertCount(1, $response->Transactions);
-        $this->assertEquals('1682', $response->Transactions[0]->TransactionId);
-        $this->assertEquals('Failed', $response->Result);
+        $this->assertSame('1682', $response->Transactions[0]->TransactionId);
+        $this->assertSame('Failed', $response->Result);
     }
 }
