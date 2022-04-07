@@ -53,7 +53,7 @@ abstract class AbstractApi
     /**
      * PHP API version
      */
-    const PHP_API_VERSION = '3.2.0';
+    const PHP_API_VERSION = '3.2.1';
 
     /**
      * Event dispatcher
@@ -225,6 +225,8 @@ abstract class AbstractApi
         $this->setShopOrderIdResolver($resolver);
         $this->setTransactionInfoResolver($resolver);
         $this->setCustomerInfoResolver($resolver);
+        $this->setValidationUrlResolver($resolver);
+        $this->setAppleDomainResolver($resolver);
         $this->options = $resolver->resolve($this->unresolvedOptions);
     }
 
@@ -468,6 +470,28 @@ abstract class AbstractApi
      * @return void
      */
     protected function setCustomerInfoResolver(OptionsResolver $resolver)
+    {
+    }
+
+    /**
+     * Resolve validationUrl option
+     *
+     * @param OptionsResolver $resolver
+     *
+     * @return void
+     */
+    protected function setValidationUrlResolver(OptionsResolver $resolver)
+    {
+    }
+
+    /**
+     * Resolve applepaydomain option
+     *
+     * @param OptionsResolver $resolver
+     *
+     * @return void
+     */
+    protected function setAppleDomainResolver(OptionsResolver $resolver)
     {
     }
 }
