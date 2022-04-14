@@ -30,7 +30,6 @@ use Altapay\Traits\TerminalTrait;
 use Altapay\Response\PaymentRequestResponse;
 use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
 use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -80,7 +79,7 @@ class CardWalletSession extends AbstractApi
     /**
      * Handle response
      *
-     * @param Request           $request
+     * @param Request $request
      * @param ResponseInterface $response
      *
      * @return PaymentRequestResponse
@@ -88,7 +87,7 @@ class CardWalletSession extends AbstractApi
     protected function handleResponse(Request $request, ResponseInterface $response)
     {
         $body = (string)$response->getBody();
-        $xml  = new \SimpleXMLElement($body);
+        $xml = new \SimpleXMLElement($body);
 
         return ResponseSerializer::serialize(PaymentRequestResponse::class, $xml->Body, $xml->Header);
     }
@@ -118,7 +117,7 @@ class CardWalletSession extends AbstractApi
         $url = 'cardWallet/session';
         if (mb_strtolower($this->getHttpMethod()) == 'get') {
             $query = $this->buildUrl($options);
-            $url   = sprintf('%s/?%s', $url, $query);
+            $url = sprintf('%s/?%s', $url, $query);
         }
 
         return $url;
@@ -138,18 +137,18 @@ class CardWalletSession extends AbstractApi
     protected function doResponse()
     {
         $this->doConfigureOptions();
-        $headers           = $this->getBasicHeaders();
+        $headers = $this->getBasicHeaders();
         $requestParameters = [$this->getHttpMethod(), $this->parseUrl(), $headers];
         if (mb_strtolower($this->getHttpMethod()) == 'post') {
             $requestParameters[] = $this->getPostOptions();
         }
 
-        $request       = new Request(...$requestParameters);
+        $request = new Request(...$requestParameters);
         $this->request = $request;
         try {
-            $response       = $this->getClient()->send($request);
+            $response = $this->getClient()->send($request);
             $this->response = $response;
-            $output         = $this->handleResponse($request, $response);
+            $output = $this->handleResponse($request, $response);
             $this->validateResponse($output);
 
             return $output;
