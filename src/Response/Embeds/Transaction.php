@@ -88,6 +88,11 @@ class Transaction extends AbstractResponse
     /**
      * @var string
      */
+    public $CardInformation; 
+
+    /**
+     * @var string
+     */
     public $CreditCardToken;
 
     /**
