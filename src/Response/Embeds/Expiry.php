@@ -25,38 +25,15 @@ namespace Altapay\Response\Embeds;
 
 use Altapay\Response\AbstractResponse;
 
-class CardInformation extends AbstractResponse
+class Expiry extends AbstractResponse
 {
     /**
-     * Childs of the response
-     *
-     * @var array<string, array<string, mixed>>
+     * @var string
      */
-    protected $childs = [
-        'Expiry' => [
-            'class' => Expiry::class,
-            'array' => false
-        ]
-    ];
-    
-    /** @var Expiry */
-    public $Expiry;
+    public $Year;
 
-    /** @var string */
-    public $IsTokenized;
-
-    /** @var string */
-    public $Token;
-
-    /** @var string */
-    public $MaskedPan;
-
-    /** @var string */
-    public $IssuingCountry;
-
-    /** @var numeric */
-    public $LastFourDigits;
-
-    /** @var string */
-    public $Scheme;
+    /**
+     * @var string
+     */
+    public $Month;
 }
