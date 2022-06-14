@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [3.2.3] - 2022-06-14
 ### Added
-- Added additional parameters for Transaction class
+- Added CarInfornation parameters for Transaction class
 
 ## [3.2.2] - 2022-04-14
 ### Added
