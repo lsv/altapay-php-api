@@ -2,15 +2,16 @@
 
 namespace Valitor\ApiTest;
 
+use ReflectionClass;
 use Valitor\Exceptions\ClassDoesNotExistsException;
 use Valitor\Factory;
 
 class FactoryTest extends AbstractTest
 {
 
-    public function dataProvider()
+    public function dataProvider(): array
     {
-        $refClass = new \ReflectionClass(Factory::class);
+        $refClass = new ReflectionClass(Factory::class);
         $constants = $refClass->getConstants();
         $output = [];
         foreach ($constants as $class) {
@@ -21,9 +22,8 @@ class FactoryTest extends AbstractTest
 
     /**
      * @dataProvider dataProvider
-     * @param string $class
      */
-    public function test_can_create($class)
+    public function test_can_create(string $class)
     {
         $this->assertInstanceOf($class, Factory::create($class, $this->getAuth()));
     }

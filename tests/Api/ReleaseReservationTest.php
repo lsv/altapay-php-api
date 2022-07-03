@@ -56,22 +56,22 @@ class ReleaseReservationTest extends AbstractApiTest
         $api->call();
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('releaseReservation/'), $request->getUri()->getPath());
-        parse_str($request->getUri()->getQuery(), $parts);
+        $this->assertEquals($this->getExceptedUri('releaseReservation'), $request->getUri()->getPath());
+        parse_str($request->getBody()->getContents(), $parts);
         $this->assertEquals(456, $parts['transaction_id']);
 
         $api = $this->getReleaseReservation();
         $api->setTransaction('helloworld');
         $api->call();
         $request = $api->getRawRequest();
-        parse_str($request->getUri()->getQuery(), $parts);
+        parse_str($request->getBody()->getContents(), $parts);
         $this->assertEquals('helloworld', $parts['transaction_id']);
 
         $api = $this->getReleaseReservation();
         $api->setTransaction('my trans id has spaces');
         $api->call();
         $request = $api->getRawRequest();
-        parse_str($request->getUri()->getQuery(), $parts);
+        parse_str($request->getBody()->getContents(), $parts);
         $this->assertEquals('my trans id has spaces', $parts['transaction_id']);
     }
 

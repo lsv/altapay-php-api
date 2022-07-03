@@ -2,11 +2,11 @@
 
 namespace Valitor\ApiTest\Api;
 
+use GuzzleHttp\Exception\RequestException;
 use Valitor\Api\Payments\RefundCapturedReservation;
 use Valitor\Request\OrderLine;
 use Valitor\Response\Embeds\Transaction;
 use Valitor\Response\RefundResponse;
-use Valitor\Exceptions\ClientException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 
@@ -86,8 +86,8 @@ class RefundCapturedReservationTest extends AbstractApiTest
 
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('refundCapturedReservation/'), $request->getUri()->getPath());
-        parse_str($request->getUri()->getQuery(), $parts);
+        $this->assertEquals($this->getExceptedUri('refundCapturedReservation'), $request->getUri()->getPath());
+        parse_str($request->getBody()->getContents(), $parts);
         $this->assertEquals(456, $parts['transaction_id']);
         $this->assertEquals(158, $parts['amount']);
         $this->assertEquals('myidentifier', $parts['reconciliation_identifier']);
@@ -121,8 +121,8 @@ class RefundCapturedReservationTest extends AbstractApiTest
 
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('refundCapturedReservation/'), $request->getUri()->getPath());
-        parse_str($request->getUri()->getQuery(), $parts);
+        $this->assertEquals($this->getExceptedUri('refundCapturedReservation'), $request->getUri()->getPath());
+        parse_str($request->getBody()->getContents(), $parts);
 
         $this->assertCount(2, $parts['orderLines']);
         $line = $parts['orderLines'][1];
@@ -150,8 +150,8 @@ class RefundCapturedReservationTest extends AbstractApiTest
 
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('refundCapturedReservation/'), $request->getUri()->getPath());
-        parse_str($request->getUri()->getQuery(), $parts);
+        $this->assertEquals($this->getExceptedUri('refundCapturedReservation'), $request->getUri()->getPath());
+        parse_str($request->getBody()->getContents(), $parts);
 
         $this->assertCount(1, $parts['orderLines']);
     }
@@ -177,10 +177,7 @@ class RefundCapturedReservationTest extends AbstractApiTest
 
     public function test_capture_refund_transaction_handleexception()
     {
-        $this->setExpectedException(ClientException::class);
-
-        $transaction = new Transaction();
-        $transaction->TransactionId = 456;
+        self::expectException(RequestException::class);
 
         $client = $this->getClient($mock = new MockHandler([
             new Response(400, ['text-content' => 'application/xml'])

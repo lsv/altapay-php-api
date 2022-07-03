@@ -5,6 +5,7 @@ namespace Valitor\ApiTest\Api;
 use Valitor\Api\Payments\Credit;
 use Valitor\Request\Card;
 use Valitor\Exceptions\CreditCardTokenAndCardUsedException;
+use Valitor\Response\AbstractResponse;
 use Valitor\Response\CreditResponse as CreditResponse;
 use Valitor\Types\PaymentSources;
 use GuzzleHttp\Handler\MockHandler;
@@ -107,7 +108,8 @@ class CreditTest extends AbstractApiTest
         $api->setCurrency(967);
         $api->setCreditCardToken('token');
         $api->setPaymentSource($type);
-        $api->call();
+        $response = $api->call();
+        self::assertInstanceOf(AbstractResponse::class, $response);
     }
 
     public function test_paymentsource_invalid_options()

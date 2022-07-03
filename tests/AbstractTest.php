@@ -2,16 +2,15 @@
 
 namespace Valitor\ApiTest;
 
+use Faker\Generator;
+use PHPUnit\Framework\TestCase;
 use Valitor\Authentication;
 use Faker\Factory;
 
-abstract class AbstractTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractTest extends TestCase
 {
 
-    /**
-     * @return \Faker\Generator
-     */
-    protected function getFaker()
+    protected function getFaker(): Generator
     {
         return Factory::create('da_DK');
     }
@@ -29,11 +28,13 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
                 $this->expectExceptionCode($code);
             }
         } else {
-            parent::setExpectedException($class, $message, $code);
+            parent::expectException($class);
+            parent::expectExceptionMessage($message);
+            parent::expectExceptionCode($code);
         }
     }
 
-    public function randomString($length, $characters = '0123456789abcdef')
+    public function randomString($length, $characters = '0123456789abcdef'): string
     {
         $randstring = '';
         for ($i = 0; $i < $length; $i++) {
@@ -42,7 +43,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
         return $randstring;
     }
 
-    protected function getAuth()
+    protected function getAuth(): Authentication
     {
         return new Authentication('test_username', 'test_password');
     }
