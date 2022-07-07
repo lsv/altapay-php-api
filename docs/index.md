@@ -1,4 +1,4 @@
-Valitor - PHP Api - Index
+Altapay - PHP Api - Index
 =========================
 
 Docs: https://testgateway.altapaysecure.com/merchant.php/help/Merchant_API
@@ -21,7 +21,7 @@ Docs: https://testgateway.altapaysecure.com/merchant.php/help/Merchant_API
 
 | Method  | Description |
 |---|---|
-| [Payment request](ecommerce/payment_request.md) | This is the preferred way of redirecting a customer to the Valitor payment page |
+| [Payment request](ecommerce/payment_request.md) | This is the preferred way of redirecting a customer to the Altapay payment page |
 
 ### Payments
 

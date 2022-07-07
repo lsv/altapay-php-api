@@ -1,46 +1,57 @@
 <?php
 
-namespace Valitor\ApiTest;
+namespace Altapay\ApiTest;
 
-use Valitor\Exceptions\ClassDoesNotExistsException;
-use Valitor\Factory;
+use Altapay\Api\Test\TestAuthentication;
+use Altapay\Exceptions\ClassDoesNotExistsException;
+use Altapay\Factory;
 
 class FactoryTest extends AbstractTest
 {
-
+    /**
+     * @return array<int, array<int, class-string>>
+     */
     public function dataProvider()
     {
-        $refClass = new \ReflectionClass(Factory::class);
+        $refClass  = new \ReflectionClass(Factory::class);
         $constants = $refClass->getConstants();
-        $output = [];
+        $output    = [];
         foreach ($constants as $class) {
             $output[] = [$class];
         }
+
         return $output;
     }
 
     /**
      * @dataProvider dataProvider
-     * @param string $class
+     *
+     * @param        class-string $class
      */
-    public function test_can_create($class)
+    public function test_can_create($class): void
     {
         $this->assertInstanceOf($class, Factory::create($class, $this->getAuth()));
     }
 
-    public function test_does_not_exists()
+    public function test_does_not_exists(): void
     {
-        $this->setExpectedException(ClassDoesNotExistsException::class);
-        Factory::create('Foo\Bar', $this->getAuth());
+        $this->expectException(ClassDoesNotExistsException::class);
+
+        /** @var class-string */
+        $invalidClassName = 'Foo\Bar';
+
+        Factory::create($invalidClassName, $this->getAuth());
     }
 
-    public function test_does_not_exists_exception_catch()
+    public function test_does_not_exists_exception_catch(): void
     {
+        /** @var class-string */
+        $invalidClassName = 'Foo\Bar';
+
         try {
-            Factory::create('Foo\Bar', $this->getAuth());
+            Factory::create($invalidClassName, $this->getAuth());
         } catch (ClassDoesNotExistsException $e) {
-            $this->assertEquals('Foo\Bar', $e->getClass());
+            $this->assertSame('Foo\Bar', $e->getClass());
         }
     }
-
 }

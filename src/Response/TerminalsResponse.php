@@ -21,12 +21,17 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Response;
+namespace Altapay\Response;
 
-use Valitor\Response\Embeds\Terminal;
+use Altapay\Response\Embeds\Terminal;
 
 class TerminalsResponse extends AbstractResponse
 {
+    /**
+     * Childs of the response
+     *
+     * @var array<string, array<string, mixed>>
+     */
     protected $childs = [
         'Terminals' => [
             'class' => Terminal::class,
@@ -34,6 +39,7 @@ class TerminalsResponse extends AbstractResponse
         ],
     ];
 
+    /** @var string */
     public $Result;
 
     /**

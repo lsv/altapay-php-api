@@ -21,13 +21,15 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Response\Embeds;
+namespace Altapay\Response\Embeds;
 
-use Valitor\Response\AbstractResponse;
+use Altapay\Response\AbstractResponse;
 
 class GiftCardAccount extends AbstractResponse
 {
+    /** @var string */
     public $Currency;
 
+    /** @var numeric */
     public $Balance;
 }

@@ -1,11 +1,11 @@
-[<](../index.md) Valitor - PHP Api - Test authentication
+[<](../index.md) Altapay - PHP Api - Test authentication
 =====================================================
 
 For testing if your authentication is working you can use this call
 
 ```php
-$auth = new \Valitor\Authentication('username', 'password', 'baseurl');
-$response = (new \Valitor\Api\Test\TestAuthentication($auth))->call();
+$auth = new \Altapay\Authentication('username', 'password', 'baseurl');
+$response = (new \Altapay\Api\Test\TestAuthentication($auth))->call();
 
 if ($response) {
     // Authentication successful

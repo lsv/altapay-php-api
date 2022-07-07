@@ -21,10 +21,23 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Response;
+namespace Altapay\Response;
+
+use Altapay\Response\Embeds\Transaction;
 
 class PaymentRequestResponse extends AbstractResponse
 {
+    /**
+     * Childs of the response
+     *
+     * @var array<string, array<string, mixed>>
+     */
+    protected $childs = [
+        'Transactions' => [
+            'class' => Transaction::class,
+            'array' => 'Transaction'
+        ],
+    ];
 
     /**
      * The result
@@ -33,9 +46,12 @@ class PaymentRequestResponse extends AbstractResponse
      */
     public $Result;
 
+    /** @var string */
     public $PaymentRequestId;
 
+    /** @var string */
     public $Url;
 
+    /** @var string */
     public $DynamicJavascriptUrl;
 }

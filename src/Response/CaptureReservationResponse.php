@@ -21,12 +21,17 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Response;
+namespace Altapay\Response;
 
-use Valitor\Response\Embeds\Transaction;
+use Altapay\Response\Embeds\Transaction;
 
 class CaptureReservationResponse extends AbstractResponse
 {
+    /**
+     * Childs of the response
+     *
+     * @var array<string, array<string, mixed>>
+     */
     protected $childs = [
         'Transactions' => [
             'class' => Transaction::class,
@@ -39,10 +44,13 @@ class CaptureReservationResponse extends AbstractResponse
      */
     public $CaptureAmount;
 
+    /** @var numeric */
     public $CaptureCurrency;
 
+    /** @var string */
     public $Result;
 
+    /** @var string */
     public $CaptureResult;
 
     /**
@@ -52,7 +60,8 @@ class CaptureReservationResponse extends AbstractResponse
 
     /**
      * @param float $CaptureAmount
-     * @return CaptureReservationResponse
+     *
+     * @return $this
      */
     public function setCaptureAmount($CaptureAmount)
     {

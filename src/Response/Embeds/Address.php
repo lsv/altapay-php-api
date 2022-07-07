@@ -21,75 +21,87 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Response\Embeds;
+namespace Altapay\Response\Embeds;
 
-use Valitor\Response\AbstractResponse;
+use Altapay\Response\AbstractResponse;
 
 class Address extends AbstractResponse
 {
     /**
-     * @var Firstname
+     * @var string|null
      */
     public $Firstname;
 
     /**
-     * @var Lastname
+     * @var string|null
      */
     public $Lastname;
 
     /**
-     * @var Address
+     * @var string|null
      */
     public $Address;
 
     /**
-     * @var City
+     * @var string|null
      */
     public $City;
 
     /**
-     * @var PostalCode
+     * @var string|null
      */
     public $PostalCode;
 
     /**
-     * @var Region
+     * @var string
      */
     public $Region;
 
     /**
-     * @var Country
+     * @var string|null
      */
     public $Country;
 
     /**
-     * @var billingAddress
+     * @var string
      */
     public $billingAddress;
 
     /**
-     * @var paymentMethod
+     * @var string
      */
     public $paymentMethod;
 
     /**
-     * @var currency
+     * @var string
      */
     public $currency;
 
     /**
-     * @var orderAmount
+     * @var string
      */
     public $orderAmount;
 
     /**
-     * @param $FirstName
+     * @param string $FirstName
      *
      * @return $this
      */
     public function setFirstName($FirstName)
     {
         $this->Firstname = $FirstName;
+
+        return $this;
+    }
+
+    /**
+     * @param string $LastName
+     *
+     * @return $this
+     */
+    public function setLastName($LastName)
+    {
+        $this->Lastname = $LastName;
 
         return $this;
     }

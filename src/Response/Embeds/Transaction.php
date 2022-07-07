@@ -21,12 +21,19 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Response\Embeds;
+namespace Altapay\Response\Embeds;
 
-use Valitor\Response\AbstractResponse;
+use DateTime;
+use Altapay\Response\AbstractResponse;
+use Altapay\Response\Embeds\PaymentInfo;
 
 class Transaction extends AbstractResponse
 {
+    /**
+     * Childs of the response
+     *
+     * @var array<string, array<string, mixed>>
+     */
     protected $childs = [
         'PaymentNatureService'      => [
             'class' => PaymentNatureService::class,
@@ -51,166 +58,175 @@ class Transaction extends AbstractResponse
         'CreditCardExpiry'          => [
             'class' => CreditCard::class,
             'array' => false
+        ],
+        'CardInformation'          => [
+            'class' => CardInformation::class,
+            'array' => false
         ]
     ];
 
     /**
-     * @var TransactionId
+     * @var string
      */
     public $TransactionId;
 
     /**
-     * @var PaymentId
+     * @var string
      */
     public $PaymentId;
 
     /**
-     * @var CardStatus
+     * @var string
      */
     public $CardStatus;
 
     /**
-     * @var CreditCardExpiry
+     * @var string
      */
     public $CreditCardExpiry;
 
     /**
-     * @var CreditCardToken
+     * @var string
+     */
+    public $CardInformation;
+
+    /**
+     * @var string
      */
     public $CreditCardToken;
 
     /**
-     * @var CreditCardMaskedPan
+     * @var string
      */
     public $CreditCardMaskedPan;
 
     /**
-     * @var IsTokenized
+     * @var string
      */
     public $IsTokenized;
 
     /**
-     * @var ThreeDSecureResult
+     * @var string
      */
     public $ThreeDSecureResult;
 
     /**
-     * @var LiableForChargeback
+     * @var string
      */
     public $LiableForChargeback;
 
     /**
-     * @var CVVCheckResult
+     * @var string
      */
     public $CVVCheckResult;
 
     /**
-     * @var BlacklistToken
+     * @var string
      */
     public $BlacklistToken;
 
     /**
-     * @var ShopOrderId
+     * @var string
      */
     public $ShopOrderId;
 
     /**
-     * @var Shop
+     * @var string
      */
     public $Shop;
 
     /**
-     * @var Terminal
+     * @var string
      */
     public $Terminal;
 
     /**
-     * @var TransactionStatus
+     * @var string
      */
     public $TransactionStatus;
 
     /**
-     * @var ReasonCode
+     * @var string
      */
     public $ReasonCode;
 
     /**
-     * @var MerchantCurrency
+     * @var string
      */
     public $MerchantCurrency;
 
     /**
-     * @var MerchantCurrencyAlpha
+     * @var string
      */
     public $MerchantCurrencyAlpha;
 
     /**
-     * @var CardHolderCurrency
+     * @var string
      */
     public $CardHolderCurrency;
 
     /**
-     * @var CardHolderCurrencyAlpha
+     * @var string
      */
     public $CardHolderCurrencyAlpha;
 
     /**
-     * @var AuthType
+     * @var string
      */
     public $AuthType;
 
     /**
-     * @var ReservedAmount
+     * @var float
      */
     public $ReservedAmount;
 
     /**
-     * @var CapturedAmount
+     * @var float
      */
     public $CapturedAmount;
 
     /**
-     * @var RefundedAmount
+     * @var float
      */
     public $RefundedAmount;
 
     /**
-     * @var RecurringDefaultAmount
+     * @var float
      */
     public $RecurringDefaultAmount;
 
     /**
-     * @var CreditedAmount
+     * @var float
      */
     public $CreditedAmount;
 
     /**
-     * @var SurchargeAmount
+     * @var float
      */
     public $SurchargeAmount;
 
     /**
-     * @var CreatedDate
+     * @var DateTime
      */
     public $CreatedDate;
 
     /**
-     * @var UpdatedDate
+     * @var DateTime
      */
     public $UpdatedDate;
 
     /**
-     * @var PaymentNature
+     * @var string
      */
     public $PaymentNature;
 
     /**
-     * @var PaymentSchemeName
+     * @var string
      */
     public $PaymentSchemeName;
 
     /**
-     * @var PaymentSource
+     * @var string
      */
     public $PaymentSource;
 
@@ -220,39 +236,39 @@ class Transaction extends AbstractResponse
     public $PaymentNatureService;
 
     /**
-     * @var FraudRiskScore
+     * @var float
      */
     public $FraudRiskScore;
 
     /**
-     * @var FraudExplanation
+     * @var string
      */
     public $FraudExplanation;
 
     /**
-     * @var FraudRecommendation
+     * @var string
      */
     public $FraudRecommendation;
 
     /**
-     * @var AddressVerification
+     * @var string
      */
     public $AddressVerification;
 
     /**
-     * @var AddressVerificationDescription
+     * @var string
      */
     public $AddressVerificationDescription;
 
     /**
-     * @var ChargebackEvents
+     * @var string
      */
     public $ChargebackEvents;
 
     /**
-     * @var PaymentInfos
+     * @var PaymentInfo[]
      */
-    public $PaymentInfos;
+    public $PaymentInfos = [];
 
     /**
      * @var CustomerInfo
@@ -260,17 +276,17 @@ class Transaction extends AbstractResponse
     public $CustomerInfo;
 
     /**
-     * @var ReconciliationIdentifiers
+     * @var ReconciliationIdentifier[]
      */
-    public $ReconciliationIdentifiers;
+    public $ReconciliationIdentifiers = [];
 
     /**
-     * @var InvoiceOrderInfo
+     * @var string
      */
     public $InvoiceOrderInfo;
 
     /**
-     * @param $CreatedDate
+     * @param string $CreatedDate
      *
      * @return $this
      */
@@ -282,7 +298,7 @@ class Transaction extends AbstractResponse
     }
 
     /**
-     * @param $UpdatedDate
+     * @param string $UpdatedDate
      *
      * @return $this
      */
@@ -294,7 +310,7 @@ class Transaction extends AbstractResponse
     }
 
     /**
-     * @param $ReservedAmount
+     * @param float $ReservedAmount
      *
      * @return $this
      */
@@ -306,7 +322,7 @@ class Transaction extends AbstractResponse
     }
 
     /**
-     * @param $CapturedAmount
+     * @param float $CapturedAmount
      *
      * @return $this
      */
@@ -318,7 +334,7 @@ class Transaction extends AbstractResponse
     }
 
     /**
-     * @param $CreditedAmount
+     * @param float $CreditedAmount
      *
      * @return $this
      */
@@ -330,7 +346,7 @@ class Transaction extends AbstractResponse
     }
 
     /**
-     * @param $SurchargeAmount
+     * @param float $SurchargeAmount
      *
      * @return $this
      */
@@ -342,7 +358,7 @@ class Transaction extends AbstractResponse
     }
 
     /**
-     * @param $RefundedAmount
+     * @param float $RefundedAmount
      *
      * @return $this
      */
@@ -354,7 +370,7 @@ class Transaction extends AbstractResponse
     }
 
     /**
-     * @param $RecurringDefaultAmount
+     * @param float $RecurringDefaultAmount
      *
      * @return $this
      */
@@ -366,7 +382,7 @@ class Transaction extends AbstractResponse
     }
 
     /**
-     * @param $FraudRiskScore
+     * @param float $FraudRiskScore
      *
      * @return $this
      */

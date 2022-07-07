@@ -1,10 +1,10 @@
-[<](../index.md) Valitor - PHP Api - Card
+[<](../index.md) Altapay - PHP Api - Card
 ======================================
 
 To create a credit card, which you can use to some calls
 
 ```php
-$card = new \Valitor\Request\Card(
+$card = new \Altapay\Request\Card(
     'card number',
     'expiry month',
     'expiry year',

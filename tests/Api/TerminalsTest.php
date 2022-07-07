@@ -1,11 +1,10 @@
 <?php
 
-namespace Valitor\ApiTest\Api;
+namespace Altapay\ApiTest\Api;
 
-use Valitor\Api\Others\Terminals;
-use Valitor\Response\Embeds\Terminal;
-use Valitor\Response\TerminalsResponse as TerminalsDocument;
-use Valitor\Response\TerminalsResponse;
+use Altapay\Api\Others\Terminals;
+use Altapay\Response\Embeds\Terminal;
+use Altapay\Response\TerminalsResponse;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 
@@ -17,73 +16,69 @@ class TerminalsTest extends AbstractApiTest
      */
     protected function getTerminals()
     {
-        $client = $this->getClient($mock = new MockHandler([
-            new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/terminals.xml'))
-        ]));
+        $client = $this->getXmlClient(__DIR__ . '/Results/terminals.xml');
 
         return (new Terminals($this->getAuth()))
-            ->setClient($client)
-        ;
+            ->setClient($client);
     }
 
-    public function test_url()
+    public function test_url(): void
     {
         $api = $this->getTerminals();
         $api->call();
-        $this->assertEquals($this->getExceptedUri('getTerminals'), $api->getRawRequest()->getUri()->getPath());
+        $this->assertSame($this->getExceptedUri('getTerminals'), $api->getRawRequest()->getUri()->getPath());
     }
 
-    public function test_header()
+    public function test_header(): void
     {
-        $api = $this->getTerminals();
-        /** @var TerminalsDocument $response */
+        $api      = $this->getTerminals();
         $response = $api->call();
+        $this->assertInstanceOf(TerminalsResponse::class, $response);
         $this->assertInstanceOf(\DateTime::class, $response->Header->Date);
-        $this->assertEquals('07-01-2016', $response->Header->Date->format('d-m-Y'));
-        $this->assertEquals('API/getTerminals', $response->Header->Path);
-        $this->assertEquals('0', $response->Header->ErrorCode);
-        $this->assertEquals('', $response->Header->ErrorMessage);
+        $this->assertSame('07-01-2016', $response->Header->Date->format('d-m-Y'));
+        $this->assertSame('API/getTerminals', $response->Header->Path);
+        $this->assertSame('0', $response->Header->ErrorCode);
+        $this->assertSame('', $response->Header->ErrorMessage);
     }
 
-    public function test_response()
+    public function test_response(): void
     {
-        $api = $this->getTerminals();
-        /** @var TerminalsDocument $response */
+        $api      = $this->getTerminals();
         $response = $api->call();
+        $this->assertInstanceOf(TerminalsResponse::class, $response);
 
         $this->assertCount(2, $response->Terminals);
-        $this->assertEquals('Success', $response->Result);
+        $this->assertSame('Success', $response->Result);
     }
 
     /**
      * @depends test_response
      */
-    public function test_response_terminal()
+    public function test_response_terminal(): void
     {
-        $api = $this->getTerminals();
-        /** @var Terminal $terminal */
-        /** @var TerminalsResponse $response */
+        $api      = $this->getTerminals();
         $response = $api->call();
+        $this->assertInstanceOf(TerminalsResponse::class, $response);
         $this->assertCount(2, $response->Terminals);
 
         $terminal = $response->Terminals[0];
-        $this->assertEquals('Valitor Multi-Nature Terminal', $terminal->Title);
-        $this->assertEquals('DK', $terminal->Country);
+        $this->assertInstanceOf(Terminal::class, $terminal);
+        $this->assertSame('AltaPay Multi-Nature Terminal', $terminal->Title);
+        $this->assertSame('DK', $terminal->Country);
         $this->assertCount(4, $terminal->Natures);
     }
 
-    public function test_attr_fail()
+    public function test_attr_fail(): void
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
-            'The attribute "iddonotexists" on element "Title" does not have a setter or a property in class "Valitor\Response\Embeds\Terminal"'
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage(
+            'The attribute "iddonotexists" on element "Title" does not have a setter or a property in class "Altapay\Response\Embeds\Terminal"'
         );
 
+        $client = $this->getXmlClient(__DIR__ . '/Results/terminals-fails.xml');
+
         (new Terminals($this->getAuth()))
-            ->setClient($this->getClient($mock = new MockHandler([
-                new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/terminals-fails.xml'))
-            ])))
-            ->call()
-        ;
+            ->setClient($client)
+            ->call();
     }
 }

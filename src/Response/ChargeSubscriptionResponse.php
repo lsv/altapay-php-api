@@ -21,8 +21,28 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Response;
+namespace Altapay\Response;
 
 class ChargeSubscriptionResponse extends ReservationOfFixedAmountResponse
 {
+    /**
+     * @var float
+     */
+    public $CaptureResult;
+
+    /**
+     * @var float
+     */
+    public $CaptureAmount;
+
+
+    /**
+     * @param float $CaptureAmount
+     * @return $this
+     */
+    public function setCaptureAmount($CaptureAmount)
+    {
+        $this->CaptureAmount = (float) $CaptureAmount;
+        return $this;
+    }
 }

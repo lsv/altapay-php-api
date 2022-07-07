@@ -21,14 +21,14 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor;
+namespace Altapay;
 
-use Valitor\Exceptions\ClassDoesNotExistsException;
-use Valitor\Api\Ecommerce;
-use Valitor\Api\Others;
-use Valitor\Api\Payments;
-use Valitor\Api\Subscription;
-use Valitor\Api\Test;
+use Altapay\Exceptions\ClassDoesNotExistsException;
+use Altapay\Api\Ecommerce;
+use Altapay\Api\Others;
+use Altapay\Api\Payments;
+use Altapay\Api\Subscription;
+use Altapay\Api\Test;
 
 class Factory
 {
@@ -58,6 +58,13 @@ class Factory
     const TEST_AUTHENTICATION = Test\TestAuthentication::class;
     const TEST_CONNECTION = Test\TestConnection::class;
 
+    /**
+     * @template T of object
+     *
+     * @param class-string<T> $class
+     *
+     * @return T
+     */
     public static function create($class, Authentication $authentication = null)
     {
         if (class_exists($class)) {

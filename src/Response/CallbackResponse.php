@@ -21,12 +21,17 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Response;
+namespace Altapay\Response;
 
-use Valitor\Response\Embeds\Transaction;
+use Altapay\Response\Embeds\Transaction;
 
 class CallbackResponse extends AbstractResponse
 {
+    /**
+     * Childs of the response
+     *
+     * @var array<string, array<string, mixed>>
+     */
     protected $childs = [
         'Transactions' => [
             'class' => Transaction::class,

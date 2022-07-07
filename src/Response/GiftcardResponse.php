@@ -21,12 +21,17 @@
  * THE SOFTWARE.
  */
 
-namespace Valitor\Response;
+namespace Altapay\Response;
 
-use Valitor\Response\Embeds\GiftCardAccount;
+use Altapay\Response\Embeds\GiftCardAccount;
 
 class GiftcardResponse extends AbstractResponse
 {
+    /**
+     * Childs of the response
+     *
+     * @var array<string, array<string, mixed>>
+     */
     protected $childs = [
         'Accounts' => [
             'class' => GiftCardAccount::class,
@@ -34,6 +39,7 @@ class GiftcardResponse extends AbstractResponse
         ],
     ];
 
+    /** @var string */
     public $Result;
 
     /**

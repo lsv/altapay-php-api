@@ -1,10 +1,10 @@
-[<](../index.md) Valitor - PHP Api - Customer Info
+[<](../index.md) Altapay - PHP Api - Customer Info
 ==================================================
 
 A customer object requries a billing address
 
 ```php
-$billingAddress = new \Valitor\Request\Address();
+$billingAddress = new \Altapay\Request\Address();
 $billingAddress->Firstname = 'First name';
 $billingAddress->Lastname = 'Last name';
 $billingAddress->Address = 'Address';
@@ -12,13 +12,13 @@ $billingAddress->City = 'City';
 $billingAddress->PostalCode = 'Postal code';
 $billingAddress->Region = 'Region';
 $billingAddress->Country = 'Country';
-$customer = new Valitor\Request\Customer($billingAddress);
+$customer = new Altapay\Request\Customer($billingAddress);
 ```
 
 We can also add a shipping address
 
 ```php
-$shippingAddress = new \Valitor\Request\Address();
+$shippingAddress = new \Altapay\Request\Address();
 $shippingAddress->Firstname = 'First name';
 $shippingAddress->Lastname = 'Last name';
 $shippingAddress->Address = 'Address';

@@ -1,10 +1,10 @@
-[<](../index.md) Valitor - PHP Api - Config
+[<](../index.md) Altapay - PHP Api - Config
 ===========================================
 
 A config can have the following
 
 ```php
-$config = new \Valitor\Request\Config();
+$config = new \Altapay\Request\Config();
 $config->setCallbackForm($url);
 $config->setCallbackOk($url);
 $config->setCallbackFail($url);
