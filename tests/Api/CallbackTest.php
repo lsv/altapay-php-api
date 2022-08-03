@@ -2,14 +2,15 @@
 
 namespace Valitor\ApiTest\Api;
 
+use PHPUnit\Framework\TestCase;
 use Valitor\Api\Ecommerce\Callback;
 use Valitor\Response\CallbackResponse;
 
-class CallbackTest extends \PHPUnit_Framework_TestCase
+class CallbackTest extends TestCase
 {
     private $data;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->data = [
             'shop_orderid' => '000000022',

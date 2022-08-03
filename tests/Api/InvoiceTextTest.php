@@ -12,10 +12,7 @@ use GuzzleHttp\Psr7\Response;
 class InvoiceTextTest extends AbstractApiTest
 {
 
-    /**
-     * @return InvoiceText
-     */
-    protected function getinvoicetext()
+    protected function getinvoicetext(): InvoiceText
     {
         $client = $this->getClient($mock = new MockHandler([
             new Response(200, ['text-content' => 'application/xml'], file_get_contents(__DIR__ . '/Results/invoicetext.xml'))

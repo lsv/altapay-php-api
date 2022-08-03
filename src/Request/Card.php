@@ -31,40 +31,25 @@ class Card
 
     /**
      * Card number
-     *
-     * @var int
      */
-    private $cardNumber;
+    private int $cardNumber;
 
     /**
      * Card expiry month
-     *
-     * @var int
      */
-    private $expiryMonth;
+    private int $expiryMonth;
 
     /**
      * Card expiry year
-     *
-     * @var int
      */
-    private $expiryYear;
+    private int $expiryYear;
 
     /**
      * Card security code
-     *
-     * @var int
      */
-    private $cvc;
+    private ?int $cvc;
 
-    /**
-     * Card constructor.
-     * @param int $cardNumber
-     * @param int $expiryMonth
-     * @param int $expiryYear
-     * @param int $cvc
-     */
-    public function __construct($cardNumber, $expiryMonth, $expiryYear, $cvc = null)
+    public function __construct(int $cardNumber, int $expiryMonth, int $expiryYear, ?int $cvc = null)
     {
         $this->cardNumber = $cardNumber;
         $this->expiryMonth = $expiryMonth;
@@ -74,40 +59,32 @@ class Card
 
     /**
      * Get card number
-     *
-     * @return int
      */
-    public function getCardNumber()
+    public function getCardNumber(): int
     {
         return $this->cardNumber;
     }
 
     /**
      * Get expiry month
-     *
-     * @return int
      */
-    public function getExpiryMonth()
+    public function getExpiryMonth(): int
     {
         return $this->expiryMonth;
     }
 
     /**
      * Get expiry year
-     *
-     * @return int
      */
-    public function getExpiryYear()
+    public function getExpiryYear(): int
     {
         return $this->expiryYear;
     }
 
     /**
      * Get cvc
-     *
-     * @return int
      */
-    public function getCvc()
+    public function getCvc(): int
     {
         return $this->cvc;
     }

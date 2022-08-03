@@ -80,13 +80,13 @@ class CaptureReservationTest extends AbstractApiTest
 
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('captureReservation/'), $request->getUri()->getPath());
-        parse_str($request->getUri()->getQuery(), $parts);
+        $this->assertEquals($this->getExceptedUri('captureReservation'), $request->getUri()->getPath());
+        parse_str($request->getBody()->getContents(), $parts);
         $this->assertEquals(456, $parts['transaction_id']);
         $this->assertEquals(158, $parts['amount']);
         $this->assertEquals('myidentifier', $parts['reconciliation_identifier']);
         $this->assertEquals('number', $parts['invoice_number']);
-        $this->assertEquals('5.00', $parts['sales_tax']);
+        $this->assertEquals('5', $parts['sales_tax']);
     }
 
     public function test_capture_reservation_transaction_orderlines()
@@ -101,8 +101,8 @@ class CaptureReservationTest extends AbstractApiTest
 
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('captureReservation/'), $request->getUri()->getPath());
-        parse_str($request->getUri()->getQuery(), $parts);
+        $this->assertEquals($this->getExceptedUri('captureReservation'), $request->getUri()->getPath());
+        parse_str($request->getBody()->getContents(), $parts);
 
         $this->assertCount(2, $parts['orderLines']);
         $line = $parts['orderLines'][1];
@@ -127,8 +127,8 @@ class CaptureReservationTest extends AbstractApiTest
 
         $request = $api->getRawRequest();
 
-        $this->assertEquals($this->getExceptedUri('captureReservation/'), $request->getUri()->getPath());
-        parse_str($request->getUri()->getQuery(), $parts);
+        $this->assertEquals($this->getExceptedUri('captureReservation'), $request->getUri()->getPath());
+        parse_str($request->getBody()->getContents(), $parts);
 
         $this->assertCount(1, $parts['orderLines']);
     }
